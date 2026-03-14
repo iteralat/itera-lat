@@ -18,6 +18,8 @@
 
 - Grid de productos SaaS con cards — Mar 2026
 - Visor interactivo por producto con thumbnails — Mar 2026
+- Screenshots reales en cards (Gestión, Tree) con overlay carátula + hover reveal — Mar 2026
+- Copy de beneficio/logro por plataforma (coverLine + description orientada a resultado) — Mar 2026
 
 ## Herramientas
 

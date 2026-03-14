@@ -19,6 +19,7 @@ export interface PlatformItem {
   type: "platform";
   productName: string;
   tagline: string;
+  coverLine: string;
   description: string;
   features: string[];
   tags: string[];
@@ -121,7 +122,8 @@ export const platforms: PlatformItem[] = [
     type: "platform",
     productName: "Itera Gestión",
     tagline: "Sistema integral para operaciones industriales y comerciales",
-    description: "Plataforma de gestión completa para empresas con operaciones complejas. Cotizador, base de clientes y productos, gestión de stock, logística, cuenta corriente y reportes — todo en un solo lugar.",
+    coverLine: "De planillas y cuadernos a operación digitalizada en semanas.",
+    description: "Reemplazó el circuito manual de ventas, despacho y cobranza. Hoy cada vendedor carga desde el celular, el depósito arma por ruta y administración cobra sin perseguir papeles.",
     features: [
       "Cotizador con precios escalonados",
       "Base de clientes y productos",
@@ -132,15 +134,16 @@ export const platforms: PlatformItem[] = [
     ],
     tags: ["Laravel", "Inertia.js", "React", "PostgreSQL"],
     status: "En producción",
-    screenshot: "",
-    adopters: [{ name: "Química Alquímica S.R.L." }],
+    screenshot: "/images/plataformas/itera-gestion.png",
+    adopters: [{ name: "Alquímica" }],
   },
   {
     id: "itera-tree",
     type: "platform",
     productName: "Itera Tree",
     tagline: "Presencia digital centralizada con panel admin y analytics",
-    description: "Todo lo que tu empresa necesita mostrar en un solo lugar: enlaces, lista de precios, catálogo y contacto. Con panel de administración, analytics propio y capacidad white-label.",
+    coverLine: "Todo tu negocio en un link, actualizable sin código.",
+    description: "Una empresa actualizó precios, catálogo y canales de contacto desde el celular — sin depender de un diseñador ni esperar deploys.",
     features: [
       "Panel de administración completo",
       "Lista de precios escalonada",
@@ -150,15 +153,16 @@ export const platforms: PlatformItem[] = [
     ],
     tags: ["Next.js", "React", "PostgreSQL", "Prisma"],
     status: "En producción",
-    screenshot: "",
-    adopters: [{ name: "Química Alquímica S.R.L." }],
+    screenshot: "/images/plataformas/itera-tree.png",
+    adopters: [{ name: "Alquímica" }],
   },
   {
     id: "itera-estudio",
     type: "platform",
     productName: "Itera Estudio",
     tagline: "Fotos de producto profesionales generadas con IA",
-    description: "Transformá fotos comunes de tus productos en imágenes profesionales de catálogo usando inteligencia artificial. Múltiples modos de generación, galería de resultados y almacenamiento en la nube.",
+    coverLine: "Foto con el celular, resultado de catálogo profesional.",
+    description: "Eliminó las sesiones de fotos y el retoque manual. El equipo comercial sube desde el depósito y tiene imágenes listas para publicar en minutos.",
     features: [
       "Generación de fotos con IA (Gemini)",
       "Múltiples modos de generación",
@@ -169,14 +173,15 @@ export const platforms: PlatformItem[] = [
     tags: ["Next.js", "Gemini AI", "Cloudflare R2"],
     status: "En producción",
     screenshot: "",
-    adopters: [{ name: "Química Alquímica S.R.L." }],
+    adopters: [{ name: "Alquímica" }],
   },
   {
     id: "itera-market",
     type: "platform",
     productName: "Itera Market",
     tagline: "Catálogo online autoadministrable con checkout a WhatsApp",
-    description: "Tu catálogo de productos online con administración propia. Tus clientes eligen, arman el pedido y lo envían directo por WhatsApp. Panel admin con productos, categorías, galería y captura de leads.",
+    coverLine: "Tu catálogo online en horas, pedidos directo a WhatsApp.",
+    description: "Sin comisiones de marketplace ni pasarelas de pago. El cliente elige, arma el pedido y lo manda por WhatsApp listo para confirmar.",
     features: [
       "Catálogo autoadministrable",
       "Checkout directo a WhatsApp",
@@ -194,7 +199,8 @@ export const platforms: PlatformItem[] = [
     type: "platform",
     productName: "IteraLex",
     tagline: "Gestión integral para estudios jurídicos",
-    description: "Sistema de gestión diseñado para estudios jurídicos. Expedientes, clientes, agenda judicial, vencimientos, documentación y alertas. En uso activo por estudios del Alto Valle.",
+    coverLine: "Expedientes, vencimientos y clientes en un solo lugar.",
+    description: "Estudios del Alto Valle dejaron de perder plazos y buscar expedientes en carpetas. Todo el circuito judicial digitalizado con copiloto IA.",
     features: [
       "Gestión de expedientes judiciales",
       "Agenda judicial con vencimientos",
