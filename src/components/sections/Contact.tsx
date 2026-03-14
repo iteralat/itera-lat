@@ -43,7 +43,7 @@ export function Contact() {
                 <MapPin size={24} />
              </div>
              <h4 className="font-semibold mb-2">Base de Operaciones</h4>
-             <p className="text-white/60">Alto Valle de Río Negro y Neuquén,<br/>Patagonia Argentina</p>
+             <p className="text-white/60">Patagonia Argentina</p>
           </motion.div>
           
           <motion.div 

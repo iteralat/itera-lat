@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X, ArrowUpRight, ChevronDown } from "lucide-react";
 
 const portfolioLinks = [
-  { name: "Webs", href: "/webs" },
+  // { name: "Webs", href: "/webs" }, // TODO: reactivar cuando las demos estén listas
   { name: "Plataformas", href: "/plataformas" },
   { name: "Herramientas", href: "/herramientas" },
 ];

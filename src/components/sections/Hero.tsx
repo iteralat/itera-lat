@@ -19,7 +19,7 @@ export function Hero() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-elevated/50 backdrop-blur-sm mb-8">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-sm font-medium tracking-wide">Agencia Tech del Alto Valle</span>
+              <span className="text-sm font-medium tracking-wide">Agencia de desarrollo · Patagonia Argentina</span>
             </div>
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05] mb-8 text-white">
@@ -33,7 +33,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="text-lg md:text-2xl text-white/60 mb-12 max-w-2xl mx-auto leading-relaxed"
           >
-            Construimos activos tecnológicos de alta performance que generan resultados medibles para tu negocio.
+            Desarrollamos sitios web, sistemas de gestión y herramientas digitales a medida para negocios que quieren crecer.
           </motion.p>
 
           <motion.div

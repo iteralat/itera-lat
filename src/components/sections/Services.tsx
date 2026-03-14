@@ -6,20 +6,20 @@ import { Code2, Cpu, Globe } from "lucide-react";
 const pillars = [
   {
     id: "web",
-    title: "Web & E-commerce",
-    description: "Sitios estáticos y tiendas ultra-rápidas.",
+    title: "Sitios Web",
+    description: "Institucionales, landing pages y tiendas online rápidas.",
     icon: <Globe className="w-6 h-6 text-primary" strokeWidth={2} />,
   },
   {
-    id: "automatizacion",
-    title: "Automatización & IA",
-    description: "Flujos de ManyChat y agentes con IA.",
+    id: "plataformas",
+    title: "Plataformas & IA",
+    description: "Sistemas de gestión, catálogos y chatbots inteligentes.",
     icon: <Cpu className="w-6 h-6 text-cold" strokeWidth={2} />,
   },
   {
     id: "custom",
-    title: "Herramientas a Medida",
-    description: "CRMs, paneles y SaaS específicos.",
+    title: "Software a Medida",
+    description: "Soluciones específicas para tu operación.",
     icon: <Code2 className="w-6 h-6 text-primary-soft" strokeWidth={2} />,
   },
 ];
@@ -32,7 +32,7 @@ export function Services() {
           
           <div className="w-full md:w-auto shrink-0 text-center md:text-left">
              <h3 className="text-sm font-semibold text-white/40 tracking-widest uppercase mb-1">Qué Hacemos</h3>
-             <p className="text-xl font-medium text-white/80">Soluciones full-stack</p>
+             <p className="text-xl font-medium text-white/80">Desarrollo a medida</p>
           </div>
 
           <div className="h-px md:h-12 w-full md:w-px bg-border shrink-0" />

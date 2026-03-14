@@ -1,4 +1,4 @@
-import { Server, Sparkles, Play } from "lucide-react";
+import { Zap, TrendingUp, Headphones } from "lucide-react";
 
 export function About() {
   return (
@@ -8,72 +8,60 @@ export function About() {
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-28 space-y-10">
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-                Código propio, <br />
-                <span className="text-white/40">resultados concretos.</span>
+                Tu idea, <br />
+                <span className="text-white/40">funcionando.</span>
               </h2>
-
-              {/* Video placeholder */}
-              <div className="aspect-video relative bg-[#050505] border border-border rounded-xl overflow-hidden group cursor-pointer">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0%,transparent_70%)]" />
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-                  <div className="w-16 h-16 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary/20 group-hover:scale-110 transition-all">
-                    <Play size={28} className="text-primary ml-1" />
-                  </div>
-                  <span className="text-sm text-white/30 font-medium">Conocé ÍTERA</span>
-                </div>
-              </div>
             </div>
           </div>
-          
+
           <div className="lg:col-span-7 space-y-12">
             <div className="prose prose-invert prose-lg">
               <p className="text-2xl text-white/80 leading-relaxed font-medium mb-8">
-                ÍTERA es un estudio con base en el Alto Valle, diseñado para ser el socio tecnológico que los negocios de hoy necesitan.
+                ÍTERA es una agencia de desarrollo con base en la Patagonia Argentina. Si tenés una idea, un problema o una operación que necesita digitalizarse, nosotros lo hacemos realidad.
               </p>
-              
+
               <div className="h-px w-full bg-border my-12" />
 
               <div className="space-y-12">
                 <div>
-                  <h3 className="text-2xl font-bold mb-4 text-white">Nuestra Filosofía</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-white">¿Qué podemos hacer por vos?</h3>
                   <p className="text-white/60 leading-relaxed text-lg mb-6">
-                    Escribimos código desde cero. Cada proyecto es una pieza de software optimizada para velocidad, SEO y conversión — no una plantilla adaptada. Infraestructura sólida, rápida y pensada para durar.
+                    Desde un sitio web para tu negocio hasta un sistema completo para manejar clientes, pedidos, stock o lo que necesites. Todo hecho a medida, pensado para que funcione rápido y lo puedas administrar vos mismo.
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-bold mb-4 text-white">Construimos lo que usamos</h3>
-                  <p className="text-white/60 leading-relaxed text-lg mb-6">
-                    No solo desarrollamos para clientes. Creamos nuestras propias herramientas internas (itera.tools), plataformas SaaS y utilidades públicas. Usamos las mismas herramientas que las startups más valiosas del mundo.
-                  </p>
-                  
+                  <h3 className="text-2xl font-bold mb-4 text-white">Por qué ÍTERA</h3>
+
                   <ul className="space-y-6 mt-8">
                     <li className="flex gap-4">
                       <div className="w-10 h-10 rounded-full bg-elevated border border-border flex items-center justify-center shrink-0">
-                        <Server size={18} className="text-primary" />
+                        <Zap size={18} className="text-primary" />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-white">Infraestructura Propia</h4>
-                        <p className="text-sm text-white/60">Servidores bare-metal y edge network optimizados, sin depender de nubes costosas.</p>
+                        <h4 className="font-semibold text-white">Rápido y funcional</h4>
+                        <p className="text-sm text-white/60">Tu proyecto online en semanas, no en meses. Y andando bien desde el día uno.</p>
                       </div>
                     </li>
                     <li className="flex gap-4">
                       <div className="w-10 h-10 rounded-full bg-elevated border border-border flex items-center justify-center shrink-0">
-                        <Sparkles size={18} className="text-primary-soft" />
+                        <TrendingUp size={18} className="text-primary-soft" />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-white">Agentic Coding</h4>
-                        <p className="text-sm text-white/60">Desarrollo acelerado con IA para entregar código de calidad de forma ultra-rápida.</p>
+                        <h4 className="font-semibold text-white">Crece con tu negocio</h4>
+                        <p className="text-sm text-white/60">Arrancamos con lo que necesitás hoy y lo ampliamos a medida que tu negocio crece.</p>
+                      </div>
+                    </li>
+                    <li className="flex gap-4">
+                      <div className="w-10 h-10 rounded-full bg-elevated border border-border flex items-center justify-center shrink-0">
+                        <Headphones size={18} className="text-cold" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-white">Soporte real</h4>
+                        <p className="text-sm text-white/60">No desaparecemos después de entregar. Mantenimiento, cambios y soporte incluido.</p>
                       </div>
                     </li>
                   </ul>
-                </div>
-
-                <div className="p-8 bg-elevated/50 border border-border rounded-sm">
-                  <h4 className="text-primary font-bold mb-2">Focus 2026</h4>
-                  <p className="text-white/80">
-                    Democratizar el acceso a tecnología premium. Sitios profesionales estáticos con modelo de suscripción (cambios autogestionados) y desarrollo de productos web escalables para nichos específicos.
-                  </p>
                 </div>
               </div>
             </div>

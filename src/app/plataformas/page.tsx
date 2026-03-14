@@ -13,7 +13,7 @@ export default function PlataformasPage() {
         <div className="max-w-3xl mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Plataformas</h1>
           <p className="text-xl text-white/60 leading-relaxed">
-            Productos digitales que construimos para resolver problemas reales. CRMs a medida, paneles de administración, catálogos autogestionables y herramientas con inteligencia artificial.
+            Productos digitales que construimos para resolver problemas reales. Sistemas de gestión, catálogos autogestionables, plataformas SaaS y herramientas con inteligencia artificial.
           </p>
         </div>
         <PlatformGrid />

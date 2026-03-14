@@ -13,7 +13,7 @@ export default function HerramientasPage() {
         <div className="max-w-3xl mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Herramientas</h1>
           <p className="text-xl text-white/60 leading-relaxed">
-            No solo desarrollamos para clientes. Creamos herramientas propias que usamos internamente, abrimos como open source o distribuimos como productos instalables.
+            Además de los productos para clientes, desarrollamos herramientas internas que usamos en cada proyecto para garantizar calidad y disponibilidad.
           </p>
         </div>
         <ToolsList />

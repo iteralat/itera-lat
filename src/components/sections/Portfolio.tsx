@@ -2,28 +2,29 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { LayoutTemplate, Server, Wrench, ArrowRight } from "lucide-react";
-import { websites, platforms, tools } from "@/data/portfolio";
+import { Server, Wrench, ArrowRight } from "lucide-react";
+import { platforms, tools } from "@/data/portfolio";
 
 const verticals = [
-  {
-    title: "Sitios Web",
-    description: `${websites.length} demos interactivas`,
-    detail: "Institucionales, e-commerce, portfolios — cada uno con preview en vivo.",
-    icon: <LayoutTemplate size={28} className="text-primary" />,
-    href: "/webs",
-  },
+  // TODO: reactivar cuando las demos estén listas
+  // {
+  //   title: "Sitios Web",
+  //   description: `${websites.length} demos interactivas`,
+  //   detail: "Institucionales, e-commerce, portfolios — cada uno con preview en vivo.",
+  //   icon: <LayoutTemplate size={28} className="text-primary" />,
+  //   href: "/webs",
+  // },
   {
     title: "Plataformas",
     description: `${platforms.length} productos digitales`,
-    detail: "CRMs, paneles admin, catálogos, herramientas con IA — sistemas en producción.",
+    detail: "Sistemas de gestión, catálogos, herramientas con IA — productos en producción real.",
     icon: <Server size={28} className="text-cold" />,
     href: "/plataformas",
   },
   {
     title: "Herramientas",
     description: `${tools.length} herramientas propias`,
-    detail: "Desde entornos de diseño con IA hasta utilidades open source.",
+    detail: "Monitoreo, búsqueda semántica y utilidades internas que usamos en cada proyecto.",
     icon: <Wrench size={28} className="text-primary-soft" />,
     href: "/herramientas",
   },
@@ -34,13 +35,13 @@ export function Portfolio() {
     <section id="portfolio" className="py-24 md:py-32 bg-background border-t border-border">
       <div className="container mx-auto px-6 md:px-12">
         <div className="max-w-2xl mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Experiencias Digitales</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Lo que construimos</h2>
           <p className="text-xl text-white/60 leading-relaxed">
-            Desde sitios web de alta performance hasta plataformas complejas y herramientas propias. Explorá lo que construimos.
+            Plataformas en producción, herramientas internas y proyectos reales. Explorá nuestro trabajo.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {verticals.map((v, index) => (
             <motion.div
               key={v.title}
