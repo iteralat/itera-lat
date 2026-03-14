@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowUpRight, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 
 const portfolioLinks = [
   // { name: "Webs", href: "/webs" }, // TODO: reactivar cuando las demos estén listas
@@ -58,11 +59,15 @@ export function Header() {
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 z-50 hover:scale-105 active:scale-95 transition-transform">
-          <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white">
-            <ArrowUpRight size={20} strokeWidth={3} />
-          </div>
-          <span className="font-bold text-xl tracking-wide">ÍTERA</span>
+        <Link href="/" className="z-50 hover:scale-105 active:scale-95 transition-transform">
+          <Image
+            src="/images/logo-itera.png"
+            alt="ÍTERA"
+            width={120}
+            height={32}
+            className="h-8 w-auto"
+            priority
+          />
         </Link>
 
         {/* Desktop Nav */}
@@ -80,7 +85,7 @@ export function Header() {
           <div ref={dropdownRef} className="relative">
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className={`flex items-center gap-1 text-sm font-medium transition-colors hover:scale-105 active:scale-95 ${
+              className={`flex items-center gap-1 text-sm font-medium transition-colors hover:scale-105 active:scale-95 cursor-pointer ${
                 isPortfolioActive ? "text-primary" : "text-white/80 hover:text-primary"
               }`}
             >
@@ -91,24 +96,28 @@ export function Header() {
               />
             </button>
 
-            {isDropdownOpen && (
-              <div className="absolute top-full mt-3 left-1/2 -translate-x-1/2 bg-elevated border border-border rounded-lg py-2 min-w-[180px] shadow-xl">
-                {portfolioLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setIsDropdownOpen(false)}
-                    className={`block px-5 py-2.5 text-sm font-medium transition-colors ${
-                      pathname === link.href || pathname.startsWith(link.href + "/")
-                        ? "text-primary bg-primary/5"
-                        : "text-white/70 hover:text-white hover:bg-white/5"
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-              </div>
-            )}
+            <div
+              className={`absolute top-full mt-3 left-0 bg-background/95 backdrop-blur-md border border-border/60 rounded-lg py-1.5 min-w-[180px] shadow-[0_8px_30px_-8px_rgba(0,0,0,0.5)] transition-all duration-200 origin-top ${
+                isDropdownOpen
+                  ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
+                  : "opacity-0 scale-95 -translate-y-1 pointer-events-none"
+              }`}
+            >
+              {portfolioLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsDropdownOpen(false)}
+                  className={`block px-4 py-2.5 text-sm font-medium transition-colors rounded-md mx-1.5 ${
+                    pathname === link.href || pathname.startsWith(link.href + "/")
+                      ? "text-primary bg-primary/10"
+                      : "text-white/60 hover:text-white hover:bg-white/8"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
           </div>
 
           <Link
