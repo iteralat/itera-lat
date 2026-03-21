@@ -6,8 +6,9 @@
 
 ---
 
-## Home
+## Home (option-2 — versión activa)
 
+- Hero rediseñado: layout 50/50, mockups de IteraLex + dashboard catálogo, focos de iluminación, fondo cálido — Mar 2026
 - Hero con animaciones y CTA — Mar 2026
 - Seccion de servicios con iconos — Mar 2026
 - Portfolio destacado en home — Mar 2026

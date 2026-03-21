@@ -8,11 +8,11 @@ import { DeviceMockup } from "../ui/DeviceMockup";
 
 export function Hero() {
   return (
-    <section className="relative min-h-[85vh] flex items-center overflow-hidden pt-16 bg-background">
+    <section className="relative min-h-[82vh] flex items-start overflow-hidden pt-24 min-[400px]:pt-40 pb-12 bg-[#0f0e0c]">
       <AnimatedBackground />
 
-      <div className="container relative mx-auto px-6 md:px-12 z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="relative mx-auto px-6 md:px-8 lg:px-10 z-10 w-full max-w-[1440px]">
+        <div className="grid grid-cols-1 lg:grid-cols-[50%_50%] gap-8 lg:gap-0 items-center">
           {/* Left - text */}
           <div>
             <motion.div
@@ -23,13 +23,13 @@ export function Hero() {
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-elevated/50 backdrop-blur-sm mb-8">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                 <span className="text-sm font-medium tracking-wide">
-                  Agencia de desarrollo · Patagonia Argentina
+                  Agencia de desarrollo
                 </span>
               </div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6 text-white">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] mb-6 text-white">
                 Soluciones digitales que{" "}
-                <span className="italic bg-gradient-to-r from-primary via-primary-soft to-zinc-300 bg-clip-text text-transparent">
+                <span className="italic" style={{ backgroundImage: "linear-gradient(to right, #FF3C00, #FF6A00)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                   evolucionan
                 </span>{" "}
                 con vos.
@@ -40,7 +40,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="text-lg md:text-xl text-zinc-400 mb-10 max-w-xl leading-relaxed"
+              className="text-lg md:text-xl text-zinc-400 mb-10 max-w-2xl leading-relaxed"
             >
               Desarrollamos sitios web, sistemas de gestión y herramientas
               digitales a medida para negocios que quieren crecer.
@@ -82,10 +82,10 @@ export function Hero() {
           </div>
 
           {/* Right - mockup */}
-          <div className="hidden lg:block">
+          <div className="hidden lg:block overflow-visible -mr-10">
             <DeviceMockup
-              desktopSrc="/images/portfolio/screenshot-cerro-solar.png"
-              laptopSrc="/images/portfolio/screenshot-cota-estudio.png"
+              desktopSrc="/images/portfolio/screenshot-iteralex.png"
+              laptopSrc="/images/portfolio/screenshot-dashboard-catalogo.png"
               mobileSrc="/images/portfolio/screenshot-cerro-solar.png"
               alt="Proyectos ÍTERA"
             />

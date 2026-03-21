@@ -20,7 +20,23 @@
 
 ## Errores Conocidos
 
-*Sin entradas todavia. Se agregan con `/save` cuando se detectan errores.*
+### Verificar qué ruta/versión está mirando el usuario antes de editar
+
+**Problema**: Se editó `src/components/sections/Hero.tsx` (home principal) durante 5+ intentos mientras el usuario estaba viendo `/option-2` que usa `src/components/option-2/sections/Hero.tsx`. Los cambios nunca se reflejaban.
+**Check preventivo**: Antes de editar un componente, confirmar qué ruta está viendo el usuario y verificar qué componente usa esa ruta (leer el `page.tsx` correspondiente).
+**Fecha**: 2026-03-21
+
+### Tailwind v4 interpola gradientes en oklab por defecto
+
+**Problema**: `bg-gradient-to-r from-primary to-primary-soft` interpolaba en oklab, desaturando el naranja hacia blanco en el medio de la palabra "evolucionan".
+**Check preventivo**: Para gradientes de texto que deben mantener saturación, usar `style={{ backgroundImage: "linear-gradient(...)" }}` con CSS inline en lugar de clases de Tailwind.
+**Fecha**: 2026-03-21
+
+### Colores de fondo: mantener paleta cálida (manual de marca)
+
+**Problema**: Se usó `#101118` (tono azulado/frío/stale) como background, violando la paleta de marca que indica tonos cálidos oscuros.
+**Check preventivo**: Background oscuro debe ser cálido (`#0f0e0c` o similar). Nunca tonos azulados/fríos para fondos base.
+**Fecha**: 2026-03-21
 
 ---
 

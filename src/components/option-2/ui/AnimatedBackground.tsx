@@ -45,7 +45,7 @@ export function AnimatedBackground() {
 
     function drawGrid() {
       if (!ctx || !canvas) return;
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.03)";
       ctx.lineWidth = 0.5;
       const step = 60;
       for (let x = 0; x < canvas.width; x += step) {
@@ -101,36 +101,60 @@ export function AnimatedBackground() {
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute inset-0 overflow-hidden bg-[#0f0e0c]">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
-      {/* Ambient glow - top left orange */}
+      {/* Orange glow — top left, illuminates headline */}
       <div
-        className="absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full animate-pulse"
+        className="absolute -top-[5%] left-[5%] w-[700px] h-[700px] rounded-full"
         style={{
-          background: "radial-gradient(circle, rgba(255, 60, 0, 0.22) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(255, 60, 0, 0.15) 0%, transparent 65%)",
           filter: "blur(80px)",
-          animationDuration: "6s",
         }}
       />
 
-      {/* Ambient glow - bottom right cool */}
+      {/* Purple glow — top right, behind mockups */}
       <div
-        className="absolute -bottom-32 -right-32 w-[400px] h-[400px] rounded-full animate-pulse"
+        className="absolute top-[5%] right-[-10%] w-[900px] h-[900px] rounded-full"
         style={{
-          background: "radial-gradient(circle, rgba(169, 96, 238, 0.12) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(169, 96, 238, 0.22) 0%, transparent 60%)",
+          filter: "blur(60px)",
+        }}
+      />
+
+      {/* Warm orange glow — center, ties both sides */}
+      <div
+        className="absolute top-[40%] left-[35%] w-[800px] h-[500px] rounded-full"
+        style={{
+          background: "radial-gradient(ellipse, rgba(255, 106, 0, 0.10) 0%, transparent 65%)",
           filter: "blur(100px)",
-          animationDuration: "8s",
-          animationDelay: "3s",
         }}
       />
 
-      {/* Ambient glow - center orange */}
+      {/* Purple glow — bottom left */}
       <div
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full"
+        className="absolute bottom-[-5%] left-[10%] w-[600px] h-[600px] rounded-full"
         style={{
-          background: "radial-gradient(ellipse, rgba(255, 60, 0, 0.08) 0%, transparent 70%)",
-          filter: "blur(120px)",
+          background: "radial-gradient(circle, rgba(169, 96, 238, 0.10) 0%, transparent 65%)",
+          filter: "blur(100px)",
+        }}
+      />
+
+      {/* Orange glow — bottom right */}
+      <div
+        className="absolute bottom-[-5%] right-[5%] w-[700px] h-[700px] rounded-full"
+        style={{
+          background: "radial-gradient(circle, rgba(255, 60, 0, 0.12) 0%, transparent 65%)",
+          filter: "blur(100px)",
+        }}
+      />
+
+      {/* Vignette — subtle edge darkening */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse at center, transparent 0%, #0f0e0c 100%)",
+          opacity: 0.4,
         }}
       />
     </div>

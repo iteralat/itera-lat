@@ -23,7 +23,9 @@ export function Hero() {
             </div>
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05] mb-8 text-white">
-              Soluciones digitales que <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-soft">evolucionan</span> con vos.
+              Soluciones digitales que{" "}
+              <span className="!text-[#FF6A00]" style={{ color: "#FF6A00", WebkitTextFillColor: "#FF6A00" }}>evolucionan</span>
+              {" "}con vos.
             </h1>
           </motion.div>
 

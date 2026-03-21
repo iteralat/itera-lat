@@ -16,7 +16,7 @@ export function DeviceMockup({ desktopSrc, laptopSrc, mobileSrc, alt }: DeviceMo
       initial={{ opacity: 0, x: 40 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-      className="relative w-full max-w-xl mx-auto"
+      className="relative w-full max-w-none"
       style={{ perspective: "1200px" }}
     >
       {/* Desktop frame - main, largest */}
@@ -32,13 +32,13 @@ export function DeviceMockup({ desktopSrc, laptopSrc, mobileSrc, alt }: DeviceMo
           <div className="ml-3 flex-1 h-3.5 bg-zinc-700/50 rounded-sm" />
         </div>
         {/* Screen */}
-        <div className="relative aspect-[16/10] bg-zinc-950 rounded-b-md overflow-hidden">
+        <div className="relative aspect-[16/9] bg-zinc-950 rounded-b-md overflow-hidden">
           <Image
             src={desktopSrc}
             alt={alt}
             fill
             className="object-cover object-top"
-            sizes="(max-width: 768px) 90vw, 520px"
+            sizes="(max-width: 768px) 90vw, 700px"
           />
         </div>
       </div>

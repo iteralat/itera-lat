@@ -66,7 +66,7 @@ export function InteractiveBackground() {
       // Draw subtle glowing torch around mouse (only desktop)
       if (!isMobile && mouse.x > 0) {
         const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 400);
-        gradient.addColorStop(0, "rgba(255, 60, 0, 0.08)");
+        gradient.addColorStop(0, "rgba(255, 60, 0, 0.12)");
         gradient.addColorStop(1, "transparent");
         
         ctx.fillStyle = gradient;
@@ -74,8 +74,8 @@ export function InteractiveBackground() {
       }
 
       // Update and draw nodes
-      ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
+      ctx.fillStyle = "rgba(255, 255, 255, 0.35)";
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
       ctx.lineWidth = 1;
 
       for (let i = 0; i < nodes.length; i++) {
@@ -131,7 +131,7 @@ export function InteractiveBackground() {
           if (dist < 120) {
             ctx.beginPath();
             // Opacity based on distance
-            const opacity = 0.08 * (1 - dist / 120);
+            const opacity = 0.12 * (1 - dist / 120);
             
             // If near mouse, tint orange
             let isNearMouse = false;
@@ -194,13 +194,26 @@ export function InteractiveBackground() {
   }, []);
 
   return (
-    <div ref={containerRef} className="absolute inset-0 w-full h-full overflow-hidden bg-[#0A0A0A] z-0">
+    <div ref={containerRef} className="absolute inset-0 w-full h-full overflow-hidden bg-[#0f0e0c] z-0">
+      {/* Ambient glow — multiple light spots matching brand palette */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Primary orange glow — top left, illuminates headline */}
+        <div className="absolute -top-[10%] -left-[5%] w-[900px] h-[900px] rounded-full bg-[radial-gradient(circle,rgba(255,60,0,0.18)_0%,transparent_65%)]" />
+        {/* Warm orange glow — center, behind content */}
+        <div className="absolute top-[30%] left-[25%] w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(255,106,0,0.12)_0%,transparent_65%)]" />
+        {/* Purple/cold glow — right side, behind mockups */}
+        <div className="absolute top-[10%] right-[-5%] w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(169,96,238,0.14)_0%,transparent_65%)]" />
+        {/* Subtle orange glow — bottom center, transition zone */}
+        <div className="absolute bottom-[-10%] left-[20%] w-[1000px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(255,60,0,0.10)_0%,transparent_65%)]" />
+        {/* Subtle purple glow — bottom right */}
+        <div className="absolute bottom-[0%] right-[10%] w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(169,96,238,0.08)_0%,transparent_65%)]" />
+      </div>
       <canvas
         ref={canvasRef}
         className="block w-full h-full pointer-events-none"
       />
-      {/* Vignette mask for depth */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#0A0A0A_100%)] pointer-events-none opacity-80" />
+      {/* Vignette mask for depth — reduced to let glows show */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#0f0e0c_100%)] pointer-events-none opacity-40" />
     </div>
   );
 }
