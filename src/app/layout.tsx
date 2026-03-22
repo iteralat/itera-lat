@@ -4,6 +4,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { JsonLd } from "@/components/shared/JsonLd";
+import { GoogleAnalytics } from "@/components/shared/GoogleAnalytics";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -89,6 +90,7 @@ export default function RootLayout({
   return (
     <html lang="es" className="scroll-smooth">
       <body className={`${poppins.variable} font-sans antialiased selection:bg-primary selection:text-white`}>
+        <GoogleAnalytics />
         <JsonLd data={organizationLd} />
         <JsonLd data={websiteLd} />
         <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-white">

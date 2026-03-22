@@ -94,11 +94,23 @@ Web informativa y portfolio de la agencia ÍTERA · itera.lat
 
 ---
 
-### Deploy / Docker
+### Deploy / Docker / Coolify
 
 - `.dockerignore` obligatorio -> excluir: node_modules, .git, .env*, .next, .planning
 - Dockerfile multi-stage -> imagen de produccion SIN devDependencies
 - **`ENV TZ=America/Argentina/Buenos_Aires`** obligatorio en Dockerfile runner stage
+
+#### Coolify (self-hosted)
+
+- Contexto: `modern` (VPS 65.108.148.79)
+- Panel: coolify-modern.itera.world
+- App UUID: `rtwcc35tbzzgfx3dp2hduod2`
+- Proyecto UUID: `kg3u7ti6c0o5ey3v1n54nq70`
+- CLI instalado: `coolify` -> usa contextos configurados en `%APPDATA%\coolify\config.json`
+- Env vars: `coolify app env list <uuid> --context modern --format json -s`
+- Agregar env: `coolify app env create <uuid> --context modern --key KEY --value "VAL"`
+- Deploy: `coolify deploy app <uuid> --context modern` o push a master (auto-deploy via webhook)
+- `NEXT_PUBLIC_*` vars requieren rebuild (se embeden en el bundle)
 
 ---
 
