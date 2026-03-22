@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ToolsList } from "@/components/herramientas/ToolsList";
 
 export const metadata: Metadata = {
-  title: "Herramientas | ÍTERA",
+  title: "Herramientas",
   description: "Herramientas propias que desarrollamos, usamos internamente y compartimos. Desde entornos de diseño con IA hasta utilidades open source.",
 };
 
