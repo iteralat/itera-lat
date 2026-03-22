@@ -79,7 +79,7 @@ export function PlatformCard({ platform, index }: { platform: PlatformItem; inde
             </p>
           )}
           <Link
-            href={`/plataformas/${platform.id}`}
+            href={`/proyectos/${platform.id}`}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider rounded-md bg-gradient-to-r from-orange-700 to-orange-500 text-white hover:from-orange-600 hover:to-orange-400 transition-all"
           >
             Ver producto <ArrowRight size={13} />

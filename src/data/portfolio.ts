@@ -210,7 +210,12 @@ export const platforms: PlatformItem[] = [
     ],
     tags: ["Next.js", "React", "TypeScript", "PostgreSQL", "Prisma"],
     status: "En producción",
-    screenshot: "",
+    screenshot: "/images/plataformas/iteralex-1.png",
+    screenshots: [
+      "/images/plataformas/iteralex-1.png",
+      "/images/plataformas/iteralex-2.png",
+      "/images/plataformas/iteralex-3.png",
+    ],
     adopters: [{ name: "Estudios jurídicos del Alto Valle" }],
   },
 ];

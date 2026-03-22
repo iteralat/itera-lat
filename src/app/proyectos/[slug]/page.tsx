@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Check, MessageSquare } from "lucide-react";
@@ -13,14 +12,19 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const platform = platforms.find((p) => p.id === slug);
-  if (!platform) return { title: "No encontrado | ÍTERA" };
+  if (!platform) return { title: "No encontrado" };
   return {
-    title: `${platform.productName} | ÍTERA`,
+    title: platform.productName,
     description: platform.tagline,
+    openGraph: {
+      title: platform.productName,
+      description: platform.tagline,
+      images: platform.screenshot ? [{ url: platform.screenshot, width: 1200, height: 630 }] : undefined,
+    },
   };
 }
 
-export default async function PlatformDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ProyectoDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const platform = platforms.find((p) => p.id === slug);
   if (!platform) notFound();
@@ -32,10 +36,10 @@ export default async function PlatformDetailPage({ params }: { params: Promise<{
       <div className="container mx-auto px-6 md:px-12">
         {/* Back link */}
         <Link
-          href="/plataformas"
+          href="/proyectos"
           className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors mb-8"
         >
-          <ArrowLeft size={16} /> Volver a Plataformas
+          <ArrowLeft size={16} /> Volver a Proyectos
         </Link>
 
         {/* Visor de screenshots — full width */}
@@ -131,7 +135,7 @@ export default async function PlatformDetailPage({ params }: { params: Promise<{
                 Podemos adaptar esta plataforma a tu negocio o construir algo completamente nuevo.
               </p>
               <Link
-                href="/#contacto"
+                href="/contacto"
                 className="inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-sm text-sm font-semibold hover:bg-primary-soft transition-all hover:scale-105 active:scale-95 w-full justify-center"
               >
                 <MessageSquare size={16} /> Hablemos

@@ -29,7 +29,7 @@ export function CTABanner() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-3xl mx-auto text-center"
+          className="max-w-4xl mx-auto text-center"
         >
           <div className="p-10 md:p-16 rounded-2xl bg-elevated/80 border border-zinc-800 backdrop-blur-sm">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">

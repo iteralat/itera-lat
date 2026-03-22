@@ -1,17 +1,21 @@
-import { Hero } from "@/components/sections/Hero";
-import { Services } from "@/components/sections/Services";
-import { Portfolio } from "@/components/sections/Portfolio";
-import { About } from "@/components/sections/About";
-import { Contact } from "@/components/sections/Contact";
+import { Hero } from "@/components/option-2/sections/Hero";
+import { Services } from "@/components/option-2/sections/Services";
+import { Showcase } from "@/components/option-2/sections/Showcase";
+import { WhyItera } from "@/components/option-2/sections/WhyItera";
+import { Process } from "@/components/option-2/sections/Process";
+import { About } from "@/components/option-2/sections/About";
+import { CTABanner } from "@/components/option-2/sections/CTABanner";
 
 export default function Home() {
   return (
     <>
       <Hero />
       <Services />
-      <Portfolio />
+      <Showcase />
+      <WhyItera />
+      <Process />
       <About />
-      <Contact />
+      <CTABanner />
     </>
   );
 }

@@ -137,7 +137,7 @@ export function ScreenshotViewer({ item, onClose }: ScreenshotViewerProps) {
               </div>
             </div>
             <Link
-              href="/#contacto"
+              href="/contacto"
               className="inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-sm text-sm font-semibold hover:bg-primary-soft transition-all hover:scale-105 active:scale-95 shrink-0"
             >
               <MessageSquare size={14} /> Solicitar un sitio así

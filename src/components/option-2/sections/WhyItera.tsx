@@ -8,13 +8,13 @@ const reasons = [
     icon: Zap,
     title: "Velocidad real",
     description:
-      "Entregas rápidas sin sacrificar calidad. Metodología ágil adaptada a equipos chicos con decisiones rápidas.",
+      "Entregas rápidas sin sacrificar calidad. Equipo chico, decisiones directas, cero vueltas.",
   },
   {
     icon: TrendingUp,
     title: "Crece con vos",
     description:
-      "Arquitectura pensada para escalar. Lo que construimos hoy soporta el volumen de mañana sin reescribir.",
+      "Lo que construimos hoy soporta el crecimiento de mañana. No vas a tener que empezar de cero.",
   },
   {
     icon: Headphones,

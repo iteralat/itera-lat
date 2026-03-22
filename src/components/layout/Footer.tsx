@@ -29,11 +29,8 @@ export function Footer() {
           <div>
             <h4 className="font-semibold text-lg mb-6">Ecosistema</h4>
             <ul className="space-y-4">
-              {/* <li>
-                <Link href="/webs" className="text-white/60 hover:text-white transition-colors">Webs</Link>
-              </li> */}
               <li>
-                <Link href="/plataformas" className="text-white/60 hover:text-white transition-colors">Plataformas</Link>
+                <Link href="/proyectos" className="text-white/60 hover:text-white transition-colors">Proyectos</Link>
               </li>
               <li>
                 <Link href="/herramientas" className="text-white/60 hover:text-white transition-colors">Herramientas</Link>
@@ -50,13 +47,13 @@ export function Footer() {
             <h4 className="font-semibold text-lg mb-6">Agencia</h4>
             <ul className="space-y-4">
               <li>
-                <Link href="/#servicios" className="text-white/60 hover:text-white transition-colors">Servicios</Link>
+                <Link href="/servicios" className="text-white/60 hover:text-white transition-colors">Servicios</Link>
               </li>
               <li>
-                <Link href="/#nosotros" className="text-white/60 hover:text-white transition-colors">Sobre Nosotros</Link>
+                <Link href="/sobre-nosotros" className="text-white/60 hover:text-white transition-colors">Sobre Nosotros</Link>
               </li>
               <li>
-                <Link href="/#contacto" className="text-white/60 hover:text-white transition-colors">Contacto</Link>
+                <Link href="/contacto" className="text-white/60 hover:text-white transition-colors">Contacto</Link>
               </li>
             </ul>
           </div>

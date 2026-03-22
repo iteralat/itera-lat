@@ -6,18 +6,18 @@ import { Globe, Cpu, Code2 } from "lucide-react";
 const services = [
   {
     icon: Globe,
-    title: "Sitios Web",
-    description: "Landing pages, portfolios y e-commerce con diseño premium y carga ultra-rápida.",
-  },
-  {
-    icon: Cpu,
-    title: "Plataformas & IA",
-    description: "Sistemas de gestión, automatización y herramientas potenciadas con inteligencia artificial.",
+    title: "Sitios & Tiendas Web",
+    description: "Webs corporativas, catálogos y tiendas online con panel de administración propio. Vos controlás el contenido, los precios y los productos sin depender de nadie.",
   },
   {
     icon: Code2,
-    title: "Software a Medida",
-    description: "Desarrollo custom que se adapta exactamente a tu operación y escala con tu negocio.",
+    title: "Plataformas a medida",
+    description: "Sistemas de gestión, automatización y herramientas que digitalizan tu operación de punta a punta. Diseñados para tu equipo, listos para crecer con tu negocio.",
+  },
+  {
+    icon: Cpu,
+    title: "Soluciones con IA",
+    description: "Analizamos tu operación y encontramos qué automatizar. Chatbots, asistentes inteligentes, generación de contenido y herramientas con IA integradas a tu flujo de trabajo.",
   },
 ];
 
@@ -43,10 +43,12 @@ export function Services() {
                 transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
                 className="group p-6 md:p-8 rounded-lg bg-zinc-900/50 border border-zinc-800 hover:border-primary/20 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,60,0,0.06)]"
               >
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/15 transition-colors">
-                  <Icon size={24} className="text-primary" />
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/15 transition-colors flex-shrink-0">
+                    <Icon size={20} className="text-primary" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-white">{service.title}</h3>
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">{service.title}</h3>
                 <p className="text-sm text-zinc-400 leading-relaxed">{service.description}</p>
               </motion.div>
             );
