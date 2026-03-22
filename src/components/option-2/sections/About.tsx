@@ -23,7 +23,7 @@ export function About() {
             día uno. Trabajamos directo con cada cliente — sin intermediarios,
             sin sorpresas.
           </p>
-          <p className="text-zinc-500 text-sm md:text-base leading-relaxed">
+          <p className="text-zinc-400 text-sm md:text-base leading-relaxed">
             Fundado por devs, no por vendedores. Cada proyecto tiene atención
             directa del equipo que lo construye.
           </p>

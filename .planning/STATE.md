@@ -8,7 +8,7 @@
 ## Sesion Actual
 
 **Fecha**: 2026-03-22
-**Trabajando en**: Google Analytics 4, favicons, OG image, error boundary, security headers.
+**Trabajando en**: Optimizacion PageSpeed Insights — performance mobile 78→90+ y accesibilidad 94→100.
 
 ---
 
@@ -24,20 +24,10 @@
 | Herramientas (`/herramientas`) | Completo | Solo en footer, no en nav top |
 | SEO | Completo | metadataBase, OG, Twitter, robots, sitemap, JSON-LD, canonical, 404, favicons, GA4 |
 | Analytics | Completo | GA4 G-YDVG0CNQQN — trackeando |
+| Performance | Completo | WebP, lazy load, CSS animations, cache headers, LCP priority |
+| Accesibilidad | Completo | Contraste, heading hierarchy, aria-labels |
 | Deploy | Completo | Coolify context "modern", app UUID: rtwcc35tbzzgfx3dp2hduod2 |
 | Marketing Pages de productos | Pendiente | Briefs primero |
-
----
-
-## Marketing Pages de Productos
-
-**Productos que necesitan marketing page**:
-- **IteraLex** → Ya tiene (iteralex.com) ✓
-- **Itera Gestión** → Pendiente
-- **Itera Tree** → Pendiente
-- **Itera Market** → Pendiente (todavía en desarrollo)
-
-**Proceso**: Briefs → Estructura por producto (no template genérico) → Diseño → Screenshots para showcase en itera.lat
 
 ---
 
@@ -59,27 +49,29 @@
 
 | Fecha | Decision |
 |-------|----------|
+| 2026-03-22 | PNGs convertidos a WebP (cerro-solar 1MB→64KB, total ~85% reduccion) |
+| 2026-03-22 | Hero y DeviceMockup: CSS @keyframes reemplaza framer-motion (critical path sin FM) |
+| 2026-03-22 | Secciones below-fold con next/dynamic (Services, Showcase, WhyItera, Process, About, CTABanner) |
+| 2026-03-22 | AnimatedBackground con dynamic ssr:false para no bloquear FCP |
+| 2026-03-22 | Cache-Control inmutable para /images/* y /fonts/* |
+| 2026-03-22 | Contraste: text-white/40 y text-zinc-500 reemplazados por text-zinc-400 |
+| 2026-03-22 | h2.sr-only en Services para corregir heading hierarchy h1→h3 |
 | 2026-03-22 | GA4 integrado via componente GoogleAnalytics + env var en Coolify CLI |
-| 2026-03-22 | Favicon set completo: .ico (ffmpeg), 16x16, 32x32, apple-touch-icon |
-| 2026-03-22 | OG image 1200x630 en public/og-image.png |
-| 2026-03-22 | Error boundary global en src/app/error.tsx |
-| 2026-03-22 | Security headers en next.config.ts: X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy |
+| 2026-03-22 | Security headers en next.config.ts |
 | 2026-03-21 | Deploy a producción en Coolify (context modern) — itera.lat live |
-| 2026-03-21 | SEO completo: metadataBase, OG, Twitter, robots, sitemap, JSON-LD, OG image dinámica |
-| 2026-03-21 | Rutas reestructuradas: /servicios, /proyectos, /sobre-nosotros, /contacto |
-| 2026-03-21 | /plataformas → /proyectos con redirect 301 |
 
 ---
 
 ## Bloqueadores
 
-1. **Metadata faltante** — check-all.sh reporta 4 pages sin metadata: /, /contacto, /servicios, /sobre-nosotros (verificar si es false positive del script o falta real)
-2. **WhatsApp** — Número placeholder en CTABanner y /contacto
-3. **Screenshots faltantes** — Estudio y Market sin screenshot
-4. **Briefs de productos** — Necesarios antes de marketing pages
+1. **WhatsApp** — Número placeholder en CTABanner y /contacto
+2. **Screenshots faltantes** — Estudio y Market sin screenshot
+3. **Briefs de productos** — Necesarios antes de marketing pages
+4. **PNGs originales** — Borrar después de verificar deploy con WebP OK
 
 ---
 
 ## Proxima Accion
 
+- Deploy y re-testear PageSpeed Insights para verificar mejoras
 - A definir por el usuario

@@ -60,6 +60,21 @@
 
 - Google Analytics 4 (G-YDVG0CNQQN) — tracking activo — Mar 2026
 
+## Performance
+
+- Imagenes convertidas de PNG a WebP (reduccion ~85% en peso total) — Mar 2026
+- Lazy load de secciones below-the-fold via next/dynamic — Mar 2026
+- Hero y DeviceMockup con CSS animations (sin framer-motion en critical path) — Mar 2026
+- AnimatedBackground cargado con dynamic ssr:false — Mar 2026
+- Cache headers inmutables para imagenes y fonts — Mar 2026
+- Imagen LCP (DeviceMockup desktop) con priority preload — Mar 2026
+
+## Accesibilidad
+
+- Contraste de colores corregido en Footer, Hero pills, About, ScreenshotViewer — Mar 2026
+- Heading hierarchy: h2 sr-only en Services para no saltar h1→h3 — Mar 2026
+- aria-labels en botones icon-only de PlatformViewer y ScreenshotViewer — Mar 2026
+
 ## Infraestructura / Seguridad
 
 - Security headers: X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy — Mar 2026

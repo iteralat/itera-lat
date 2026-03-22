@@ -52,20 +52,22 @@ export function ScreenshotViewer({ item, onClose }: ScreenshotViewerProps) {
             <div className="flex bg-elevated border border-border rounded-sm p-1">
               <button
                 onClick={() => setMode("desktop")}
+                aria-label="Ver versión desktop"
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-xs font-medium transition-all ${
                   mode === "desktop"
                     ? "bg-background border border-border text-white"
-                    : "text-white/40 hover:text-white/70"
+                    : "text-zinc-400 hover:text-white"
                 }`}
               >
                 <Monitor size={14} /> Desktop
               </button>
               <button
                 onClick={() => setMode("mobile")}
+                aria-label="Ver versión mobile"
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-xs font-medium transition-all ${
                   mode === "mobile"
                     ? "bg-background border border-border text-white"
-                    : "text-white/40 hover:text-white/70"
+                    : "text-zinc-400 hover:text-white"
                 }`}
               >
                 <Smartphone size={14} /> Mobile
@@ -73,7 +75,8 @@ export function ScreenshotViewer({ item, onClose }: ScreenshotViewerProps) {
             </div>
             <button
               onClick={onClose}
-              className="w-8 h-8 flex items-center justify-center rounded-sm hover:bg-elevated transition-colors text-white/60 hover:text-white"
+              aria-label="Cerrar visor"
+              className="w-8 h-8 flex items-center justify-center rounded-sm hover:bg-elevated transition-colors text-zinc-400 hover:text-white"
             >
               <X size={18} />
             </button>
@@ -127,10 +130,10 @@ export function ScreenshotViewer({ item, onClose }: ScreenshotViewerProps) {
         <div className="px-6 py-5 border-t border-border bg-elevated/50 shrink-0">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div className="flex-grow">
-              <p className="text-white/60 text-sm mb-2">{item.description}</p>
+              <p className="text-zinc-400 text-sm mb-2">{item.description}</p>
               <div className="flex flex-wrap gap-2">
                 {item.tags.map(tag => (
-                  <span key={tag} className="text-xs font-medium text-white/40 bg-elevated border border-border px-2.5 py-0.5 rounded-full">
+                  <span key={tag} className="text-xs font-medium text-zinc-400 bg-elevated border border-border px-2.5 py-0.5 rounded-full">
                     {tag}
                   </span>
                 ))}

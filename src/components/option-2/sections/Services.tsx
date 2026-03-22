@@ -25,6 +25,7 @@ export function Services() {
   return (
     <section className="py-20 md:py-28 bg-background">
       <div className="container mx-auto px-6 md:px-12">
+        <h2 className="sr-only">Nuestros servicios</h2>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

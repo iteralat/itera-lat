@@ -15,7 +15,7 @@ export function Footer() {
               </div>
               <span className="font-bold text-2xl tracking-wide">ÍTERA</span>
             </Link>
-            <p className="text-white/60 max-w-sm text-lg leading-relaxed mb-8">
+            <p className="text-zinc-400 max-w-sm text-lg leading-relaxed mb-8">
               Soluciones digitales que evolucionan con vos.
             </p>
             <a
@@ -30,13 +30,13 @@ export function Footer() {
             <h4 className="font-semibold text-lg mb-6">Ecosistema</h4>
             <ul className="space-y-4">
               <li>
-                <Link href="/proyectos" className="text-white/60 hover:text-white transition-colors">Proyectos</Link>
+                <Link href="/proyectos" className="text-zinc-400 hover:text-white transition-colors">Proyectos</Link>
               </li>
               <li>
-                <Link href="/herramientas" className="text-white/60 hover:text-white transition-colors">Herramientas</Link>
+                <Link href="/herramientas" className="text-zinc-400 hover:text-white transition-colors">Herramientas</Link>
               </li>
               <li>
-                <a href="https://itera.tools" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors flex items-center gap-1 group">
+                <a href="https://itera.tools" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors flex items-center gap-1 group">
                   itera.tools <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                 </a>
               </li>
@@ -47,19 +47,19 @@ export function Footer() {
             <h4 className="font-semibold text-lg mb-6">Agencia</h4>
             <ul className="space-y-4">
               <li>
-                <Link href="/servicios" className="text-white/60 hover:text-white transition-colors">Servicios</Link>
+                <Link href="/servicios" className="text-zinc-400 hover:text-white transition-colors">Servicios</Link>
               </li>
               <li>
-                <Link href="/sobre-nosotros" className="text-white/60 hover:text-white transition-colors">Sobre Nosotros</Link>
+                <Link href="/sobre-nosotros" className="text-zinc-400 hover:text-white transition-colors">Sobre Nosotros</Link>
               </li>
               <li>
-                <Link href="/contacto" className="text-white/60 hover:text-white transition-colors">Contacto</Link>
+                <Link href="/contacto" className="text-zinc-400 hover:text-white transition-colors">Contacto</Link>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between text-white/40 text-sm">
+        <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between text-zinc-400 text-sm">
           <p>&copy; {currentYear} ÍTERA. Todos los derechos reservados.</p>
           <div className="flex gap-6 mt-4 md:mt-0">
             <span>Patagonia, Argentina</span>
