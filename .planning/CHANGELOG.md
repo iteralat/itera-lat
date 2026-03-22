@@ -4,6 +4,34 @@ Historial completo de sesiones. Se acumula con cada `/save`.
 
 ---
 
+## [21 Mar 2026] - Reestructuración rutas, SEO y primer deploy
+
+### Que se hizo
+- Reestructuración: /servicios, /proyectos (ex /plataformas)
+- Redirects 301: /plataformas → /proyectos, /webs → /proyectos
+- Header simplificado: nav plano, CTA Hablemos
+- SEO completo: metadataBase, OG, Twitter, robots, sitemap, JSON-LD
+- Eliminación dead code: /webs, /portfolio, /option-2, components/sections/
+- Dockerfile multi-stage, .dockerignore, output standalone
+- Primer deploy a producción en Coolify (itera.lat)
+
+### Archivos clave
+- `next.config.ts` - redirects + standalone
+- `src/app/layout.tsx` - metadataBase, OG, JSON-LD
+- `src/app/robots.ts`, `sitemap.ts` - SEO indexing
+- `src/app/opengraph-image.tsx` - OG dinámica ImageResponse
+- `src/components/layout/Header.tsx`, `Footer.tsx` - nav plana, rutas nuevas
+- `Dockerfile`, `.dockerignore` - deploy Coolify
+- `.planning/auto-deploy-coolify.md` - guía actualizada
+
+### Decisiones
+- Nav plano sin dropdown para simplificar UX
+- /proyectos más descriptivo que /plataformas
+- Cada page client con metadata propia (framer-motion)
+- OG image generada en edge runtime
+
+---
+
 ## [21 Mar 2026] - Rediseño hero option-2 y auditoría de contenido
 
 ### Que se hizo
