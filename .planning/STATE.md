@@ -7,8 +7,8 @@
 
 ## Sesion Actual
 
-**Fecha**: 2026-03-21
-**Trabajando en**: Reestructuración completa de rutas, SEO, y primer deploy a producción en Coolify.
+**Fecha**: 2026-03-22
+**Trabajando en**: Google Analytics 4, favicons, OG image, error boundary, security headers.
 
 ---
 
@@ -22,9 +22,10 @@
 | Sobre Nosotros (`/sobre-nosotros`) | Completo | Quiénes somos, proceso, por qué ÍTERA, herramientas propias |
 | Contacto (`/contacto`) | Completo | WhatsApp + email con GlowButton |
 | Herramientas (`/herramientas`) | Completo | Solo en footer, no en nav top |
-| SEO | Completo | metadataBase, OG, Twitter, robots, sitemap, JSON-LD, canonical, 404 |
+| SEO | Completo | metadataBase, OG, Twitter, robots, sitemap, JSON-LD, canonical, 404, favicons, GA4 |
+| Analytics | Completo | GA4 G-YDVG0CNQQN — trackeando |
 | Deploy | Completo | Coolify context "modern", app UUID: rtwcc35tbzzgfx3dp2hduod2 |
-| Marketing Pages de productos | Pendiente | Briefs primero (ver sección abajo) |
+| Marketing Pages de productos | Pendiente | Briefs primero |
 
 ---
 
@@ -50,6 +51,7 @@
 | Dominio | https://itera.lat + https://www.itera.lat |
 | Server IP | 65.108.148.79 |
 | Google Search Console | Añadido |
+| Google Analytics 4 | G-YDVG0CNQQN — activo |
 
 ---
 
@@ -57,18 +59,21 @@
 
 | Fecha | Decision |
 |-------|----------|
+| 2026-03-22 | GA4 integrado via componente GoogleAnalytics + env var en Coolify CLI |
+| 2026-03-22 | Favicon set completo: .ico (ffmpeg), 16x16, 32x32, apple-touch-icon |
+| 2026-03-22 | OG image 1200x630 en public/og-image.png |
+| 2026-03-22 | Error boundary global en src/app/error.tsx |
+| 2026-03-22 | Security headers en next.config.ts: X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy |
 | 2026-03-21 | Deploy a producción en Coolify (context modern) — itera.lat live |
 | 2026-03-21 | SEO completo: metadataBase, OG, Twitter, robots, sitemap, JSON-LD, OG image dinámica |
 | 2026-03-21 | Rutas reestructuradas: /servicios, /proyectos, /sobre-nosotros, /contacto |
-| 2026-03-21 | Header simplificado: nav plano sin dropdown |
 | 2026-03-21 | /plataformas → /proyectos con redirect 301 |
-| 2026-03-21 | Eliminadas rutas huérfanas (/webs, /portfolio, /option-2) y components/sections/ |
 
 ---
 
 ## Bloqueadores
 
-1. **Google Analytics** — Falta agregar (próxima sesión)
+1. **Metadata faltante** — check-all.sh reporta 4 pages sin metadata: /, /contacto, /servicios, /sobre-nosotros (verificar si es false positive del script o falta real)
 2. **WhatsApp** — Número placeholder en CTABanner y /contacto
 3. **Screenshots faltantes** — Estudio y Market sin screenshot
 4. **Briefs de productos** — Necesarios antes de marketing pages
@@ -77,4 +82,4 @@
 
 ## Proxima Accion
 
-- Agregar Google Analytics
+- A definir por el usuario

@@ -53,3 +53,14 @@
 - JSON-LD (Organization + WebSite) — Mar 2026
 - OG image dinámica — Mar 2026
 - Title template (%s | ÍTERA) en todas las páginas — Mar 2026
+- Favicon set completo: .ico, 16x16, 32x32, apple-touch-icon — Mar 2026
+- OG image estática 1200x630 en public/ — Mar 2026
+
+## Analytics
+
+- Google Analytics 4 (G-YDVG0CNQQN) — tracking activo — Mar 2026
+
+## Infraestructura / Seguridad
+
+- Security headers: X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy — Mar 2026
+- Error boundary global con "Intentar de nuevo" y "Ir al inicio" — Mar 2026

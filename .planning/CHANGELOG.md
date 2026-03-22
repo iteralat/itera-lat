@@ -4,6 +4,31 @@ Historial completo de sesiones. Se acumula con cada `/save`.
 
 ---
 
+## [22 Mar 2026] - GA4, favicons, OG image y security headers
+
+### Que se hizo
+- Google Analytics 4 instalado con Measurement ID G-YDVG0CNQQN
+- Componente GoogleAnalytics.tsx con next/script strategy
+- Favicon set completo: .ico, 16x16, 32x32, apple-touch-icon
+- OG image estática 1200x630 en public/og-image.png
+- Error boundary global en src/app/error.tsx
+- Security headers: X-Frame-Options, X-Content-Type-Options, Referrer-Policy
+
+### Archivos clave
+- `src/components/shared/GoogleAnalytics.tsx` - GA4 tracking
+- `src/app/error.tsx` - error boundary global
+- `src/app/layout.tsx` - metadata iconos actualizada
+- `next.config.ts` - security headers añadidos
+- `public/` - favicon set, og-image.png nuevos
+
+### Decisiones
+- GA4 via NEXT_PUBLIC_GA_ID en Coolify CLI
+- afterInteractive script strategy para performance
+- Favicon set en public/ vs esquema .ico único
+- Memoria persistente documentada en .claude/
+
+---
+
 ## [21 Mar 2026] - Reestructuración rutas, SEO y primer deploy
 
 ### Que se hizo
