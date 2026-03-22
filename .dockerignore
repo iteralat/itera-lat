@@ -1,0 +1,8 @@
+node_modules
+.git
+.next
+.planning
+.playwright-mcp
+.env*
+!.env.example
+*.md
