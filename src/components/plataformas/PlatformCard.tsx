@@ -4,10 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Server } from "lucide-react";
-import type { PlatformItem } from "@/data/portfolio";
+import type { ProductItem } from "@/data/portfolio";
 
-export function PlatformCard({ platform, index }: { platform: PlatformItem; index: number }) {
-  const isProduction = platform.status.toLowerCase().includes("producción");
+export function PlatformCard({ platform, index }: { platform: ProductItem; index: number }) {
+  const isProduction = platform.status.toLowerCase().includes("produccion");
   const words = platform.productName.split(" ");
   const firstWord = words[0];
   const restWords = words.slice(1).join(" ");
@@ -79,7 +79,7 @@ export function PlatformCard({ platform, index }: { platform: PlatformItem; inde
             </p>
           )}
           <Link
-            href={`/proyectos/${platform.id}`}
+            href={`/productos/${platform.id}`}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider rounded-md bg-gradient-to-r from-orange-700 to-orange-500 text-white hover:from-orange-600 hover:to-orange-400 transition-all"
           >
             Ver producto <ArrowRight size={13} />

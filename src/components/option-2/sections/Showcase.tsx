@@ -4,31 +4,24 @@ import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
-import { platforms, type PlatformItem } from "@/data/portfolio";
+import { ArrowUpRight, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+import { saasProducts, standaloneProducts, type ProductItem } from "@/data/portfolio";
 
-// Slider: plataformas destacadas (IteraLex primero)
-const sliderItems: PlatformItem[] = [
-  platforms.find((p) => p.id === "iteralex")!,
-  platforms.find((p) => p.id === "itera-gestion")!,
-  platforms.find((p) => p.id === "itera-tree")!,
-];
+// Slider: los productos con screenshot (SaaS primero, luego standalone con screenshot)
+const sliderItems: ProductItem[] = [
+  ...saasProducts,
+  ...standaloneProducts,
+].filter((p) => p.screenshot);
 
-// Bento: el resto
+// Bento: standalone sin screenshot en slider
 const sliderIds = new Set(sliderItems.map((p) => p.id));
-const bentoItems = platforms.filter((p) => !sliderIds.has(p.id));
-
-const spanMap: Record<number, string> = {
-  0: "md:col-span-6",
-  1: "md:col-span-6",
-};
+const bentoItems = standaloneProducts.filter((p) => !sliderIds.has(p.id));
 
 function mod(n: number, m: number) {
   return ((n % m) + m) % m;
 }
 
-/** Devuelve las imágenes disponibles para un slide */
-function getSlideImages(item: PlatformItem): string[] {
+function getSlideImages(item: ProductItem): string[] {
   if (item.screenshots && item.screenshots.length > 0) return item.screenshots;
   if (item.screenshot) return [item.screenshot];
   return [];
@@ -38,13 +31,18 @@ function SliderCard({
   item,
   position,
 }: {
-  item: PlatformItem;
+  item: ProductItem;
   position: "prev" | "active" | "next";
 }) {
   const images = getSlideImages(item);
   const [imgIndex, setImgIndex] = useState(0);
   const hasMultiple = images.length > 1;
   const isActive = position === "active";
+  const isStandalone = item.category === "standalone";
+
+  const href = isStandalone && item.externalUrl
+    ? item.externalUrl
+    : `/productos/${item.id}`;
 
   return (
     <div
@@ -54,14 +52,14 @@ function SliderCard({
           : "scale-[0.88] opacity-40 z-0 pointer-events-none"
       }`}
     >
-      {/* Tablet frame */}
       <div
         className={`relative rounded-xl border bg-zinc-900 p-2 shadow-2xl shadow-black/40 transition-colors duration-500 ${
           isActive ? "border-zinc-700/60" : "border-zinc-800/40"
         }`}
       >
         <Link
-          href={`/proyectos/${item.id}`}
+          href={href}
+          {...(isStandalone && item.externalUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
           className="block relative aspect-[16/10] rounded-lg overflow-hidden"
         >
           {images.length > 0 ? (
@@ -90,10 +88,15 @@ function SliderCard({
               </span>
             </div>
           )}
-          {/* Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent" />
 
-          {/* Name + tagline */}
+          {/* Badge */}
+          <span className={`absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full ${
+            isStandalone ? "bg-primary/20 text-primary" : "bg-blue-500/20 text-blue-400"
+          }`}>
+            {isStandalone ? "Standalone" : "SaaS"}
+          </span>
+
           <div className="absolute bottom-4 left-4 right-4">
             <span className="text-white font-semibold text-lg">
               {item.productName}
@@ -102,7 +105,6 @@ function SliderCard({
           </div>
         </Link>
 
-        {/* Inner dots — solo si hay múltiples screenshots */}
         {hasMultiple && isActive && (
           <div className="flex items-center justify-center gap-1.5 pt-2 pb-1">
             {images.map((_, i) => (
@@ -159,11 +161,11 @@ export function Showcase() {
             Lo que construimos
           </h2>
           <p className="text-zinc-400 max-w-xl">
-            Plataformas en producción que resuelven problemas reales.
+            Plataformas en produccion que resuelven problemas reales.
           </p>
         </motion.div>
 
-        {/* Infinite tablet slider */}
+        {/* Slider */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -171,9 +173,7 @@ export function Showcase() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="relative mb-16"
         >
-          {/* 3-card layout: prev | active | next */}
           <div className="relative flex items-center justify-center">
-            {/* Previous (peek left) */}
             <div className="hidden md:block w-[20%] flex-shrink-0">
               <SliderCard
                 key={`prev-${prevIndex}`}
@@ -182,7 +182,6 @@ export function Showcase() {
               />
             </div>
 
-            {/* Active center */}
             <div className="w-full md:w-[60%] flex-shrink-0 px-2 md:px-4">
               <SliderCard
                 key={`active-${activeIndex}`}
@@ -191,7 +190,6 @@ export function Showcase() {
               />
             </div>
 
-            {/* Next (peek right) */}
             <div className="hidden md:block w-[20%] flex-shrink-0">
               <SliderCard
                 key={`next-${nextIndex}`}
@@ -201,11 +199,10 @@ export function Showcase() {
             </div>
           </div>
 
-          {/* Navigation */}
           <div className="flex items-center justify-center gap-4 mt-6">
             <button
               onClick={() => navigate(-1)}
-              aria-label="Proyecto anterior"
+              aria-label="Producto anterior"
               className="w-10 h-10 rounded-full border border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-white hover:border-zinc-500 transition-colors"
             >
               <ChevronLeft size={20} />
@@ -215,7 +212,7 @@ export function Showcase() {
                 <button
                   key={i}
                   onClick={() => goTo(i)}
-                  aria-label={`Ir a proyecto ${i + 1}`}
+                  aria-label={`Ir a producto ${i + 1}`}
                   className={`h-2 rounded-full transition-all duration-300 ${
                     i === activeIndex
                       ? "bg-primary w-6"
@@ -226,7 +223,7 @@ export function Showcase() {
             </div>
             <button
               onClick={() => navigate(1)}
-              aria-label="Proyecto siguiente"
+              aria-label="Producto siguiente"
               className="w-10 h-10 rounded-full border border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-white hover:border-zinc-500 transition-colors"
             >
               <ChevronRight size={20} />
@@ -234,9 +231,9 @@ export function Showcase() {
           </div>
         </motion.div>
 
-        {/* Bento grid: resto de plataformas */}
+        {/* Bento: standalone sin screenshot */}
         {bentoItems.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {bentoItems.map((item, i) => (
               <motion.div
                 key={item.id}
@@ -248,10 +245,12 @@ export function Showcase() {
                   delay: i * 0.1,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className={`group relative overflow-hidden rounded-lg border border-zinc-800 hover:border-primary/25 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,60,0,0.08)] ${spanMap[i] ?? "md:col-span-4"}`}
+                className="group relative overflow-hidden rounded-lg border border-zinc-800 hover:border-primary/25 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,60,0,0.08)]"
               >
-                <Link
-                  href={`/proyectos/${item.id}`}
+                <a
+                  href={item.externalUrl ?? `/productos/${item.id}`}
+                  target={item.externalUrl ? "_blank" : undefined}
+                  rel={item.externalUrl ? "noopener noreferrer" : undefined}
                   className="block relative aspect-[16/10]"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-zinc-800/80 via-zinc-900 to-zinc-950 flex items-center justify-center">
@@ -259,32 +258,29 @@ export function Showcase() {
                       {item.productName}
                     </span>
                   </div>
-
-                  {/* Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/30 to-transparent" />
 
-                  {/* Badge */}
                   <span className="absolute top-3 left-3 text-xs font-medium px-2.5 py-1 rounded-full bg-primary/20 text-primary">
-                    Plataforma
+                    Standalone
                   </span>
 
-                  {/* Name + arrow */}
                   <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
                     <span className="text-white font-semibold text-sm md:text-base">
                       {item.productName}
                     </span>
-                    <ArrowUpRight
-                      size={18}
-                      className="text-zinc-400 group-hover:text-primary transition-colors"
-                    />
+                    {item.externalUrl ? (
+                      <ExternalLink size={16} className="text-zinc-400 group-hover:text-primary transition-colors" />
+                    ) : (
+                      <ArrowUpRight size={18} className="text-zinc-400 group-hover:text-primary transition-colors" />
+                    )}
                   </div>
-                </Link>
+                </a>
               </motion.div>
             ))}
           </div>
         )}
 
-        {/* View all link */}
+        {/* View all */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -293,10 +289,10 @@ export function Showcase() {
           className="mt-8 text-center"
         >
           <Link
-            href="/proyectos"
+            href="/productos"
             className="inline-flex items-center gap-1.5 text-sm text-zinc-400 hover:text-primary transition-colors"
           >
-            Ver todos los proyectos
+            Ver todos los productos
             <ArrowUpRight size={16} />
           </Link>
         </motion.div>
