@@ -7,7 +7,7 @@ model: 'sonnet'
 
 ## Pasos
 
-### 1. /check (condicional)
+### 1. /check + enforcement scripts (condicional)
 
 Hubo cambios de codigo (.ts/.tsx)?
 
@@ -15,7 +15,17 @@ Hubo cambios de codigo (.ts/.tsx)?
 - **SI** + existen `scripts/check-all.sh` -> ejecutar `bash scripts/check-all.sh` ademas. Si reporta fallos, corregir antes de continuar.
 - **NO** -> saltar.
 
-### 2. Errores/bugs de la sesion -> GUARDRAILS.md
+### 2. Autoevaluacion de auditorias especificas
+
+El `/check` del paso 1 ya cubre calidad general. Evaluar ademas:
+
+| Si en la sesion hubo...                                                                | Lanzar               |
+| -------------------------------------------------------------------------------------- | -------------------- |
+| API routes nuevas/modificadas, services con writes, modelos nuevos, endpoints publicos | `/security-audit`    |
+| Features IA, integraciones externas (Google, Gemini), acciones de dominio sensibles    | `/operational-audit` |
+| Solo docs/planning, sin codigo                                                         | ninguna              |
+
+### 3. Errores/bugs de la sesion -> GUARDRAILS.md
 
 Hubo bugs, ida-y-vuelta, soluciones que no funcionaron a la primera?
 
@@ -26,14 +36,16 @@ Hubo bugs, ida-y-vuelta, soluciones que no funcionaron a la primera?
 
 > **CLAUDE.md solo recibe lo que se repitio.** GUARDRAILS.md es el primer paso, CLAUDE.md es la escalacion.
 
-### 3. Actualizar FEATURE-CHANGELOG.md (si hubo features nuevas o modificadas)
+### 4. Actualizar FEATURE-CHANGELOG.md (si hubo features nuevas o modificadas)
 
 Se agrego o cambio funcionalidad visible para el usuario?
 
 - **SI** -> Agregar entradas en `.planning/FEATURE-CHANGELOG.md` bajo el modulo correspondiente: `- descripcion de la feature — Mes Ano`
 - **NO** (solo fixes tecnicos, docs, infra) -> saltar
 
-### 4. Actualizar STATE.md (sobrescribir)
+> El FEATURE-CHANGELOG es opcional. Crearlo cuando el proyecto tiene features de usuario.
+
+### 5. Actualizar STATE.md (sobrescribir)
 
 ```markdown
 ## Sesion Actual
@@ -60,7 +72,7 @@ Se agrego o cambio funcionalidad visible para el usuario?
 
 **Max 120 lineas.** Si crece, condensar Decisiones Recientes.
 
-### 5. CHANGELOG + Commit (en paralelo)
+### 6. CHANGELOG + Commit (en paralelo)
 
 **Changelog** via agente:
 
@@ -84,11 +96,12 @@ git commit -m "<tipo>(<scope>): <descripcion en imperativo>"
 
 Tipos: feat/fix/refactor/style/test/docs/chore | Max 72 chars | Sin punto final
 
-### 6. Confirmar al usuario
+### 7. Confirmar al usuario
 
 ```markdown
 ## Sesion Guardada
 
+**Auditorias**: [ejecutadas / ninguna]
 **GUARDRAILS**: [N errores nuevos / N promovidos a CLAUDE.md / sin cambios]
 **STATE.md**: actualizado
 **CHANGELOG.md**: entrada agregada

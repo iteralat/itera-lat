@@ -51,6 +51,7 @@ Web informativa y portfolio de la agencia ÍTERA · itera.lat
 - ANTES de usar campo/prop -> verificar que existe en schema/interface
 - SIEMPRE `===` y `!==` -> NUNCA `==` o `!=`
 - Evitar `as Type` en datos externos -> validar runtime si hay duda
+- **Grep de directivas** (`'use client'`, `'use server'`) -> SIEMPRE buscar ambas variantes de comillas (`"use client"` y `'use client'`) -> conteos con una sola variante dan resultados incorrectos
 
 ---
 
@@ -59,6 +60,8 @@ Web informativa y portfolio de la agencia ÍTERA · itera.lat
 - `searchParams`, `params`, `cookies()`, `headers()` -> TODAS son Promises -> await ANTES de usar
 - Pages dinamicas (`[id]`, `[slug]`) -> SIEMPRE Server Component async -> NUNCA `useParams()`
 - `next/image` CDN externo -> agregar a `images.remotePatterns` en next.config.ts
+- Defensive parsing de API responses -> verificar `res.ok` PRIMERO -> solo setear state si estructura valida
+- `serverExternalPackages` en next.config.ts para libs con bindings nativos (ssh2, bcrypt, etc)
 
 ---
 
@@ -68,6 +71,9 @@ Web informativa y portfolio de la agencia ÍTERA · itera.lat
 - Sincronizar props a state -> SIEMPRE en useEffect con deps, NUNCA en cuerpo del componente
 - Elementos interactivos anidados (`<button>` dentro de `<button>`) -> hydration error
 - `ref.current` en cuerpo del componente -> SOLO en effects o event handlers
+- Orden de hooks en el componente: `useState`/`useRef` -> SIEMPRE declarar ANTES del `useEffect` que los usa -> `const` no tiene hoisting -> `Cannot access X before initialization` en runtime
+- Context en componente compartido -> Hook tolerante que retorna `undefined` sin provider -> NUNCA hook que throwea si no hay provider
+- Client state optimista con arrays -> `router.refresh()` + `useEffect(() => setState(props), [props])` -> NUNCA poblar con `[]` (no refresca desde SSR)
 
 ---
 
