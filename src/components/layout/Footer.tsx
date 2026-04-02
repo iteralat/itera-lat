@@ -30,27 +30,13 @@ export function Footer() {
             <h4 className="font-semibold text-lg mb-6">Productos</h4>
             <ul className="space-y-4">
               <li>
-                <Link href="/productos" className="text-zinc-400 hover:text-white transition-colors">Todos los productos</Link>
+                <Link href="/productos/sitios-web" className="text-zinc-400 hover:text-white transition-colors">Sitios Web</Link>
               </li>
               <li>
-                <a href="https://desk.itera.lat" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors flex items-center gap-1 group">
-                  IteraDesk <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                </a>
+                <Link href="/productos/soluciones" className="text-zinc-400 hover:text-white transition-colors">Soluciones</Link>
               </li>
               <li>
-                <a href="https://link.itera.lat" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors flex items-center gap-1 group">
-                  IteraLink <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                </a>
-              </li>
-              <li>
-                <a href="https://shop.itera.lat" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors flex items-center gap-1 group">
-                  IteraShop <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                </a>
-              </li>
-              <li>
-                <a href="https://iteralex.com" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors flex items-center gap-1 group">
-                  IteraLex <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                </a>
+                <Link href="/productos/saas" className="text-zinc-400 hover:text-white transition-colors">SaaS</Link>
               </li>
             </ul>
           </div>
