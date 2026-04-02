@@ -1,22 +1,48 @@
-// --- TIPOS ---
+// --- TIPOS BASE ---
 
-export interface ProductItem {
+export interface CaseStudy {
+  summary: string;
+  challenge: string;
+  solution: string;
+  result: string;
+}
+
+export interface WebCaseStudy extends CaseStudy {
+  client: string;
+}
+
+export interface BaseProduct {
   id: string;
-  category: "saas" | "standalone";
+  slug: string;
   productName: string;
   tagline: string;
-  coverLine: string;
   description: string;
-  features: string[];
   tags: string[];
-  status: string;
   screenshot: string;
   screenshots?: string[];
+}
+
+// --- TIPOS DERIVADOS ---
+
+export interface ProductItem extends BaseProduct {
+  category: "saas" | "standalone";
+  coverLine: string;
+  features: string[];
+  status: string;
   adopters: { name: string; url?: string }[];
   /** URL externa del producto (landing en subdominio o dominio propio) */
   externalUrl?: string;
   /** Subdominio de la landing standalone */
   subdomain?: string;
+  caseStudy?: CaseStudy;
+}
+
+export interface WebItem extends BaseProduct {
+  niche: string;
+  screenshotMobile: string;
+  url?: string;
+  featured?: boolean;
+  caseStudy?: WebCaseStudy;
 }
 
 // --- SAAS ---
@@ -24,6 +50,7 @@ export interface ProductItem {
 export const saasProducts: ProductItem[] = [
   {
     id: "iteralex",
+    slug: "iteralex",
     category: "saas",
     productName: "IteraLex",
     tagline: "Gestion integral para estudios juridicos",
@@ -55,6 +82,7 @@ export const saasProducts: ProductItem[] = [
 export const standaloneProducts: ProductItem[] = [
   {
     id: "iteradesk",
+    slug: "iteradesk",
     category: "standalone",
     productName: "IteraDesk",
     tagline: "Sistema de gestion para negocios B2B",
@@ -77,6 +105,7 @@ export const standaloneProducts: ProductItem[] = [
   },
   {
     id: "iteralink",
+    slug: "iteralink",
     category: "standalone",
     productName: "IteraLink",
     tagline: "Presencia digital B2B con lista de precios y analytics",
@@ -99,6 +128,7 @@ export const standaloneProducts: ProductItem[] = [
   },
   {
     id: "iterashop",
+    slug: "iterashop",
     category: "standalone",
     productName: "IteraShop",
     tagline: "Catalogo online con checkout por WhatsApp",
@@ -125,6 +155,7 @@ export const standaloneProducts: ProductItem[] = [
 export const internalProducts: ProductItem[] = [
   {
     id: "itera-estudio",
+    slug: "itera-estudio",
     category: "saas",
     productName: "Itera Estudio",
     tagline: "Fotos de producto profesionales generadas con IA",
@@ -144,8 +175,78 @@ export const internalProducts: ProductItem[] = [
   },
 ];
 
+// --- SITIOS WEB DEMO ---
+
+export const websites: WebItem[] = [
+  {
+    id: "brasa-burgers",
+    slug: "brasa-burgers",
+    productName: "Brasa Burgers",
+    tagline: "Hamburgueseria artesanal con identidad de barrio",
+    description: "Sitio web para hamburgueseria artesanal con menu digital, galeria y boton de pedido por WhatsApp.",
+    niche: "Gastronomia",
+    tags: ["Next.js", "Tailwind CSS", "WhatsApp"],
+    screenshot: "/images/portfolio/screenshot-brasa-burgers.jpg",
+    screenshotMobile: "",
+    featured: true,
+  },
+  {
+    id: "cerro-solar",
+    slug: "cerro-solar",
+    productName: "Cerro Solar",
+    tagline: "Cabanas de montana con reservas online",
+    description: "Sitio web para complejo de cabanas en la Patagonia con galeria inmersiva, disponibilidad y formulario de reserva.",
+    niche: "Turismo",
+    tags: ["Next.js", "Tailwind CSS"],
+    screenshot: "/images/portfolio/screenshot-cerro-solar.webp",
+    screenshotMobile: "",
+    featured: true,
+  },
+  {
+    id: "cota-estudio",
+    slug: "cota-estudio",
+    productName: "Cota Estudio",
+    tagline: "Estudio de arquitectura con portfolio digital",
+    description: "Portfolio web minimalista para estudio de arquitectura. Proyectos con galeria de alta resolucion y ficha tecnica.",
+    niche: "Arquitectura",
+    tags: ["Next.js", "Tailwind CSS"],
+    screenshot: "/images/portfolio/screenshot-cota-estudio.webp",
+    screenshotMobile: "",
+    featured: false,
+  },
+  {
+    id: "surco-cafe",
+    slug: "surco-cafe",
+    productName: "Surco Cafe",
+    tagline: "Cafeteria de especialidad con carta digital",
+    description: "Sitio web para cafeteria de especialidad con carta digital, historia de origen y ubicacion.",
+    niche: "Gastronomia",
+    tags: ["Next.js", "Tailwind CSS"],
+    screenshot: "/images/portfolio/screenshot-surco-cafe.jpg",
+    screenshotMobile: "",
+    featured: false,
+  },
+  {
+    id: "filo-barberia",
+    slug: "filo-barberia",
+    productName: "Filo Barberia",
+    tagline: "Barberia moderna con turnos online",
+    description: "Sitio web para barberia con sistema de turnos online, galeria de trabajos y precios.",
+    niche: "Servicios",
+    tags: ["Next.js", "Tailwind CSS"],
+    screenshot: "/images/portfolio/screenshot-filo-barberia.jpg",
+    screenshotMobile: "",
+    featured: false,
+  },
+];
+
+// --- HELPERS ---
+
 // Helper: todos los productos públicos
 export const allProducts: ProductItem[] = [...saasProducts, ...standaloneProducts];
+
+// Helper: sitios web destacados
+export const featuredWebsites: WebItem[] = websites.filter((w) => w.featured);
 
 // Backward compat alias
 export const platforms = allProducts;
