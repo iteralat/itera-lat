@@ -1,14 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0f0e0c;
+  --background: #050505;
   --foreground: #FFFFFF;
   --primary: #FF3C00;
   --primary-soft: #FF6A00;
   --cold: #A960EE;
-  --muted: #161412;
-  --elevated: #1a1816;
-  --border: rgba(255, 255, 255, 0.08);
+  --muted: #0a0a0a;
+  --elevated: #111111;
+  --border: rgba(255, 255, 255, 0.06);
+
+  /* Category colors */
+  --cat-web: #4ecdc4;
+  --cat-solutions: #f5a623;
+  --cat-saas: #a78bfa;
 }
 
 @theme inline {
@@ -20,6 +25,9 @@
   --color-muted: var(--muted);
   --color-elevated: var(--elevated);
   --color-border: var(--border);
+  --color-cat-web: var(--cat-web);
+  --color-cat-solutions: var(--cat-solutions);
+  --color-cat-saas: var(--cat-saas);
   --font-sans: var(--font-poppins);
 }
 
@@ -90,4 +98,25 @@ body {
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* Glow hover effect for cards */
+.glow-hover {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.glow-hover:hover {
+  box-shadow: 0 0 30px rgba(255, 60, 0, 0.1);
+  border-color: rgba(255, 60, 0, 0.15);
+}
+
+/* Light line separator */
+.light-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 60, 0, 0.4), transparent);
+}
+
+/* Dot grid background */
+.dot-grid {
+  background-image: radial-gradient(rgba(255, 60, 0, 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
