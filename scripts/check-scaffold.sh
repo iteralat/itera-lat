@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# check-scaffold.sh — Verifica que los archivos scaffold existan.
+# check-scaffold.sh — Verifica que los archivos scaffold del kickstart existan.
+# Ejecutar manualmente o como parte de CI.
 # Exit code 0 = todo OK, 1 = faltan archivos.
 
 set -euo pipefail
@@ -29,19 +30,29 @@ check_optional() {
 echo "== Verificando archivos scaffold =="
 echo ""
 
-# Archivos requeridos para este proyecto
-check_required "CLAUDE.md"
-check_required ".planning/STATE.md"
-check_required ".planning/GUARDRAILS.md"
+# Archivos siempre requeridos
+check_required ".nvmrc"
+check_required "Dockerfile"
+check_required ".dockerignore"
+check_required "src/lib/env.ts"
+check_required "src/lib/utils/slugify.ts"
+check_required "src/lib/types.ts"
+check_required "src/components/shared/empty-state.tsx"
 
-# Error boundaries
-check_optional "src/app/error.tsx"
-check_optional "src/app/not-found.tsx"
+# Error boundaries y loading (al menos el público)
+check_required "src/app/(public)/error.tsx"
+check_required "src/app/(public)/loading.tsx"
 
-# Deploy (cuando se necesite)
-check_optional ".nvmrc"
-check_optional "Dockerfile"
-check_optional ".dockerignore"
+# Opcionales (si hay admin — route group (admin) es la convencion)
+if [ -d "src/app/(admin)" ]; then
+  check_optional "src/app/(admin)/admin/error.tsx"
+  check_optional "src/app/(admin)/admin/loading.tsx"
+fi
+
+# Si hay auth module
+if [ -f "src/lib/auth.ts" ]; then
+  check_optional "src/lib/auth-action.ts"
+fi
 
 echo ""
 if [ $missing -gt 0 ]; then

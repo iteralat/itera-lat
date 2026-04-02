@@ -80,6 +80,8 @@ Web informativa y portfolio de la agencia ÍTERA · itera.lat
 ### UI / Tailwind v4
 
 - CSS vars custom -> registrar en `@theme inline` de globals.css
+- **Paleta base**: `#050505` (background), `#0a0a0a` (muted), `#111111` (elevated). Los marrones anteriores (#0f0e0c, #161412, #1a1816) ya NO se usan.
+- **Colores de categoría**: `--cat-web: #4ecdc4`, `--cat-solutions: #f5a623`, `--cat-saas: #a78bfa`
 - grid-cols arbitrario -> espacios NO comas: `grid-cols-[1fr_280px]`
 - **`Button size="icon"` -> SIEMPRE `aria-label` descriptivo**
 - `h-full` requiere cascada completa -> todos los padres deben tener `h-full`

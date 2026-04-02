@@ -7,8 +7,8 @@
 
 ## Sesion Actual
 
-**Fecha**: 2026-03-24
-**Trabajando en**: Reestructuracion completa del sitio — /proyectos→/productos, separacion SaaS vs Standalone.
+**Fecha**: 2026-04-02
+**Trabajando en**: Rediseño completo del sitio — nueva identidad visual (negro puro, glow naranja), reestructuración de productos en 3 categorías con dropdown.
 
 ---
 
@@ -16,35 +16,47 @@
 
 | Modulo | Estado | Notas |
 |--------|--------|-------|
-| Home (`/`) | Completo | option-2 es el home definitivo |
-| Servicios (`/servicios`) | Completo | 3 verticales: webs, plataformas, IA |
-| Productos (`/productos`) | Reestructurado | Overview con SaaS + Standalone separados |
-| Productos detail (`/productos/[slug]`) | En progreso | 4 productos (iteralex, iteradesk, iteralink, iterashop). CTA a subdominios para standalone. Paginas individuales necesitan trabajo antes de deploy |
-| Sobre Nosotros (`/sobre-nosotros`) | Completo | |
-| Contacto (`/contacto`) | Completo | WhatsApp placeholder |
-| SEO | Completo | sitemap actualizado con /productos |
-| Analytics | Completo | GA4 G-YDVG0CNQQN |
-| Performance | Completo | WebP, lazy load, CSS animations |
-| Deploy | Pendiente redeploy | Cambios de estructura aun no deployados |
-
-### Eliminado en sesion 2026-03-24
-- `/proyectos` → renombrado a `/productos`
-- `/herramientas` — Monitor y Hub son internos, no aportan al visitante
-- Websites ficticios (Cerro Solar, Cota Estudio, Surco Cafe, etc.)
-- Componentes huerfanos: `src/components/webs/`, `src/components/herramientas/`
+| Design System | Fase 1 completa | Negro puro #050505, tokens de categoría, efectos glow |
+| Header | Actualizado | Dropdown en "Productos" → Sitios Web, Soluciones, SaaS |
+| Footer | Actualizado | Links a categorías en vez de productos individuales |
+| Data Model | Extendido | BaseProduct, WebItem, caseStudy, websites[] con 5 demos |
+| Productos overview (`/productos`) | Pendiente rewrite | Task 12: overview de 3 categorías |
+| Sitios Web (`/productos/sitios-web`) | Pendiente | Tasks 5-7: landing + galería + viewer + featured pages |
+| Soluciones (`/productos/soluciones`) | Pendiente | Tasks 8-9: landing + fichas de producto |
+| SaaS (`/productos/saas`) | Pendiente | Tasks 10-11: landing + fichas de producto |
+| Home (`/`) | Pendiente rediseño | Task 13: adaptar Showcase a 3 categorías |
+| Servicios (`/servicios`) | Pendiente rediseño | Task 14: agregar interlinks a categorías |
+| Sobre Nosotros / Contacto | Pendiente rediseño | Task 15: aplicar nuevo design system |
 
 ---
 
-## Estructura de Productos
+## Plan de Implementación
 
-| Producto | Categoria | Slug | CTA destino |
-|----------|-----------|------|-------------|
-| IteraLex | SaaS | `/productos/iteralex` | iteralex.com |
-| IteraDesk | Standalone | `/productos/iteradesk` | desk.itera.lat |
-| IteraLink | Standalone | `/productos/iteralink` | link.itera.lat |
-| IteraShop | Standalone | `/productos/iterashop` | shop.itera.lat |
+**Spec**: `docs/superpowers/specs/2026-04-02-site-redesign-design.md`
+**Plan**: `docs/superpowers/plans/2026-04-02-site-redesign.md`
+**Tasks**: `docs/superpowers/plans/2026-04-02-site-redesign.md.tasks.json`
 
-Datos en `src/data/portfolio.ts`: `saasProducts`, `standaloneProducts`, `allProducts`.
+| Fase | Tasks | Estado |
+|------|-------|--------|
+| 1. Design system + layout | Tasks 1-4 | Completada |
+| 2. Sitios Web | Tasks 5-7 | Pendiente |
+| 3. Soluciones | Tasks 8-9 | Pendiente |
+| 4. SaaS | Tasks 10-11 | Pendiente |
+| 5. Overview + redirects | Task 12 | Pendiente |
+| 6. Páginas existentes | Tasks 13-15 | Pendiente |
+
+---
+
+## Estructura de Productos (nueva)
+
+```
+/productos              → Overview de 3 categorías
+/productos/sitios-web   → Galería filtrable de 14+ demos web
+/productos/soluciones   → IteraDesk, IteraLink, IteraShop
+/productos/saas         → IteraLex, Itera Estudio
+```
+
+Datos en `src/data/portfolio.ts`: `saasProducts`, `standaloneProducts`, `websites`, `allProducts`, `featuredWebsites`.
 
 ---
 
@@ -54,23 +66,19 @@ Datos en `src/data/portfolio.ts`: `saasProducts`, `standaloneProducts`, `allProd
 |-----|-------|
 | Contexto Coolify | modern |
 | App UUID | rtwcc35tbzzgfx3dp2hduod2 |
-| Proyecto UUID | kg3u7ti6c0o5ey3v1n54nq70 |
-| Dominio | https://itera.lat + https://www.itera.lat |
-| Server IP | 65.108.148.79 |
+| Dominio | https://itera.lat |
 | Google Analytics 4 | G-YDVG0CNQQN |
 
 ---
 
 ## Bloqueadores
 
-1. **WhatsApp** — Numero placeholder en CTABanner y /contacto
-2. **Screenshots faltantes** — IteraShop e Itera Estudio sin screenshot
-3. **Paginas individuales de productos** — necesitan refinamiento antes de deploy
+1. **Screenshots faltantes** — IteraShop, Itera Estudio sin screenshot. 9 de 14 web demos sin screenshot aún.
+2. **Contenido caseStudy** — Textos de problema/solución/resultado pendientes para cada producto.
 
 ---
 
 ## Proxima Accion
 
-- Terminar paginas individuales de productos (/productos/[slug])
-- Screenshots reales para cards y detail pages
-- Redeploy con nueva estructura
+- Continuar con Fase 2: Tasks 5-7 (shared components + landing Sitios Web + galería + viewer modal)
+- El plan está listo para ejecutar con `/superpowers-extended-cc:executing-plans docs/superpowers/plans/2026-04-02-site-redesign.md`

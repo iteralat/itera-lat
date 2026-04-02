@@ -38,6 +38,18 @@
 **Check preventivo**: Background oscuro debe ser cálido (`#0f0e0c` o similar). Nunca tonos azulados/fríos para fondos base.
 **Fecha**: 2026-03-21
 
+### ESLint react-hooks/set-state-in-effect prohíbe setState en useEffect
+
+**Problema**: Al agregar `useEffect(() => { setState(false) }, [pathname])` para cerrar dropdown en cambio de ruta, ESLint reporta `set-state-in-effect`. React 19 lint rules son más estrictas.
+**Check preventivo**: No usar useEffect para sincronizar estado interno con cambios de ruta. En su lugar, cerrar dropdowns/modales en los `onClick` de los links que navegan. El `onMouseLeave` cubre el caso desktop.
+**Fecha**: 2026-04-02
+
+### Colores de fondo: actualización paleta (negro puro)
+
+**Problema**: La regla anterior decía mantener `#0f0e0c` (cálido). Se decidió migrar a `#050505` (negro puro neutro) como parte del rediseño visual.
+**Check preventivo**: Background base ahora es `#050505`. Superficies: `#0a0a0a` (muted), `#111111` (elevated). Los marrones ya no se usan. -> promovido a CLAUDE.md [2026-04-02]
+**Fecha**: 2026-04-02
+
 ---
 
 ## Flujo de escalacion

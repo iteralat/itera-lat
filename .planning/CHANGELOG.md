@@ -4,6 +4,32 @@ Historial completo de sesiones. Se acumula con cada `/save`.
 
 ---
 
+## [02 Abr 2026] - Redesign completo: identidad visual, categorías de productos y design system
+
+### Que se hizo
+- Design system: globals.css con paleta negro puro + glow naranja
+- Header con dropdown navegación inteligente por categoría
+- Footer actualizado con categorías de productos (Sitios, Soluciones, SaaS)
+- Modelo datos extendido: BaseProduct, WebItem, caseStudy para 3 categorías
+- Plan 15 tasks en 6 fases con spec completo
+- Fase 1 completada: design tokens, componentes layout, portfolio.ts
+
+### Archivos clave
+- `src/app/globals.css` - design system, tokens color, CSS vars
+- `src/components/layout/Header.tsx` - dropdown navegación
+- `src/components/layout/Footer.tsx` - footer categorizado
+- `src/data/portfolio.ts` - modelo datos extendido
+- `docs/superpowers/specs/2026-04-02-site-redesign-design.md` - spec visual
+- `docs/superpowers/plans/2026-04-02-site-redesign.md` - plan 15 tasks
+
+### Decisiones
+- Identidad: negro puro #0a0a0a + glow naranja #ff6b35
+- 3 categorías: Sitios Web (galería+modal), Soluciones (caso estudio), SaaS (educativo)
+- Servicios y Productos interlinkeados en modelo datos
+- Implementación incremental por rama, validar en navegador
+
+---
+
 ## [22 Mar 2026] - GA4, favicons, OG image y security headers
 
 ### Que se hizo

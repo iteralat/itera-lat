@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # check-all.sh — Ejecuta todos los scripts de verificación.
+# Útil como pre-deploy check o auditoría manual.
 # Exit code: 0 si todo OK, 1 si hay errores críticos.
 
 set -uo pipefail
@@ -29,8 +30,11 @@ echo -e "${BOLD}  ITERA Quality Checks${NC}"
 echo -e "${BOLD}========================================${NC}"
 echo ""
 
-run_check "Page metadata" "check-page-metadata.sh"
 run_check "Archivos scaffold" "check-scaffold.sh"
+run_check "findMany con take" "check-findmany-take.sh"
+run_check "Upload validation" "check-upload-validation.sh"
+run_check "Auth guards en API" "check-auth-guards.sh"
+run_check "Page metadata" "check-page-metadata.sh"
 
 echo -e "${BOLD}========================================${NC}"
 if [ $failures -gt 0 ]; then
