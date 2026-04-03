@@ -51,18 +51,11 @@ export function Hero() {
               </GlowButton>
             </div>
 
-            {/* Social proof pills */}
-            <div className="animate-fade-in-up [animation-delay:400ms] flex flex-wrap gap-3 mt-12">
-              {["5+ proyectos en producción", "Patagonia → LATAM", "Soporte continuo"].map(
-                (pill) => (
-                  <span
-                    key={pill}
-                    className="text-xs text-white/40 border border-border rounded-full px-3 py-1.5"
-                  >
-                    {pill}
-                  </span>
-                )
-              )}
+            {/* Social proof pill */}
+            <div className="animate-fade-in-up [animation-delay:400ms] mt-12">
+              <span className="text-xs italic text-white/40 border border-white/10 rounded-full px-3 py-1.5 cursor-pointer select-none transition-transform duration-200 hover:scale-105">
+                Patagonia → LATAM
+              </span>
             </div>
           </div>
 
@@ -80,7 +73,6 @@ export function Hero() {
             <DeviceMockup
               desktopSrc="/images/portfolio/screenshot-iteralex.webp"
               laptopSrc="/images/portfolio/screenshot-iterashop.png"
-              mobileSrc="/images/portfolio/screenshot-cerro-solar.webp"
               alt="Proyectos ÍTERA"
               priority
             />

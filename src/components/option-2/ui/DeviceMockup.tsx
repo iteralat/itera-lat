@@ -18,7 +18,7 @@ export function DeviceMockup({ desktopSrc, laptopSrc, mobileSrc, alt, priority =
     >
       {/* Desktop frame - main, largest */}
       <div
-        className="relative rounded-lg border border-white/[0.06] bg-elevated p-1.5 shadow-2xl shadow-black/60"
+        className={`relative rounded-lg border border-white/[0.06] bg-elevated p-1.5 shadow-2xl shadow-black/60 ${!mobileSrc ? "w-[85%]" : ""}`}
         style={{ transform: "rotateY(-4deg) rotateX(2deg)" }}
       >
         {/* Browser bar */}
@@ -42,9 +42,9 @@ export function DeviceMockup({ desktopSrc, laptopSrc, mobileSrc, alt, priority =
         </div>
       </div>
 
-      {/* Laptop frame - smaller, overlapping bottom-left */}
+      {/* Laptop frame - smaller, overlapping */}
       <div
-        className="absolute -bottom-8 -left-10 w-[55%] rounded-md border border-white/[0.06] bg-elevated p-1 shadow-xl shadow-black/60 z-10 animate-fade-in-up [animation-delay:600ms]"
+        className={`absolute -bottom-8 w-[55%] rounded-md border border-white/[0.06] bg-elevated p-1 shadow-xl shadow-black/60 z-10 animate-fade-in-up [animation-delay:600ms] ${mobileSrc ? "-left-10" : "right-[-12%]"}`}
         style={{ transform: "rotateY(-2deg)" }}
       >
         <div className="flex items-center gap-1 px-2 py-1 bg-black rounded-t-sm">
@@ -66,21 +66,23 @@ export function DeviceMockup({ desktopSrc, laptopSrc, mobileSrc, alt, priority =
       </div>
 
       {/* Mobile frame - smallest, overlapping bottom-right */}
-      <div
-        className="absolute -bottom-4 -right-4 w-[22%] rounded-xl border border-white/[0.06] bg-elevated p-1 shadow-xl shadow-black/60 z-20 animate-fade-in-up [animation-delay:800ms]"
-        style={{ transform: "rotateY(-3deg)" }}
-      >
-        <div className="relative aspect-[9/19] bg-black rounded-lg overflow-hidden">
-          <Image
-            src={mobileSrc ?? desktopSrc}
-            alt={`${alt} mobile`}
-            fill
-            className="object-cover object-top opacity-80"
-            sizes="120px"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+      {mobileSrc && (
+        <div
+          className="absolute -bottom-4 -right-4 w-[22%] rounded-xl border border-white/[0.06] bg-elevated p-1 shadow-xl shadow-black/60 z-20 animate-fade-in-up [animation-delay:800ms]"
+          style={{ transform: "rotateY(-3deg)" }}
+        >
+          <div className="relative aspect-[9/19] bg-black rounded-lg overflow-hidden">
+            <Image
+              src={mobileSrc}
+              alt={`${alt} mobile`}
+              fill
+              className="object-cover object-top opacity-80"
+              sizes="120px"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

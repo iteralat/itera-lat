@@ -15,6 +15,9 @@
 - Home simplificado a 4 secciones: Hero, Showcase, WhyItera, CTA (se quitaron Services, Process, About) — Abr 2026
 - Glassmorphism en tarjetas (.glass-card): gradiente interno, borde luminoso, glow naranja — Abr 2026
 - Showcase con 3 categorías (Sitios Web, Soluciones, SaaS) y botón gradiente "Ver todos los productos" — Abr 2026
+- Hero: mobile mockup oculto, laptop a la derecha sobresaliendo del desktop — Abr 2026
+- Hero: badge único "Patagonia → LATAM" en cursiva con borde sutil — Abr 2026
+- Showcase: IteraShop como tarjeta principal de Soluciones, hover scale reducido — Abr 2026
 
 ## Productos (reestructuración completa)
 
@@ -50,7 +53,9 @@
 
 - Scroll to top button — Mar 2026
 - Header con dropdown en Productos → 3 categorías — Abr 2026
+- Header dropdown: hover continuo, alineado izquierda, "Ver todo" sutil — Abr 2026
 - Footer con links a categorías de productos — Abr 2026
+- Footer: logo real, WhatsApp + email con íconos, columna Recursos — Abr 2026
 - Custom 404 page — Mar 2026
 
 ## SEO

@@ -133,17 +133,14 @@ export function Header() {
               />
             </button>
 
-            {/* Dropdown panel */}
+            {/* Dropdown panel — pt-3 keeps hover area continuous */}
             <div
-              className={`absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 transition-all duration-200 ${
+              className={`absolute top-full left-0 pt-3 w-64 transition-all duration-200 ${
                 isDropdownOpen
                   ? "opacity-100 translate-y-0 pointer-events-auto"
                   : "opacity-0 -translate-y-2 pointer-events-none"
               }`}
             >
-              {/* Arrow */}
-              <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-muted border-l border-t border-border/50 rotate-45" />
-
               <div className="bg-muted border border-border/50 rounded-xl shadow-lg shadow-black/40 overflow-hidden">
                 {productCategories.map((cat) => (
                   <Link
@@ -156,16 +153,16 @@ export function Header() {
                       <span className={`text-sm font-medium ${cat.colorClass} group-hover:opacity-90`}>
                         {cat.name}
                       </span>
-                      <p className="text-xs text-white/50 mt-0.5 truncate">{cat.description}</p>
+                      <p className="text-xs text-white/70 mt-0.5 truncate">{cat.description}</p>
                     </div>
                   </Link>
                 ))}
 
-                <div className="border-t border-border/50 px-4 py-2.5">
+                <div className="border-t border-border/50 px-4 py-2 flex justify-end">
                   <Link
                     href="/productos"
                     onClick={() => setIsDropdownOpen(false)}
-                    className="text-xs font-medium text-white/60 hover:text-white transition-colors"
+                    className="text-[11px] text-white/50 hover:text-primary transition-colors"
                   >
                     Ver todo →
                   </Link>

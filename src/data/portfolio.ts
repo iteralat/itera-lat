@@ -164,7 +164,7 @@ export const standaloneProducts: ProductItem[] = [
     ],
     tags: ["Next.js", "React", "PostgreSQL", "Prisma"],
     status: "En produccion",
-    screenshot: "",
+    screenshot: "/images/portfolio/screenshot-iterashop.png",
     adopters: [{ name: "Abundancia Hogar" }],
     externalUrl: "https://shop.itera.lat",
     subdomain: "shop",

@@ -19,7 +19,7 @@ const categories = [
     title: "Soluciones",
     description: "Plataformas que digitalizan tu operación de punta a punta. Gestión, stock, ventas y reportes en un solo lugar.",
     href: "/productos/soluciones",
-    item: standaloneProducts.find((p) => p.screenshot) ?? standaloneProducts[0],
+    item: standaloneProducts.find((p) => p.slug === "iterashop") ?? standaloneProducts.find((p) => p.screenshot) ?? standaloneProducts[0],
   },
   {
     title: "SaaS",
@@ -74,7 +74,7 @@ export function Showcase() {
               key={cat.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ scale: 1.03, y: -4, transition: { duration: 0.3, delay: 0, ease: EASE } }}
+              whileHover={{ scale: 1.015, y: -2, transition: { duration: 0.3, delay: 0, ease: EASE } }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.12, ease: EASE }}
             >

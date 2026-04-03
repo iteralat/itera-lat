@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
+import { Mail, MessageCircle } from "lucide-react";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -7,23 +8,38 @@ export function Footer() {
   return (
     <footer className="bg-background border-t border-border pt-24 pb-12">
       <div className="container mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-24 mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-12 lg:gap-16 mb-24">
           <div className="md:col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white">
-                <ArrowUpRight size={20} strokeWidth={3} />
-              </div>
-              <span className="font-bold text-2xl tracking-wide">ÍTERA</span>
+            <Link href="/" className="inline-block mb-6">
+              <Image
+                src="/images/logo-itera.png"
+                alt="ÍTERA"
+                width={120}
+                height={32}
+                className="h-8 w-auto"
+              />
             </Link>
             <p className="text-zinc-400 max-w-sm text-lg leading-relaxed mb-8">
               Soluciones digitales que evolucionan con vos.
             </p>
-            <a
-              href="mailto:hola@itera.lat"
-              className="text-white hover:text-primary transition-colors text-lg font-medium inline-flex items-center gap-2"
-            >
-              hola@itera.lat
-            </a>
+            <div className="flex flex-col gap-3">
+              <a
+                href="mailto:hola@itera.lat"
+                className="text-white hover:text-primary transition-colors font-medium inline-flex items-center gap-2"
+              >
+                <Mail size={16} />
+                hola@itera.lat
+              </a>
+              <a
+                href="https://wa.me/5492994000000"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-primary transition-colors font-medium inline-flex items-center gap-2"
+              >
+                <MessageCircle size={16} />
+                WhatsApp
+              </a>
+            </div>
           </div>
 
           <div>
@@ -52,6 +68,18 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/contacto" className="text-zinc-400 hover:text-white transition-colors">Contacto</Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-semibold text-lg mb-6">Recursos</h4>
+            <ul className="space-y-4">
+              <li>
+                <Link href="#showcase" className="text-zinc-400 hover:text-white transition-colors">Portfolio</Link>
+              </li>
+              <li>
+                <Link href="#contacto" className="text-zinc-400 hover:text-white transition-colors">Hablemos</Link>
               </li>
             </ul>
           </div>
