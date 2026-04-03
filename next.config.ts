@@ -29,9 +29,18 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      { source: "/plataformas", destination: "/proyectos", permanent: true },
-      { source: "/plataformas/:slug", destination: "/proyectos/:slug", permanent: true },
-      { source: "/webs", destination: "/proyectos", permanent: true },
+      // Legacy routes
+      { source: "/plataformas", destination: "/productos", permanent: true },
+      { source: "/plataformas/:slug", destination: "/productos/:slug", permanent: true },
+      { source: "/webs", destination: "/productos/sitios-web", permanent: true },
+      { source: "/proyectos", destination: "/productos", permanent: true },
+      { source: "/proyectos/:slug", destination: "/productos/:slug", permanent: true },
+      // Product slug migrations (old flat → new categorized)
+      { source: "/productos/iteralex", destination: "/productos/saas/iteralex", permanent: true },
+      { source: "/productos/itera-estudio", destination: "/productos/saas/itera-estudio", permanent: true },
+      { source: "/productos/iteradesk", destination: "/productos/soluciones/iteradesk", permanent: true },
+      { source: "/productos/iteralink", destination: "/productos/soluciones/iteralink", permanent: true },
+      { source: "/productos/iterashop", destination: "/productos/soluciones/iterashop", permanent: true },
     ];
   },
 };

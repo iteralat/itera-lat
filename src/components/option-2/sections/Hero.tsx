@@ -12,7 +12,7 @@ const AnimatedBackground = dynamic(
 
 export function Hero() {
   return (
-    <section className="relative min-h-[82vh] flex items-start overflow-hidden pt-24 min-[400px]:pt-40 pb-12 bg-[#0f0e0c]">
+    <section className="relative min-h-[82vh] flex items-start overflow-hidden pt-24 min-[400px]:pt-40 pb-12 bg-background">
       <AnimatedBackground />
 
       <div className="relative mx-auto px-6 md:px-8 lg:px-10 z-10 w-full max-w-[1440px]">
@@ -28,7 +28,7 @@ export function Hero() {
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] mb-6 text-white">
-                Soluciones digitales que{" "}
+                Soluciones que{" "}
                 <span className="italic" style={{ backgroundImage: "linear-gradient(to right, #FF3C00, #FF6A00)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                   evolucionan
                 </span>{" "}
@@ -36,9 +36,9 @@ export function Hero() {
               </h1>
             </div>
 
-            <p className="animate-fade-in-up [animation-delay:100ms] text-lg md:text-xl text-zinc-400 mb-10 max-w-2xl leading-relaxed">
-              Desarrollamos sitios web, sistemas de gestión y herramientas
-              digitales a medida para negocios que quieren crecer.
+            <p className="animate-fade-in-up [animation-delay:100ms] text-lg md:text-xl text-white/60 mb-10 max-w-2xl leading-relaxed">
+              Sitios web, sistemas de gestión y herramientas digitales
+              <br />a medida para negocios <strong className="text-white font-semibold">que quieren crecer.</strong>
             </p>
 
             <div className="animate-fade-in-up [animation-delay:200ms] flex flex-col sm:flex-row gap-4">
@@ -57,7 +57,7 @@ export function Hero() {
                 (pill) => (
                   <span
                     key={pill}
-                    className="text-xs text-zinc-400 border border-zinc-800 rounded-full px-3 py-1.5"
+                    className="text-xs text-white/40 border border-border rounded-full px-3 py-1.5"
                   >
                     {pill}
                   </span>
@@ -67,10 +67,19 @@ export function Hero() {
           </div>
 
           {/* Right - mockup */}
-          <div className="hidden lg:block overflow-visible -mr-10">
+          <div className="hidden lg:block overflow-visible -mr-10 relative">
+            {/* Glow behind mockup */}
+            <div
+              className="absolute inset-0 -z-10"
+              style={{
+                background: "radial-gradient(ellipse at 55% 50%, rgba(255, 60, 0, 0.22) 0%, transparent 65%)",
+                filter: "blur(60px)",
+                transform: "scale(1.2)",
+              }}
+            />
             <DeviceMockup
               desktopSrc="/images/portfolio/screenshot-iteralex.webp"
-              laptopSrc="/images/portfolio/screenshot-dashboard-catalogo.webp"
+              laptopSrc="/images/portfolio/screenshot-iterashop.png"
               mobileSrc="/images/portfolio/screenshot-cerro-solar.webp"
               alt="Proyectos ÍTERA"
               priority

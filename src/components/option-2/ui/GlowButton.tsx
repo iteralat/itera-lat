@@ -21,7 +21,7 @@ export function GlowButton({
   external,
 }: GlowButtonProps) {
   const base =
-    "inline-flex items-center justify-center gap-2 px-8 py-4 font-semibold rounded-xl transition-all duration-300 group";
+    "inline-flex items-center justify-center gap-2 px-8 py-3 font-semibold rounded-xl transition-all duration-300 group hover:scale-105";
 
   const variants = {
     primary: [

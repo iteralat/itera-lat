@@ -17,6 +17,7 @@ const services = [
       "Optimización para buscadores desde el día uno",
       "Adaptado a celulares, tablets y escritorio",
     ],
+    relatedLink: { label: "Ver galería de sitios web", href: "/productos/sitios-web", colorClass: "text-primary" },
   },
   {
     icon: Code2,
@@ -30,6 +31,7 @@ const services = [
       "Integración con herramientas que ya usás",
       "Permisos por rol para cada usuario de tu equipo",
     ],
+    relatedLink: { label: "Ver soluciones en producción", href: "/productos/soluciones", colorClass: "text-primary" },
   },
   {
     icon: Cpu,
@@ -43,6 +45,7 @@ const services = [
       "Procesamiento de documentos e imágenes",
       "Integración con tus sistemas existentes",
     ],
+    relatedLink: { label: "Ver productos SaaS", href: "/productos/saas", colorClass: "text-primary" },
   },
 ];
 
@@ -62,7 +65,7 @@ export default function ServiciosPage() {
           <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
             Servicios
           </h1>
-          <p className="text-xl text-white/60 leading-relaxed">
+          <p className="text-xl text-white/40 leading-relaxed">
             Construimos lo que tu negocio necesita para operar mejor.
             Desde un sitio web hasta una plataforma completa con inteligencia artificial.
           </p>
@@ -91,21 +94,27 @@ export default function ServiciosPage() {
                       {service.title}
                     </h2>
                   </div>
-                  <p className="text-zinc-400 text-base md:text-lg leading-relaxed">
+                  <p className="text-white/40 text-base md:text-lg leading-relaxed mb-4">
                     {service.description}
                   </p>
+                  <Link
+                    href={service.relatedLink.href}
+                    className={`inline-flex items-center gap-1.5 text-sm font-semibold ${service.relatedLink.colorClass} hover:underline`}
+                  >
+                    {service.relatedLink.label} <ArrowRight size={14} />
+                  </Link>
                 </div>
 
                 {/* Right: details */}
-                <div className="p-6 md:p-8 rounded-xl bg-zinc-900/50 border border-zinc-800">
-                  <h3 className="text-sm font-semibold text-white/40 uppercase tracking-wider mb-5">
+                <div className="p-6 md:p-8 rounded-xl bg-muted border border-border">
+                  <h3 className="text-sm font-semibold text-white/30 uppercase tracking-wider mb-5">
                     Qué incluye
                   </h3>
                   <ul className="space-y-3">
                     {service.details.map((detail) => (
                       <li key={detail} className="flex items-start gap-3">
                         <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                        <span className="text-white/70 text-sm leading-relaxed">{detail}</span>
+                        <span className="text-white/50 text-sm leading-relaxed">{detail}</span>
                       </li>
                     ))}
                   </ul>
@@ -123,7 +132,7 @@ export default function ServiciosPage() {
           transition={{ duration: 0.6, ease }}
           className="mt-24 text-center"
         >
-          <p className="text-zinc-400 mb-6 text-lg">
+          <p className="text-white/40 mb-6 text-lg">
             ¿Tenés un proyecto en mente? Contanos y te armamos una propuesta.
           </p>
           <Link

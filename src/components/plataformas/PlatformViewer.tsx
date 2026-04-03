@@ -42,7 +42,7 @@ export function PlatformViewer({ productName, screenshot, screenshots = [] }: Pl
           <div className="w-3 h-3 rounded-full bg-green-500/20" />
           <div className="mx-auto text-[10px] text-white/30 font-mono">{productName.toLowerCase().replace(/\s/g, "")}.itera.lat</div>
         </div>
-        <div className="relative aspect-[16/9] bg-[#050505] flex items-center justify-center">
+        <div className="relative aspect-[16/9] bg-[#000000] flex items-center justify-center">
           <div className="flex flex-col items-center gap-4">
             <Server size={48} className="text-white/10" />
             <span className="text-3xl font-bold text-white/10 uppercase tracking-widest">{productName}</span>

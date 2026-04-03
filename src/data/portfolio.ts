@@ -75,6 +75,26 @@ export const saasProducts: ProductItem[] = [
     adopters: [{ name: "Estudios juridicos del Alto Valle" }],
     externalUrl: "https://iteralex.com",
   },
+  {
+    id: "itera-estudio",
+    slug: "itera-estudio",
+    category: "saas",
+    productName: "Itera Estudio",
+    tagline: "Fotos de producto profesionales generadas con IA",
+    coverLine: "Foto con el celular, resultado de catalogo profesional.",
+    description: "Genera fotos de producto profesionales con IA. Subi una foto desde el celular y obtene imagenes listas para publicar.",
+    features: [
+      "Generacion de fotos con IA (Gemini)",
+      "Multiples modos de generacion",
+      "Galeria de resultados",
+      "Almacenamiento cloud",
+    ],
+    tags: ["Next.js", "Gemini AI", "Cloudflare R2"],
+    status: "En produccion",
+    screenshot: "",
+    adopters: [{ name: "Alquimica" }],
+    externalUrl: "https://iteraestudio.com",
+  },
 ];
 
 // --- STANDALONE ---
@@ -151,29 +171,7 @@ export const standaloneProducts: ProductItem[] = [
   },
 ];
 
-// Otros productos internos (no se muestran en nav, solo referencia)
-export const internalProducts: ProductItem[] = [
-  {
-    id: "itera-estudio",
-    slug: "itera-estudio",
-    category: "saas",
-    productName: "Itera Estudio",
-    tagline: "Fotos de producto profesionales generadas con IA",
-    coverLine: "Foto con el celular, resultado de catalogo profesional.",
-    description: "Genera fotos de producto profesionales con IA. Subi una foto desde el celular y obtene imagenes listas para publicar.",
-    features: [
-      "Generacion de fotos con IA (Gemini)",
-      "Multiples modos de generacion",
-      "Galeria de resultados",
-      "Almacenamiento cloud",
-    ],
-    tags: ["Next.js", "Gemini AI", "Cloudflare R2"],
-    status: "En produccion",
-    screenshot: "",
-    adopters: [{ name: "Alquimica" }],
-    externalUrl: "https://iteraestudio.com",
-  },
-];
+// internalProducts eliminado — Itera Estudio movido a saasProducts
 
 // --- SITIOS WEB DEMO ---
 

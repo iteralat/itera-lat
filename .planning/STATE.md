@@ -8,7 +8,7 @@
 ## Sesion Actual
 
 **Fecha**: 2026-04-02
-**Trabajando en**: Rediseño completo del sitio — nueva identidad visual (negro puro, glow naranja), reestructuración de productos en 3 categorías con dropdown.
+**Trabajando en**: Implementación completa del rediseño (Fases 2-6) + refinamiento visual del home (glassmorphism, paleta negro puro, fondo espacial).
 
 ---
 
@@ -16,47 +16,35 @@
 
 | Modulo | Estado | Notas |
 |--------|--------|-------|
-| Design System | Fase 1 completa | Negro puro #050505, tokens de categoría, efectos glow |
-| Header | Actualizado | Dropdown en "Productos" → Sitios Web, Soluciones, SaaS |
-| Footer | Actualizado | Links a categorías en vez de productos individuales |
-| Data Model | Extendido | BaseProduct, WebItem, caseStudy, websites[] con 5 demos |
-| Productos overview (`/productos`) | Pendiente rewrite | Task 12: overview de 3 categorías |
-| Sitios Web (`/productos/sitios-web`) | Pendiente | Tasks 5-7: landing + galería + viewer + featured pages |
-| Soluciones (`/productos/soluciones`) | Pendiente | Tasks 8-9: landing + fichas de producto |
-| SaaS (`/productos/saas`) | Pendiente | Tasks 10-11: landing + fichas de producto |
-| Home (`/`) | Pendiente rediseño | Task 13: adaptar Showcase a 3 categorías |
-| Servicios (`/servicios`) | Pendiente rediseño | Task 14: agregar interlinks a categorías |
-| Sobre Nosotros / Contacto | Pendiente rediseño | Task 15: aplicar nuevo design system |
+| Design System | Completo | Negro puro #000000, .glass-card, sin colores de categoría |
+| Header | Completo | Dropdown en "Productos" → 3 categorías, colores primary |
+| Footer | Completo | Links a categorías |
+| Data Model | Completo | BaseProduct, WebItem, websites[], Itera Estudio en saasProducts |
+| Home | Refinando | 4 secciones (Hero, Showcase, WhyItera, CTA), glassmorphism, fondo espacial |
+| Productos overview | Completo | /productos con 3 CategoryCards |
+| Sitios Web | Completo | /productos/sitios-web + galería + [slug] para featured |
+| Soluciones | Completo | /productos/soluciones + [slug] fichas |
+| SaaS | Completo | /productos/saas + [slug] fichas |
+| Servicios | Actualizado | Interlinks a categorías, design system nuevo |
+| Sobre Nosotros / Contacto | Actualizado | Tokens nuevos aplicados |
 
 ---
 
 ## Plan de Implementación
 
-**Spec**: `docs/superpowers/specs/2026-04-02-site-redesign-design.md`
 **Plan**: `docs/superpowers/plans/2026-04-02-site-redesign.md`
-**Tasks**: `docs/superpowers/plans/2026-04-02-site-redesign.md.tasks.json`
-
-| Fase | Tasks | Estado |
-|------|-------|--------|
-| 1. Design system + layout | Tasks 1-4 | Completada |
-| 2. Sitios Web | Tasks 5-7 | Pendiente |
-| 3. Soluciones | Tasks 8-9 | Pendiente |
-| 4. SaaS | Tasks 10-11 | Pendiente |
-| 5. Overview + redirects | Task 12 | Pendiente |
-| 6. Páginas existentes | Tasks 13-15 | Pendiente |
+**Tasks**: Todas 15/15 completadas.
 
 ---
 
-## Estructura de Productos (nueva)
+## Estructura de Productos
 
 ```
 /productos              → Overview de 3 categorías
-/productos/sitios-web   → Galería filtrable de 14+ demos web
+/productos/sitios-web   → Galería filtrable de demos web
 /productos/soluciones   → IteraDesk, IteraLink, IteraShop
 /productos/saas         → IteraLex, Itera Estudio
 ```
-
-Datos en `src/data/portfolio.ts`: `saasProducts`, `standaloneProducts`, `websites`, `allProducts`, `featuredWebsites`.
 
 ---
 
@@ -73,12 +61,27 @@ Datos en `src/data/portfolio.ts`: `saasProducts`, `standaloneProducts`, `website
 
 ## Bloqueadores
 
-1. **Screenshots faltantes** — IteraShop, Itera Estudio sin screenshot. 9 de 14 web demos sin screenshot aún.
+1. **Screenshots faltantes** — IteraShop tiene screenshot del landing (copiada de ShareX). Itera Estudio sin screenshot. 9 de 14 web demos sin screenshot.
 2. **Contenido caseStudy** — Textos de problema/solución/resultado pendientes para cada producto.
+
+---
+
+## Decisiones Recientes
+
+- Paleta migrada a negro puro #000000, muted #050505, elevated #0a0a0a
+- Colores de categoría eliminados (teal, violeta) — todo usa primary
+- Glows violetas eliminados, solo naranja en todo el sitio
+- Home reducido a 4 secciones (Hero, Showcase, WhyItera, CTA)
+- Glassmorphism (.glass-card) con gradiente interno + borde luminoso ::before
+- Fondo del hero: estrellas + shooting stars (reemplaza cuadrados flotantes)
+- Mockups del hero oscurecidos con opacity-80 + gradient overlay
+- GlowButton: padding reducido, hover:scale-105
+- "ÍTERA" en WhyItera con gradiente naranja, sin cursiva
 
 ---
 
 ## Proxima Accion
 
-- Continuar con Fase 2: Tasks 5-7 (shared components + landing Sitios Web + galería + viewer modal)
-- El plan está listo para ejecutar con `/superpowers-extended-cc:executing-plans docs/superpowers/plans/2026-04-02-site-redesign.md`
+- Seguir refinando CSS/visual del sitio (el usuario está iterando el diseño en vivo)
+- Agregar screenshots faltantes de demos web
+- Escribir contenido de caseStudy para productos

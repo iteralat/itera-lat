@@ -2,14 +2,24 @@
 
 import { useEffect, useRef } from "react";
 
-interface FloatingBlock {
+interface Star {
   x: number;
   y: number;
   size: number;
-  rotation: number;
-  speed: number;
-  rotSpeed: number;
   opacity: number;
+  twinkleSpeed: number;
+  phase: number;
+}
+
+interface ShootingStar {
+  x: number;
+  y: number;
+  length: number;
+  speed: number;
+  angle: number;
+  opacity: number;
+  life: number;
+  maxLife: number;
 }
 
 export function AnimatedBackground() {
@@ -22,71 +32,100 @@ export function AnimatedBackground() {
     if (!ctx) return;
 
     let animId: number;
-    let blocks: FloatingBlock[] = [];
+    let stars: Star[] = [];
+    const shootingStars: ShootingStar[] = [];
+    let time = 0;
 
     function resize() {
       canvas!.width = window.innerWidth;
       canvas!.height = window.innerHeight;
-      initBlocks();
+      initStars();
     }
 
-    function initBlocks() {
-      const count = Math.floor((canvas!.width * canvas!.height) / 80000);
-      blocks = Array.from({ length: Math.min(count, 25) }, () => ({
+    function initStars() {
+      const count = Math.floor((canvas!.width * canvas!.height) / 4000);
+      stars = Array.from({ length: Math.min(count, 200) }, () => ({
         x: Math.random() * canvas!.width,
         y: Math.random() * canvas!.height,
-        size: 30 + Math.random() * 80,
-        rotation: Math.random() * Math.PI * 2,
-        speed: 0.15 + Math.random() * 0.3,
-        rotSpeed: (Math.random() - 0.5) * 0.003,
-        opacity: 0.08 + Math.random() * 0.12,
+        size: Math.random() * 1.5 + 0.3,
+        opacity: Math.random() * 0.6 + 0.1,
+        twinkleSpeed: Math.random() * 0.02 + 0.005,
+        phase: Math.random() * Math.PI * 2,
       }));
     }
 
-    function drawGrid() {
-      if (!ctx || !canvas) return;
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.03)";
-      ctx.lineWidth = 0.5;
-      const step = 60;
-      for (let x = 0; x < canvas.width; x += step) {
+    function spawnShootingStar() {
+      if (shootingStars.length > 2) return;
+      const maxLife = 60 + Math.random() * 40;
+      shootingStars.push({
+        x: Math.random() * canvas!.width * 0.8,
+        y: Math.random() * canvas!.height * 0.4,
+        length: 60 + Math.random() * 80,
+        speed: 4 + Math.random() * 3,
+        angle: Math.PI * 0.15 + Math.random() * 0.15,
+        opacity: 0.4 + Math.random() * 0.3,
+        life: 0,
+        maxLife,
+      });
+    }
+
+    function drawStars() {
+      if (!ctx) return;
+      for (const s of stars) {
+        const flicker = Math.sin(time * s.twinkleSpeed + s.phase) * 0.3 + 0.7;
+        const alpha = s.opacity * flicker;
+        ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
         ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, canvas.height);
-        ctx.stroke();
-      }
-      for (let y = 0; y < canvas.height; y += step) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(canvas.width, y);
-        ctx.stroke();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.fill();
       }
     }
 
-    function drawBlocks() {
-      if (!ctx || !canvas) return;
-      for (const b of blocks) {
-        b.y -= b.speed;
-        b.rotation += b.rotSpeed;
-        if (b.y + b.size < 0) {
-          b.y = canvas.height + b.size;
-          b.x = Math.random() * canvas.width;
+    function drawShootingStars() {
+      if (!ctx) return;
+      for (let i = shootingStars.length - 1; i >= 0; i--) {
+        const ss = shootingStars[i];
+        ss.x += Math.cos(ss.angle) * ss.speed;
+        ss.y += Math.sin(ss.angle) * ss.speed;
+        ss.life++;
+
+        const progress = ss.life / ss.maxLife;
+        const fadeIn = Math.min(progress * 4, 1);
+        const fadeOut = 1 - Math.max((progress - 0.6) / 0.4, 0);
+        const alpha = ss.opacity * fadeIn * fadeOut;
+
+        if (ss.life >= ss.maxLife) {
+          shootingStars.splice(i, 1);
+          continue;
         }
-        ctx.save();
-        ctx.translate(b.x, b.y);
-        ctx.rotate(b.rotation);
-        ctx.strokeStyle = `rgba(255, 255, 255, ${b.opacity})`;
-        ctx.lineWidth = 1;
-        const half = b.size / 2;
-        ctx.strokeRect(-half, -half, b.size, b.size);
-        ctx.restore();
+
+        const tailX = ss.x - Math.cos(ss.angle) * ss.length;
+        const tailY = ss.y - Math.sin(ss.angle) * ss.length;
+
+        const grad = ctx.createLinearGradient(tailX, tailY, ss.x, ss.y);
+        grad.addColorStop(0, `rgba(255, 60, 0, 0)`);
+        grad.addColorStop(0.7, `rgba(255, 106, 0, ${alpha * 0.5})`);
+        grad.addColorStop(1, `rgba(255, 255, 255, ${alpha})`);
+
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(tailX, tailY);
+        ctx.lineTo(ss.x, ss.y);
+        ctx.stroke();
       }
     }
 
     function animate() {
       if (!ctx || !canvas) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      drawGrid();
-      drawBlocks();
+      ctx.fillStyle = "#000000";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      time++;
+
+      if (Math.random() < 0.008) spawnShootingStar();
+
+      drawStars();
+      drawShootingStars();
       animId = requestAnimationFrame(animate);
     }
 
@@ -101,60 +140,33 @@ export function AnimatedBackground() {
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden bg-[#0f0e0c]">
+    <div className="absolute inset-0 overflow-hidden bg-background">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
-      {/* Orange glow — top left, illuminates headline */}
+      {/* Warm orange glow — top left, subtle */}
       <div
-        className="absolute -top-[5%] left-[5%] w-[700px] h-[700px] rounded-full"
+        className="absolute -top-[10%] left-[0%] w-[600px] h-[600px] rounded-full"
         style={{
-          background: "radial-gradient(circle, rgba(255, 60, 0, 0.15) 0%, transparent 65%)",
-          filter: "blur(80px)",
-        }}
-      />
-
-      {/* Purple glow — top right, behind mockups */}
-      <div
-        className="absolute top-[5%] right-[-10%] w-[900px] h-[900px] rounded-full"
-        style={{
-          background: "radial-gradient(circle, rgba(169, 96, 238, 0.22) 0%, transparent 60%)",
-          filter: "blur(60px)",
-        }}
-      />
-
-      {/* Warm orange glow — center, ties both sides */}
-      <div
-        className="absolute top-[40%] left-[35%] w-[800px] h-[500px] rounded-full"
-        style={{
-          background: "radial-gradient(ellipse, rgba(255, 106, 0, 0.10) 0%, transparent 65%)",
+          background: "radial-gradient(circle, rgba(255, 60, 0, 0.10) 0%, transparent 65%)",
           filter: "blur(100px)",
         }}
       />
 
-      {/* Purple glow — bottom left */}
+      {/* Soft orange glow — bottom center */}
       <div
-        className="absolute bottom-[-5%] left-[10%] w-[600px] h-[600px] rounded-full"
+        className="absolute bottom-[-10%] left-[30%] w-[800px] h-[400px] rounded-full"
         style={{
-          background: "radial-gradient(circle, rgba(169, 96, 238, 0.10) 0%, transparent 65%)",
-          filter: "blur(100px)",
+          background: "radial-gradient(ellipse, rgba(255, 60, 0, 0.06) 0%, transparent 65%)",
+          filter: "blur(120px)",
         }}
       />
 
-      {/* Orange glow — bottom right */}
-      <div
-        className="absolute bottom-[-5%] right-[5%] w-[700px] h-[700px] rounded-full"
-        style={{
-          background: "radial-gradient(circle, rgba(255, 60, 0, 0.12) 0%, transparent 65%)",
-          filter: "blur(100px)",
-        }}
-      />
-
-      {/* Vignette — subtle edge darkening */}
+      {/* Vignette */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse at center, transparent 0%, #0f0e0c 100%)",
-          opacity: 0.4,
+          background: "radial-gradient(ellipse at center, transparent 0%, #000000 100%)",
+          opacity: 0.5,
         }}
       />
     </div>

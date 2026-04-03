@@ -11,19 +11,19 @@ const productCategories = [
     name: "Sitios Web",
     href: "/productos/sitios-web",
     description: "Presencia digital profesional",
-    colorClass: "text-cat-web",
+    colorClass: "text-primary",
   },
   {
     name: "Soluciones",
     href: "/productos/soluciones",
     description: "Software a medida para tu negocio",
-    colorClass: "text-cat-solutions",
+    colorClass: "text-primary",
   },
   {
     name: "SaaS",
     href: "/productos/saas",
     description: "Plataformas listas para usar",
-    colorClass: "text-cat-saas",
+    colorClass: "text-primary",
   },
 ];
 

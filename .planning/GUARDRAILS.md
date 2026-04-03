@@ -46,8 +46,32 @@
 
 ### Colores de fondo: actualización paleta (negro puro)
 
-**Problema**: La regla anterior decía mantener `#0f0e0c` (cálido). Se decidió migrar a `#050505` (negro puro neutro) como parte del rediseño visual.
-**Check preventivo**: Background base ahora es `#050505`. Superficies: `#0a0a0a` (muted), `#111111` (elevated). Los marrones ya no se usan. -> promovido a CLAUDE.md [2026-04-02]
+**Problema**: La regla anterior decía mantener `#0f0e0c` (cálido). Se decidió migrar a negro puro como parte del rediseño visual.
+**Check preventivo**: Background base ahora es `#000000`. Superficies: `#050505` (muted), `#0a0a0a` (elevated). -> promovido a CLAUDE.md [2026-04-02]
+**Fecha**: 2026-04-02
+
+### No introducir colores de categoría
+
+**Problema**: El plan de rediseño introdujo 3 colores de categoría (teal, violeta, naranja custom) que rompían la identidad visual de ÍTERA (negro + naranja primary).
+**Check preventivo**: Todo acento es `primary` (#FF3C00). No usar verdes, violetas, azules ni colores diferentes por categoría. Diferenciar con contenido/layout, no con color.
+**Fecha**: 2026-04-02
+
+### framer-motion transition.delay se aplica también al hover
+
+**Problema**: Cards con `transition={{ delay: i * 0.12 }}` para stagger de entrada tenían el mismo delay al hacer hover, causando respuesta lenta.
+**Check preventivo**: Cuando un motion.div tiene stagger + hover, definir `whileHover={{ ..., transition: { delay: 0 } }}` para que el hover sea inmediato.
+**Fecha**: 2026-04-02
+
+### framer-motion transform pisa CSS transform
+
+**Problema**: `.glass-card:hover { transform: scale(1.02) }` no funcionaba en cards dentro de `motion.div` porque framer-motion controla el transform.
+**Check preventivo**: Si un elemento usa framer-motion, el scale/translate del hover debe ir en `whileHover` de motion, no en CSS. No mezclar CSS transform con motion transform.
+**Fecha**: 2026-04-02
+
+### backdrop-blur invisible sobre negro puro
+
+**Problema**: Glassmorphism con `backdrop-blur` sobre fondo `#000000` sin glows detrás es invisible (blur de negro = negro).
+**Check preventivo**: Si usás glassmorphism, asegurar que hay glows/gradientes posicionados detrás de las cards. Usar gradiente interno + borde luminoso `::before` como fallback.
 **Fecha**: 2026-04-02
 
 ---

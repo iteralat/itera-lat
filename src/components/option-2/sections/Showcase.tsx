@@ -1,299 +1,144 @@
 "use client";
 
-import { useState, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
-import { saasProducts, standaloneProducts, type ProductItem } from "@/data/portfolio";
+import { ArrowRight } from "lucide-react";
+import { saasProducts, standaloneProducts, featuredWebsites } from "@/data/portfolio";
 
-// Slider: los productos con screenshot (SaaS primero, luego standalone con screenshot)
-const sliderItems: ProductItem[] = [
-  ...saasProducts,
-  ...standaloneProducts,
-].filter((p) => p.screenshot);
+const EASE = [0.22, 1, 0.36, 1] as const;
 
-// Bento: standalone sin screenshot en slider
-const sliderIds = new Set(sliderItems.map((p) => p.id));
-const bentoItems = standaloneProducts.filter((p) => !sliderIds.has(p.id));
-
-function mod(n: number, m: number) {
-  return ((n % m) + m) % m;
-}
-
-function getSlideImages(item: ProductItem): string[] {
-  if (item.screenshots && item.screenshots.length > 0) return item.screenshots;
-  if (item.screenshot) return [item.screenshot];
-  return [];
-}
-
-function SliderCard({
-  item,
-  position,
-}: {
-  item: ProductItem;
-  position: "prev" | "active" | "next";
-}) {
-  const images = getSlideImages(item);
-  const [imgIndex, setImgIndex] = useState(0);
-  const hasMultiple = images.length > 1;
-  const isActive = position === "active";
-  const isStandalone = item.category === "standalone";
-
-  const href = isStandalone && item.externalUrl
-    ? item.externalUrl
-    : `/productos/${item.id}`;
-
-  return (
-    <div
-      className={`relative transition-all duration-500 ${
-        isActive
-          ? "scale-100 opacity-100 z-10"
-          : "scale-[0.88] opacity-40 z-0 pointer-events-none"
-      }`}
-    >
-      <div
-        className={`relative rounded-xl border bg-zinc-900 p-2 shadow-2xl shadow-black/40 transition-colors duration-500 ${
-          isActive ? "border-zinc-700/60" : "border-zinc-800/40"
-        }`}
-      >
-        <Link
-          href={href}
-          {...(isStandalone && item.externalUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-          className="block relative aspect-[16/10] rounded-lg overflow-hidden"
-        >
-          {images.length > 0 ? (
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={imgIndex}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="absolute inset-0"
-              >
-                <Image
-                  src={images[imgIndex]}
-                  alt={`${item.productName} - vista ${imgIndex + 1}`}
-                  fill
-                  className="object-cover object-top"
-                  sizes="(max-width: 768px) 90vw, 60vw"
-                />
-              </motion.div>
-            </AnimatePresence>
-          ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800/80 via-zinc-900 to-zinc-950 flex items-center justify-center">
-              <span className="text-3xl md:text-4xl font-bold text-zinc-600">
-                {item.productName}
-              </span>
-            </div>
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent" />
-
-          {/* Badge */}
-          <span className={`absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full ${
-            isStandalone ? "bg-primary/20 text-primary" : "bg-blue-500/20 text-blue-400"
-          }`}>
-            {isStandalone ? "Standalone" : "SaaS"}
-          </span>
-
-          <div className="absolute bottom-4 left-4 right-4">
-            <span className="text-white font-semibold text-lg">
-              {item.productName}
-            </span>
-            <p className="text-zinc-300 text-sm mt-1">{item.tagline}</p>
-          </div>
-        </Link>
-
-        {hasMultiple && isActive && (
-          <div className="flex items-center justify-center gap-1.5 pt-2 pb-1">
-            {images.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setImgIndex(i)}
-                aria-label={`Vista ${i + 1} de ${item.productName}`}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === imgIndex
-                    ? "bg-primary w-4"
-                    : "bg-zinc-600 hover:bg-zinc-500 w-1.5"
-                }`}
-              />
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
+const categories = [
+  {
+    title: "Sitios Web y Tiendas Online",
+    description: "Webs corporativas, catálogos y tiendas con panel propio. Diseño a medida, SEO y velocidad desde el día uno.",
+    href: "/productos/sitios-web",
+    item: featuredWebsites[0] ?? null,
+  },
+  {
+    title: "Soluciones",
+    description: "Plataformas que digitalizan tu operación de punta a punta. Gestión, stock, ventas y reportes en un solo lugar.",
+    href: "/productos/soluciones",
+    item: standaloneProducts.find((p) => p.screenshot) ?? standaloneProducts[0],
+  },
+  {
+    title: "SaaS",
+    description: "Productos propios por suscripción. Actualizaciones continuas, soporte incluido y listos para usar desde hoy.",
+    href: "/productos/saas",
+    item: saasProducts.find((p) => p.screenshot) ?? saasProducts[0],
+  },
+];
 
 export function Showcase() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const len = sliderItems.length;
-
-  const navigate = useCallback(
-    (dir: -1 | 1) => {
-      setActiveIndex((prev) => mod(prev + dir, len));
-    },
-    [len]
-  );
-
-  const goTo = useCallback(
-    (index: number) => {
-      setActiveIndex(index);
-    },
-    []
-  );
-
-  const prevIndex = mod(activeIndex - 1, len);
-  const nextIndex = mod(activeIndex + 1, len);
-
   return (
-    <section id="showcase" className="py-20 md:py-28 bg-background">
-      <div className="container mx-auto px-6 md:px-12">
+    <section id="showcase" className="py-24 md:py-32 bg-background relative overflow-hidden">
+      {/* Ambient glows */}
+      <div
+        className="absolute top-[10%] left-[5%] w-[800px] h-[800px] rounded-full pointer-events-none"
+        style={{
+          background: "radial-gradient(circle, rgba(255, 60, 0, 0.12) 0%, transparent 60%)",
+          filter: "blur(80px)",
+        }}
+      />
+      <div
+        className="absolute bottom-[0%] right-[0%] w-[700px] h-[700px] rounded-full pointer-events-none"
+        style={{
+          background: "radial-gradient(circle, rgba(255, 60, 0, 0.08) 0%, transparent 60%)",
+          filter: "blur(100px)",
+        }}
+      />
+
+      <div className="container mx-auto px-6 md:px-12 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-12"
+          transition={{ duration: 0.6, ease: EASE }}
+          className="mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Lo que construimos
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+            Lo que{" "}
+            <span style={{ backgroundImage: "linear-gradient(to right, #FF3C00, #FF6A00)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              construimos
+            </span>
           </h2>
-          <p className="text-zinc-400 max-w-xl">
-            Plataformas en produccion que resuelven problemas reales.
+          <p className="text-white/60 max-w-xl text-lg">
+            Plataformas en producción, soluciones llave en mano y sitios web
+            para todos los rubros.
           </p>
         </motion.div>
 
-        {/* Slider */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mb-16"
-        >
-          <div className="relative flex items-center justify-center">
-            <div className="hidden md:block w-[20%] flex-shrink-0">
-              <SliderCard
-                key={`prev-${prevIndex}`}
-                item={sliderItems[prevIndex]}
-                position="prev"
-              />
-            </div>
-
-            <div className="w-full md:w-[60%] flex-shrink-0 px-2 md:px-4">
-              <SliderCard
-                key={`active-${activeIndex}`}
-                item={sliderItems[activeIndex]}
-                position="active"
-              />
-            </div>
-
-            <div className="hidden md:block w-[20%] flex-shrink-0">
-              <SliderCard
-                key={`next-${nextIndex}`}
-                item={sliderItems[nextIndex]}
-                position="next"
-              />
-            </div>
-          </div>
-
-          <div className="flex items-center justify-center gap-4 mt-6">
-            <button
-              onClick={() => navigate(-1)}
-              aria-label="Producto anterior"
-              className="w-10 h-10 rounded-full border border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-white hover:border-zinc-500 transition-colors"
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {categories.map((cat, i) => (
+            <motion.div
+              key={cat.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ scale: 1.03, y: -4, transition: { duration: 0.3, delay: 0, ease: EASE } }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.12, ease: EASE }}
             >
-              <ChevronLeft size={20} />
-            </button>
-            <div className="flex gap-2">
-              {sliderItems.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => goTo(i)}
-                  aria-label={`Ir a producto ${i + 1}`}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    i === activeIndex
-                      ? "bg-primary w-6"
-                      : "bg-zinc-600 hover:bg-zinc-500 w-2"
-                  }`}
-                />
-              ))}
-            </div>
-            <button
-              onClick={() => navigate(1)}
-              aria-label="Producto siguiente"
-              className="w-10 h-10 rounded-full border border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-white hover:border-zinc-500 transition-colors"
-            >
-              <ChevronRight size={20} />
-            </button>
-          </div>
-        </motion.div>
-
-        {/* Bento: standalone sin screenshot */}
-        {bentoItems.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {bentoItems.map((item, i) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.5,
-                  delay: i * 0.1,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="group relative overflow-hidden rounded-lg border border-zinc-800 hover:border-primary/25 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,60,0,0.08)]"
+              <Link
+                href={cat.href}
+                className="group block rounded-2xl overflow-hidden relative glass-card cursor-pointer"
               >
-                <a
-                  href={item.externalUrl ?? `/productos/${item.id}`}
-                  target={item.externalUrl ? "_blank" : undefined}
-                  rel={item.externalUrl ? "noopener noreferrer" : undefined}
-                  className="block relative aspect-[16/10]"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-zinc-800/80 via-zinc-900 to-zinc-950 flex items-center justify-center">
-                    <span className="text-2xl md:text-3xl font-bold text-zinc-600 group-hover:text-zinc-500 transition-colors">
-                      {item.productName}
-                    </span>
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/30 to-transparent" />
+                {/* Screenshot */}
+                <div className="relative aspect-[16/10] overflow-hidden bg-black">
+                  {cat.item?.screenshot ? (
+                    <Image
+                      src={cat.item.screenshot}
+                      alt={cat.item.productName}
+                      fill
+                      className="object-cover object-top"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-white/[0.02]">
+                      <span className="text-2xl font-bold text-white/10 uppercase tracking-widest">
+                        {cat.title}
+                      </span>
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-                  <span className="absolute top-3 left-3 text-xs font-medium px-2.5 py-1 rounded-full bg-primary/20 text-primary">
-                    Standalone
+                  {cat.item && (
+                    <div className="absolute bottom-3 left-4">
+                      <span className="text-white/70 font-medium text-sm">
+                        {cat.item.productName}
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Info */}
+                <div className="p-6">
+                  <div className="text-white font-bold text-xl mb-2">
+                    {cat.title}
+                  </div>
+                  <p className="text-white/50 text-sm leading-relaxed mb-5">{cat.description}</p>
+                  <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md text-xs font-semibold uppercase tracking-wider bg-primary/10 border border-primary/20 text-primary group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-300">
+                    Explorar <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
                   </span>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
 
-                  <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
-                    <span className="text-white font-semibold text-sm md:text-base">
-                      {item.productName}
-                    </span>
-                    {item.externalUrl ? (
-                      <ExternalLink size={16} className="text-zinc-400 group-hover:text-primary transition-colors" />
-                    ) : (
-                      <ArrowUpRight size={18} className="text-zinc-400 group-hover:text-primary transition-colors" />
-                    )}
-                  </div>
-                </a>
-              </motion.div>
-            ))}
-          </div>
-        )}
-
-        {/* View all */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-8 text-center"
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-10 text-center"
         >
           <Link
             href="/productos"
-            className="inline-flex items-center gap-1.5 text-sm text-zinc-400 hover:text-primary transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_-5px_rgba(255,60,0,0.4)]"
+            style={{ backgroundImage: "linear-gradient(to right, #FF3C00 70%, #FF6A00)" }}
           >
             Ver todos los productos
-            <ArrowUpRight size={16} />
+            <ArrowRight size={16} />
           </Link>
         </motion.div>
       </div>

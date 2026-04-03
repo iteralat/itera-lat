@@ -194,26 +194,24 @@ export function InteractiveBackground() {
   }, []);
 
   return (
-    <div ref={containerRef} className="absolute inset-0 w-full h-full overflow-hidden bg-[#0f0e0c] z-0">
+    <div ref={containerRef} className="absolute inset-0 w-full h-full overflow-hidden bg-[#000000] z-0">
       {/* Ambient glow — multiple light spots matching brand palette */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Primary orange glow — top left, illuminates headline */}
         <div className="absolute -top-[10%] -left-[5%] w-[900px] h-[900px] rounded-full bg-[radial-gradient(circle,rgba(255,60,0,0.18)_0%,transparent_65%)]" />
         {/* Warm orange glow — center, behind content */}
         <div className="absolute top-[30%] left-[25%] w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(255,106,0,0.12)_0%,transparent_65%)]" />
-        {/* Purple/cold glow — right side, behind mockups */}
-        <div className="absolute top-[10%] right-[-5%] w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(169,96,238,0.14)_0%,transparent_65%)]" />
+        {/* Secondary orange glow — right side, behind mockups */}
+        <div className="absolute top-[10%] right-[-5%] w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(255,60,0,0.08)_0%,transparent_65%)]" />
         {/* Subtle orange glow — bottom center, transition zone */}
         <div className="absolute bottom-[-10%] left-[20%] w-[1000px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(255,60,0,0.10)_0%,transparent_65%)]" />
-        {/* Subtle purple glow — bottom right */}
-        <div className="absolute bottom-[0%] right-[10%] w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(169,96,238,0.08)_0%,transparent_65%)]" />
       </div>
       <canvas
         ref={canvasRef}
         className="block w-full h-full pointer-events-none"
       />
       {/* Vignette mask for depth — reduced to let glows show */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#0f0e0c_100%)] pointer-events-none opacity-40" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#000000_100%)] pointer-events-none opacity-40" />
     </div>
   );
 }

@@ -1,110 +1,21 @@
 {
   "planPath": "docs/superpowers/plans/2026-04-02-site-redesign.md",
   "tasks": [
-    {
-      "id": 8,
-      "subject": "Task 1: Update design tokens and effects in globals.css",
-      "status": "pending",
-      "description": "**Goal:** Reemplazar la paleta marrón por negro puro con efectos glow naranja.\n\n**Files:**\n- Modify: `src/app/globals.css`\n\n**Acceptance Criteria:**\n- [ ] Background #050505\n- [ ] Category color vars\n- [ ] Glow utility classes\n\n**Verify:** `npm run lint`\n\n```json:metadata\n{\"files\": [\"src/app/globals.css\"], \"verifyCommand\": \"npm run lint\", \"acceptanceCriteria\": [\"Background #050505\", \"Category color vars\", \"Glow utility classes\"], \"requiresUserVerification\": false}\n```"
-    },
-    {
-      "id": 9,
-      "subject": "Task 2: Refactor Header with dropdown navigation",
-      "status": "pending",
-      "blockedBy": [8],
-      "description": "**Goal:** Dropdown en Productos con 3 categorías.\n\n**Files:**\n- Modify: `src/components/layout/Header.tsx`\n\n**Verify:** `npm run lint`\n\n```json:metadata\n{\"files\": [\"src/components/layout/Header.tsx\"], \"verifyCommand\": \"npm run lint\", \"acceptanceCriteria\": [\"Dropdown desktop\", \"Mobile expand\", \"Category colors\"], \"requiresUserVerification\": false}\n```"
-    },
-    {
-      "id": 10,
-      "subject": "Task 3: Update Footer with category links",
-      "status": "pending",
-      "blockedBy": [8],
-      "description": "**Goal:** Categorías en footer.\n\n**Files:**\n- Modify: `src/components/layout/Footer.tsx`\n\n**Verify:** `npm run lint`\n\n```json:metadata\n{\"files\": [\"src/components/layout/Footer.tsx\"], \"verifyCommand\": \"npm run lint\", \"acceptanceCriteria\": [\"Category links in footer\"], \"requiresUserVerification\": false}\n```"
-    },
-    {
-      "id": 11,
-      "subject": "Task 4: Extend data model with BaseProduct, WebItem, caseStudy",
-      "status": "pending",
-      "blockedBy": [8],
-      "description": "**Goal:** Reestructurar portfolio.ts.\n\n**Files:**\n- Modify: `src/data/portfolio.ts`\n\n**Verify:** `npx tsc --noEmit && npm run lint`\n\n```json:metadata\n{\"files\": [\"src/data/portfolio.ts\"], \"verifyCommand\": \"npx tsc --noEmit && npm run lint\", \"acceptanceCriteria\": [\"BaseProduct interface\", \"WebItem interface\", \"websites array\", \"slug field\"], \"requiresUserVerification\": false}\n```"
-    },
-    {
-      "id": 12,
-      "subject": "Task 5: Create shared components (Breadcrumb, CaseStudy, CategoryCard)",
-      "status": "pending",
-      "blockedBy": [8, 11],
-      "description": "**Goal:** Componentes reutilizables.\n\n**Files:**\n- Create: `src/components/shared/Breadcrumb.tsx`\n- Create: `src/components/shared/CaseStudy.tsx`\n- Create: `src/components/shared/CategoryCard.tsx`\n\n**Verify:** `npm run lint`\n\n```json:metadata\n{\"files\": [\"src/components/shared/Breadcrumb.tsx\", \"src/components/shared/CaseStudy.tsx\", \"src/components/shared/CategoryCard.tsx\"], \"verifyCommand\": \"npm run lint\", \"acceptanceCriteria\": [\"Breadcrumb\", \"CaseStudy\", \"CategoryCard\"], \"requiresUserVerification\": false}\n```"
-    },
-    {
-      "id": 13,
-      "subject": "Task 6: Create Sitios Web landing with gallery",
-      "status": "pending",
-      "blockedBy": [11, 12],
-      "description": "**Goal:** Landing /productos/sitios-web con galería filtrable.\n\n**Files:**\n- Create: `src/app/productos/sitios-web/page.tsx`\n- Create: `src/app/productos/sitios-web/layout.tsx`\n- Create: `src/components/webs/NicheFilter.tsx`\n- Create: `src/components/webs/WebCard.tsx`\n- Create: `src/components/webs/WebCatalog.tsx`\n- Create: `src/components/webs/ScreenshotViewer.tsx`\n\n**Verify:** `npm run lint`\n\n```json:metadata\n{\"files\": [\"src/app/productos/sitios-web/page.tsx\", \"src/components/webs/\"], \"verifyCommand\": \"npm run lint\", \"acceptanceCriteria\": [\"Gallery with filters\", \"Modal viewer\", \"Featured badge\"], \"requiresUserVerification\": false}\n```"
-    },
-    {
-      "id": 14,
-      "subject": "Task 7: Create featured web case detail page",
-      "status": "pending",
-      "blockedBy": [13],
-      "description": "**Goal:** /productos/sitios-web/[slug] para featured.\n\n**Files:**\n- Create: `src/app/productos/sitios-web/[slug]/page.tsx`\n\n**Verify:** `npm run lint`\n\n```json:metadata\n{\"files\": [\"src/app/productos/sitios-web/[slug]/page.tsx\"], \"verifyCommand\": \"npm run lint\", \"acceptanceCriteria\": [\"Static params for featured\", \"Case study page\"], \"requiresUserVerification\": false}\n```"
-    },
-    {
-      "id": 15,
-      "subject": "Task 8: Create Soluciones landing page",
-      "status": "pending",
-      "blockedBy": [11, 12],
-      "description": "**Goal:** Landing /productos/soluciones.\n\n**Files:**\n- Create: `src/app/productos/soluciones/page.tsx`\n- Create: `src/app/productos/soluciones/layout.tsx`\n\n**Verify:** `npm run lint`\n\n```json:metadata\n{\"files\": [\"src/app/productos/soluciones/page.tsx\"], \"verifyCommand\": \"npm run lint\", \"acceptanceCriteria\": [\"Landing with product cards\"], \"requiresUserVerification\": false}\n```"
-    },
-    {
-      "id": 16,
-      "subject": "Task 9: Create Soluciones detail page",
-      "status": "pending",
-      "blockedBy": [15],
-      "description": "**Goal:** Ficha /productos/soluciones/[slug].\n\n**Files:**\n- Create: `src/app/productos/soluciones/[slug]/page.tsx`\n\n**Verify:** `npm run lint`\n\n```json:metadata\n{\"files\": [\"src/app/productos/soluciones/[slug]/page.tsx\"], \"verifyCommand\": \"npm run lint\", \"acceptanceCriteria\": [\"Product detail page\", \"Case study\"], \"requiresUserVerification\": false}\n```"
-    },
-    {
-      "id": 17,
-      "subject": "Task 10: Create SaaS landing page",
-      "status": "pending",
-      "blockedBy": [11],
-      "description": "**Goal:** Landing /productos/saas.\n\n**Files:**\n- Create: `src/app/productos/saas/page.tsx`\n- Create: `src/app/productos/saas/layout.tsx`\n- Modify: `src/data/portfolio.ts`\n\n**Verify:** `npm run lint`\n\n```json:metadata\n{\"files\": [\"src/app/productos/saas/page.tsx\", \"src/data/portfolio.ts\"], \"verifyCommand\": \"npm run lint\", \"acceptanceCriteria\": [\"SaaS landing\", \"Itera Estudio moved\"], \"requiresUserVerification\": false}\n```"
-    },
-    {
-      "id": 18,
-      "subject": "Task 11: Create SaaS detail page",
-      "status": "pending",
-      "blockedBy": [17],
-      "description": "**Goal:** Ficha /productos/saas/[slug].\n\n**Files:**\n- Create: `src/app/productos/saas/[slug]/page.tsx`\n\n**Verify:** `npm run lint`\n\n```json:metadata\n{\"files\": [\"src/app/productos/saas/[slug]/page.tsx\"], \"verifyCommand\": \"npm run lint\", \"acceptanceCriteria\": [\"SaaS detail page\"], \"requiresUserVerification\": false}\n```"
-    },
-    {
-      "id": 19,
-      "subject": "Task 12: Create Products overview + redirects + cleanup",
-      "status": "pending",
-      "blockedBy": [13, 15, 17, 18],
-      "description": "**Goal:** Overview /productos + redirects 301 + eliminar ruta vieja.\n\n**Files:**\n- Modify: `src/app/productos/page.tsx`\n- Modify: `next.config.ts`\n- Delete: `src/app/productos/[slug]/page.tsx`\n\n**Verify:** `npm run lint`\n\n```json:metadata\n{\"files\": [\"src/app/productos/page.tsx\", \"next.config.ts\"], \"verifyCommand\": \"npm run lint\", \"acceptanceCriteria\": [\"Category overview\", \"301 redirects\", \"Old route removed\"], \"requiresUserVerification\": false}\n```"
-    },
-    {
-      "id": 20,
-      "subject": "Task 13: Redesign Home showcase section",
-      "status": "pending",
-      "blockedBy": [8, 19],
-      "description": "**Goal:** Showcase con 3 categorías.\n\n**Files:**\n- Modify: `src/components/option-2/sections/Showcase.tsx`\n\n**Verify:** `npm run lint`\n\n```json:metadata\n{\"files\": [\"src/components/option-2/sections/Showcase.tsx\"], \"verifyCommand\": \"npm run lint\", \"acceptanceCriteria\": [\"3-category showcase\"], \"requiresUserVerification\": false}\n```"
-    },
-    {
-      "id": 21,
-      "subject": "Task 14: Redesign Servicios with interlinks",
-      "status": "pending",
-      "blockedBy": [8, 19],
-      "description": "**Goal:** Interlinks a categorías de productos.\n\n**Files:**\n- Modify: `src/app/servicios/page.tsx`\n\n**Verify:** `npm run lint`\n\n```json:metadata\n{\"files\": [\"src/app/servicios/page.tsx\"], \"verifyCommand\": \"npm run lint\", \"acceptanceCriteria\": [\"Interlinks to categories\"], \"requiresUserVerification\": false}\n```"
-    },
-    {
-      "id": 22,
-      "subject": "Task 15: Redesign Sobre Nosotros and Contacto",
-      "status": "pending",
-      "blockedBy": [8],
-      "description": "**Goal:** Actualizar al nuevo design system.\n\n**Files:**\n- Modify: `src/app/sobre-nosotros/page.tsx`\n- Modify: `src/app/contacto/page.tsx`\n\n**Verify:** `npm run lint`\n\n```json:metadata\n{\"files\": [\"src/app/sobre-nosotros/page.tsx\", \"src/app/contacto/page.tsx\"], \"verifyCommand\": \"npm run lint\", \"acceptanceCriteria\": [\"Updated tokens\", \"Glow effects\"], \"requiresUserVerification\": false}\n```"
-    }
+    { "id": 8, "subject": "Task 1: Update design tokens and effects in globals.css", "status": "completed", "lastUpdated": "2026-04-02T12:00:00Z" },
+    { "id": 9, "subject": "Task 2: Refactor Header with dropdown navigation", "status": "completed", "lastUpdated": "2026-04-02T12:00:00Z" },
+    { "id": 10, "subject": "Task 3: Update Footer with category links", "status": "completed", "lastUpdated": "2026-04-02T12:00:00Z" },
+    { "id": 11, "subject": "Task 4: Extend data model with BaseProduct, WebItem, caseStudy", "status": "completed", "lastUpdated": "2026-04-02T12:00:00Z" },
+    { "id": 12, "subject": "Task 5: Create shared components (Breadcrumb, CaseStudy, CategoryCard)", "status": "completed", "lastUpdated": "2026-04-02T15:00:00Z" },
+    { "id": 13, "subject": "Task 6: Create Sitios Web landing with gallery", "status": "completed", "lastUpdated": "2026-04-02T15:00:00Z" },
+    { "id": 14, "subject": "Task 7: Create featured web case detail page", "status": "completed", "lastUpdated": "2026-04-02T15:00:00Z" },
+    { "id": 15, "subject": "Task 8: Create Soluciones landing page", "status": "completed", "lastUpdated": "2026-04-02T15:00:00Z" },
+    { "id": 16, "subject": "Task 9: Create Soluciones detail page", "status": "completed", "lastUpdated": "2026-04-02T15:00:00Z" },
+    { "id": 17, "subject": "Task 10: Create SaaS landing page", "status": "completed", "lastUpdated": "2026-04-02T15:00:00Z" },
+    { "id": 18, "subject": "Task 11: Create SaaS detail page", "status": "completed", "lastUpdated": "2026-04-02T15:00:00Z" },
+    { "id": 19, "subject": "Task 12: Create Products overview + redirects + cleanup", "status": "completed", "lastUpdated": "2026-04-02T15:00:00Z" },
+    { "id": 20, "subject": "Task 13: Redesign Home showcase section", "status": "completed", "lastUpdated": "2026-04-02T15:00:00Z" },
+    { "id": 21, "subject": "Task 14: Redesign Servicios with interlinks", "status": "completed", "lastUpdated": "2026-04-02T15:00:00Z" },
+    { "id": 22, "subject": "Task 15: Redesign Sobre Nosotros and Contacto", "status": "completed", "lastUpdated": "2026-04-02T15:00:00Z" }
   ],
-  "lastUpdated": "2026-04-02T12:00:00Z"
+  "lastUpdated": "2026-04-02T15:00:00Z"
 }

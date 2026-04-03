@@ -8,20 +8,27 @@
 
 ## Home (option-2 — versión activa)
 
-- Hero rediseñado: layout 50/50, mockups de IteraLex + dashboard catálogo, focos de iluminación, fondo cálido — Mar 2026
+- Hero rediseñado: layout 50/50, mockups de IteraLex + IteraShop + Cerro Solar — Mar 2026
 - Hero con animaciones y CTA — Mar 2026
-- Seccion de servicios con iconos — Mar 2026
-- Portfolio destacado en home — Mar 2026
-- About con descripcion de la agencia — Mar 2026
-- Formulario de contacto con WhatsApp — Mar 2026
+- Fondo espacial con estrellas y shooting stars naranjas (reemplaza cuadrados flotantes) — Abr 2026
+- Glow naranja detrás del mockup de dispositivos — Abr 2026
+- Home simplificado a 4 secciones: Hero, Showcase, WhyItera, CTA (se quitaron Services, Process, About) — Abr 2026
+- Glassmorphism en tarjetas (.glass-card): gradiente interno, borde luminoso, glow naranja — Abr 2026
+- Showcase con 3 categorías (Sitios Web, Soluciones, SaaS) y botón gradiente "Ver todos los productos" — Abr 2026
 
-## Proyectos (antes Plataformas)
+## Productos (reestructuración completa)
 
-- Grid de productos SaaS con cards — Mar 2026
-- Visor interactivo por producto con thumbnails — Mar 2026
-- Screenshots reales en cards (Gestión, Tree) con overlay carátula + hover reveal — Mar 2026
-- Copy de beneficio/logro por plataforma (coverLine + description orientada a resultado) — Mar 2026
-- Ruta renombrada de /plataformas a /proyectos con redirects 301 — Mar 2026
+- Reestructuración en 3 categorías: Sitios Web, Soluciones, SaaS — Abr 2026
+- Overview /productos con 3 CategoryCards glassmorphism — Abr 2026
+- Landing /productos/sitios-web con galería filtrable (NicheFilter) y ScreenshotViewer modal — Abr 2026
+- Landing /productos/soluciones con cards de IteraDesk, IteraLink, IteraShop — Abr 2026
+- Landing /productos/saas con sección educativa y cards de IteraLex, Itera Estudio — Abr 2026
+- Fichas de producto por categoría (/productos/{cat}/[slug]) con sidebar sticky — Abr 2026
+- Página de caso web destacado (/productos/sitios-web/[slug]) — Abr 2026
+- Redirects 301 de URLs viejas (/productos/iteralex → /productos/saas/iteralex, etc.) — Abr 2026
+- Itera Estudio movido de internalProducts a saasProducts — Abr 2026
+- Shared components: Breadcrumb, CaseStudy, CategoryCard — Abr 2026
+- Web components: NicheFilter, WebCard, ScreenshotViewer, WebCatalog — Abr 2026
 
 ## Servicios
 
@@ -42,8 +49,8 @@
 ## General
 
 - Scroll to top button — Mar 2026
-- Header simplificado: nav plano sin dropdown (Inicio, Servicios, Proyectos, Sobre nosotros, CTA) — Mar 2026
-- Footer actualizado con links a nuevas rutas (Ecosistema + Agencia) — Mar 2026
+- Header con dropdown en Productos → 3 categorías — Abr 2026
+- Footer con links a categorías de productos — Abr 2026
 - Custom 404 page — Mar 2026
 
 ## SEO

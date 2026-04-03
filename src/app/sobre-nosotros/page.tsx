@@ -61,17 +61,17 @@ export default function SobreNosotrosPage() {
           <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
             Sobre nosotros
           </h1>
-          <p className="text-xl text-white/60 leading-relaxed mb-6">
+          <p className="text-xl text-white/40 leading-relaxed mb-6">
             Somos un estudio de desarrollo web con base en la Patagonia, Argentina.
             Combinamos diseño, código y herramientas de inteligencia artificial
             para construir productos digitales que funcionan desde el día uno.
           </p>
-          <p className="text-zinc-500 text-base leading-relaxed mb-6">
+          <p className="text-white/30 text-base leading-relaxed mb-6">
             Fundado por devs, no por vendedores. Cada proyecto tiene atención
             directa del equipo que lo construye. Trabajamos con vos — sin
             intermediarios, sin sorpresas, sin letra chica.
           </p>
-          <p className="text-zinc-500 text-base leading-relaxed">
+          <p className="text-white/30 text-base leading-relaxed">
             Además de proyectos para clientes, construimos nuestras propias
             herramientas internas: sistemas de monitoreo, gestión operativa y
             automatización que usamos todos los días. Esa experiencia de producto
@@ -90,7 +90,7 @@ export default function SobreNosotrosPage() {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Cómo trabajamos
           </h2>
-          <p className="text-zinc-400 max-w-2xl mb-12">
+          <p className="text-white/40 max-w-2xl mb-12">
             Un proceso simple y transparente, sin sorpresas.
           </p>
 
@@ -102,7 +102,7 @@ export default function SobreNosotrosPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1, ease }}
-                className="p-6 rounded-lg bg-zinc-900/50 border border-zinc-800"
+                className="p-6 rounded-lg bg-muted border border-border"
               >
                 <span className="text-primary font-bold text-sm mb-3 block">
                   {step.number}
@@ -110,7 +110,7 @@ export default function SobreNosotrosPage() {
                 <h3 className="text-lg font-semibold text-white mb-2">
                   {step.title}
                 </h3>
-                <p className="text-sm text-zinc-400 leading-relaxed">
+                <p className="text-sm text-white/40 leading-relaxed">
                   {step.description}
                 </p>
               </motion.div>
@@ -129,7 +129,7 @@ export default function SobreNosotrosPage() {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Por qué ÍTERA
           </h2>
-          <p className="text-zinc-400 max-w-2xl mb-12">
+          <p className="text-white/40 max-w-2xl mb-12">
             Un estudio boutique donde cada proyecto tiene atención directa del equipo que lo construye.
           </p>
 
@@ -143,7 +143,7 @@ export default function SobreNosotrosPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.12, ease }}
-                  className="group p-6 md:p-8 rounded-lg bg-zinc-900/50 border border-zinc-800 hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(255,60,0,0.06)]"
+                  className="group p-6 md:p-8 rounded-lg bg-muted border border-border hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(255,60,0,0.06)]"
                 >
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-5">
                     <Icon size={24} className="text-primary" />
@@ -151,7 +151,7 @@ export default function SobreNosotrosPage() {
                   <h3 className="text-lg font-semibold text-white mb-2">
                     {reason.title}
                   </h3>
-                  <p className="text-sm text-zinc-400 leading-relaxed">
+                  <p className="text-sm text-white/40 leading-relaxed">
                     {reason.description}
                   </p>
                 </motion.div>
@@ -168,7 +168,7 @@ export default function SobreNosotrosPage() {
           transition={{ duration: 0.6, ease }}
           className="mb-24"
         >
-          <div className="p-8 md:p-12 rounded-xl bg-zinc-900/50 border border-zinc-800">
+          <div className="p-8 md:p-12 rounded-xl bg-muted border border-border">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
                 <Wrench size={24} className="text-primary" />
@@ -177,12 +177,12 @@ export default function SobreNosotrosPage() {
                 Herramientas propias
               </h2>
             </div>
-            <p className="text-zinc-400 text-base md:text-lg leading-relaxed max-w-3xl mb-4">
+            <p className="text-white/40 text-base md:text-lg leading-relaxed max-w-3xl mb-4">
               No solo construimos para otros. Tenemos nuestras propias plataformas
               en producción: sistemas de monitoreo, gestión de operaciones y
               herramientas de automatización que usamos todos los días.
             </p>
-            <p className="text-zinc-500 text-sm leading-relaxed max-w-3xl">
+            <p className="text-white/30 text-sm leading-relaxed max-w-3xl">
               Cuando un cliente nos pide algo, ya pasamos por los mismos problemas
               con nuestros propios productos. Eso se nota en las decisiones de diseño,
               en la estabilidad y en lo rápido que podemos iterar.
@@ -198,7 +198,7 @@ export default function SobreNosotrosPage() {
           transition={{ duration: 0.6, ease }}
           className="text-center"
         >
-          <p className="text-zinc-400 mb-6 text-lg">
+          <p className="text-white/40 mb-6 text-lg">
             ¿Querés saber más o tenés un proyecto en mente?
           </p>
           <Link
