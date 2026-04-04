@@ -8,8 +8,8 @@ Web informativa y portfolio de la agencia ÍTERA · itera.lat
 
 1. Planificar antes de codear: disenar pantallas/flujo UX. Implementar DESPUES de aprobacion.
 2. Verificar en navegador: resultado verificable en `localhost:3005` al final de cada feature.
-3. **Lint obligatorio**: correr `npm run lint` despues de terminar cambios y ANTES de commitear.
-4. **Lint en Windows**: si `npm run lint` falla por paths con espacios -> fallback: `npx eslint src` directo.
+3. **Lint obligatorio**: correr `pnpm lint` despues de terminar cambios y ANTES de commitear.
+4. **Lint en Windows**: si `pnpm lint` falla por paths con espacios -> fallback: `pnpm exec eslint src` directo.
 5. Referencias en `.planning/` — STATE.md y GUARDRAILS.md en raiz.
 6. **Mini-audit por archivo**: al terminar de escribir una page o componente -> verificar metadata y error boundaries.
 7. **Tipos compartidos desde el primer uso**: al definir un `type` o `interface` -> si puede usarse en 2+ archivos -> crearlo en `src/lib/types/` desde el inicio. Si ya existe similar -> importar, NUNCA redefinir.
@@ -47,7 +47,7 @@ Web informativa y portfolio de la agencia ÍTERA · itera.lat
 
 ### TypeScript / ESLint
 
-- Despues de cambios -> `npm run lint`
+- Despues de cambios -> `pnpm lint`
 - ANTES de usar campo/prop -> verificar que existe en schema/interface
 - SIEMPRE `===` y `!==` -> NUNCA `==` o `!=`
 - Evitar `as Type` en datos externos -> validar runtime si hay duda
