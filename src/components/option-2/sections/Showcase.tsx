@@ -89,7 +89,7 @@ export function Showcase() {
                       src={cat.item.screenshot}
                       alt={cat.item.productName}
                       fill
-                      className="object-cover object-top"
+                      className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   ) : (
@@ -99,10 +99,23 @@ export function Showcase() {
                       </span>
                     </div>
                   )}
+                  {/* Gradient base (siempre visible) */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
+                  {/* Overlay oscuro con texto — desaparece al hover */}
+                  {cat.item?.screenshot && (
+                    <div className="absolute inset-0 bg-black/75 flex flex-col items-center justify-center transition-opacity duration-500 ease-out group-hover:opacity-0">
+                      <span className="text-white font-bold text-2xl tracking-tight">
+                        {cat.item.productName}
+                      </span>
+                      <span className="mt-1.5 text-xs font-semibold uppercase tracking-widest text-primary">
+                        {cat.title}
+                      </span>
+                    </div>
+                  )}
+
                   {cat.item && (
-                    <div className="absolute bottom-3 left-4">
+                    <div className="absolute bottom-3 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                       <span className="text-white/70 font-medium text-sm">
                         {cat.item.productName}
                       </span>

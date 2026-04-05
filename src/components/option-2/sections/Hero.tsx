@@ -73,6 +73,7 @@ export function Hero() {
             <DeviceMockup
               desktopSrc="/images/portfolio/screenshot-iteralex.webp"
               laptopSrc="/images/portfolio/screenshot-iterashop.png"
+              mobileSrc="/images/portfolio/screenshot-linktree-itera.png"
               alt="Proyectos ÍTERA"
               priority
             />

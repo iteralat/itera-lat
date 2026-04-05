@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npx kill-port 3005 && next dev -p 3005",
+    "dev": "kill-port 3005 && next dev -p 3005",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
@@ -16,7 +16,10 @@
     "react-dom": "19.2.3"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["esbuild", "unrs-resolver"]
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "unrs-resolver"
+    ]
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -25,6 +28,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "kill-port": "^2.0.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
