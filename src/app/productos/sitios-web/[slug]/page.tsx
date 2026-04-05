@@ -16,8 +16,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const site = websites.find((w) => w.slug === slug && w.featured);
   if (!site) return {};
   return {
-    title: `${site.productName} | Sitios Web | ÍTERA`,
+    title: `${site.productName} — Sitios Web`,
     description: site.description,
+    openGraph: {
+      title: `${site.productName} — Sitios Web`,
+      description: site.description,
+    },
+    alternates: { canonical: `/productos/sitios-web/${slug}` },
   };
 }
 

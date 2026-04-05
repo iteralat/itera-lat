@@ -94,6 +94,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="scroll-smooth">
+      <head>
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+      </head>
       <body className={`${poppins.variable} font-sans antialiased selection:bg-primary selection:text-white`}>
         <GoogleAnalytics />
         <JsonLd data={organizationLd} />

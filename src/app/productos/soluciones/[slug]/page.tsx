@@ -15,8 +15,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const product = standaloneProducts.find((p) => p.slug === slug);
   if (!product) return {};
   return {
-    title: `${product.productName} | Soluciones | ÍTERA`,
+    title: `${product.productName} — Soluciones`,
     description: product.description,
+    openGraph: {
+      title: `${product.productName} — Soluciones`,
+      description: product.description,
+    },
+    alternates: { canonical: `/productos/soluciones/${slug}` },
   };
 }
 
