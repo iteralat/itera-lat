@@ -8,21 +8,21 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 const reasons = [
   {
     icon: Zap,
-    title: "Velocidad real",
+    title: "Trabajo directo",
     description:
-      "Entregas rápidas sin sacrificar calidad. Equipo chico, decisiones directas, cero vueltas.",
+      "Hablás con quien desarrolla tu proyecto. Sin intermediarios, sin demoras innecesarias.",
   },
   {
     icon: TrendingUp,
-    title: "Crece con vos",
+    title: "Pensado para crecer",
     description:
-      "Lo que construimos hoy soporta el crecimiento de mañana. No vas a tener que empezar de cero.",
+      "Construimos sobre buenas prácticas para que tu proyecto se pueda ampliar sin rehacerlo.",
   },
   {
     icon: Headphones,
-    title: "Soporte continuo",
+    title: "Socio tecnológico",
     description:
-      "No desaparecemos después del deploy. Acompañamiento, iteraciones y mejoras constantes.",
+      "Trabajamos con vos a largo plazo. Mantenimiento, ajustes y soporte como parte del equipo.",
   },
 ];
 

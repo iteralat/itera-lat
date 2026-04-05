@@ -42,13 +42,24 @@ export default function SolucionesPage() {
                     src={product.screenshot}
                     alt={product.productName}
                     fill
-                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center dot-grid">
                     <span className="text-2xl font-bold text-white/10 uppercase tracking-widest">
                       {product.productName}
+                    </span>
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                {product.screenshot && (
+                  <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center gap-1 transition-opacity duration-500 ease-out group-hover:opacity-0">
+                    <span className="text-white font-bold text-xl tracking-tight">
+                      {product.productName}
+                    </span>
+                    <span className="text-xs font-semibold uppercase tracking-widest text-primary">
+                      {product.status}
                     </span>
                   </div>
                 )}

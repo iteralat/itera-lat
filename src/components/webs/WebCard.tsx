@@ -33,7 +33,7 @@ export function WebCard({ item, index, onClick }: WebCardProps) {
             src={item.screenshot}
             alt={item.productName}
             fill
-            className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+            className="object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         ) : (
@@ -44,16 +44,24 @@ export function WebCard({ item, index, onClick }: WebCardProps) {
           </div>
         )}
 
-        {/* Hover overlay */}
-        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-          <span className="text-white text-sm font-medium border border-white/20 px-4 py-2 rounded-lg">
-            Ver preview
-          </span>
-        </div>
+        {/* Gradient base */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+
+        {/* Overlay oscuro con nombre — desaparece al hover */}
+        {item.screenshot && (
+          <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center gap-1 transition-opacity duration-500 ease-out group-hover:opacity-0">
+            <span className="text-white font-bold text-xl tracking-tight">
+              {item.productName}
+            </span>
+            <span className="text-xs font-semibold uppercase tracking-widest text-primary">
+              {item.niche}
+            </span>
+          </div>
+        )}
 
         {/* Featured badge */}
         {item.featured && (
-          <div className="absolute top-3 right-3 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider bg-primary/20 border border-primary/30 text-primary rounded-full backdrop-blur-sm">
+          <div className="absolute top-3 right-3 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider bg-primary/20 border border-primary/30 text-primary rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">
             Destacado
           </div>
         )}
