@@ -57,6 +57,12 @@ export function Header() {
     return () => { document.body.style.overflow = ""; };
   }, [isMobileMenuOpen]);
 
+  // Close mobile menu on route change (new page is already rendered underneath)
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+    setIsMobileProductsOpen(false);
+  }, [pathname]);
+
   // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -250,7 +256,6 @@ export function Header() {
                 <Link
                   href={link.href}
                   className={`text-2xl font-medium transition-colors ${isActive(link.href) ? "text-primary" : "text-white hover:text-primary"}`}
-                  onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
                 </Link>
@@ -298,7 +303,6 @@ export function Header() {
                           <Link
                             href={cat.href}
                             className="text-lg text-white/70 hover:text-primary transition-colors"
-                            onClick={() => setIsMobileMenuOpen(false)}
                           >
                             {cat.name}
                           </Link>
@@ -312,7 +316,6 @@ export function Header() {
                         <Link
                           href="/productos"
                           className="text-sm text-white/40 hover:text-primary transition-colors"
-                          onClick={() => setIsMobileMenuOpen(false)}
                         >
                           Ver todo →
                         </Link>
@@ -331,7 +334,6 @@ export function Header() {
               <Link
                 href="/contacto"
                 className="inline-block text-lg font-semibold bg-primary text-white px-8 py-3.5 rounded-xl hover:bg-primary-soft transition-colors shadow-[0_0_25px_rgba(255,60,0,0.3)]"
-                onClick={() => setIsMobileMenuOpen(false)}
               >
                 Hablemos
               </Link>
