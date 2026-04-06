@@ -20,25 +20,26 @@ export function Hero() {
           {/* Left - text */}
           <div>
             <div className="animate-fade-in-up">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-elevated/50 backdrop-blur-sm mb-8">
-                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                <span className="text-sm font-medium tracking-wide">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-border bg-elevated/50 backdrop-blur-sm mb-8">
+                <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-primary animate-pulse" />
+                <span className="text-xs md:text-sm font-medium tracking-wide">
                   Agencia de desarrollo
                 </span>
               </div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] mb-6 text-white">
-                Soluciones que{" "}
-                <span className="italic" style={{ backgroundImage: "linear-gradient(to right, #FF3C00, #FF6A00)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              <h1 className="text-[2.5rem] md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] mb-6 text-white">
+                Soluciones que
+                <br />
+                <span style={{ backgroundImage: "linear-gradient(to right, #FF3C00, #FF6A00)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontFamily: "var(--font-poppins)" }}>
                   evolucionan
-                </span>{" "}
-                con vos.
+                </span>
+                <br className="md:hidden" />
+                {" "}con vos.
               </h1>
             </div>
 
-            <p className="animate-fade-in-up [animation-delay:100ms] text-lg md:text-xl text-white/60 mb-10 max-w-2xl leading-relaxed">
-              Sitios web, sistemas de gestión y herramientas digitales
-              <br />a medida para negocios <strong className="text-white font-semibold">que quieren crecer.</strong>
+            <p className="animate-fade-in-up [animation-delay:100ms] text-lg md:text-xl text-white/70 mb-10 max-w-2xl leading-relaxed">
+              Sitios web, sistemas de gestión y herramientas digitales a medida para negocios <strong className="text-white font-semibold">que quieren crecer.</strong>
             </p>
 
             <div className="animate-fade-in-up [animation-delay:200ms] flex flex-col sm:flex-row gap-4">

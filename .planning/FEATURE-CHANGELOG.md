@@ -18,6 +18,8 @@
 - Hero: mobile mockup oculto, laptop a la derecha sobresaliendo del desktop — Abr 2026
 - Hero: badge único "Patagonia → LATAM" en cursiva con borde sutil — Abr 2026
 - Showcase: IteraShop como tarjeta principal de Soluciones, hover scale reducido — Abr 2026
+- Hero: "evolucionan" sin cursiva, font Poppins, layout 3 filas en mobile — Abr 2026
+- Hero: título más grande en mobile (2.5rem), botones más compactos, chip más chico — Abr 2026
 
 ## Productos (reestructuración completa)
 
@@ -54,6 +56,9 @@
 - Scroll to top button — Mar 2026
 - Header con dropdown en Productos → 3 categorías — Abr 2026
 - Header dropdown: hover continuo, alineado izquierda, "Ver todo" sutil — Abr 2026
+- Menú mobile: animaciones framer-motion (fade+slide stagger), botón animado hamburguesa/X — Abr 2026
+- Menú mobile: overlay full-screen corregido (movido fuera del header con backdrop-blur) — Abr 2026
+- Menú mobile: dropdown Productos simplificado a lista de títulos centrada — Abr 2026
 - Footer con links a categorías de productos — Abr 2026
 - Footer: logo real, WhatsApp + email con íconos, columna Recursos — Abr 2026
 - Custom 404 page — Mar 2026

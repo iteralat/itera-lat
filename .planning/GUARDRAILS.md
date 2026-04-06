@@ -74,6 +74,12 @@
 **Check preventivo**: Si usás glassmorphism, asegurar que hay glows/gradientes posicionados detrás de las cards. Usar gradiente interno + borde luminoso `::before` como fallback.
 **Fecha**: 2026-04-02
 
+### backdrop-blur rompe position:fixed en hijos
+
+**Problema**: El menú mobile usaba `fixed inset-0` dentro del `<header>` que tiene `backdrop-blur-md`. CSS spec: `backdrop-filter` crea un nuevo containing block, haciendo que `fixed` se comporte como `absolute` relativo al padre. El menú no cubría toda la pantalla si el usuario scrolleaba.
+**Check preventivo**: Nunca poner un overlay `position: fixed` como hijo de un elemento con `backdrop-filter` o `filter`. Mover el overlay como sibling (fuera del contenedor con blur).
+**Fecha**: 2026-04-06
+
 ---
 
 ## Flujo de escalacion
