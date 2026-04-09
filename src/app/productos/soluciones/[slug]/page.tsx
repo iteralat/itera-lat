@@ -112,8 +112,8 @@ export default async function SolucionDetailPage({ params }: { params: Promise<{
               </div>
             </div>
 
-            {/* Adopters */}
-            {product.adopters.length > 0 && (
+            {/* Adopters — hidden temporarily */}
+            {/* {product.adopters.length > 0 && (
               <div className="bg-muted border border-border rounded-lg p-5">
                 <div className="text-xs uppercase tracking-widest text-white/30 font-semibold mb-3">
                   Usado por
@@ -132,16 +132,17 @@ export default async function SolucionDetailPage({ params }: { params: Promise<{
                   ))}
                 </ul>
               </div>
-            )}
+            )} */}
 
             {/* CTAs */}
             <div className="space-y-3">
-              {product.externalUrl && (
+              {/* Ver producto — hidden temporarily */}
+              {/* {product.externalUrl && (
                 <GlowButton href={product.externalUrl} external className="w-full">
                   Ver {product.productName}
                 </GlowButton>
-              )}
-              <GlowButton href="/contacto" variant="outline" className="w-full">
+              )} */}
+              <GlowButton href="/contacto" className="w-full">
                 Quiero algo similar
               </GlowButton>
             </div>

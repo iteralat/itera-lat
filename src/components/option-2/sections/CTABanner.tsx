@@ -36,7 +36,7 @@ export function CTABanner() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <GlowButton href="https://wa.me/5492994000000" external>
+              <GlowButton href="https://wa.me/5492984394286" external>
                 <MessageCircle size={20} />
                 WhatsApp
               </GlowButton>

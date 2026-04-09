@@ -31,7 +31,7 @@ export function Footer() {
                 hola@itera.lat
               </a>
               <a
-                href="https://wa.me/5492994000000"
+                href="https://wa.me/5492984394286"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white hover:text-primary transition-colors font-medium inline-flex items-center gap-2"

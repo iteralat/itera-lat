@@ -57,7 +57,7 @@ export default function ContactoPage() {
             <p className="text-white/40 text-sm leading-relaxed mb-6 flex-grow">
               La forma más rápida de contactarnos. Escribinos y te respondemos en el día.
             </p>
-            <GlowButton href="https://wa.me/5492994000000" external>
+            <GlowButton href="https://wa.me/5492984394286" external>
               <MessageCircle size={20} />
               Escribinos por WhatsApp
             </GlowButton>
