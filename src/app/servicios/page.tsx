@@ -31,7 +31,7 @@ const services = [
       "Integración con herramientas que ya usás",
       "Permisos por rol para cada usuario de tu equipo",
     ],
-    relatedLink: { label: "Ver soluciones en producción", href: "/productos/soluciones", colorClass: "text-primary" },
+    relatedLink: { label: "Consultá por tu plataforma", href: "/contacto", colorClass: "text-primary" },
   },
   {
     icon: Cpu,
@@ -62,10 +62,10 @@ export default function ServiciosPage() {
           transition={{ duration: 0.6, ease }}
           className="max-w-3xl mb-20"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 tracking-tight">
             Servicios
           </h1>
-          <p className="text-xl text-white/40 leading-relaxed">
+          <p className="text-xl text-white/70 leading-relaxed">
             Construimos lo que tu negocio necesita para operar mejor.
             Desde un sitio web hasta una plataforma completa con inteligencia artificial.
           </p>
@@ -90,11 +90,11 @@ export default function ServiciosPage() {
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
                       <Icon size={24} className="text-primary" />
                     </div>
-                    <h2 className="text-2xl md:text-3xl font-bold text-white">
+                    <h2 className="text-2xl md:text-3xl font-display font-bold text-white">
                       {service.title}
                     </h2>
                   </div>
-                  <p className="text-white/40 text-base md:text-lg leading-relaxed mb-4">
+                  <p className="text-white/65 text-base md:text-lg leading-relaxed mb-4">
                     {service.description}
                   </p>
                   <Link
@@ -107,14 +107,14 @@ export default function ServiciosPage() {
 
                 {/* Right: details */}
                 <div className="p-6 md:p-8 rounded-xl bg-muted border border-border">
-                  <h3 className="text-sm font-semibold text-white/30 uppercase tracking-wider mb-5">
+                  <h3 className="text-sm font-semibold text-white/50 uppercase tracking-wider mb-5">
                     Qué incluye
                   </h3>
                   <ul className="space-y-3">
                     {service.details.map((detail) => (
                       <li key={detail} className="flex items-start gap-3">
                         <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                        <span className="text-white/50 text-sm leading-relaxed">{detail}</span>
+                        <span className="text-white/75 text-sm leading-relaxed">{detail}</span>
                       </li>
                     ))}
                   </ul>
@@ -132,7 +132,7 @@ export default function ServiciosPage() {
           transition={{ duration: 0.6, ease }}
           className="mt-24 text-center"
         >
-          <p className="text-white/40 mb-6 text-lg">
+          <p className="text-white/70 mb-6 text-lg">
             ¿Tenés un proyecto en mente? Contanos y te armamos una propuesta.
           </p>
           <Link

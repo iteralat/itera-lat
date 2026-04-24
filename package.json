@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "kill-port 3005 && next dev -p 3005",
+    "dev": "fuser -k 3005/tcp 2>/dev/null; sleep 0.3; next dev -p 3005",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

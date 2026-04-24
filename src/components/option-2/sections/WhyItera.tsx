@@ -46,7 +46,7 @@ export function WhyItera() {
           transition={{ duration: 0.6, ease: EASE }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 tracking-tight">
             Por qué{" "}
             <span style={{ backgroundImage: "linear-gradient(to right, #FF3C00, #FF6A00)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               ÍTERA

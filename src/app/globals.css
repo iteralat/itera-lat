@@ -21,7 +21,10 @@
   --color-muted: var(--muted);
   --color-elevated: var(--elevated);
   --color-border: var(--border);
-  --font-sans: var(--font-poppins);
+  /* Inter para body, UI y párrafos — optimizada para pantalla */
+  --font-sans: var(--font-inter);
+  /* Poppins para headings y brand moments — carga display */
+  --font-display: var(--font-poppins);
 }
 
 body {

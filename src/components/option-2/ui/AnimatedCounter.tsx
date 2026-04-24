@@ -50,7 +50,7 @@ export function AnimatedCounter({
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="text-center"
     >
-      <div className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-primary to-primary-soft bg-clip-text text-transparent">
+      <div className="text-4xl md:text-5xl lg:text-6xl font-display font-bold bg-gradient-to-r from-primary to-primary-soft bg-clip-text text-transparent">
         {prefix}
         {count}
         {suffix}

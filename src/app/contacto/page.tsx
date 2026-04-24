@@ -33,7 +33,7 @@ export default function ContactoPage() {
           transition={{ duration: 0.6, ease }}
           className="max-w-3xl mb-16"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 tracking-tight">
             Contacto
           </h1>
           <p className="text-xl text-white/60 leading-relaxed">

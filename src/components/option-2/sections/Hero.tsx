@@ -27,7 +27,7 @@ export function Hero() {
                 </span>
               </div>
 
-              <h1 className="text-[2.5rem] md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] mb-6 text-white">
+              <h1 className="text-[2.5rem] md:text-5xl lg:text-6xl font-display font-bold tracking-tight leading-[1.08] mb-6 text-white">
                 Soluciones que
                 <br />
                 <span style={{ backgroundImage: "linear-gradient(to right, #FF3C00, #FF6A00)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontFamily: "var(--font-poppins)" }}>
@@ -73,7 +73,7 @@ export function Hero() {
             />
             <DeviceMockup
               desktopSrc="/images/portfolio/screenshot-iteralex.webp"
-              laptopSrc="/images/portfolio/screenshot-iterashop.png"
+              laptopSrc="/images/portfolio/screenshot-shopear.png"
               mobileSrc="/images/portfolio/screenshot-linktree-itera.png"
               alt="Proyectos ÍTERA"
               priority

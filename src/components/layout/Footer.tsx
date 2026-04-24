@@ -49,9 +49,6 @@ export function Footer() {
                 <Link href="/productos/sitios-web" className="text-zinc-400 hover:text-white transition-colors">Sitios Web</Link>
               </li>
               <li>
-                <Link href="/productos/soluciones" className="text-zinc-400 hover:text-white transition-colors">Soluciones</Link>
-              </li>
-              <li>
                 <Link href="/productos/saas" className="text-zinc-400 hover:text-white transition-colors">SaaS</Link>
               </li>
             </ul>

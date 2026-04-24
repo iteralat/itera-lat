@@ -25,7 +25,7 @@ export interface BaseProduct {
 // --- TIPOS DERIVADOS ---
 
 export interface ProductItem extends BaseProduct {
-  category: "saas" | "standalone";
+  category: "saas";
   coverLine: string;
   features: string[];
   status: string;
@@ -35,6 +35,20 @@ export interface ProductItem extends BaseProduct {
   /** Subdominio de la landing standalone */
   subdomain?: string;
   caseStudy?: CaseStudy;
+  /** Info rápida para sidebar (tipo, modelo, pricing, etc) — opcional */
+  quickFacts?: { label: string; value: string }[];
+  /** Demos públicas live — para SaaS multi-tenant. Se muestran como widget en sidebar */
+  liveDemos?: { name: string; niche: string; url: string }[];
+  /** Párrafos extendidos para la intro — opcional, si no va solo description */
+  longDescription?: string[];
+  /** Sección "Para quién lo pensamos" */
+  forWhom?: string;
+  /** Sección "Por qué lo creamos" */
+  rationale?: string;
+  /** Pilares del producto (cómo lo resolvimos) */
+  pillars?: { title: string; body: string }[];
+  /** Features agrupadas por área. Si existen, reemplazan al flat `features` en el detail */
+  featureGroups?: { title: string; items: string[]; upcoming?: boolean }[];
 }
 
 export interface WebItem extends BaseProduct {
@@ -48,6 +62,122 @@ export interface WebItem extends BaseProduct {
 // --- SAAS ---
 
 export const saasProducts: ProductItem[] = [
+  {
+    id: "shopear",
+    slug: "shopear",
+    category: "saas",
+    productName: "Shopear",
+    tagline: "Catálogo online con checkout por WhatsApp",
+    coverLine: "Tu catálogo online en horas, pedidos directo a WhatsApp.",
+    description: "Plataforma SaaS multi-tenant para comercios que ya venden por WhatsApp y no quieren pasarelas de pago ni comisiones por venta. Convierte su presencia en un catálogo profesional navegable, manteniendo el cierre en el mismo WhatsApp que sus clientes ya usan.",
+    longDescription: [
+      "Tus clientes navegan tu catálogo, arman el pedido y te escriben por WhatsApp para cerrarlo. Sin pasarela de pagos, sin comisiones por venta, sin forzar a nadie a pagar con tarjeta. Vos cobrás como siempre lo hiciste: transferencia, efectivo, link de Mercado Pago — lo que uses.",
+      "Es una plataforma multi-tenant con trial de 14 días sin tarjeta. Cada tienda corre en su propio subdominio (tunegocio.shope.ar) o en dominio propio si se activa el plan anual. El admin está diseñado para que cualquiera pueda usarlo — si sabés subir una foto a Instagram, sabés administrar tu tienda.",
+    ],
+    forWhom: "Desde el comerciante que recién empieza a digitalizar y necesita pasar del PDF a una tienda real, hasta quien ya tiene su negocio online andando y se cansó de responder '¿cuánto sale esto?' por WhatsApp todo el día. Los rubros que validamos primero: indumentaria, joyería, tecnología, vinoteca, ferretería, decoración, bazar y calzado. Explícitamente fuera del target: gastronomía/delivery (ese rubro ya tiene jugadores fuertes) y marketplaces multi-vendedor.",
+    rationale: "El ecommerce tradicional está pensado para negocios que cobran con tarjeta. Pero en Argentina y buena parte de LatAm, muchísima gente vende perfecto por WhatsApp y cobra por transferencia o en persona — no necesitan integrar Mercado Pago ni perder 3-5% de comisión por transacción. Lo que les faltaba era un catálogo profesional, navegable y administrable que deje de depender de fotos en Stories o listas de texto. Shopear cubre ese hueco: presencia digital seria con el mismo flujo de cierre que ya conocen. Priorizamos que la plataforma fuera usable sin manual, pero que también tuviera profundidad para quien quiera meterse más — filtros custom por rubro, analytics first-party, CMS per-tienda, dominio propio.",
+    pillars: [
+      {
+        title: "Catálogo hecho a medida de cada rubro",
+        body: "Grid navegable con filtros dinámicos que vos definís: metal y piedra para joyería, talle y color para ropa, añada y varietal para vinos. Ficha de producto con galería, descripción y los campos específicos que tu negocio necesita.",
+      },
+      {
+        title: "Checkout por WhatsApp, sin pasarelas ni comisiones",
+        body: "Tu cliente arma el carrito, completa nombre y teléfono, y el pedido se envía por WhatsApp listo para cerrar. Cobrás como siempre: transferencia, efectivo, link de Mercado Pago. Shopear no toma un peso de la venta.",
+      },
+      {
+        title: "Panel admin sin jerga técnica",
+        body: "Productos, categorías, clientes, caja, consultas, analytics y contenido institucional — todo desde un solo lugar. Pensado para el que migra de un PDF tanto como para el que ya tiene métricas pintadas en otro lado.",
+      },
+      {
+        title: "IA que acompaña el diseño visual",
+        body: "Limpieza automática de fotos de producto con fondo estudio, generación de descripciones con IA y biblioteca de banners personalizables. Para que tu tienda luzca profesional sin tener que contratar fotógrafo ni diseñador gráfico.",
+      },
+    ],
+    features: [
+      "Catálogo con categorías y filtros",
+      "Checkout directo a WhatsApp",
+      "Panel admin completo",
+      "Caja integrada",
+      "Consultas y leads",
+      "Analytics por producto",
+    ],
+    featureGroups: [
+      {
+        title: "Catálogo",
+        items: [
+          "Grid navegable con categorías y etiquetas",
+          "Filtros dinámicos por rubro (vos definís los atributos)",
+          "Ficha de producto con galería y campos custom",
+          "Búsqueda interna",
+          "Modo mantenimiento (pausar sin perder la URL)",
+        ],
+      },
+      {
+        title: "Checkout",
+        items: [
+          "Checkout directo a WhatsApp con pedido armado",
+          "Sin pasarela de pago, sin comisiones por venta",
+          "Cierre por transferencia, efectivo o link manual de Mercado Pago",
+          "Consultas pre-venta por WhatsApp desde la ficha",
+          "QR descargable de la tienda",
+        ],
+      },
+      {
+        title: "Panel admin",
+        items: [
+          "Gestión de productos, categorías y etiquetas",
+          "Caja integrada con ingresos, egresos y balance mensual",
+          "CRM de clientes con ficha comercial",
+          "Pedidos con estados y seguimiento",
+          "Cupones y descuentos",
+          "Analytics first-party por producto (sin Google intermediando)",
+          "Miembros y permisos",
+        ],
+      },
+      {
+        title: "Branding e identidad",
+        items: [
+          "Paleta y tipografía editables",
+          "Hero banner y barra de anuncios",
+          "CMS per-tienda (home, sobre nosotros, contacto)",
+          "Subdominio tunegocio.shope.ar o dominio propio",
+          "SEO y sitemap automáticos",
+        ],
+      },
+      {
+        title: "IA integrada",
+        upcoming: true,
+        items: [
+          "Limpieza automática de fotos de producto (fondo estudio)",
+          "Generación de descripciones de producto con IA",
+          "Biblioteca de banners prefab editables",
+        ],
+      },
+    ],
+    tags: ["Next.js", "React", "PostgreSQL", "Prisma"],
+    status: "En producción",
+    screenshot: "/images/portfolio/screenshot-shopear.png",
+    screenshots: [
+      "/images/plataformas/shopear-dashboard.png",
+      "/images/plataformas/shopear-demo-1.png",
+      "/images/plataformas/shopear-demo-2.png",
+      "/images/plataformas/shopear-demo-3.png",
+      "/images/plataformas/shopear-joyeria.png",
+    ],
+    adopters: [],
+    quickFacts: [
+      { label: "Tipo", value: "SaaS multi-tenant" },
+      { label: "Modelo", value: "Suscripción" },
+      { label: "Trial", value: "14 días sin tarjeta" },
+      { label: "Desde", value: "$22.000 ARS/mes" },
+    ],
+    liveDemos: [
+      { name: "iStore BA", niche: "Tecnología Apple", url: "https://apple.shope.ar" },
+      { name: "Lumière Joyas", niche: "Joyería", url: "https://joyeria.shope.ar" },
+    ],
+    externalUrl: "https://shope.ar",
+  },
   {
     id: "iteralex",
     slug: "iteralex",
@@ -99,86 +229,6 @@ export const saasProducts: ProductItem[] = [
   },
 ];
 
-// --- STANDALONE ---
-
-export const standaloneProducts: ProductItem[] = [
-  {
-    id: "iteradesk",
-    slug: "iteradesk",
-    category: "standalone",
-    productName: "IteraDesk",
-    tagline: "Sistema de gestion para negocios B2B",
-    coverLine: "De planillas y cuadernos a operacion digitalizada en semanas.",
-    description: "Productos, ventas, cotizador, cuenta corriente, repartos y estadisticas en un solo lugar. Ya funciona en empresas reales.",
-    features: [
-      "Productos con stock en tiempo real",
-      "Cotizador con listas de precio automaticas",
-      "Ventas con pagos parciales",
-      "Cuenta corriente con FIFO",
-      "Estadisticas y reportes",
-    ],
-    tags: ["Laravel", "React", "Inertia.js", "PostgreSQL"],
-    status: "En produccion",
-    screenshot: "/images/plataformas/itera-desk.png",
-    adopters: [{ name: "Alquimica" }],
-    externalUrl: "https://desk.itera.lat",
-    subdomain: "desk",
-  },
-  {
-    id: "iteralink",
-    slug: "iteralink",
-    category: "standalone",
-    productName: "IteraLink",
-    tagline: "Presencia digital completa, administrable sin codigo",
-    coverLine: "Tu negocio en un link, sin tocar codigo.",
-    description: "Mas que un Linktree, menos que un ecommerce. Botones con modales informativos, galeria de fotos, banners generados con IA, QR descargable y analytics — todo desde un panel admin con preview en tiempo real.",
-    features: [
-      "Botones con modales: texto, tabla, pasos, FAQ, mapa",
-      "Galeria de fotos con lightbox",
-      "Banners generados con IA",
-      "QR descargable + tarjeta imprimible",
-      "SEO completo con preview en vivo",
-      "Analytics de visitas y clicks",
-    ],
-    tags: ["Next.js", "React", "PostgreSQL", "Prisma"],
-    status: "En produccion",
-    screenshot: "/images/plataformas/itera-link-2.png",
-    screenshots: [
-      "/images/plataformas/itera-link-3.png",
-      "/images/plataformas/itera-link-4.png",
-      "/images/plataformas/itera-link-1.png",
-    ],
-    adopters: [{ name: "Alquimica" }],
-    externalUrl: "https://link.itera.lat",
-    subdomain: "link",
-  },
-  {
-    id: "iterashop",
-    slug: "iterashop",
-    category: "standalone",
-    productName: "IteraShop",
-    tagline: "Catalogo online con checkout por WhatsApp",
-    coverLine: "Tu catalogo online en horas, pedidos directo a WhatsApp.",
-    description: "Tus clientes eligen, arman el pedido y te escriben directo. Sin pasarela de pagos, sin comisiones. Administrable desde un panel.",
-    features: [
-      "Catalogo con categorias y filtros",
-      "Checkout directo a WhatsApp",
-      "Panel admin completo",
-      "Caja integrada",
-      "Consultas y leads",
-      "Analytics por producto",
-    ],
-    tags: ["Next.js", "React", "PostgreSQL", "Prisma"],
-    status: "En produccion",
-    screenshot: "/images/portfolio/screenshot-iterashop.png",
-    adopters: [{ name: "Abundancia Hogar" }],
-    externalUrl: "https://shop.itera.lat",
-    subdomain: "shop",
-  },
-];
-
-// internalProducts eliminado — Itera Estudio movido a saasProducts
-
 // --- SITIOS WEB ---
 
 export const websites: WebItem[] = [
@@ -225,10 +275,8 @@ export const websites: WebItem[] = [
 
 // --- HELPERS ---
 
-// Helper: todos los productos públicos
-export const allProducts: ProductItem[] = [...saasProducts, ...standaloneProducts];
+export const allProducts: ProductItem[] = [...saasProducts];
 
-// Helper: sitios web destacados
 export const featuredWebsites: WebItem[] = websites.filter((w) => w.featured);
 
 // Backward compat alias

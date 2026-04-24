@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "SaaS",
   description:
-    "Productos de software por suscripción. Siempre actualizados, con soporte incluido y escalables. IteraLex, Itera Estudio y más.",
+    "Productos de software por suscripción. Siempre actualizados, con soporte incluido y escalables. Shopear, IteraLex, Itera Estudio.",
   alternates: { canonical: "/productos/saas" },
 };
 

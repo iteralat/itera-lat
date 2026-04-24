@@ -36,7 +36,7 @@ export function Process() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-14"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
             Cómo trabajamos
           </h2>
           <p className="text-zinc-400 max-w-xl mx-auto">

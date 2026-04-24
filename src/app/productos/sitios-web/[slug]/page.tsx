@@ -43,21 +43,22 @@ export default async function WebCasePage({ params }: { params: Promise<{ slug: 
           currentColor="text-primary"
         />
 
-        <div className="mt-8 mb-8">
+        <div className="mt-10 mb-10">
           <PlatformViewer
             productName={site.productName}
             screenshot={site.screenshot}
             screenshots={site.screenshots}
+            externalUrl={site.url}
           />
         </div>
 
-        <h1 className="text-3xl md:text-4xl font-bold mb-2">{site.productName}</h1>
-        <p className="text-white/40 text-lg mb-2">{site.tagline}</p>
-        <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-primary/10 border border-primary/20 text-primary mb-8">
+        <span className="inline-block px-3 py-1 text-[11px] font-bold uppercase tracking-wider rounded-full bg-primary/15 border border-primary/30 text-primary mb-4">
           {site.niche}
         </span>
+        <h1 className="text-3xl md:text-5xl font-display font-bold mb-3 tracking-tight">{site.productName}</h1>
+        <p className="text-white/75 text-lg md:text-xl mb-8 font-medium">{site.tagline}</p>
 
-        <p className="text-white/50 leading-relaxed max-w-3xl mb-10">{site.description}</p>
+        <p className="text-white/70 text-base md:text-lg leading-relaxed max-w-3xl mb-10">{site.description}</p>
 
         {site.caseStudy && (
           <div className="mb-10">

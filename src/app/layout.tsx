@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
@@ -7,10 +7,16 @@ import { JsonLd } from "@/components/shared/JsonLd";
 import { GoogleAnalytics } from "@/components/shared/GoogleAnalytics";
 import "./globals.css";
 
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://itera.lat";
@@ -97,7 +103,7 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://www.googletagmanager.com" />
       </head>
-      <body className={`${poppins.variable} font-sans antialiased selection:bg-primary selection:text-white`}>
+      <body className={`${inter.variable} ${poppins.variable} font-sans antialiased selection:bg-primary selection:text-white`}>
         <GoogleAnalytics />
         <JsonLd data={organizationLd} />
         <JsonLd data={websiteLd} />

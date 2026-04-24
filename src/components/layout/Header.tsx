@@ -15,12 +15,6 @@ const productCategories = [
     colorClass: "text-primary",
   },
   {
-    name: "Soluciones",
-    href: "/productos/soluciones",
-    description: "Software a medida para tu negocio",
-    colorClass: "text-primary",
-  },
-  {
     name: "SaaS",
     href: "/productos/saas",
     description: "Plataformas listas para usar",
@@ -201,10 +195,11 @@ export function Header() {
         </div>
       </header>
 
-      {/* Mobile toggle — outside header so it stays above the overlay */}
+      {/* Mobile toggle — outside header so it stays above the overlay.
+          Height matches the header (80px sin scroll, 64px con scroll) para alinear con el logo. */}
       <button
-        className="md:hidden fixed top-0 right-0 z-[60] text-white active:scale-90 transition-transform px-6 py-6"
-        style={{ top: isScrolled ? "0.5rem" : "1rem" }}
+        className="md:hidden fixed top-0 right-0 z-[60] text-white active:scale-90 transition-[height] duration-300 px-6 flex items-center justify-center"
+        style={{ height: isScrolled ? "64px" : "80px" }}
         onClick={() => {
           setIsMobileMenuOpen(!isMobileMenuOpen);
           if (isMobileMenuOpen) setIsMobileProductsOpen(false);

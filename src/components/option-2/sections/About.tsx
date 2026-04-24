@@ -13,7 +13,7 @@ export function About() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-3xl mx-auto"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-6">
             Quiénes somos
           </h2>
           <p className="text-zinc-400 leading-relaxed text-base md:text-lg mb-6">

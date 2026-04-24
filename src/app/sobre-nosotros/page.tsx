@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Zap, TrendingUp, Headphones, Wrench, ArrowRight } from "lucide-react";
+import { Code2, MessageCircle, Layers, Wrench, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 const steps = [
@@ -27,21 +27,21 @@ const steps = [
   },
 ];
 
-const reasons = [
+const principles = [
   {
-    icon: Zap,
-    title: "Velocidad real",
-    description: "Entregas rápidas sin sacrificar calidad. Equipo chico, decisiones directas, cero vueltas.",
+    icon: Code2,
+    title: "Código propio, no templates",
+    description: "Cada producto se construye desde cero para tu caso. Sin plantillas recicladas ni armados apurados con no-code.",
   },
   {
-    icon: TrendingUp,
-    title: "Crece con vos",
-    description: "Lo que construimos hoy soporta el crecimiento de mañana. No vas a tener que empezar de cero.",
+    icon: MessageCircle,
+    title: "Dev directo, sin intermediarios",
+    description: "Hablás con quien escribe el código. Cero PMs, cero vueltas. Si hay que decidir algo, se decide en el momento.",
   },
   {
-    icon: Headphones,
-    title: "Soporte continuo",
-    description: "No desaparecemos después del lanzamiento. Acompañamiento, iteraciones y mejoras constantes.",
+    icon: Layers,
+    title: "Construido para durar",
+    description: "Lo que armamos hoy tiene que servir dentro de dos años. Priorizamos decisiones técnicas sobre atajos inmediatos.",
   },
 ];
 
@@ -58,20 +58,20 @@ export default function SobreNosotrosPage() {
           transition={{ duration: 0.6, ease }}
           className="max-w-3xl mb-24"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 tracking-tight">
             Sobre nosotros
           </h1>
-          <p className="text-xl text-white/40 leading-relaxed mb-6">
+          <p className="text-xl text-white/75 leading-relaxed mb-6">
             Somos un estudio de desarrollo web con base en la Patagonia, Argentina.
             Combinamos diseño, código y herramientas de inteligencia artificial
             para construir productos digitales que funcionan desde el día uno.
           </p>
-          <p className="text-white/30 text-base leading-relaxed mb-6">
+          <p className="text-white/60 text-base leading-relaxed mb-6">
             Fundado por devs, no por vendedores. Cada proyecto tiene atención
             directa del equipo que lo construye. Trabajamos con vos — sin
             intermediarios, sin sorpresas, sin letra chica.
           </p>
-          <p className="text-white/30 text-base leading-relaxed">
+          <p className="text-white/60 text-base leading-relaxed">
             Además de proyectos para clientes, construimos nuestras propias
             herramientas internas: sistemas de monitoreo, gestión operativa y
             automatización que usamos todos los días. Esa experiencia de producto
@@ -87,10 +87,10 @@ export default function SobreNosotrosPage() {
           transition={{ duration: 0.6, ease }}
           className="mb-24"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
             Cómo trabajamos
           </h2>
-          <p className="text-white/40 max-w-2xl mb-12">
+          <p className="text-white/65 max-w-2xl mb-12">
             Un proceso simple y transparente, sin sorpresas.
           </p>
 
@@ -110,7 +110,7 @@ export default function SobreNosotrosPage() {
                 <h3 className="text-lg font-semibold text-white mb-2">
                   {step.title}
                 </h3>
-                <p className="text-sm text-white/40 leading-relaxed">
+                <p className="text-sm text-white/70 leading-relaxed">
                   {step.description}
                 </p>
               </motion.div>
@@ -118,7 +118,7 @@ export default function SobreNosotrosPage() {
           </div>
         </motion.div>
 
-        {/* Por qué ÍTERA */}
+        {/* Manifiesto */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -126,19 +126,19 @@ export default function SobreNosotrosPage() {
           transition={{ duration: 0.6, ease }}
           className="mb-24"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Por qué ÍTERA
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
+            Manifiesto
           </h2>
-          <p className="text-white/40 max-w-2xl mb-12">
-            Un estudio boutique donde cada proyecto tiene atención directa del equipo que lo construye.
+          <p className="text-white/65 max-w-2xl mb-12">
+            Cómo encaramos cada proyecto. Sin rodeos.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {reasons.map((reason, i) => {
-              const Icon = reason.icon;
+            {principles.map((principle, i) => {
+              const Icon = principle.icon;
               return (
                 <motion.div
-                  key={reason.title}
+                  key={principle.title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -149,10 +149,10 @@ export default function SobreNosotrosPage() {
                     <Icon size={24} className="text-primary" />
                   </div>
                   <h3 className="text-lg font-semibold text-white mb-2">
-                    {reason.title}
+                    {principle.title}
                   </h3>
-                  <p className="text-sm text-white/40 leading-relaxed">
-                    {reason.description}
+                  <p className="text-sm text-white/70 leading-relaxed">
+                    {principle.description}
                   </p>
                 </motion.div>
               );
@@ -173,16 +173,16 @@ export default function SobreNosotrosPage() {
               <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
                 <Wrench size={24} className="text-primary" />
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-white">
+              <h2 className="text-2xl md:text-3xl font-display font-bold text-white">
                 Herramientas propias
               </h2>
             </div>
-            <p className="text-white/40 text-base md:text-lg leading-relaxed max-w-3xl mb-4">
+            <p className="text-white/75 text-base md:text-lg leading-relaxed max-w-3xl mb-4">
               No solo construimos para otros. Tenemos nuestras propias plataformas
               en producción: sistemas de monitoreo, gestión de operaciones y
               herramientas de automatización que usamos todos los días.
             </p>
-            <p className="text-white/30 text-sm leading-relaxed max-w-3xl">
+            <p className="text-white/60 text-sm leading-relaxed max-w-3xl">
               Cuando un cliente nos pide algo, ya pasamos por los mismos problemas
               con nuestros propios productos. Eso se nota en las decisiones de diseño,
               en la estabilidad y en lo rápido que podemos iterar.
@@ -198,7 +198,7 @@ export default function SobreNosotrosPage() {
           transition={{ duration: 0.6, ease }}
           className="text-center"
         >
-          <p className="text-white/40 mb-6 text-lg">
+          <p className="text-white/70 mb-6 text-lg">
             ¿Querés saber más o tenés un proyecto en mente?
           </p>
           <Link

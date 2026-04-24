@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 import { JsonLd } from "./JsonLd";
 
 interface BreadcrumbItem {
@@ -34,17 +35,25 @@ export function Breadcrumb({ items, current, currentColor = "text-primary" }: Br
           itemListElement: ldItems,
         }}
       />
-      <nav className="flex items-center gap-2 text-sm text-white/30">
+      <nav
+        aria-label="Breadcrumb"
+        className="flex items-center gap-1.5 text-sm md:text-base font-medium"
+      >
         {items.map((item, i) => (
-          <span key={item.href} className="flex items-center gap-2">
-            {i > 0 && <span>/</span>}
-            <Link href={item.href} className="hover:text-white/60 transition-colors">
+          <span key={item.href} className="flex items-center gap-1.5">
+            {i > 0 && (
+              <ChevronRight size={14} className="text-white/30 shrink-0" aria-hidden="true" />
+            )}
+            <Link
+              href={item.href}
+              className="text-white/65 hover:text-white transition-colors"
+            >
               {item.label}
             </Link>
           </span>
         ))}
-        <span>/</span>
-        <span className={currentColor}>{current}</span>
+        <ChevronRight size={14} className="text-white/30 shrink-0" aria-hidden="true" />
+        <span className={`${currentColor} font-semibold`}>{current}</span>
       </nav>
     </>
   );

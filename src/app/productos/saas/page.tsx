@@ -45,7 +45,7 @@ export default function SaaSPage() {
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mt-6 mb-16"
         >
           <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+            <h1 className="text-4xl md:text-5xl font-display font-bold tracking-tight mb-4">
               SaaS
             </h1>
             <p className="text-lg text-white/40 leading-relaxed">
