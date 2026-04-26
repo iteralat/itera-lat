@@ -26,7 +26,7 @@
 - Reestructuración en 3 categorías: Sitios Web, Soluciones, SaaS — Abr 2026
 - Overview /productos con 3 CategoryCards glassmorphism — Abr 2026
 - Landing /productos/sitios-web con galería filtrable (NicheFilter) y ScreenshotViewer modal — Abr 2026
-- Landing /productos/soluciones con cards de IteraDesk, IteraLink, IteraShop — Abr 2026
+- Landing /productos/soluciones con cards de IteraDesk, Linkea2, IteraShop — Abr 2026
 - Landing /productos/saas con sección educativa y cards de IteraLex, Itera Estudio — Abr 2026
 - Fichas de producto por categoría (/productos/{cat}/[slug]) con sidebar sticky — Abr 2026
 - Página de caso web destacado (/productos/sitios-web/[slug]) — Abr 2026

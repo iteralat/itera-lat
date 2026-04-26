@@ -94,7 +94,7 @@ Para no romper URLs existentes:
 |-------|-------|
 | `/productos/iteralex` | `/productos/saas/iteralex` |
 | `/productos/iteradesk` | `/productos/soluciones/iteradesk` |
-| `/productos/iteralink` | `/productos/soluciones/iteralink` |
+| `/productos/linkea2` | `/productos/soluciones/linkea2` |
 | `/productos/iterashop` | `/productos/soluciones/iterashop` |
 
 Configurar en `next.config.ts` → `redirects()`.

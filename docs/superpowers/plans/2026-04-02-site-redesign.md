@@ -210,7 +210,7 @@ git commit -m "ui: agregar dropdown de categorías en nav Productos"
 
 - [ ] **Step 1: Replace product links**
 
-Replace individual product links (IteraDesk, IteraLink, etc.) with category links:
+Replace individual product links (IteraDesk, Linkea2, etc.) with category links:
 
 ```typescript
 const productLinks = [
@@ -986,7 +986,7 @@ async redirects() {
     // Product slug migrations
     { source: "/productos/iteralex", destination: "/productos/saas/iteralex", permanent: true },
     { source: "/productos/iteradesk", destination: "/productos/soluciones/iteradesk", permanent: true },
-    { source: "/productos/iteralink", destination: "/productos/soluciones/iteralink", permanent: true },
+    { source: "/productos/linkea2", destination: "/productos/soluciones/linkea2", permanent: true },
     { source: "/productos/iterashop", destination: "/productos/soluciones/iterashop", permanent: true },
   ];
 },

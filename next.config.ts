@@ -39,7 +39,7 @@ const nextConfig: NextConfig = {
       { source: "/productos/iteralex", destination: "/productos/saas/iteralex", permanent: true },
       { source: "/productos/itera-estudio", destination: "/productos/saas/itera-estudio", permanent: true },
       { source: "/productos/iteradesk", destination: "/productos/soluciones/iteradesk", permanent: true },
-      { source: "/productos/iteralink", destination: "/productos/soluciones/iteralink", permanent: true },
+      { source: "/productos/linkea2", destination: "/productos/soluciones/linkea2", permanent: true },
       { source: "/productos/iterashop", destination: "/productos/soluciones/iterashop", permanent: true },
     ];
   },
