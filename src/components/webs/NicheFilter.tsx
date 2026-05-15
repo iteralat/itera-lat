@@ -14,7 +14,7 @@ export function NicheFilter({ niches, active, onSelect }: NicheFilterProps) {
         className={`px-4 py-2 rounded-full text-sm font-medium border transition-all ${
           active === null
             ? "bg-primary/10 border-primary/30 text-primary"
-            : "bg-muted border-border text-white/50 hover:text-white hover:border-white/20"
+            : "bg-muted border-border text-white/55 hover:text-white hover:border-white/20"
         }`}
       >
         Todos
@@ -26,7 +26,7 @@ export function NicheFilter({ niches, active, onSelect }: NicheFilterProps) {
           className={`px-4 py-2 rounded-full text-sm font-medium border transition-all ${
             active === niche
               ? "bg-primary/10 border-primary/30 text-primary"
-              : "bg-muted border-border text-white/50 hover:text-white hover:border-white/20"
+              : "bg-muted border-border text-white/55 hover:text-white hover:border-white/20"
           }`}
         >
           {niche}

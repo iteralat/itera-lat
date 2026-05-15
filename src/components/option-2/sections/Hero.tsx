@@ -28,18 +28,17 @@ export function Hero() {
               </div>
 
               <h1 className="text-[2.5rem] md:text-5xl lg:text-6xl font-display font-bold tracking-tight leading-[1.08] mb-6 text-white">
-                Soluciones que
-                <br />
-                <span style={{ backgroundImage: "linear-gradient(to right, #FF3C00, #FF6A00)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontFamily: "var(--font-poppins)" }}>
-                  evolucionan
+                Software que{" "}
+                <span style={{ backgroundImage: "linear-gradient(to right, #F21B10, #FF5421)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontFamily: "var(--font-poppins)" }}>
+                  resuelve
                 </span>
-                <br className="md:hidden" />
-                {" "}con vos.
+                <br />
+                tu operación.
               </h1>
             </div>
 
-            <p className="animate-fade-in-up [animation-delay:100ms] text-lg md:text-xl text-white/70 mb-10 max-w-2xl leading-relaxed">
-              Sitios web, sistemas de gestión y herramientas digitales a medida para negocios <strong className="text-white font-semibold">que quieren crecer.</strong>
+            <p className="animate-fade-in-up [animation-delay:100ms] text-lg md:text-xl text-white/80 mb-10 max-w-2xl leading-relaxed">
+              Sitios, sistemas internos y plataformas a medida para <strong className="text-white font-semibold">PyMEs y empresas que quieren crecer.</strong>
             </p>
 
             <div className="animate-fade-in-up [animation-delay:200ms] flex flex-col sm:flex-row gap-4">
@@ -54,7 +53,7 @@ export function Hero() {
 
             {/* Social proof pill */}
             <div className="animate-fade-in-up [animation-delay:400ms] mt-12">
-              <span className="text-xs italic text-white/40 border border-white/10 rounded-full px-3 py-1.5 cursor-pointer select-none transition-transform duration-200 hover:scale-105">
+              <span className="text-xs italic text-white/55 border border-white/10 rounded-full px-3 py-1.5 cursor-pointer select-none transition-transform duration-200 hover:scale-105">
                 Patagonia → LATAM
               </span>
             </div>

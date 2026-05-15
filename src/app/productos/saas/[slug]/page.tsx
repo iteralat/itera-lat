@@ -68,7 +68,7 @@ export default async function SaaSDetailPage({ params }: { params: Promise<{ slu
                       <dt className="text-xs uppercase tracking-wider text-white/55 font-semibold shrink-0">
                         {fact.label}
                       </dt>
-                      <dd className="text-sm text-white/95 font-medium text-right">
+                      <dd className="text-sm text-white font-medium text-right">
                         {fact.value}
                       </dd>
                     </div>
@@ -96,21 +96,21 @@ export default async function SaaSDetailPage({ params }: { params: Promise<{ slu
                         className="group flex items-center justify-between gap-2 -mx-1.5 px-1.5 py-2 rounded-md hover:bg-white/[0.04] transition-colors"
                       >
                         <div className="min-w-0 flex items-baseline gap-1.5 flex-wrap">
-                          <span className="text-sm text-white/95 font-semibold group-hover:text-primary transition-colors">
+                          <span className="text-sm text-white font-semibold group-hover:text-primary transition-colors">
                             {demo.name}
                           </span>
                           <span className="text-white/25">·</span>
-                          <span className="text-xs text-white/60">{demo.niche}</span>
+                          <span className="text-xs text-white/80">{demo.niche}</span>
                         </div>
                         <ExternalLink
                           size={13}
-                          className="text-white/40 group-hover:text-primary shrink-0 transition-colors"
+                          className="text-white/55 group-hover:text-primary shrink-0 transition-colors"
                         />
                       </a>
                     </li>
                   ))}
                 </ul>
-                <p className="text-xs text-white/50 mt-3 leading-relaxed italic">
+                <p className="text-xs text-white/55 mt-3 leading-relaxed italic">
                   Sumamos más demos a medida que se relanzan.
                 </p>
               </div>
@@ -124,7 +124,7 @@ export default async function SaaSDetailPage({ params }: { params: Promise<{ slu
                 </div>
                 <ul className="space-y-1.5">
                   {product.adopters.map((a) => (
-                    <li key={a.name} className="text-sm text-white/90 font-medium">
+                    <li key={a.name} className="text-sm text-white font-medium">
                       {a.url ? (
                         <a
                           href={a.url}
@@ -148,7 +148,7 @@ export default async function SaaSDetailPage({ params }: { params: Promise<{ slu
             <div className="hidden lg:block px-1">
               <div className="flex items-center gap-2 mb-2.5">
                 <Cpu size={13} className="text-white/55" />
-                <div className="text-[11px] uppercase tracking-widest text-white/60 font-semibold">
+                <div className="text-[11px] uppercase tracking-widest text-white/80 font-semibold">
                   Construido con
                 </div>
               </div>
@@ -156,7 +156,7 @@ export default async function SaaSDetailPage({ params }: { params: Promise<{ slu
                 {product.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-2 py-0.5 text-[11px] font-medium text-white/65"
+                    className="px-2 py-0.5 text-[11px] font-medium text-white/80"
                   >
                     {tag}
                   </span>
@@ -187,7 +187,7 @@ export default async function SaaSDetailPage({ params }: { params: Promise<{ slu
                 <span className="px-3 py-1 text-[11px] font-bold uppercase tracking-wider bg-primary/15 border border-primary/30 text-primary rounded-full">
                   SaaS
                 </span>
-                <span className="px-3 py-1 text-[11px] font-semibold bg-white/8 border border-white/15 rounded-full text-white/75 inline-flex items-center gap-1.5">
+                <span className="px-3 py-1 text-[11px] font-semibold bg-white/8 border border-white/15 rounded-full text-white/80 inline-flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
                   {product.status}
                 </span>
@@ -195,7 +195,7 @@ export default async function SaaSDetailPage({ params }: { params: Promise<{ slu
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 tracking-tight leading-[1.05]">
                 {product.productName}
               </h1>
-              <p className="text-white/75 text-lg md:text-xl font-medium leading-snug">
+              <p className="text-white/80 text-lg md:text-xl font-medium leading-snug">
                 {product.tagline}
               </p>
             </div>
@@ -206,7 +206,7 @@ export default async function SaaSDetailPage({ params }: { params: Promise<{ slu
                 {product.description}
               </p>
               {product.longDescription?.map((para, i) => (
-                <p key={i} className="text-white/65 text-base md:text-lg leading-relaxed">
+                <p key={i} className="text-white/80 text-base md:text-lg leading-relaxed">
                   {para}
                 </p>
               ))}
@@ -228,7 +228,7 @@ export default async function SaaSDetailPage({ params }: { params: Promise<{ slu
                       Para quién lo pensamos
                     </h2>
                   </div>
-                  <p className="text-white/70 text-base md:text-lg leading-relaxed">
+                  <p className="text-white/80 text-base md:text-lg leading-relaxed">
                     {product.forWhom}
                   </p>
                 </div>
@@ -246,7 +246,7 @@ export default async function SaaSDetailPage({ params }: { params: Promise<{ slu
                       Por qué lo creamos
                     </h2>
                   </div>
-                  <p className="text-white/70 text-base md:text-lg leading-relaxed">
+                  <p className="text-white/80 text-base md:text-lg leading-relaxed">
                     {product.rationale}
                   </p>
                 </div>
@@ -278,7 +278,7 @@ export default async function SaaSDetailPage({ params }: { params: Promise<{ slu
                         {pillar.title}
                       </h3>
                     </div>
-                    <p className="text-white/70 text-sm md:text-base leading-relaxed pl-[2.125rem] md:pl-[2.375rem]">
+                    <p className="text-white/80 text-sm md:text-base leading-relaxed pl-[2.125rem] md:pl-[2.375rem]">
                       {pillar.body}
                     </p>
                   </div>
@@ -311,7 +311,7 @@ export default async function SaaSDetailPage({ params }: { params: Promise<{ slu
               {product.featureGroups.map((group, gi) => (
                 <FadeIn key={group.title} delay={0.05 * gi}>
                   <div className="flex items-center gap-3 mb-4">
-                    <h3 className="text-sm uppercase tracking-wider text-white/90 font-bold">
+                    <h3 className="text-sm uppercase tracking-wider text-white font-bold">
                       {group.title}
                     </h3>
                     {group.upcoming && (
@@ -336,7 +336,7 @@ export default async function SaaSDetailPage({ params }: { params: Promise<{ slu
                           className={group.upcoming ? "text-primary/70 mt-0.5 shrink-0" : "text-primary mt-0.5 shrink-0"}
                           strokeWidth={2.5}
                         />
-                        <span className="text-white/85 text-sm leading-relaxed">{item}</span>
+                        <span className="text-white text-sm leading-relaxed">{item}</span>
                       </div>
                     ))}
                   </div>
@@ -356,7 +356,7 @@ export default async function SaaSDetailPage({ params }: { params: Promise<{ slu
                   className="flex items-start gap-3 p-3.5 rounded-lg bg-white/[0.03] border border-white/[0.06] hover:border-primary/20 transition-colors"
                 >
                   <Check size={18} className="text-primary mt-0.5 shrink-0" strokeWidth={2.5} />
-                  <span className="text-white/85 text-sm leading-relaxed">{feature}</span>
+                  <span className="text-white text-sm leading-relaxed">{feature}</span>
                 </div>
               ))}
             </div>

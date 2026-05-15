@@ -24,7 +24,7 @@ const categories = [
     title: "SaaS",
     count: `${saasProducts.length} productos`,
     description:
-      "Software por suscripción. Siempre actualizado, con soporte incluido y listo para usar.",
+      "Productos propios que construimos y mantenemos. La forma más concreta de mostrar qué podemos desarrollar para tu negocio.",
     href: "/productos/saas",
     cta: "Ver productos",
     icon: Sparkles,
@@ -65,7 +65,7 @@ export default function ProductosPage() {
             <span
               className="italic"
               style={{
-                backgroundImage: "linear-gradient(to right, #FF3C00, #FF6A00)",
+                backgroundImage: "linear-gradient(to right, #F21B10, #FF5421)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
@@ -73,7 +73,7 @@ export default function ProductosPage() {
               construimos
             </span>
           </h1>
-          <p className="text-lg text-white/60 leading-relaxed">
+          <p className="text-lg text-white/80 leading-relaxed">
             Productos SaaS en producción y sitios web hechos a medida.
           </p>
         </motion.div>
@@ -118,7 +118,7 @@ export default function ProductosPage() {
                     )}
 
                     <div className="absolute bottom-3 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      <span className="text-white/70 font-medium text-sm">
+                      <span className="text-white/80 font-medium text-sm">
                         {cat.label}
                       </span>
                     </div>
@@ -130,9 +130,9 @@ export default function ProductosPage() {
                       <span className="text-primary font-bold text-2xl">
                         {cat.title}
                       </span>
-                      <span className="text-white/40 text-xs">{cat.count}</span>
+                      <span className="text-white/55 text-xs">{cat.count}</span>
                     </div>
-                    <p className="text-white/60 text-sm leading-relaxed mb-5">
+                    <p className="text-white/80 text-sm leading-relaxed mb-5">
                       {cat.description}
                     </p>
                     <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md text-xs font-semibold uppercase tracking-wider bg-primary/10 border border-primary/20 text-primary group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-300">

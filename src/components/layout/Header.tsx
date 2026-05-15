@@ -53,8 +53,11 @@ export function Header() {
 
   // Close mobile menu on route change (new page is already rendered underneath)
   useEffect(() => {
-    setIsMobileMenuOpen(false);
-    setIsMobileProductsOpen(false);
+    const frame = requestAnimationFrame(() => {
+      setIsMobileMenuOpen(false);
+      setIsMobileProductsOpen(false);
+    });
+    return () => cancelAnimationFrame(frame);
   }, [pathname]);
 
   // Close dropdown on outside click
@@ -155,7 +158,7 @@ export function Header() {
                         <span className={`text-sm font-medium ${cat.colorClass} group-hover:opacity-90`}>
                           {cat.name}
                         </span>
-                        <p className="text-xs text-white/70 mt-0.5 truncate">{cat.description}</p>
+                        <p className="text-xs text-white/80 mt-0.5 truncate">{cat.description}</p>
                       </div>
                     </Link>
                   ))}
@@ -164,7 +167,7 @@ export function Header() {
                     <Link
                       href="/productos"
                       onClick={() => setIsDropdownOpen(false)}
-                      className="text-[11px] text-white/50 hover:text-primary transition-colors"
+                      className="text-[11px] text-white/55 hover:text-primary transition-colors"
                     >
                       Ver todo →
                     </Link>
@@ -184,7 +187,7 @@ export function Header() {
 
             <Link
               href="/contacto"
-              className="text-sm font-semibold bg-primary text-white px-5 py-2.5 rounded-md hover:bg-primary-soft transition-all hover:scale-105 active:scale-95 inline-block shadow-[0_0_15px_rgba(255,60,0,0.25)]"
+              className="text-sm font-semibold bg-primary text-white px-5 py-2.5 rounded-md hover:bg-primary-soft transition-all hover:scale-105 active:scale-95 inline-block shadow-[0_0_15px_rgba(242,27,16,0.25)]"
             >
               Hablemos
             </Link>
@@ -297,7 +300,7 @@ export function Header() {
                         >
                           <Link
                             href={cat.href}
-                            className="text-lg text-white/70 hover:text-primary transition-colors"
+                            className="text-lg text-white/80 hover:text-primary transition-colors"
                           >
                             {cat.name}
                           </Link>
@@ -310,7 +313,7 @@ export function Header() {
                       >
                         <Link
                           href="/productos"
-                          className="text-sm text-white/40 hover:text-primary transition-colors"
+                          className="text-sm text-white/55 hover:text-primary transition-colors"
                         >
                           Ver todo →
                         </Link>
@@ -328,7 +331,7 @@ export function Header() {
             >
               <Link
                 href="/contacto"
-                className="inline-block text-lg font-semibold bg-primary text-white px-8 py-3.5 rounded-xl hover:bg-primary-soft transition-colors shadow-[0_0_25px_rgba(255,60,0,0.3)]"
+                className="inline-block text-lg font-semibold bg-primary text-white px-8 py-3.5 rounded-xl hover:bg-primary-soft transition-colors shadow-[0_0_25px_rgba(242,27,16,0.3)]"
               >
                 Hablemos
               </Link>

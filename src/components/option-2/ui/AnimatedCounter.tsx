@@ -55,7 +55,7 @@ export function AnimatedCounter({
         {count}
         {suffix}
       </div>
-      <div className="mt-2 text-sm md:text-base text-zinc-500 font-medium">
+      <div className="mt-2 text-sm md:text-base text-white/55 font-medium">
         {label}
       </div>
     </motion.div>

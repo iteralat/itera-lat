@@ -8,40 +8,40 @@ const steps = [
   {
     number: "01",
     title: "Escuchamos",
-    description: "Arrancamos entendiendo tu negocio, tu equipo y qué problema necesitás resolver. Sin plantillas genéricas.",
+    description: "Empezamos entendiendo tu negocio, tu equipo y el problema que necesitás resolver. Esa primera conversación suele ser la que más define el proyecto.",
   },
   {
     number: "02",
     title: "Proponemos",
-    description: "Te presentamos una solución concreta con alcance, tiempos y costos claros. Sabés qué vas a recibir antes de arrancar.",
+    description: "Armamos una propuesta concreta con alcance, plazos estimados y costos. La idea es que tengas toda la información antes de decidir si avanzamos.",
   },
   {
     number: "03",
     title: "Construimos",
-    description: "Desarrollamos por etapas. Cada semana ves avance real, podés probar y dar feedback sobre lo que estamos armando.",
+    description: "Desarrollamos por etapas, con espacios regulares para revisar lo que está avanzando. Eso permite dar feedback sobre la marcha y ajustar el rumbo si hace falta.",
   },
   {
     number: "04",
     title: "Acompañamos",
-    description: "Después del lanzamiento seguimos. Ajustes, mejoras y soporte para que el producto siga funcionando como el primer día.",
+    description: "Después del lanzamiento seguimos disponibles para ajustes, mejoras y mantenimiento. La idea es acompañar al producto mientras tenga vida útil, no solo hasta el entregable.",
   },
 ];
 
 const principles = [
   {
     icon: Code2,
-    title: "Código propio, no templates",
-    description: "Cada producto se construye desde cero para tu caso. Sin plantillas recicladas ni armados apurados con no-code.",
+    title: "Desarrollo a medida",
+    description: "Cada proyecto se construye adaptado a las necesidades específicas del caso. Preferimos invertir tiempo en entender el problema antes de elegir las herramientas para resolverlo.",
   },
   {
     icon: MessageCircle,
-    title: "Dev directo, sin intermediarios",
-    description: "Hablás con quien escribe el código. Cero PMs, cero vueltas. Si hay que decidir algo, se decide en el momento.",
+    title: "Comunicación cercana",
+    description: "Quienes desarrollan tu proyecto son los mismos con los que conversás durante el proceso. Esa cercanía ayuda a que los detalles operativos y las decisiones técnicas se tomen con contexto completo.",
   },
   {
     icon: Layers,
-    title: "Construido para durar",
-    description: "Lo que armamos hoy tiene que servir dentro de dos años. Priorizamos decisiones técnicas sobre atajos inmediatos.",
+    title: "Pensado para durar",
+    description: "Lo que construimos hoy queremos que siga teniendo sentido en dos o tres años. Por eso preferimos decisiones técnicas fundadas antes que soluciones que solo resuelven lo inmediato.",
   },
 ];
 
@@ -61,21 +61,21 @@ export default function SobreNosotrosPage() {
           <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 tracking-tight">
             Sobre nosotros
           </h1>
-          <p className="text-xl text-white/75 leading-relaxed mb-6">
-            Somos un estudio de desarrollo web con base en la Patagonia, Argentina.
-            Combinamos diseño, código y herramientas de inteligencia artificial
-            para construir productos digitales que funcionan desde el día uno.
+          <p className="text-xl text-white/80 leading-relaxed mb-6">
+            Somos un estudio de desarrollo con base en la Patagonia, Argentina.
+            Combinamos diseño, programación y herramientas de inteligencia
+            artificial para construir productos digitales a medida.
           </p>
-          <p className="text-white/60 text-base leading-relaxed mb-6">
-            Fundado por devs, no por vendedores. Cada proyecto tiene atención
-            directa del equipo que lo construye. Trabajamos con vos — sin
-            intermediarios, sin sorpresas, sin letra chica.
+          <p className="text-white/80 text-base leading-relaxed mb-6">
+            Nos fundaron personas que programan todos los días. Cada proyecto
+            tiene acompañamiento directo del equipo que lo construye, lo que
+            ayuda a que los detalles del camino se entiendan y se cuiden.
           </p>
-          <p className="text-white/60 text-base leading-relaxed">
+          <p className="text-white/80 text-base leading-relaxed">
             Además de proyectos para clientes, construimos nuestras propias
             herramientas internas: sistemas de monitoreo, gestión operativa y
-            automatización que usamos todos los días. Esa experiencia de producto
-            propio es la que llevamos a cada proyecto que encaramos.
+            automatización que usamos todos los días. Esa experiencia de
+            producto propio es la que llevamos a cada proyecto nuevo.
           </p>
         </motion.div>
 
@@ -88,10 +88,11 @@ export default function SobreNosotrosPage() {
           className="mb-24"
         >
           <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
-            Cómo trabajamos
+            Nuestro proceso
           </h2>
-          <p className="text-white/65 max-w-2xl mb-12">
-            Un proceso simple y transparente, sin sorpresas.
+          <p className="text-white/80 max-w-2xl mb-12">
+            El camino que seguimos desde la primera conversación hasta después
+            del lanzamiento.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -110,7 +111,7 @@ export default function SobreNosotrosPage() {
                 <h3 className="text-lg font-semibold text-white mb-2">
                   {step.title}
                 </h3>
-                <p className="text-sm text-white/70 leading-relaxed">
+                <p className="text-sm text-white/80 leading-relaxed">
                   {step.description}
                 </p>
               </motion.div>
@@ -127,10 +128,10 @@ export default function SobreNosotrosPage() {
           className="mb-24"
         >
           <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
-            Manifiesto
+            Cómo trabajamos
           </h2>
-          <p className="text-white/65 max-w-2xl mb-12">
-            Cómo encaramos cada proyecto. Sin rodeos.
+          <p className="text-white/80 max-w-2xl mb-12">
+            Tres principios que guían las decisiones de cada proyecto.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -143,7 +144,7 @@ export default function SobreNosotrosPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.12, ease }}
-                  className="group p-6 md:p-8 rounded-lg bg-muted border border-border hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(255,60,0,0.06)]"
+                  className="group p-6 md:p-8 rounded-lg bg-muted border border-border hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(242,27,16,0.06)]"
                 >
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-5">
                     <Icon size={24} className="text-primary" />
@@ -151,7 +152,7 @@ export default function SobreNosotrosPage() {
                   <h3 className="text-lg font-semibold text-white mb-2">
                     {principle.title}
                   </h3>
-                  <p className="text-sm text-white/70 leading-relaxed">
+                  <p className="text-sm text-white/80 leading-relaxed">
                     {principle.description}
                   </p>
                 </motion.div>
@@ -177,15 +178,17 @@ export default function SobreNosotrosPage() {
                 Herramientas propias
               </h2>
             </div>
-            <p className="text-white/75 text-base md:text-lg leading-relaxed max-w-3xl mb-4">
-              No solo construimos para otros. Tenemos nuestras propias plataformas
-              en producción: sistemas de monitoreo, gestión de operaciones y
-              herramientas de automatización que usamos todos los días.
+            <p className="text-white/80 text-base md:text-lg leading-relaxed max-w-3xl mb-4">
+              No solo construimos para otros. Tenemos nuestras propias
+              plataformas en funcionamiento: sistemas de monitoreo, gestión
+              operativa y herramientas de automatización que usamos todos los
+              días.
             </p>
-            <p className="text-white/60 text-sm leading-relaxed max-w-3xl">
-              Cuando un cliente nos pide algo, ya pasamos por los mismos problemas
-              con nuestros propios productos. Eso se nota en las decisiones de diseño,
-              en la estabilidad y en lo rápido que podemos iterar.
+            <p className="text-white/80 text-sm leading-relaxed max-w-3xl">
+              Haber construido y sostenido productos propios nos hace más
+              conscientes de las decisiones de diseño, la estabilidad y el
+              costo real de cada atajo técnico. Esa mirada la traemos a cada
+              proyecto nuevo.
             </p>
           </div>
         </motion.div>
@@ -198,12 +201,12 @@ export default function SobreNosotrosPage() {
           transition={{ duration: 0.6, ease }}
           className="text-center"
         >
-          <p className="text-white/70 mb-6 text-lg">
+          <p className="text-white/80 mb-6 text-lg">
             ¿Querés saber más o tenés un proyecto en mente?
           </p>
           <Link
             href="/contacto"
-            className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-semibold hover:bg-primary-soft transition-all shadow-[0_0_25px_rgba(255,60,0,0.35)] hover:shadow-[0_0_35px_rgba(255,60,0,0.5)]"
+            className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-semibold hover:bg-primary-soft transition-all shadow-[0_0_25px_rgba(242,27,16,0.35)] hover:shadow-[0_0_35px_rgba(242,27,16,0.5)]"
           >
             Hablemos <ArrowRight size={18} />
           </Link>

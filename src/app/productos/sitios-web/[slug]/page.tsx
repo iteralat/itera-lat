@@ -56,9 +56,9 @@ export default async function WebCasePage({ params }: { params: Promise<{ slug: 
           {site.niche}
         </span>
         <h1 className="text-3xl md:text-5xl font-display font-bold mb-3 tracking-tight">{site.productName}</h1>
-        <p className="text-white/75 text-lg md:text-xl mb-8 font-medium">{site.tagline}</p>
+        <p className="text-white/80 text-lg md:text-xl mb-8 font-medium">{site.tagline}</p>
 
-        <p className="text-white/70 text-base md:text-lg leading-relaxed max-w-3xl mb-10">{site.description}</p>
+        <p className="text-white/80 text-base md:text-lg leading-relaxed max-w-3xl mb-10">{site.description}</p>
 
         {site.caseStudy && (
           <div className="mb-10">

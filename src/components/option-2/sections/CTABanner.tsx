@@ -30,9 +30,8 @@ export function CTABanner() {
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tight">
               ¿Listo para tu próximo proyecto?
             </h2>
-            <p className="text-white/50 mb-10 max-w-lg mx-auto text-lg">
-              Contanos tu idea y te respondemos en menos de 24 horas con una
-              propuesta concreta.
+            <p className="text-white/80 mb-10 max-w-lg mx-auto text-lg">
+              Contanos de qué se trata y vemos juntos cómo podríamos encararlo.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

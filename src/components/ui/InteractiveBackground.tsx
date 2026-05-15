@@ -133,13 +133,11 @@ export function InteractiveBackground() {
             // Opacity based on distance
             const opacity = 0.12 * (1 - dist / 120);
             
-            // If near mouse, tint orange
-            let isNearMouse = false;
+            // If near mouse, tint with brand red.
             if (!isMobile) {
                const distToMouse = Math.sqrt(Math.pow(mouse.x - (node.x + other.x)/2, 2) + Math.pow(mouse.y - (node.y + other.y)/2, 2));
                if (distToMouse < 200) {
-                  isNearMouse = true;
-                  ctx.strokeStyle = `rgba(255, 60, 0, ${opacity * 2.5})`;
+                  ctx.strokeStyle = `rgba(242, 27, 16, ${opacity * 2.5})`;
                } else {
                   ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
                }
@@ -197,14 +195,14 @@ export function InteractiveBackground() {
     <div ref={containerRef} className="absolute inset-0 w-full h-full overflow-hidden bg-[#000000] z-0">
       {/* Ambient glow — multiple light spots matching brand palette */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Primary orange glow — top left, illuminates headline */}
-        <div className="absolute -top-[10%] -left-[5%] w-[900px] h-[900px] rounded-full bg-[radial-gradient(circle,rgba(255,60,0,0.18)_0%,transparent_65%)]" />
-        {/* Warm orange glow — center, behind content */}
-        <div className="absolute top-[30%] left-[25%] w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(255,106,0,0.12)_0%,transparent_65%)]" />
-        {/* Secondary orange glow — right side, behind mockups */}
-        <div className="absolute top-[10%] right-[-5%] w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(255,60,0,0.08)_0%,transparent_65%)]" />
-        {/* Subtle orange glow — bottom center, transition zone */}
-        <div className="absolute bottom-[-10%] left-[20%] w-[1000px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(255,60,0,0.10)_0%,transparent_65%)]" />
+        {/* Primary red glow — top left, illuminates headline */}
+        <div className="absolute -top-[10%] -left-[5%] w-[900px] h-[900px] rounded-full bg-[radial-gradient(circle,rgba(242,27,16,0.18)_0%,transparent_65%)]" />
+        {/* Warm brand glow — center, behind content */}
+        <div className="absolute top-[30%] left-[25%] w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(255,84,33,0.12)_0%,transparent_65%)]" />
+        {/* Secondary red glow — right side, behind mockups */}
+        <div className="absolute top-[10%] right-[-5%] w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(242,27,16,0.08)_0%,transparent_65%)]" />
+        {/* Subtle red glow — bottom center, transition zone */}
+        <div className="absolute bottom-[-10%] left-[20%] w-[1000px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(242,27,16,0.10)_0%,transparent_65%)]" />
       </div>
       <canvas
         ref={canvasRef}

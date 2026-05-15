@@ -52,9 +52,9 @@
 
 ### No introducir colores de categoría
 
-**Problema**: El plan de rediseño introdujo 3 colores de categoría (teal, violeta, naranja custom) que rompían la identidad visual de ÍTERA (negro + naranja primary).
-**Check preventivo**: Todo acento es `primary` (#FF3C00). No usar verdes, violetas, azules ni colores diferentes por categoría. Diferenciar con contenido/layout, no con color.
-**Fecha**: 2026-04-02
+**Problema**: El plan de rediseño introdujo 3 colores de categoría (teal, violeta, naranja custom) que rompían la identidad visual de ÍTERA (negro + accent único).
+**Check preventivo**: Todo acento es `primary` (#F21B10 — rojo). No usar verdes, violetas, azules ni colores diferentes por categoría. Diferenciar con contenido/layout, no con color. Para gradientes warm: `primary` → `primary-soft` (#FF5421).
+**Fecha original**: 2026-04-02 · **Actualizado**: 2026-04-27 (accent migrado de naranja `#FF3C00` a rojo `#F21B10` post-brandboard)
 
 ### framer-motion transition.delay se aplica también al hover
 

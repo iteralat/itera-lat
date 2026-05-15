@@ -53,7 +53,7 @@ export function ScreenshotViewer({ item, onClose }: ScreenshotViewerProps) {
         <button
           onClick={onClose}
           aria-label="Cerrar preview"
-          className="absolute -top-12 right-0 w-10 h-10 rounded-full bg-elevated border border-border flex items-center justify-center text-white/50 hover:text-white transition-colors"
+          className="absolute -top-12 right-0 w-10 h-10 rounded-full bg-elevated border border-border flex items-center justify-center text-white/55 hover:text-white transition-colors"
         >
           <X size={20} />
         </button>
@@ -67,7 +67,7 @@ export function ScreenshotViewer({ item, onClose }: ScreenshotViewerProps) {
               className={`p-2 rounded-md transition-colors ${
                 view === "desktop"
                   ? "bg-white/10 text-white"
-                  : "text-white/40 hover:text-white/60"
+                  : "text-white/55 hover:text-white/80"
               }`}
             >
               <Monitor size={16} />
@@ -78,7 +78,7 @@ export function ScreenshotViewer({ item, onClose }: ScreenshotViewerProps) {
               className={`p-2 rounded-md transition-colors ${
                 view === "mobile"
                   ? "bg-white/10 text-white"
-                  : "text-white/40 hover:text-white/60"
+                  : "text-white/55 hover:text-white/80"
               }`}
             >
               <Smartphone size={16} />
@@ -93,7 +93,7 @@ export function ScreenshotViewer({ item, onClose }: ScreenshotViewerProps) {
               <div className="w-3 h-3 rounded-full bg-red-500/20" />
               <div className="w-3 h-3 rounded-full bg-yellow-500/20" />
               <div className="w-3 h-3 rounded-full bg-green-500/20" />
-              <span className="mx-auto text-[10px] text-white/30 font-mono">
+              <span className="mx-auto text-[10px] text-white/55 font-mono">
                 {item.url || `${item.slug}.itera.lat`}
               </span>
             </div>
@@ -147,7 +147,7 @@ export function ScreenshotViewer({ item, onClose }: ScreenshotViewerProps) {
         <div className="mt-4 flex items-center justify-between">
           <div>
             <div className="font-semibold text-white">{item.productName}</div>
-            <div className="text-xs text-white/30">
+            <div className="text-xs text-white/55">
               <span className="text-primary">{item.niche}</span>
               <span className="mx-2">·</span>
               {item.tags.join(", ")}
@@ -159,7 +159,7 @@ export function ScreenshotViewer({ item, onClose }: ScreenshotViewerProps) {
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 text-sm font-medium bg-elevated border border-border rounded-lg text-white/70 hover:text-white hover:border-white/20 transition-colors"
+                className="px-4 py-2 text-sm font-medium bg-elevated border border-border rounded-lg text-white/80 hover:text-white hover:border-white/20 transition-colors"
               >
                 Ver sitio en vivo
               </a>

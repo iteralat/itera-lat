@@ -16,7 +16,7 @@ Landing page + portfolio showcase de la agencia. Muestra los servicios, proyecto
 - **InteractiveBackground** — Fondo animado interactivo en el Hero.
 - **Animaciones con Framer Motion** — Transiciones y micro-interacciones en todas las secciones.
 - **Demos en vivo** — Los sitios web del portfolio apuntan a `demo.itera.lat/{proyecto}` (HTML estáticos).
-- **Dark theme** — Paleta oscura con acentos naranja (#FF3C00) y violeta (#A960EE).
+- **Dark theme** — Paleta oscura con accent rojo (#F21B10) y soft warm (#FF5421) para gradientes. Sin alternativa fría.
 
 ## Stack
 

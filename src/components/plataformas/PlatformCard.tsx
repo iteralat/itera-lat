@@ -38,7 +38,7 @@ export function PlatformCard({ platform, index }: { platform: ProductItem; index
                   {restWords}
                 </span>
               </h3>
-              <p className="text-sm text-white/50 max-w-[28ch] leading-relaxed">{platform.coverLine}</p>
+              <p className="text-sm text-white/55 max-w-[28ch] leading-relaxed">{platform.coverLine}</p>
             </div>
           </>
         ) : (
@@ -51,7 +51,7 @@ export function PlatformCard({ platform, index }: { platform: ProductItem; index
           <span className={`px-3 py-1.5 text-xs font-semibold rounded-full border backdrop-blur-md ${
             isProduction
               ? "bg-green-500/10 border-green-500/20 text-green-400"
-              : "bg-cold/10 border-cold/20 text-cold"
+              : "bg-amber-500/10 border-amber-500/20 text-amber-400"
           }`}>
             {platform.status}
           </span>
@@ -61,12 +61,12 @@ export function PlatformCard({ platform, index }: { platform: ProductItem; index
       {/* Content */}
       <div className="p-8 relative z-20 flex flex-col flex-grow bg-background/50">
         <h3 className="text-2xl font-bold mb-1">{platform.productName}</h3>
-        <p className="text-sm text-white/40 mb-1">{platform.tagline}</p>
-        <p className="text-sm text-white/60 mb-4 leading-relaxed">{platform.description}</p>
+        <p className="text-sm text-white/55 mb-1">{platform.tagline}</p>
+        <p className="text-sm text-white/80 mb-4 leading-relaxed">{platform.description}</p>
 
         <div className="flex flex-wrap gap-2 mb-6">
           {platform.tags.map(tag => (
-            <span key={tag} className="text-xs font-medium text-white/40 bg-elevated border border-border px-3 py-1 rounded-full transition-colors duration-300 hover:border-orange-400/50 hover:text-orange-400 hover:bg-orange-500/10 cursor-default select-none">
+            <span key={tag} className="text-xs font-medium text-white/55 bg-elevated border border-border px-3 py-1 rounded-full transition-colors duration-300 hover:border-orange-400/50 hover:text-orange-400 hover:bg-orange-500/10 cursor-default select-none">
               {tag}
             </span>
           ))}
@@ -74,7 +74,7 @@ export function PlatformCard({ platform, index }: { platform: ProductItem; index
 
         <div className="flex items-center justify-between mt-auto">
           {platform.adopters.length > 0 && (
-            <p className="text-xs text-white/30">
+            <p className="text-xs text-white/55">
               <span className="font-bold italic">Usado por:</span> {platform.adopters.map(a => a.name).join(", ")}
             </p>
           )}

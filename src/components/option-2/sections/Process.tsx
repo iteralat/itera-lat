@@ -11,17 +11,17 @@ const steps = [
   {
     num: "02",
     title: "Diseñamos",
-    description: "Proponemos la solución técnica y el flujo UX antes de escribir una línea de código.",
+    description: "Definimos el enfoque técnico y el flujo de uso antes de empezar a programar.",
   },
   {
     num: "03",
     title: "Construimos",
-    description: "Desarrollo iterativo con entregas parciales. Ves progreso real cada semana.",
+    description: "Desarrollo por etapas, con revisiones regulares para dar feedback y ajustar en el camino.",
   },
   {
     num: "04",
     title: "Acompañamos",
-    description: "Deploy, monitoreo y mejoras continuas. Tu producto evoluciona con tu negocio.",
+    description: "Deploy, mantenimiento y mejoras posteriores mientras el producto esté en uso.",
   },
 ];
 
@@ -39,8 +39,8 @@ export function Process() {
           <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
             Cómo trabajamos
           </h2>
-          <p className="text-zinc-400 max-w-xl mx-auto">
-            Un proceso claro y predecible, sin sorpresas.
+          <p className="text-white/80 max-w-xl mx-auto">
+            El camino que seguimos en cada proyecto, de principio a fin.
           </p>
         </motion.div>
 
@@ -74,7 +74,7 @@ export function Process() {
                 )}
 
                 <h3 className="text-lg font-semibold text-white mb-2">{step.title}</h3>
-                <p className="text-sm text-zinc-400 leading-relaxed max-w-xs mx-auto md:mx-0">
+                <p className="text-sm text-white/80 leading-relaxed max-w-xs mx-auto md:mx-0">
                   {step.description}
                 </p>
               </motion.div>

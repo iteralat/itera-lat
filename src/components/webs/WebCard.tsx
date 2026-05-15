@@ -70,7 +70,7 @@ export function WebCard({ item, index, onClick }: WebCardProps) {
       {/* Info */}
       <div className="p-4">
         <div className="font-semibold text-white mb-1">{item.productName}</div>
-        <div className="flex items-center gap-2 text-xs text-white/30">
+        <div className="flex items-center gap-2 text-xs text-white/55">
           <span className="text-primary">{item.niche}</span>
           <span>·</span>
           <span>{item.tags.slice(0, 2).join(", ")}</span>

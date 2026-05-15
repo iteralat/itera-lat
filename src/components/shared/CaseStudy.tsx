@@ -21,7 +21,7 @@ export function CaseStudy({ challenge, solution, result }: CaseStudyProps) {
           <div className="text-primary text-xs uppercase tracking-widest font-semibold mb-3">
             {block.label}
           </div>
-          <p className="text-white/50 text-sm leading-relaxed">{block.text}</p>
+          <p className="text-white/55 text-sm leading-relaxed">{block.text}</p>
         </div>
       ))}
     </div>

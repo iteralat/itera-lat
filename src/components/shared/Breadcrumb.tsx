@@ -42,17 +42,17 @@ export function Breadcrumb({ items, current, currentColor = "text-primary" }: Br
         {items.map((item, i) => (
           <span key={item.href} className="flex items-center gap-1.5">
             {i > 0 && (
-              <ChevronRight size={14} className="text-white/30 shrink-0" aria-hidden="true" />
+              <ChevronRight size={14} className="text-white/55 shrink-0" aria-hidden="true" />
             )}
             <Link
               href={item.href}
-              className="text-white/65 hover:text-white transition-colors"
+              className="text-white/80 hover:text-white transition-colors"
             >
               {item.label}
             </Link>
           </span>
         ))}
-        <ChevronRight size={14} className="text-white/30 shrink-0" aria-hidden="true" />
+        <ChevronRight size={14} className="text-white/55 shrink-0" aria-hidden="true" />
         <span className={`${currentColor} font-semibold`}>{current}</span>
       </nav>
     </>

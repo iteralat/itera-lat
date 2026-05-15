@@ -24,8 +24,8 @@ export function CategoryCard({
       </div>
       <div className="p-5">
         <div className={`${colorClass} font-bold text-lg mb-1`}>{name}</div>
-        <div className="text-white/40 text-xs mb-3">{count}</div>
-        <p className="text-white/50 text-sm leading-relaxed mb-4">{description}</p>
+        <div className="text-white/55 text-xs mb-3">{count}</div>
+        <p className="text-white/55 text-sm leading-relaxed mb-4">{description}</p>
         <div className={`${colorClass} text-sm font-semibold group-hover:translate-x-1 transition-transform`}>
           {ctaLabel} →
         </div>

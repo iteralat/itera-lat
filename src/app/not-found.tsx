@@ -9,7 +9,7 @@ export default function NotFound() {
         <h2 className="text-2xl md:text-3xl font-display font-bold text-white mb-4">
           Página no encontrada
         </h2>
-        <p className="text-zinc-400 mb-8 max-w-md mx-auto">
+        <p className="text-white/80 mb-8 max-w-md mx-auto">
           La página que buscás no existe o fue movida.
         </p>
         <Link

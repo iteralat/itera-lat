@@ -16,16 +16,14 @@ export function About() {
           <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-6">
             Quiénes somos
           </h2>
-          <p className="text-zinc-400 leading-relaxed text-base md:text-lg mb-6">
-            Somos un estudio de desarrollo web con base en la Patagonia,
-            Argentina. Combinamos diseño, código y herramientas de inteligencia
-            artificial para construir productos digitales que funcionan desde el
-            día uno. Trabajamos directo con cada cliente — sin intermediarios,
-            sin sorpresas.
+          <p className="text-white/80 leading-relaxed text-base md:text-lg mb-6">
+            Somos un estudio de desarrollo con base en la Patagonia, Argentina.
+            Combinamos diseño, programación y herramientas de inteligencia
+            artificial para construir productos digitales a medida.
           </p>
-          <p className="text-zinc-400 text-sm md:text-base leading-relaxed">
-            Fundado por devs, no por vendedores. Cada proyecto tiene atención
-            directa del equipo que lo construye.
+          <p className="text-white/80 text-sm md:text-base leading-relaxed">
+            Nos fundaron personas que programan todos los días. Cada proyecto
+            tiene acompañamiento directo del equipo que lo construye.
           </p>
         </motion.div>
       </div>

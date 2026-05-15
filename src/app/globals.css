@@ -3,9 +3,8 @@
 :root {
   --background: #000000;
   --foreground: #FFFFFF;
-  --primary: #FF3C00;
-  --primary-soft: #FF6A00;
-  --cold: #A960EE;
+  --primary: #F21B10;
+  --primary-soft: #FF5421;
   --muted: #050505;
   --elevated: #0a0a0a;
   --border: rgba(255, 255, 255, 0.08);
@@ -17,7 +16,6 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-primary-soft: var(--primary-soft);
-  --color-cold: var(--cold);
   --color-muted: var(--muted);
   --color-elevated: var(--elevated);
   --color-border: var(--border);

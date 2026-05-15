@@ -31,7 +31,7 @@ export function Stats() {
             <div className="text-4xl md:text-5xl lg:text-6xl font-display font-bold bg-gradient-to-r from-primary to-primary-soft bg-clip-text text-transparent">
               Patagonia → LATAM
             </div>
-            <div className="mt-2 text-sm md:text-base text-zinc-500 font-medium">
+            <div className="mt-2 text-sm md:text-base text-white/55 font-medium">
               De la Patagonia al mundo
             </div>
           </motion.div>

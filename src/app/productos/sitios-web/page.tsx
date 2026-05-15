@@ -17,12 +17,13 @@ export default function SitiosWebPage() {
             <h1 className="text-4xl md:text-5xl font-display font-bold tracking-tight mb-4">
               Sitios Web
             </h1>
-            <p className="text-lg text-white/40 leading-relaxed">
-              Diseñamos sitios web para todos los rubros. Cada sitio es rápido,
-              indexable y administrable. Desde institucionales hasta tiendas online.
+            <p className="text-lg text-white/80 leading-relaxed">
+              Diseñamos sitios para distintos rubros y necesidades. Cada uno se
+              construye rápido, indexable por buscadores y administrable desde
+              un panel propio. Desde institucionales hasta tiendas online.
             </p>
           </div>
-          <GlowButton href="/contacto">Quiero mi sitio</GlowButton>
+          <GlowButton href="/contacto">Hablemos de tu sitio</GlowButton>
         </div>
 
         <WebCatalog />

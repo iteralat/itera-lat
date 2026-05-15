@@ -36,7 +36,7 @@ export default function ContactoPage() {
           <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 tracking-tight">
             Contacto
           </h1>
-          <p className="text-xl text-white/60 leading-relaxed">
+          <p className="text-xl text-white/80 leading-relaxed">
             Contanos tu idea y te respondemos en menos de 24 horas con una propuesta concreta.
           </p>
         </motion.div>
@@ -54,7 +54,7 @@ export default function ContactoPage() {
               <MessageCircle size={24} className="text-green-400" />
             </div>
             <h2 className="text-xl font-bold text-white mb-2">WhatsApp</h2>
-            <p className="text-white/40 text-sm leading-relaxed mb-6 flex-grow">
+            <p className="text-white/55 text-sm leading-relaxed mb-6 flex-grow">
               La forma más rápida de contactarnos. Escribinos y te respondemos en el día.
             </p>
             <GlowButton href="https://wa.me/5492984394286" external>
@@ -69,7 +69,7 @@ export default function ContactoPage() {
               <Mail size={24} className="text-primary" />
             </div>
             <h2 className="text-xl font-bold text-white mb-2">Email</h2>
-            <p className="text-white/40 text-sm leading-relaxed mb-6 flex-grow">
+            <p className="text-white/55 text-sm leading-relaxed mb-6 flex-grow">
               Para propuestas detalladas o consultas que necesiten más contexto.
             </p>
             <GlowButton href="mailto:hola@itera.lat" variant="outline">
@@ -87,7 +87,7 @@ export default function ContactoPage() {
           transition={{ duration: 0.6, ease }}
           className="max-w-3xl"
         >
-          <div className="flex flex-col sm:flex-row gap-8 text-white/30 text-sm">
+          <div className="flex flex-col sm:flex-row gap-8 text-white/55 text-sm">
             <div className="flex items-center gap-2">
               <Clock size={16} className="text-white/20" />
               <span>Respuesta en menos de 24 hs</span>

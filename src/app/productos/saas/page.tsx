@@ -13,18 +13,18 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 const benefits = [
   {
     icon: RefreshCw,
-    title: "Siempre actualizado",
-    description: "Recibís mejoras y nuevas funciones sin instalar nada. Tu herramienta evoluciona con tu negocio.",
+    title: "Productos propios, de la idea al funcionamiento",
+    description: "Cada uno de estos SaaS lo pensamos, diseñamos y construimos nosotros, de punta a punta. No son maquetas ni pruebas de concepto: son productos terminados, funcionando online y listos para recibir usuarios.",
   },
   {
     icon: HeadphonesIcon,
-    title: "Soporte desde el día uno",
-    description: "Te acompañamos en la adopción y resolvemos dudas. No te dejamos solo con el producto.",
+    title: "Mantenidos por el mismo equipo",
+    description: "Los desarrollamos, los operamos y los iteramos de forma continua. Un proyecto para tu negocio entraría al mismo flujo de trabajo y al mismo nivel de dedicación.",
   },
   {
     icon: Cloud,
-    title: "Sin infraestructura propia",
-    description: "Todo corre en la nube. No necesitás servidores, backups ni equipo técnico para mantenerlo.",
+    title: "Esa misma experiencia en tu proyecto",
+    description: "Lo que aprendimos construyendo productos propios lo aplicamos al trabajo con clientes. El mismo criterio técnico y el mismo cuidado en las decisiones, con foco en que lo que entregamos se sostenga en el tiempo.",
   },
 ];
 
@@ -48,12 +48,13 @@ export default function SaaSPage() {
             <h1 className="text-4xl md:text-5xl font-display font-bold tracking-tight mb-4">
               SaaS
             </h1>
-            <p className="text-lg text-white/40 leading-relaxed">
-              Herramientas propias que resuelven problemas concretos.
-              Listas para usar, con soporte incluido y actualizaciones permanentes.
+            <p className="text-lg text-white/80 leading-relaxed">
+              Productos propios que construimos, mantenemos y usamos. Son la
+              forma más concreta de mostrar qué tipo de soluciones podemos
+              desarrollar para tu negocio.
             </p>
           </div>
-          <GlowButton href="/contacto">Consultá por tu SaaS</GlowButton>
+          <GlowButton href="/contacto">Hablemos de tu proyecto</GlowButton>
         </motion.div>
 
         {/* Benefits */}
@@ -70,7 +71,7 @@ export default function SaaSPage() {
                 <b.icon size={18} className="text-primary shrink-0" />
                 <div className="font-semibold text-white">{b.title}</div>
               </div>
-              <p className="text-white/40 text-sm leading-relaxed">{b.description}</p>
+              <p className="text-white/55 text-sm leading-relaxed">{b.description}</p>
             </motion.div>
           ))}
         </div>
@@ -132,8 +133,8 @@ export default function SaaSPage() {
                   <div className="text-primary font-bold text-lg mb-1">
                     {product.productName}
                   </div>
-                  <p className="text-white/40 text-sm mb-3">{product.tagline}</p>
-                  <p className="text-white/30 text-sm leading-relaxed mb-4 line-clamp-2">
+                  <p className="text-white/55 text-sm mb-3">{product.tagline}</p>
+                  <p className="text-white/55 text-sm leading-relaxed mb-4 line-clamp-2">
                     {product.coverLine}
                   </p>
                   <div className="flex items-center justify-between">
@@ -141,7 +142,7 @@ export default function SaaSPage() {
                       {product.tags.slice(0, 3).map((tag) => (
                         <span
                           key={tag}
-                          className="px-2 py-0.5 text-[10px] font-medium bg-white/5 border border-border rounded-full text-white/30"
+                          className="px-2 py-0.5 text-[10px] font-medium bg-white/5 border border-border rounded-full text-white/55"
                         >
                           {tag}
                         </span>

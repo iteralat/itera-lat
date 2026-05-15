@@ -83,7 +83,7 @@ export function PlatformViewer({ productName, screenshot, screenshots = [], exte
             {displayUrl}
           </div>
           {hasMultiple && (
-            <span className="text-[9px] md:text-[10px] text-white/50 font-mono font-semibold">
+            <span className="text-[9px] md:text-[10px] text-white/55 font-mono font-semibold">
               {activeIndex + 1}/{allScreenshots.length}
             </span>
           )}
@@ -117,14 +117,14 @@ export function PlatformViewer({ productName, screenshot, screenshots = [], exte
               <button
                 onClick={goPrev}
                 aria-label="Vista anterior"
-                className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-black/80 transition-all opacity-0 group-hover:opacity-100 z-10"
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 border border-white/10 flex items-center justify-center text-white/80 hover:text-white hover:bg-black/80 transition-all opacity-0 group-hover:opacity-100 z-10"
               >
                 <ChevronLeft size={20} />
               </button>
               <button
                 onClick={goNext}
                 aria-label="Vista siguiente"
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-black/80 transition-all opacity-0 group-hover:opacity-100 z-10"
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 border border-white/10 flex items-center justify-center text-white/80 hover:text-white hover:bg-black/80 transition-all opacity-0 group-hover:opacity-100 z-10"
               >
                 <ChevronRight size={20} />
               </button>
@@ -142,7 +142,7 @@ export function PlatformViewer({ productName, screenshot, screenshots = [], exte
               onClick={() => goTo(i)}
               className={`relative shrink-0 w-24 h-14 rounded-lg overflow-hidden border-2 transition-all ${
                 i === activeIndex
-                  ? "border-primary shadow-[0_0_12px_-4px_rgba(255,60,0,0.4)]"
+                  ? "border-primary shadow-[0_0_12px_-4px_rgba(242,27,16,0.4)]"
                   : "border-border/50 opacity-50 hover:opacity-80"
               }`}
             >

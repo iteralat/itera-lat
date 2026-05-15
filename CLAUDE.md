@@ -81,7 +81,7 @@ Web informativa y portfolio de la agencia ÍTERA · itera.lat
 
 - CSS vars custom -> registrar en `@theme inline` de globals.css
 - **Paleta base**: `#000000` (background), `#050505` (muted), `#0a0a0a` (elevated). Negro puro.
-- **Sin colores de categoría**: todo acento es `primary` (#FF3C00). No usar verdes, violetas ni azules. Diferenciar con contenido/layout.
+- **Sin colores de categoría**: todo acento es `primary` (#F21B10 — rojo). No usar verdes, violetas ni azules. Diferenciar con contenido/layout. Para gradientes brand usar `primary` → `primary-soft` (#FF5421).
 - **framer-motion + CSS transform**: no mezclar. Si motion controla el elemento, hover scale va en `whileHover`, no en CSS.
 - grid-cols arbitrario -> espacios NO comas: `grid-cols-[1fr_280px]`
 - **`Button size="icon"` -> SIEMPRE `aria-label` descriptivo**

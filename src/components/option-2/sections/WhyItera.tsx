@@ -8,21 +8,21 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 const reasons = [
   {
     icon: Zap,
-    title: "Trabajo directo",
+    title: "Trato directo con quien construye",
     description:
-      "Hablás con quien desarrolla tu proyecto. Sin intermediarios, sin demoras innecesarias.",
+      "La persona que piensa tu proyecto es la que lo desarrolla. Eso ayuda a que se entiendan los detalles de tu operación y a que las decisiones tengan contexto desde el principio.",
   },
   {
     icon: TrendingUp,
-    title: "Pensado para crecer",
+    title: "Productos propios en producción",
     description:
-      "Construimos sobre buenas prácticas para que tu proyecto se pueda ampliar sin rehacerlo.",
+      "Además de los proyectos para clientes, mantenemos nuestros propios sistemas funcionando todos los días. Esa experiencia de operar un producto real influye en cómo pensamos y construimos los tuyos.",
   },
   {
     icon: Headphones,
-    title: "Socio tecnológico",
+    title: "Tecnología actualizada, criterio a largo plazo",
     description:
-      "Trabajamos con vos a largo plazo. Mantenimiento, ajustes y soporte como parte del equipo.",
+      "Trabajamos con herramientas modernas y nos mantenemos al día con lo que se mueve en la industria. Cada decisión técnica busca servir hoy y seguir teniendo sentido en dos o tres años.",
   },
 ];
 
@@ -48,13 +48,12 @@ export function WhyItera() {
         >
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 tracking-tight">
             Por qué{" "}
-            <span style={{ backgroundImage: "linear-gradient(to right, #FF3C00, #FF6A00)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            <span style={{ backgroundImage: "linear-gradient(to right, #F21B10, #FF5421)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               ÍTERA
             </span>
           </h2>
-          <p className="text-white/60 max-w-2xl mx-auto text-lg">
-            Un estudio boutique donde cada proyecto tiene atención directa del
-            equipo que lo construye.
+          <p className="text-white/80 max-w-2xl mx-auto text-lg">
+            Tres cosas que intentamos sostener en cada proyecto que encaramos.
           </p>
         </motion.div>
 
@@ -77,7 +76,7 @@ export function WhyItera() {
                     {reason.title}
                   </h3>
                 </div>
-                <p className="text-base text-white/50 leading-relaxed">
+                <p className="text-base text-white/55 leading-relaxed">
                   {reason.description}
                 </p>
               </motion.div>
