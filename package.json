@@ -16,8 +16,10 @@
     "react-dom": "19.2.3"
   },
   "pnpm": {
+    "dangerouslyAllowAllBuilds": true,
     "onlyBuiltDependencies": [
       "esbuild",
+      "sharp",
       "unrs-resolver"
     ]
   },

@@ -1,0 +1,6 @@
+dangerouslyAllowAllBuilds: true
+
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
+  - unrs-resolver
