@@ -1,0 +1,932 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Propuesta - Resumen de productos del día</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #050505;
+      --panel: #0d0d0d;
+      --panel-2: #141414;
+      --line: #252525;
+      --muted: #808080;
+      --soft: #d4d4d4;
+      --text: #ffffff;
+      --accent: #f21b10;
+      --accent-hover: #ff3322;
+      --accent-soft: rgba(242, 27, 16, .12);
+      --accent-line: rgba(242, 27, 16, .36);
+      --cream: #f5f1ea;
+      --crm-green: #00a846;
+      --crm-green-soft: #0a2b1d;
+      --crm-green-line: #155c3a;
+      --amber: #ff9d2e;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(242, 27, 16, .16), transparent 34rem),
+        linear-gradient(180deg, #000000 0%, var(--bg) 45%);
+      color: var(--text);
+      font-family: Poppins, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+
+    .page {
+      width: min(1120px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 44px 0 56px;
+    }
+
+    .hero {
+      max-width: 820px;
+      margin-bottom: 32px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Archivo, Poppins, Inter, ui-sans-serif, system-ui, sans-serif;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin: 18px 0 0;
+      color: var(--soft);
+      font-size: 17px;
+      max-width: 720px;
+    }
+
+    .price-card {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(13, 13, 13, .92);
+      padding: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .28);
+    }
+
+    .price-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+
+    .price {
+      margin-top: 8px;
+      font-size: 34px;
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .price-note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .price-list {
+      display: grid;
+      gap: 9px;
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+      color: var(--soft);
+      font-size: 13px;
+    }
+
+    .price-list li {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 8px;
+    }
+
+    .dash {
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    .meta {
+      display: grid;
+      gap: 8px;
+      margin-top: 18px;
+      color: var(--soft);
+      font-size: 14px;
+    }
+
+    .meta div {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+
+    .meta strong {
+      color: var(--text);
+    }
+
+    .section {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(13, 13, 13, .82);
+      padding: 24px;
+      margin-top: 18px;
+    }
+
+    .section h2 {
+      margin: 0 0 14px;
+      font-family: Archivo, Poppins, Inter, ui-sans-serif, system-ui, sans-serif;
+      font-size: 22px;
+      line-height: 1.2;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 10px;
+      color: var(--soft);
+    }
+
+    .check {
+      width: 20px;
+      height: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid var(--accent-line);
+      font-size: 12px;
+      font-weight: 900;
+      margin-top: 1px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .screen {
+      border: 1px solid #252525;
+      border-radius: 14px;
+      background: #05070b;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, .42);
+    }
+
+    .screen-bar {
+      height: 34px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 13px;
+      border-bottom: 1px solid #1a1a1a;
+      background: #0d0d0d;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #333333;
+    }
+
+    .screen-url {
+      margin-left: 10px;
+      height: 18px;
+      width: 260px;
+      border-radius: 999px;
+      background: #151515;
+      color: #777777;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      font-size: 11px;
+    }
+
+    .mock {
+      min-height: 610px;
+      background: #080808;
+      position: relative;
+      padding: 18px 18px 26px 72px;
+      overflow: hidden;
+    }
+
+    .mock-sidebar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 54px;
+      border-right: 1px solid #1a1a1a;
+      background: #050505;
+      display: grid;
+      align-content: start;
+      justify-items: center;
+      gap: 18px;
+      padding-top: 16px;
+      color: #6b7688;
+    }
+
+    .mock-sidebar .active-icon {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 7px;
+      background: var(--crm-green);
+      color: #031208;
+      font-weight: 900;
+    }
+
+    .mock-top {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      border-bottom: 1px solid #222222;
+      margin-bottom: 18px;
+    }
+
+    .mock-date {
+      font-weight: 850;
+      min-width: 160px;
+    }
+
+    .pill {
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #0f6844;
+      background: #072c20;
+      color: #00c86b;
+      border-radius: 999px;
+      padding: 0 10px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .mock-actions {
+      margin-left: auto;
+      display: flex;
+      gap: 8px;
+    }
+
+    .mock-button {
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid #2a2a2a;
+      border-radius: 6px;
+      padding: 0 11px;
+      background: #111111;
+      color: var(--text);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .mock-button.green {
+      border-color: #0f6844;
+      background: #08261c;
+      color: #37df89;
+    }
+
+    .mock-button.solid {
+      background: var(--crm-green);
+      color: #041109;
+      border-color: var(--crm-green);
+    }
+
+    .route {
+      border: 1px solid #242424;
+      border-radius: 8px;
+      background: #111111;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+
+    .route-head {
+      height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 16px;
+      border-bottom: 1px solid #242424;
+      color: var(--soft);
+    }
+
+    .route-title {
+      color: var(--text);
+      font-weight: 900;
+    }
+
+    .bar {
+      width: 144px;
+      height: 16px;
+      border: 1px solid #3a3a3a;
+      border-radius: 4px;
+      background: #222222;
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      width: 81%;
+      background: var(--amber);
+    }
+
+    .small-badge {
+      border-radius: 999px;
+      padding: 2px 8px;
+      background: #4a2b08;
+      color: #ffbd5f;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .mock-overlay {
+      position: absolute;
+      inset: 34px 0 0;
+      background: rgba(0, 0, 0, .58);
+      z-index: 2;
+    }
+
+    .mock-modal {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -45%);
+      width: 640px;
+      border: 1px solid #333333;
+      border-radius: 8px;
+      background: #101010;
+      box-shadow: 0 30px 90px rgba(0, 0, 0, .62);
+      padding: 22px 24px 24px;
+      z-index: 3;
+    }
+
+    .proposal-head {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 16px;
+    }
+
+    .proposal-head h2 {
+      margin-bottom: 6px;
+    }
+
+    .proposal-toggle {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4px;
+      border: 1px solid #252525;
+      border-radius: 7px;
+      padding: 4px;
+      background: #080808;
+      width: 260px;
+      flex: 0 0 auto;
+    }
+
+    .proposal-toggle button {
+      height: 34px;
+      border: 0;
+      border-radius: 5px;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .proposal-toggle button.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+      box-shadow: inset 0 0 0 1px var(--accent-line);
+    }
+
+    .mock-view[hidden] {
+      display: none;
+    }
+
+    .mock-modal h3 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .mock-modal p {
+      margin: 6px 0 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+      border: 1px solid #252525;
+      border-radius: 7px;
+      padding: 4px;
+      background: #080808;
+      margin-bottom: 10px;
+    }
+
+    .tab {
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 5px;
+      color: var(--muted);
+      font-weight: 900;
+      font-size: 13px;
+    }
+
+    .tab.active {
+      background: #15251c;
+      color: #37df89;
+      box-shadow: inset 0 0 0 1px #135233;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #252525;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th {
+      height: 34px;
+      color: #a3a3a3;
+      background: #151515;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      text-align: left;
+      padding: 0 12px;
+      border-bottom: 1px solid #252525;
+    }
+
+    td {
+      height: 40px;
+      padding: 0 12px;
+      border-bottom: 1px solid #252525;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    td.num,
+    th.num {
+      text-align: right;
+      width: 90px;
+    }
+
+    td.center,
+    th.center {
+      text-align: center;
+      width: 78px;
+    }
+
+    .chip {
+      min-width: 48px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: #072b1f;
+      color: #37df89;
+      border: 1px solid #155c3a;
+      font-weight: 900;
+    }
+
+    .mock-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .note {
+      border-left: 3px solid var(--accent);
+      padding: 12px 14px;
+      background: var(--accent-soft);
+      color: var(--soft);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .scope-table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+    }
+
+    .scope-table th,
+    .scope-table td {
+      border-bottom: 1px solid var(--line);
+      height: auto;
+      padding: 12px 14px;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    .scope-table th {
+      background: #141414;
+      color: var(--soft);
+      text-align: left;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 13px;
+    }
+
+    .scope-table td {
+      color: var(--soft);
+      font-weight: 500;
+    }
+
+    .yes {
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    .no {
+      color: #7b8798;
+      font-weight: 800;
+    }
+
+    .right {
+      text-align: center;
+      width: 180px;
+    }
+
+    .footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        width: min(100vw - 24px, 680px);
+        padding-top: 24px;
+      }
+
+      .hero,
+      .grid-2,
+      .option-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mock {
+        padding-left: 18px;
+      }
+
+      .mock-sidebar {
+        display: none;
+      }
+
+      .mock-modal {
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: none;
+        width: 100%;
+        margin-top: 18px;
+      }
+
+      .mock-overlay {
+        display: none;
+      }
+
+      .proposal-head {
+        display: grid;
+      }
+
+      .proposal-toggle {
+        width: 100%;
+      }
+
+      .mock-top {
+        flex-wrap: wrap;
+        height: auto;
+        padding-bottom: 12px;
+      }
+
+      .mock-actions {
+        margin-left: 0;
+        width: 100%;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Propuesta de mejora - Alquímica CRM</div>
+        <h1>Resumen de productos del día para organizar la carga de repartos</h1>
+        <p class="lead">
+          Incorporar una vista rápida dentro de Repartos Día para ver cuántos productos salen y preparar la carga con información consolidada.
+          La mejora puede implementarse en una versión simple o en una versión discriminada por reparto/vehículo.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Opciones de implementación</h2>
+      <div class="option-grid">
+        <article class="price-card">
+          <div class="price-label">Opción A - Resumen simple</div>
+          <div class="price">$120.000 ARS</div>
+          <div class="price-note">Listado total de productos del día, pensado para resolver la necesidad principal con el menor alcance posible.</div>
+          <ul class="price-list">
+            <li><span class="dash">✓</span><span>Botón <strong>Productos</strong> en Repartos Día.</span></li>
+            <li><span class="dash">✓</span><span>Modal con tabla <strong>Producto</strong> + <strong>Total</strong>.</span></li>
+            <li><span class="dash">✓</span><span>Exportación de la tabla en hoja A4.</span></li>
+          </ul>
+        </article>
+
+        <article class="price-card">
+          <div class="price-label">Opción B - Resumen por reparto</div>
+          <div class="price">$200.000 ARS</div>
+          <div class="price-note">Incluye el resumen total y agrega separación por reparto/vehículo para organizar mejor la carga.</div>
+          <ul class="price-list">
+            <li><span class="dash">✓</span><span>Todo lo incluido en la opción simple.</span></li>
+            <li><span class="dash">✓</span><span>Vista <strong>Total</strong> con columnas por reparto.</span></li>
+            <li><span class="dash">✓</span><span>Vista individual por cada reparto.</span></li>
+            <li><span class="dash">✓</span><span>Respeta los vehículos activos configurados en el sistema, sin valores fijos en código.</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="proposal-head">
+        <div>
+          <h2>Vista propuesta</h2>
+          <p class="muted" style="margin:0">
+            Usá el selector para ver la versión simple o la versión por reparto.
+          </p>
+        </div>
+        <div class="proposal-toggle" aria-label="Opciones de vista">
+          <button class="active" type="button" data-view-button="basic">Básico</button>
+          <button type="button" data-view-button="plus">Plus</button>
+        </div>
+      </div>
+      <div class="screen">
+        <div class="screen-bar">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <div class="screen-url">gestion.quimicabambu.com.ar/ventas/repartos</div>
+        </div>
+
+        <div class="mock">
+          <div class="mock-sidebar">
+            <div style="color:#00d464;font-size:20px">◜</div>
+            <div class="active-icon">▣</div>
+            <div>⌂</div>
+            <div>♙</div>
+            <div>□</div>
+            <div>▱</div>
+          </div>
+
+          <div class="mock-top">
+            <strong>← Volver</strong>
+            <div class="mock-date">Vie 15/05/2026</div>
+            <span class="pill">44 pedidos</span>
+            <span class="pill">5385.0 kg</span>
+            <div class="mock-actions">
+              <div class="mock-button green">▦ Productos</div>
+              <div class="mock-button">⌖ Ver por ciudad</div>
+              <div class="mock-button solid">⇩ Exportar</div>
+            </div>
+          </div>
+
+          <div class="route">
+            <div class="route-head">
+              <span>▱</span>
+              <span class="route-title">REPARTO 1</span>
+              <span class="muted">16 pedidos</span>
+              <div class="bar"><span></span></div>
+              <span class="muted">1830.0kg / 2250kg</span>
+              <span class="small-badge">81%</span>
+              <span class="small-badge">ALTA</span>
+            </div>
+          </div>
+
+          <div class="route">
+            <div class="route-head">
+              <span>▱</span>
+              <span class="route-title">REPARTO 2</span>
+              <span class="muted">12 pedidos</span>
+              <div class="bar"><span style="width:100%; background:#e11d48"></span></div>
+              <span class="muted">1519.0kg / 1500kg</span>
+              <span class="small-badge" style="background:#842031;color:#fecdd3">101%</span>
+            </div>
+          </div>
+
+          <div class="mock-overlay"></div>
+
+          <section class="mock-modal">
+            <h3>Productos del día</h3>
+            <p>Cantidades a enviar el Vie 15/05, agrupadas por producto.</p>
+
+            <div class="mock-view" data-view="basic">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Producto</th>
+                    <th class="num">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Jabón líquido ropa 5L</td><td class="num">84</td></tr>
+                  <tr><td>Lavandina tradicional 5L</td><td class="num">76</td></tr>
+                  <tr><td>Detergente limón 1L</td><td class="num">64</td></tr>
+                  <tr><td>Rejilla multiuso x12</td><td class="num">51</td></tr>
+                  <tr><td>Desengrasante naranja 5L</td><td class="num">43</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="mock-view" data-view="plus" hidden>
+              <div class="tabs">
+                <div class="tab active">Total</div>
+                <div class="tab">R1</div>
+                <div class="tab">R2</div>
+                <div class="tab">R3</div>
+              </div>
+
+              <table>
+                <thead>
+                  <tr>
+                    <th>Producto</th>
+                    <th class="num">Total</th>
+                    <th class="center">R1</th>
+                    <th class="center">R2</th>
+                    <th class="center">R3</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Jabón líquido ropa 5L</td><td class="num">84</td><td class="center"><span class="chip">31</span></td><td class="center"><span class="chip">22</span></td><td class="center"><span class="chip">31</span></td></tr>
+                  <tr><td>Lavandina tradicional 5L</td><td class="num">76</td><td class="center"><span class="chip">28</span></td><td class="center"><span class="chip">21</span></td><td class="center"><span class="chip">27</span></td></tr>
+                  <tr><td>Detergente limón 1L</td><td class="num">64</td><td class="center"><span class="chip">20</span></td><td class="center"><span class="chip">18</span></td><td class="center"><span class="chip">26</span></td></tr>
+                  <tr><td>Rejilla multiuso x12</td><td class="num">51</td><td class="center"><span class="chip">17</span></td><td class="center"><span class="chip">14</span></td><td class="center"><span class="chip">20</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="mock-footer">
+              <span>Cantidades agrupadas según los pedidos asignados al día.</span>
+              <strong style="color:#fff">Exportar</strong>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Comparativa de alcance</h2>
+      <table class="scope-table">
+        <thead>
+          <tr>
+            <th>Funcionalidad</th>
+            <th class="right">Opción A<br>Simple</th>
+            <th class="right">Opción B<br>Por reparto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Nuevo botón <strong>Productos</strong> en Repartos Día</td>
+            <td class="right"><span class="yes">Sí</span></td>
+            <td class="right"><span class="yes">Sí</span></td>
+          </tr>
+          <tr>
+            <td>Modal con productos agrupados del día</td>
+            <td class="right"><span class="yes">Sí</span></td>
+            <td class="right"><span class="yes">Sí</span></td>
+          </tr>
+          <tr>
+            <td>Tabla <strong>Producto</strong> + <strong>Total</strong></td>
+            <td class="right"><span class="yes">Sí</span></td>
+            <td class="right"><span class="yes">Sí</span></td>
+          </tr>
+          <tr>
+            <td>Exportación en hoja A4</td>
+            <td class="right"><span class="yes">Sí</span></td>
+            <td class="right"><span class="yes">Sí</span></td>
+          </tr>
+          <tr>
+            <td>Separación por reparto/vehículo</td>
+            <td class="right"><span class="no">No</span></td>
+            <td class="right"><span class="yes">Sí</span></td>
+          </tr>
+          <tr>
+            <td>Respeta los vehículos activos configurados en el sistema</td>
+            <td class="right"><span class="no">No aplica</span></td>
+            <td class="right"><span class="yes">Sí</span></td>
+          </tr>
+          <tr>
+            <td>Tabs por reparto y vista individual de cada vehículo</td>
+            <td class="right"><span class="no">No</span></td>
+            <td class="right"><span class="yes">Sí</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="grid-2">
+      <div class="section">
+        <h2>Qué resuelve</h2>
+        <ul class="list">
+          <li><span class="check">✓</span><span>Permite saber rápidamente cuántos productos de cada tipo salen en el día.</span></li>
+          <li><span class="check">✓</span><span>Evita revisar pedido por pedido para preparar la carga.</span></li>
+          <li><span class="check">✓</span><span>Permite imprimir o exportar el resumen en una hoja A4.</span></li>
+          <li><span class="check">✓</span><span>En la opción por reparto, también separa cantidades por reparto/vehículo.</span></li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Alcance incluido</h2>
+        <ul class="list">
+          <li><span class="check">✓</span><span>Nuevo botón <strong>Productos</strong> dentro de la vista actual de Repartos Día.</span></li>
+          <li><span class="check">✓</span><span>Modal integrado al sistema con tabla de productos agrupados.</span></li>
+          <li><span class="check">✓</span><span>Exportación del resumen en formato apto para hoja A4.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="footer">
+      Propuesta preparada para Alquímica CRM - Mejora sobre módulo de Repartos Día.
+    </div>
+  </main>
+  <script>
+    const viewButtons = document.querySelectorAll('[data-view-button]');
+    const views = document.querySelectorAll('[data-view]');
+
+    viewButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const selected = button.dataset.viewButton;
+
+        viewButtons.forEach((item) => {
+          item.classList.toggle('active', item.dataset.viewButton === selected);
+        });
+
+        views.forEach((view) => {
+          view.hidden = view.dataset.view !== selected;
+        });
+      });
+    });
+  </script>
+</body>
+</html>
