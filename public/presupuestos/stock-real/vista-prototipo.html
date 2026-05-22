@@ -1,0 +1,963 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mock - Stock real en deposito</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090d13;
+      --panel: #11161d;
+      --panel-2: #151a22;
+      --line: #272d36;
+      --line-2: #343b46;
+      --muted: #8b96a8;
+      --text: #f8fafc;
+      --soft: #cbd5e1;
+      --green: #00a846;
+      --green-2: #063d27;
+      --amber: #ff9d2e;
+      --excel: #217346;
+      --excel-2: #0f3b25;
+      --red: #e11d48;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 14px;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 204px 1fr;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      border-right: 1px solid var(--line);
+      background: #070a0f;
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 700;
+      font-size: 16px;
+      white-space: nowrap;
+    }
+
+    .leaf {
+      width: 22px;
+      height: 22px;
+      color: #00d464;
+    }
+
+    .nav {
+      display: grid;
+      gap: 6px;
+    }
+
+    .nav-item {
+      height: 36px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 12px;
+      border-radius: 6px;
+      color: var(--soft);
+      font-weight: 600;
+    }
+
+    .nav-item.active-primary {
+      background: var(--green);
+      color: #031208;
+    }
+
+    .nav-item.active {
+      background: #171c24;
+      color: var(--text);
+    }
+
+    .nav-icon {
+      width: 18px;
+      text-align: center;
+      opacity: .95;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .main {
+      min-width: 0;
+      padding: 0 24px 40px;
+    }
+
+    .topbar {
+      min-height: 74px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .page-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 270px;
+      font-size: 18px;
+      font-weight: 850;
+    }
+
+    .page-title small {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .top-actions {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+      background: #0f141c;
+      color: var(--text);
+      padding: 0 12px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      border-color: #3a4454;
+      background: #141a23;
+    }
+
+    .btn-primary {
+      background: var(--green);
+      border-color: var(--green);
+      color: #021108;
+    }
+
+    .btn-stock {
+      border-color: #1f7a48;
+      background: #07331f;
+      color: #8df7b7;
+    }
+
+    .btn-stock:hover {
+      border-color: #26a85f;
+      background: #0a472b;
+      color: #ffffff;
+    }
+
+    .btn-excel {
+      border-color: #2f9a61;
+      background: var(--excel-2);
+      color: #b8f3d0;
+    }
+
+    .btn-pdf {
+      border-color: #8f2942;
+      background: #3b0f1d;
+      color: #fecdd3;
+    }
+
+    .field {
+      height: 32px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #0f141c;
+      color: var(--text);
+      padding: 0 10px;
+      min-width: 146px;
+      font-size: 13px;
+    }
+
+    .field.search {
+      min-width: 230px;
+    }
+
+    .field.select {
+      appearance: none;
+    }
+
+    .name-col {
+      width: 360px;
+      max-width: 360px;
+    }
+
+    .content {
+      padding: 24px 24px 0;
+    }
+
+    .product-card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .filters {
+      min-height: 48px;
+      border-bottom: 1px solid var(--line);
+      background: #0d1118;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 14px;
+    }
+
+    .checkline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--soft);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .checkline input {
+      accent-color: var(--green);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      height: 34px;
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      font-weight: 800;
+      text-align: left;
+      padding: 0 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    td {
+      height: 38px;
+      padding: 0 12px;
+      border-bottom: 1px solid var(--line);
+      color: var(--soft);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .drag-col,
+    .select-col {
+      width: 34px;
+      text-align: center;
+      padding: 0 6px;
+    }
+
+    .drag-handle {
+      color: #667085;
+      font-weight: 900;
+      cursor: grab;
+      letter-spacing: -2px;
+    }
+
+    .row-check {
+      width: 14px;
+      height: 14px;
+      accent-color: var(--green);
+      cursor: pointer;
+    }
+
+    .product-row.excluded td:not(:last-child),
+    .product-row.excluded .strong {
+      color: #6f7784;
+    }
+
+    .bulk-bar {
+      min-height: 42px;
+      border-bottom: 1px solid var(--line);
+      background: #0d1118;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 14px;
+    }
+
+    .bulk-copy {
+      margin-right: auto;
+      color: var(--soft);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .bulk-btn {
+      height: 28px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #11161d;
+      color: var(--text);
+      padding: 0 10px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .bulk-btn.good {
+      border-color: #137a45;
+      background: #07331f;
+      color: #8df7b7;
+    }
+
+    .bulk-btn.warn {
+      border-color: #8f2942;
+      background: #3b0f1d;
+      color: #fecdd3;
+    }
+
+    .mock-status {
+      min-height: 28px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+      background: #0d1118;
+    }
+
+    .strong {
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .pill {
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid #0a6c47;
+      background: #062e22;
+      color: #00c86b;
+      border-radius: 999px;
+      padding: 0 10px;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .pill.off {
+      border-color: #4b5563;
+      background: #151a22;
+      color: var(--muted);
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 6px;
+    }
+
+    .icon-btn {
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      background: #0b2447;
+      color: #60a5fa;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .icon-btn.stock-on {
+      border-color: #137a45;
+      background: #07331f;
+      color: #8df7b7;
+    }
+
+    .icon-btn.stock-off {
+      border-color: #3b414c;
+      background: #151a22;
+      color: #6b7280;
+    }
+
+    .icon-btn.danger {
+      background: #350914;
+      color: #fb7185;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgb(0 0 0 / .62);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+    }
+
+    .modal {
+      width: min(800px, calc(100vw - 96px));
+      max-height: calc(100vh - 92px);
+      border: 1px solid #2b3340;
+      border-radius: 8px;
+      background: #0d1118;
+      box-shadow: 0 30px 90px rgb(0 0 0 / .55);
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+    }
+
+    .modal-header {
+      position: relative;
+      z-index: 50;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 24px 12px;
+    }
+
+    .modal-title {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.2;
+      font-weight: 850;
+    }
+
+    .modal-date {
+      color: var(--green);
+    }
+
+    .modal-subtitle {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .close {
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--muted);
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      background: #151a22;
+      color: var(--text);
+    }
+
+    .modal-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 24px 14px;
+    }
+
+    .modal-table-wrap {
+      position: relative;
+      z-index: 1;
+      margin: 0 24px;
+      border: 1px solid var(--line-2);
+      border-radius: 4px;
+      overflow: auto;
+      max-height: min(68vh, calc(100vh - 250px));
+      background: var(--panel);
+      scrollbar-color: #5b6472 #11161d;
+      scrollbar-width: thin;
+    }
+
+    .modal-table-wrap::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    .modal-table-wrap::-webkit-scrollbar-track {
+      background: #11161d;
+    }
+
+    .modal-table-wrap::-webkit-scrollbar-thumb {
+      background: #5b6472;
+      border: 2px solid #11161d;
+      border-radius: 999px;
+    }
+
+    .stock-table th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: #141922;
+      color: var(--text);
+      font-size: 14px;
+      text-transform: none;
+      letter-spacing: 0;
+      border: 1px solid var(--line-2);
+    }
+
+    .stock-table td {
+      height: 42px;
+      border: 1px solid var(--line-2);
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .product-name {
+      min-width: 330px;
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .real-stock {
+      color: #8df7b7;
+      font-weight: 900;
+      font-size: 18px;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .available-stock {
+      color: var(--text);
+      font-weight: 850;
+      font-size: 18px;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 24px 24px;
+    }
+
+    .footer-note {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 1535px) {
+      .app {
+        grid-template-columns: 56px 1fr;
+      }
+
+      .brand span,
+      .nav-label,
+      .sidebar-footer {
+        display: none;
+      }
+
+      .sidebar {
+        padding: 12px 8px;
+      }
+
+      .nav-item {
+        justify-content: center;
+        padding: 0;
+      }
+
+      .main {
+        padding: 0 16px 32px;
+      }
+
+      .content {
+        padding: 18px 16px 0;
+      }
+
+      .topbar {
+        height: auto;
+        min-height: 68px;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding: 10px 0;
+      }
+
+      .top-actions {
+        margin-left: 0;
+      }
+
+      .modal {
+        width: min(800px, calc(100vw - 72px));
+        max-height: calc(100vh - 70px);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .topbar,
+      .modal-controls,
+      .filters {
+        flex-wrap: wrap;
+      }
+
+      .field,
+      .field.search {
+        min-width: 0;
+        width: 100%;
+      }
+
+      .modal {
+        width: calc(100vw - 28px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <svg class="leaf" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M20 4c-8.4.4-14.2 4.5-14.2 11.3 0 3.2 2.1 5.2 5.2 5.2C17.9 20.5 21.3 12.2 20 4Z" stroke="currentColor" stroke-width="2"/>
+          <path d="M4 20c2.7-5.9 7.1-9.3 13.2-10.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span>Alqu&iacute;mica CRM</span>
+      </div>
+
+      <nav class="nav">
+        <div class="nav-item active-primary"><span class="nav-icon">▣</span><span class="nav-label">COTIZADOR</span></div>
+        <div class="nav-item"><span class="nav-icon">⌂</span><span class="nav-label">Dashboard</span></div>
+        <div class="nav-item"><span class="nav-icon">♙</span><span class="nav-label">Clientes</span></div>
+        <div class="nav-item active"><span class="nav-icon">□</span><span class="nav-label">Productos y Stock</span></div>
+        <div class="nav-item"><span class="nav-icon">▱</span><span class="nav-label">Ventas</span></div>
+        <div class="nav-item"><span class="nav-icon">▥</span><span class="nav-label">Estad&iacute;sticas</span></div>
+        <div class="nav-item"><span class="nav-icon">▭</span><span class="nav-label">Respaldos</span></div>
+        <div class="nav-item"><span class="nav-icon">⚙</span><span class="nav-label">Configuraci&oacute;n</span></div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="nav-item"><span class="nav-icon">◐</span><span class="nav-label">Tema</span></div>
+        <div class="nav-item"><span class="nav-icon">↪</span><span class="nav-label">Cerrar Sesi&oacute;n</span></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="page-title">□ Productos y Stock <small>(257 productos)</small></div>
+        <input class="field search" id="productSearch" placeholder="Buscar producto..." aria-label="Buscar producto">
+        <select class="field select" id="providerFilter" aria-label="Proveedor">
+          <option value="todos">Todos los proveedores</option>
+        </select>
+        <select class="field select" id="stockFilter" aria-label="Estado reporte">
+          <option value="todos">Reporte stock: Todos</option>
+          <option value="incluidos">Incluidos</option>
+          <option value="excluidos">Excluidos</option>
+        </select>
+        <div class="top-actions">
+          <button class="btn btn-stock" type="button" data-open>▣ Stock real</button>
+          <button class="btn" type="button">⇩ Exportar</button>
+          <button class="btn btn-primary" type="button">□ Nuevo</button>
+        </div>
+      </header>
+
+      <section class="content">
+        <article class="product-card">
+          <div class="filters">
+            <label class="checkline"><input type="checkbox"> En promocion</label>
+            <label class="checkline"><input type="checkbox" checked> Stock bajo</label>
+            <label class="checkline"><input type="checkbox"> Combos</label>
+            <button class="btn">Limpiar</button>
+          </div>
+          <div class="bulk-bar hidden" id="bulkBar">
+            <span class="bulk-copy" id="bulkCopy">0 productos seleccionados</span>
+            <button class="bulk-btn good" id="bulkInclude" type="button">Incluir en Stock real</button>
+            <button class="bulk-btn warn" id="bulkExclude" type="button">Excluir de Stock real</button>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th class="drag-col"></th>
+                <th class="select-col"><input class="row-check" id="selectAllProducts" type="checkbox" aria-label="Seleccionar productos visibles"></th>
+                <th class="name-col">Producto</th>
+                <th>Proveedor</th>
+                <th>Stock actual</th>
+                <th>Stock minimo</th>
+                <th>Precio base</th>
+                <th style="text-align:right">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="productsBody"></tbody>
+          </table>
+          <div class="mock-status" id="mockStatus"></div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div class="overlay hidden" id="modal">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <header class="modal-header">
+        <div>
+          <h1 class="modal-title" id="modal-title">Stock real en deposito, <span class="modal-date">Viernes 22 de mayo de 2026</span></h1>
+          <div class="modal-subtitle">Se muestran solo los productos marcados para este reporte.</div>
+        </div>
+        <button class="close" type="button" data-close aria-label="Cerrar">x</button>
+      </header>
+
+      <div class="modal-controls">
+        <input class="field" type="date" value="2026-05-22" aria-label="Fecha de corte">
+        <select class="field" aria-label="Proveedor">
+          <option>Todos los proveedores</option>
+          <option>Distribuidora Sur</option>
+          <option>Higiene Total</option>
+          <option>Mayorista Norte</option>
+        </select>
+        <select class="field" aria-label="Etiqueta">
+          <option>Todas las etiquetas</option>
+          <option>Bidones x5</option>
+          <option>Pet 5 lts</option>
+          <option>Deposito</option>
+        </select>
+      </div>
+
+      <div class="modal-table-wrap">
+        <table class="stock-table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th style="text-align:center">Stock real</th>
+              <th style="text-align:center">Stock disponible</th>
+            </tr>
+          </thead>
+          <tbody id="reportBody"></tbody>
+        </table>
+      </div>
+
+      <footer class="modal-footer">
+        <div class="footer-note">Fecha de corte: no se descuentan ventas con reparto posterior a la fecha elegida.</div>
+        <div style="display:flex; gap:10px">
+          <button class="btn btn-pdf">⇩ Descargar PDF</button>
+          <button class="btn btn-excel">⇩ Descargar Excel</button>
+          <button class="btn" type="button" data-close>Cerrar</button>
+        </div>
+      </footer>
+    </section>
+  </div>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const products = [
+      { id: 1, name: 'Balde de plastico', provider: 'Distribuidora Sur', stock: 50, min: 15, price: '$ 3.200', future: 20, included: true },
+      { id: 2, name: 'Papel 12x4x80', provider: 'Higiene Total', stock: 124, min: 40, price: '$ 12.400', future: 36, included: true },
+      { id: 3, name: 'Detergente x5 lts', note: 'stock infinito', provider: 'Alquimica', stock: 9999, min: 20, price: '$ 5.900', future: 0, included: false },
+      { id: 4, name: 'Rejilla multiuso x12', provider: 'Mayorista Norte', stock: 32, min: 20, price: '$ 4.800', future: 8, included: true },
+      { id: 5, name: 'Lavandina tradicional 5L', note: 'stock infinito', provider: 'Alquimica', stock: 9999, min: 50, price: '$ 2.150', future: 0, included: false },
+      { id: 6, name: 'Alcohol en gel 500ml', provider: 'Distribuidora Sur', stock: 38, min: 12, price: '$ 1.950', future: 7, included: true },
+      { id: 7, name: 'Bolsas residuos 80x110', provider: 'Mayorista Norte', stock: 96, min: 30, price: '$ 6.400', future: 0, included: true },
+      { id: 8, name: 'Combo baño completo', note: 'combo', provider: 'Alquimica', stock: 9999, min: 0, price: '$ 18.900', future: 0, included: false },
+      { id: 9, name: 'Limpiador pisos lavanda 5L', provider: 'Distribuidora Sur', stock: 63, min: 25, price: '$ 3.700', future: 11, included: true },
+    ];
+    const selected = new Set();
+    const productsBody = document.getElementById('productsBody');
+    const reportBody = document.getElementById('reportBody');
+    const productSearch = document.getElementById('productSearch');
+    const providerFilter = document.getElementById('providerFilter');
+    const stockFilter = document.getElementById('stockFilter');
+    const selectAllProducts = document.getElementById('selectAllProducts');
+    const bulkBar = document.getElementById('bulkBar');
+    const bulkCopy = document.getElementById('bulkCopy');
+    const mockStatus = document.getElementById('mockStatus');
+
+    function renderProviders() {
+      const providers = [...new Set(products.map((product) => product.provider))];
+      providerFilter.innerHTML = [
+        '<option value="todos">Todos los proveedores</option>',
+        ...providers.map((provider) => `<option value="${provider}">${provider}</option>`),
+      ].join('');
+    }
+
+    function getVisibleProducts() {
+      const search = productSearch.value.trim().toLowerCase();
+      const provider = providerFilter.value;
+      const stockMode = stockFilter.value;
+
+      return products.filter((product) => {
+        const matchesSearch = !search || product.name.toLowerCase().includes(search) || product.provider.toLowerCase().includes(search);
+        const matchesProvider = provider === 'todos' || product.provider === provider;
+        const matchesStock = stockMode === 'todos' || (stockMode === 'incluidos' && product.included) || (stockMode === 'excluidos' && !product.included);
+        return matchesSearch && matchesProvider && matchesStock;
+      });
+    }
+
+    function renderProducts() {
+      const visible = getVisibleProducts();
+      productsBody.innerHTML = visible.map((product) => {
+        const isSelected = selected.has(product.id);
+        const note = product.note ? ` <span class="muted">(${product.note})</span>` : '';
+        return `
+          <tr class="product-row ${product.included ? '' : 'excluded'}">
+            <td class="drag-col"><span class="drag-handle">⋮⋮</span></td>
+            <td class="select-col"><input class="row-check" type="checkbox" data-id="${product.id}" ${isSelected ? 'checked' : ''} aria-label="Seleccionar ${product.name}"></td>
+            <td class="strong name-col">${product.name}${note}</td>
+            <td>${product.provider}</td>
+            <td class="strong">${product.stock}</td>
+            <td>${product.min}</td>
+            <td>${product.price}</td>
+            <td>
+              <div class="actions">
+                <button class="icon-btn ${product.included ? 'stock-on' : 'stock-off'}" data-toggle-stock="${product.id}" title="${product.included ? 'Incluido en stock real' : 'Excluido de stock real'}">${product.included ? '■' : '□'}</button>
+                <button class="icon-btn" title="Editar">✎</button>
+                <button class="icon-btn" title="Historial">▥</button>
+                <button class="icon-btn danger" title="Eliminar">⌫</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      const visibleIds = visible.map((product) => product.id);
+      const selectedVisible = visibleIds.filter((id) => selected.has(id));
+      selectAllProducts.checked = visible.length > 0 && selectedVisible.length === visible.length;
+      selectAllProducts.indeterminate = selectedVisible.length > 0 && selectedVisible.length < visible.length;
+      renderBulk();
+      renderReport();
+    }
+
+    function renderBulk() {
+      bulkBar.classList.toggle('hidden', selected.size === 0);
+      bulkCopy.textContent = selected.size === 1 ? '1 producto seleccionado' : `${selected.size} productos seleccionados`;
+    }
+
+    function renderReport() {
+      reportBody.innerHTML = products
+        .filter((product) => product.included)
+        .map((product) => `
+          <tr>
+            <td class="product-name">${product.name}</td>
+            <td class="real-stock">${product.stock + product.future}</td>
+            <td class="available-stock">${product.stock}</td>
+          </tr>
+        `)
+        .join('');
+    }
+
+    function setStatus(message) {
+      mockStatus.textContent = message;
+      window.clearTimeout(setStatus.timer);
+      setStatus.timer = window.setTimeout(() => {
+        mockStatus.textContent = '';
+      }, 2600);
+    }
+
+    function setIncluded(ids, included) {
+      products.forEach((product) => {
+        if (ids.includes(product.id)) {
+          product.included = included;
+        }
+      });
+      selected.clear();
+      renderProducts();
+      setStatus(included ? 'Productos incluidos en Stock real.' : 'Productos excluidos de Stock real.');
+    }
+
+    document.querySelectorAll('[data-close]').forEach((button) => {
+      button.addEventListener('click', () => modal.classList.add('hidden'));
+    });
+
+    document.querySelectorAll('[data-open]').forEach((button) => {
+      button.addEventListener('click', () => modal.classList.remove('hidden'));
+    });
+
+    productsBody.addEventListener('click', (event) => {
+      const toggle = event.target.closest('[data-toggle-stock]');
+      if (!toggle) return;
+      const product = products.find((item) => item.id === Number(toggle.dataset.toggleStock));
+      product.included = !product.included;
+      renderProducts();
+      setStatus(product.included ? `${product.name} incluido en Stock real.` : `${product.name} excluido de Stock real.`);
+    });
+
+    productsBody.addEventListener('change', (event) => {
+      const checkbox = event.target.closest('.row-check');
+      if (!checkbox) return;
+      const id = Number(checkbox.dataset.id);
+      if (checkbox.checked) {
+        selected.add(id);
+      } else {
+        selected.delete(id);
+      }
+      renderProducts();
+    });
+
+    selectAllProducts.addEventListener('change', () => {
+      getVisibleProducts().forEach((product) => {
+        if (selectAllProducts.checked) {
+          selected.add(product.id);
+        } else {
+          selected.delete(product.id);
+        }
+      });
+      renderProducts();
+    });
+
+    document.getElementById('bulkInclude').addEventListener('click', () => setIncluded([...selected], true));
+    document.getElementById('bulkExclude').addEventListener('click', () => setIncluded([...selected], false));
+
+    [productSearch, providerFilter, stockFilter].forEach((control) => {
+      control.addEventListener('input', () => {
+        selected.clear();
+        renderProducts();
+      });
+      control.addEventListener('change', () => {
+        selected.clear();
+        renderProducts();
+      });
+    });
+
+    renderProviders();
+    renderProducts();
+  </script>
+</body>
+</html>
