@@ -1,0 +1,1291 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prototipo - Mapa de recorrido en Repartos Dia</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #06080c;
+      --sidebar: #080b10;
+      --panel: #0d1118;
+      --panel-2: #121821;
+      --panel-3: #171f2b;
+      --line: #27303d;
+      --line-2: #354153;
+      --text: #f8fafc;
+      --muted: #8d99aa;
+      --soft: #cdd5e1;
+      --green: #24ad39;
+      --green-soft: rgba(36, 173, 57, .14);
+      --blue: #2563eb;
+      --blue-2: #0b66ff;
+      --orange: #f59e0b;
+      --red: #fb3344;
+      --shadow: 0 28px 90px rgba(0, 0, 0, .42);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.4;
+    }
+
+    button,
+    select {
+      font: inherit;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 208px 1fr;
+      background:
+        radial-gradient(circle at 78% 0%, rgba(37, 99, 235, .12), transparent 36rem),
+        var(--bg);
+    }
+
+    .sidebar {
+      border-right: 1px solid #1f2630;
+      background: var(--sidebar);
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 850;
+      font-size: 15px;
+      padding: 7px 4px 12px;
+      border-bottom: 1px solid #1f2630;
+    }
+
+    .brand-mark {
+      width: 24px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 7px;
+      color: #6ee787;
+      border: 1px solid rgba(36, 173, 57, .42);
+      background: rgba(36, 173, 57, .12);
+    }
+
+    .nav {
+      display: grid;
+      gap: 5px;
+    }
+
+    .nav-item {
+      min-height: 37px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 7px;
+      color: #dbe4f0;
+      padding: 0 10px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav-item.active {
+      background: var(--green);
+      color: #061008;
+    }
+
+    .nav-spacer { flex: 1; }
+
+    .main {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      border-bottom: 1px solid #202733;
+      padding: 0 24px;
+      background: rgba(6, 8, 12, .84);
+      backdrop-filter: blur(18px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .top-left,
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .ghost-btn,
+    .solid-btn,
+    .outline-btn {
+      min-height: 34px;
+      border-radius: 7px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .035);
+      color: var(--soft);
+      padding: 0 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: border-color .16s ease, background .16s ease, transform .16s ease;
+      white-space: nowrap;
+    }
+
+    .ghost-btn:hover,
+    .outline-btn:hover {
+      border-color: var(--line-2);
+      background: rgba(255, 255, 255, .07);
+    }
+
+    .solid-btn {
+      border-color: var(--green);
+      background: var(--green);
+      color: #041008;
+    }
+
+    .solid-btn:hover { background: #31c64a; }
+
+    .map-top-btn {
+      border-color: rgba(37, 99, 235, .55);
+      color: #dbeafe;
+      background: rgba(37, 99, 235, .16);
+    }
+
+    .date-title {
+      min-width: 165px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 850;
+    }
+
+    .badge {
+      min-height: 25px;
+      border: 1px solid rgba(36, 173, 57, .35);
+      background: rgba(36, 173, 57, .13);
+      color: #54d96a;
+      border-radius: 999px;
+      padding: 4px 9px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .content {
+      padding: 24px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .vehicle-card {
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--panel);
+      overflow: hidden;
+    }
+
+    .vehicle-head {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+    }
+
+    .vehicle-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      flex-wrap: wrap;
+    }
+
+    .truck-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, .04);
+      color: var(--muted);
+      border: 1px solid var(--line);
+      flex: 0 0 auto;
+    }
+
+    .vehicle-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+    }
+
+    .vehicle-title strong {
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+
+    .vehicle-title span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .capacity {
+      width: 144px;
+      height: 16px;
+      border: 1px solid var(--line-2);
+      background: #252b35;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .capacity span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, #24ad39, #4ade80);
+    }
+
+    .capacity.high span {
+      background: linear-gradient(90deg, #ff3348, #ff5161);
+    }
+
+    .vehicle-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tiny-badge {
+      border-radius: 7px;
+      background: rgba(251, 51, 68, .16);
+      color: #ff9aa3;
+      font-size: 12px;
+      font-weight: 850;
+      padding: 4px 8px;
+      text-transform: uppercase;
+    }
+
+    .tiny-badge.good {
+      background: rgba(36, 173, 57, .16);
+      color: #8df5a0;
+    }
+
+    .vehicle-content[hidden] {
+      display: none;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+      border-bottom: 1px solid var(--line);
+      padding: 9px 12px;
+      text-align: left;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .table th {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      font-size: 10px;
+      font-weight: 850;
+      background: rgba(255, 255, 255, .02);
+    }
+
+    .table tr:last-child td { border-bottom: 0; }
+
+    .table tr.dragging { opacity: .42; }
+
+    .table td.address {
+      font-weight: 800;
+      color: var(--text);
+      white-space: normal;
+      min-width: 250px;
+    }
+
+    .order-chip {
+      min-width: 22px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      background: var(--green);
+      color: #041008;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .drag-dots {
+      color: #64748b;
+      font-weight: 900;
+      margin-right: 7px;
+      cursor: grab;
+    }
+
+    .vehicle-footer {
+      border-top: 1px solid var(--line);
+      background: rgba(255, 255, 255, .025);
+      padding: 11px 13px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 9px;
+    }
+
+    .empty-card {
+      padding: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .map-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      background: rgba(0, 0, 0, .72);
+      backdrop-filter: blur(8px);
+      padding: 18px;
+    }
+
+    .map-modal.open {
+      display: grid;
+      place-items: center;
+    }
+
+    .map-shell {
+      width: min(1540px, 100%);
+      height: min(900px, calc(100vh - 36px));
+      min-height: 620px;
+      display: grid;
+      grid-template-rows: 58px 1fr 56px;
+      border: 1px solid #334155;
+      border-radius: 13px;
+      background: #0a0e15;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .map-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      padding: 0 16px;
+      background: #0d121a;
+    }
+
+    .map-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .map-title strong {
+      display: block;
+      font-size: 15px;
+    }
+
+    .map-title span {
+      color: var(--muted);
+      display: block;
+      font-size: 12px;
+    }
+
+    .map-body {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 405px 1fr;
+    }
+
+    .route-panel {
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--line);
+      background: #0d121a;
+    }
+
+    .route-panel-top {
+      padding: 14px;
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      gap: 10px;
+    }
+
+    .route-select {
+      height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #080c12;
+      color: var(--text);
+      padding: 0 12px;
+      outline: none;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .route-summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .summary-box {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .035);
+      padding: 8px;
+    }
+
+    .summary-box strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .summary-box span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .stop-list {
+      min-height: 0;
+      overflow: auto;
+      padding: 10px;
+      display: grid;
+      align-content: start;
+      gap: 8px;
+    }
+
+    .stop-card {
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--panel-2);
+      padding: 10px;
+      display: grid;
+      grid-template-columns: 31px 1fr 74px;
+      gap: 9px;
+      align-items: center;
+      cursor: grab;
+    }
+
+    .stop-card.dragging { opacity: .45; }
+
+    .stop-card.off {
+      opacity: .62;
+      background: #0f141c;
+    }
+
+    .stop-card.off .letter {
+      background: #4b5563;
+      border-color: #cbd5e1;
+    }
+
+    .letter {
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--blue);
+      border: 2px solid #dbeafe;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .stop-info strong {
+      display: block;
+      font-size: 12px;
+      line-height: 1.2;
+    }
+
+    .stop-info span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 3px;
+    }
+
+    .move-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+
+    .move-actions button {
+      height: 24px;
+      border-radius: 5px;
+      border: 1px solid var(--line);
+      background: #0a0e15;
+      color: var(--soft);
+      cursor: pointer;
+    }
+
+    .route-toggle {
+      grid-column: 1 / -1;
+      height: 24px;
+      border-radius: 5px;
+      border: 1px solid rgba(36, 173, 57, .38);
+      background: rgba(36, 173, 57, .12);
+      color: #9ee9ad;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .route-toggle.off {
+      border-color: var(--line);
+      background: #0a0e15;
+      color: var(--muted);
+    }
+
+    .map-area {
+      position: relative;
+      min-width: 0;
+      min-height: 0;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(68, 88, 73, .18) 1px, transparent 1px) 0 0 / 52px 52px,
+        linear-gradient(0deg, rgba(68, 88, 73, .18) 1px, transparent 1px) 0 0 / 52px 52px,
+        #d8e1d0;
+    }
+
+    .map-toolbar {
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid rgba(15, 23, 42, .16);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .92);
+      color: #111827;
+      padding: 6px 8px;
+      font-size: 12px;
+      font-weight: 800;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, .12);
+    }
+
+    .map-toolbar span {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #e7f0ff;
+      color: var(--blue);
+    }
+
+    .region {
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(59, 130, 246, .07);
+      border: 1px solid rgba(37, 99, 235, .12);
+    }
+
+    .region.r-a {
+      width: 260px;
+      height: 120px;
+      left: 185px;
+      top: 170px;
+      transform: rotate(-10deg);
+    }
+
+    .region.r-b {
+      width: 440px;
+      height: 155px;
+      right: 130px;
+      bottom: 125px;
+      transform: rotate(9deg);
+    }
+
+    .map-road {
+      position: absolute;
+      height: 10px;
+      background: #ffffff;
+      border-radius: 999px;
+      box-shadow: 0 0 0 2px rgba(30, 41, 59, .11);
+      opacity: .98;
+    }
+
+    .map-road.one {
+      width: 72%;
+      left: 8%;
+      top: 51%;
+      transform: rotate(-4deg);
+    }
+
+    .map-road.two {
+      width: 34%;
+      left: 24%;
+      top: 32%;
+      transform: rotate(46deg);
+    }
+
+    .map-road.three {
+      width: 48%;
+      right: 8%;
+      top: 35%;
+      transform: rotate(-15deg);
+    }
+
+    .map-road.four {
+      width: 32%;
+      left: 11%;
+      bottom: 20%;
+      transform: rotate(24deg);
+    }
+
+    .route-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .map-marker {
+      position: absolute;
+      z-index: 3;
+      width: 30px;
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      background: var(--blue);
+      color: white;
+      font-size: 12px;
+      font-weight: 900;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, .32);
+      transform: translate(-50%, -50%);
+    }
+
+    .map-marker.off {
+      background: #64748b;
+      opacity: .72;
+    }
+
+    .place-label {
+      position: absolute;
+      z-index: 1;
+      color: rgba(15, 23, 42, .58);
+      font-size: 13px;
+      font-weight: 750;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .map-brand {
+      position: absolute;
+      right: 18px;
+      bottom: 14px;
+      color: rgba(15, 23, 42, .55);
+      font-size: 18px;
+      font-weight: 900;
+      z-index: 4;
+    }
+
+    .map-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-top: 1px solid var(--line);
+      padding: 0 14px;
+      background: #0d121a;
+    }
+
+    .footer-status {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer-status strong { color: #9ee9ad; }
+
+    .toast {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 80;
+      display: none;
+      border: 1px solid rgba(36, 173, 57, .45);
+      border-radius: 10px;
+      background: #0d1d13;
+      color: #b7f7c3;
+      box-shadow: 0 18px 60px rgba(0, 0, 0, .35);
+      padding: 12px 14px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .toast.show { display: block; }
+
+    @media (max-width: 1060px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px;
+      }
+      .top-left,
+      .top-actions,
+      .vehicle-head,
+      .vehicle-actions {
+        flex-wrap: wrap;
+      }
+      .map-body { grid-template-columns: 1fr; }
+      .map-shell { height: calc(100vh - 24px); }
+      .route-panel {
+        max-height: 300px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">⌁</span>
+        <span>Alquimica CRM</span>
+      </div>
+      <nav class="nav">
+        <div class="nav-item">▦ Cotizador</div>
+        <div class="nav-item">⌂ Dashboard</div>
+        <div class="nav-item">♙ Clientes</div>
+        <div class="nav-item">□ Productos y Stock</div>
+        <div class="nav-item active">▰ Ventas</div>
+        <div class="nav-item">▥ Estadisticas</div>
+        <div class="nav-item">▱ Respaldos</div>
+        <div class="nav-item">⚙ Configuracion</div>
+      </nav>
+      <div class="nav-spacer"></div>
+      <div class="nav-item">◐ Tema</div>
+      <div class="nav-item">⇥ Cerrar sesion</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="top-left">
+          <button class="ghost-btn">← Volver</button>
+          <button class="ghost-btn">‹</button>
+          <div class="date-title">Lun 25/05/2026</div>
+          <button class="ghost-btn">›</button>
+          <span class="badge">▣ 23 pedidos</span>
+          <span class="badge">⚖ 2364.0 kg</span>
+        </div>
+        <div class="top-actions">
+          <button class="outline-btn map-top-btn" id="openMapBtn">⌖ Mapa de recorrido</button>
+          <button class="outline-btn">▣ Productos del dia</button>
+          <button class="outline-btn">⌖ Ver por ciudad</button>
+          <button class="solid-btn">⇩ Exportar</button>
+        </div>
+      </header>
+
+      <section class="content" id="vehiclesContainer"></section>
+    </main>
+  </div>
+
+  <section class="map-modal" id="mapModal" aria-hidden="true">
+    <div class="map-shell">
+      <header class="map-header">
+        <div class="map-title">
+          <span class="truck-icon">⌖</span>
+          <div>
+            <strong id="mapTitle">Mapa de recorrido</strong>
+            <span>Seleccionar un reparto, ordenar las paradas y luego importar ese orden al acordeon.</span>
+          </div>
+        </div>
+        <div class="top-actions">
+          <button class="outline-btn" id="simulateBtn">Simular orden de Carlos</button>
+          <button class="ghost-btn" id="closeMapBtn">Cerrar</button>
+        </div>
+      </header>
+
+      <div class="map-body">
+        <aside class="route-panel">
+          <div class="route-panel-top">
+            <select class="route-select" id="vehicleSelect" aria-label="Seleccionar reparto"></select>
+            <div class="route-summary">
+              <div class="summary-box"><strong id="summaryStops">0</strong><span>paradas</span></div>
+              <div class="summary-box"><strong id="summaryKm">0 km</strong><span>estimado</span></div>
+              <div class="summary-box"><strong id="summaryTime">0m</strong><span>manejo</span></div>
+            </div>
+          </div>
+          <div class="stop-list" id="stopList"></div>
+        </aside>
+
+        <div class="map-area">
+          <div class="map-toolbar"><span>i</span> Prototipo visual: en produccion usa Google Maps Platform</div>
+          <div class="region r-a"></div>
+          <div class="region r-b"></div>
+          <div class="map-road one"></div>
+          <div class="map-road two"></div>
+          <div class="map-road three"></div>
+          <div class="map-road four"></div>
+          <div class="place-label" style="left:23%;top:28%">Plottier</div>
+          <div class="place-label" style="left:56%;top:43%">Ciudad de Neuquen</div>
+          <div class="place-label" style="right:12%;bottom:31%">Zona Este</div>
+          <svg class="route-svg" id="routeSvg" viewBox="0 0 1000 620" preserveAspectRatio="none"></svg>
+          <div id="markers"></div>
+          <div class="map-brand">Google Maps</div>
+        </div>
+      </div>
+
+      <footer class="map-footer">
+        <div class="footer-status" id="routeStatus">
+          Estado: <strong>sin cambios</strong>. El mapa carga el mismo orden que tiene el reparto.
+        </div>
+        <div class="top-actions">
+          <button class="outline-btn">Abrir tramo en Google Maps</button>
+          <button class="solid-btn" id="saveOrderBtn">Importar recorrido a reparto</button>
+        </div>
+      </footer>
+    </div>
+  </section>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const vehicles = [
+      {
+        id: 1,
+        name: 'Reparto 1',
+        capacity: 2250,
+        open: true,
+        stops: [
+          { id: 3301, address: 'MISIONES 141', city: 'General Roca', phone: '2984 10-2400', weight: 120, amount: '$ 92.400', x: 220, y: 205 },
+          { id: 3302, address: 'TUCUMAN 820', city: 'General Roca', phone: '2984 66-1030', weight: 95, amount: '$ 84.200', x: 300, y: 235 },
+          { id: 3303, address: 'ALSINA 1120', city: 'General Roca', phone: '2984 90-1130', weight: 140, amount: '$ 121.500', x: 380, y: 255 }
+        ]
+      },
+      {
+        id: 2,
+        name: 'Reparto 2',
+        capacity: 1500,
+        open: true,
+        stops: [
+          { id: 3094, address: 'SANTIAGO DEL ESTERO 191', city: 'Plottier', phone: '2996 72-9021', weight: 5, amount: '$ 116.600', x: 220, y: 200 },
+          { id: 2975, address: 'LIMA 100', city: 'Plottier', phone: '2994 69-3535', weight: 54, amount: '$ 101.300', x: 305, y: 260 },
+          { id: 3188, address: 'JORGE NEWBERY 1030', city: 'Plottier', phone: '299 511-7006', weight: 70, amount: '$ 129.800', x: 385, y: 230 },
+          { id: 3173, address: 'OLIVOS 2954', city: 'Plottier', phone: '2994 76-7941', weight: 100, amount: '$ 256.600', x: 470, y: 315 },
+          { id: 3187, address: 'GUEMES 2926', city: 'Plottier', phone: '299 550-3056', weight: 105, amount: '$ 160.300', x: 550, y: 280 },
+          { id: 3162, address: 'PRIMER PIONERO Y JUAN PABLO II', city: 'Plottier', phone: '2996 73-5223', weight: 70, amount: '$ 334.970', x: 650, y: 255 },
+          { id: 3201, address: 'AV. SAN MARTIN 2548', city: 'Plottier', phone: '299 421-7242', weight: 306, amount: '$ 392.255', x: 720, y: 315 },
+          { id: 3197, address: 'LA PAMPA 921', city: 'Plottier', phone: '2995 18-2954', weight: 65, amount: '$ 107.500', x: 790, y: 250 },
+          { id: 3205, address: 'PALMENIA AROCA LOTE 04', city: 'Plottier', phone: '2994 68-5700', weight: 88, amount: '$ 102.900', x: 840, y: 360 },
+          { id: 3171, address: 'TUNUYAN 1302', city: 'Neuquen', phone: '2994 64-3854', weight: 53, amount: '$ 113.800', x: 620, y: 420 },
+          { id: 3181, address: 'RAMOS MEJIA 1388 2', city: 'Neuquen', phone: '2996 28-8986', weight: 180, amount: '$ 154.800', x: 500, y: 455 },
+          { id: 3177, address: 'ARCOIRIS Y EL SORGO', city: 'Neuquen', phone: '2993 32-5034', weight: 90, amount: '$ 103.100', x: 400, y: 415 },
+          { id: 3198, address: 'CARCARANA 222', city: 'Neuquen', phone: '2995 16-2569', weight: 116, amount: '$ 251.500', x: 320, y: 495 },
+          { id: 3199, address: 'COLLON CURA 1050 TIRA 27 DTO 474 PB', city: 'Neuquen', phone: '2995 86-9437', weight: 71, amount: '$ 117.800', x: 245, y: 445 },
+          { id: 3190, address: 'PIEDRAS BLANCAS MZA 9 LOTE 10', city: 'Neuquen', phone: '2994 64-2919', weight: 115, amount: '$ 103.900', x: 170, y: 510 }
+        ]
+      },
+      {
+        id: 3,
+        name: 'Reparto 3',
+        capacity: 1800,
+        open: true,
+        stops: [
+          { id: 3401, address: 'RUTA 22 Y BELGRANO', city: 'Cipolletti', phone: '2994 51-8000', weight: 210, amount: '$ 144.200', x: 780, y: 455 },
+          { id: 3402, address: 'MENGELLE 754', city: 'Cipolletti', phone: '2994 22-9020', weight: 165, amount: '$ 131.000', x: 710, y: 500 },
+          { id: 3403, address: '25 DE MAYO 1550', city: 'Cipolletti', phone: '2994 40-3301', weight: 180, amount: '$ 168.900', x: 620, y: 520 },
+          { id: 3404, address: 'ESMERALDA 120', city: 'Neuquen', phone: '2995 13-7800', weight: 132, amount: '$ 110.700', x: 520, y: 485 },
+          { id: 3405, address: 'RIO COLORADO 910', city: 'Neuquen', phone: '2994 88-2300', weight: 85, amount: '$ 74.800', x: 440, y: 510 }
+        ]
+      }
+    ];
+
+    const carlosOrderR2 = [3094, 3188, 2975, 3173, 3187, 3201, 3197, 3162, 3205, 3171, 3181, 3177, 3199, 3198, 3190];
+    let selectedVehicleId = 2;
+    let modalStops = [];
+    let draggedTable = null;
+    let draggedModal = null;
+
+    const vehiclesContainer = document.getElementById('vehiclesContainer');
+    const mapModal = document.getElementById('mapModal');
+    const vehicleSelect = document.getElementById('vehicleSelect');
+    const stopList = document.getElementById('stopList');
+    const routeSvg = document.getElementById('routeSvg');
+    const markers = document.getElementById('markers');
+    const routeStatus = document.getElementById('routeStatus');
+    const toast = document.getElementById('toast');
+
+    function formatKg(value) {
+      return `${value.toFixed(1)}kg`;
+    }
+
+    function padId(id) {
+      return `#${String(id).padStart(5, '0')}`;
+    }
+
+    function letter(index) {
+      return String.fromCharCode(65 + index);
+    }
+
+    function getVehicle(id) {
+      return vehicles.find((vehicle) => vehicle.id === id);
+    }
+
+    function getTotalWeight(vehicle) {
+      return vehicle.stops.reduce((sum, stop) => sum + stop.weight, 0);
+    }
+
+    function getCapacityState(vehicle) {
+      const pct = vehicle.capacity ? Math.round(getTotalWeight(vehicle) / vehicle.capacity * 100) : 0;
+      if (pct >= 85) return { label: 'Casi lleno', className: '', pct };
+      if (pct >= 70) return { label: 'Alta', className: '', pct };
+      return { label: 'Optima', className: 'good', pct };
+    }
+
+    function renderVehicles() {
+      vehiclesContainer.innerHTML = vehicles.map((vehicle) => {
+        const total = getTotalWeight(vehicle);
+        const capacity = getCapacityState(vehicle);
+        const rows = vehicle.stops.map((stop, index) => `
+          <tr draggable="true" data-vehicle-id="${vehicle.id}" data-stop-id="${stop.id}">
+            <td><span class="drag-dots">⋮⋮</span><span class="order-chip">${index + 1}</span></td>
+            <td style="color:#24ad39;font-weight:800">${padId(stop.id)}</td>
+            <td class="address">${stop.address}</td>
+            <td>${stop.city}</td>
+            <td style="color:#9aa6b7">${stop.phone}</td>
+            <td style="font-weight:850">${stop.weight}kg</td>
+            <td style="font-weight:850">${stop.amount}</td>
+            <td style="text-align:right"><button class="outline-btn" style="min-height:26px;font-size:11px">↔ Cambiar</button></td>
+          </tr>
+        `).join('');
+
+        return `
+          <article class="vehicle-card" data-vehicle-card="${vehicle.id}">
+            <div class="vehicle-head" data-toggle-vehicle="${vehicle.id}">
+              <div class="vehicle-meta">
+                <span class="truck-icon">▱</span>
+                <div class="vehicle-title">
+                  <strong>${vehicle.name}</strong>
+                  <span>${vehicle.stops.length} ${vehicle.stops.length === 1 ? 'pedido' : 'pedidos'}</span>
+                </div>
+                <div class="capacity ${capacity.pct >= 85 ? 'high' : ''}">
+                  <span style="width:${Math.min(capacity.pct, 100)}%"></span>
+                </div>
+                <span class="muted">${formatKg(total)} / ${vehicle.capacity}kg</span>
+                <span class="tiny-badge ${capacity.className}">${capacity.pct}%</span>
+              </div>
+              <div class="vehicle-actions">
+                <span class="tiny-badge ${capacity.className}">${capacity.label}</span>
+                <span class="muted">${vehicle.open ? '⌃' : '⌄'}</span>
+              </div>
+            </div>
+            <div class="vehicle-content" ${vehicle.open ? '' : 'hidden'}>
+              ${vehicle.stops.length > 0 ? `
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Orden</th>
+                      <th>#</th>
+                      <th>Direccion</th>
+                      <th>Ciudad</th>
+                      <th>Telefono</th>
+                      <th>Peso</th>
+                      <th>Monto</th>
+                      <th style="text-align:right">Accion</th>
+                    </tr>
+                  </thead>
+                  <tbody>${rows}</tbody>
+                </table>
+                <div class="vehicle-footer">
+                  <button class="outline-btn">▤ Exportar</button>
+                  <button class="ghost-btn">↕ Reordenar por ciudad</button>
+                </div>
+              ` : '<div class="empty-card">No hay pedidos asignados a este vehiculo.</div>'}
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function renderVehicleSelect() {
+      vehicleSelect.innerHTML = vehicles.map((vehicle) => `
+        <option value="${vehicle.id}" ${vehicle.id === selectedVehicleId ? 'selected' : ''}>
+          ${vehicle.name} - ${vehicle.stops.length} pedidos
+        </option>
+      `).join('');
+    }
+
+    function loadModalVehicle(vehicleId) {
+      selectedVehicleId = vehicleId;
+      const vehicle = getVehicle(vehicleId);
+      modalStops = vehicle.stops.map((stop, index) => ({ ...stop, enabled: index === 0 }));
+      renderVehicleSelect();
+      renderModal();
+      routeStatus.innerHTML = `Estado: <strong>${vehicle.name} cargado</strong>. Solo el primer punto esta prendido para armar el recorrido de a uno.`;
+    }
+
+    function renderStopList() {
+      stopList.innerHTML = modalStops.map((stop, index) => `
+        <div class="stop-card ${stop.enabled ? '' : 'off'}" draggable="true" data-stop-id="${stop.id}">
+          <span class="letter">${letter(index)}</span>
+          <div class="stop-info">
+            <strong>${stop.address}</strong>
+            <span>${padId(stop.id)} · ${stop.city} · ${stop.weight}kg · ${stop.enabled ? 'en recorrido' : 'apagado'}</span>
+          </div>
+          <div class="move-actions">
+            <button type="button" data-move="up" data-id="${stop.id}" ${index === 0 ? 'disabled' : ''}>↑</button>
+            <button type="button" data-move="down" data-id="${stop.id}" ${index === modalStops.length - 1 ? 'disabled' : ''}>↓</button>
+            <button type="button" class="route-toggle ${stop.enabled ? '' : 'off'}" data-toggle-stop="${stop.id}">
+              ${stop.enabled ? 'Prendido' : 'Prender'}
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderMap() {
+      const activeStops = modalStops.filter((stop) => stop.enabled);
+      const points = activeStops.map((stop) => `${stop.x},${stop.y}`).join(' ');
+      routeSvg.innerHTML = points
+        ? `
+          <polyline points="${points}" fill="none" stroke="rgba(11, 102, 255, .24)" stroke-width="18" stroke-linejoin="round" stroke-linecap="round"></polyline>
+          <polyline points="${points}" fill="none" stroke="#0b66ff" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"></polyline>
+        `
+        : '';
+
+      markers.innerHTML = modalStops.map((stop, index) => `
+        <span class="map-marker ${stop.enabled ? '' : 'off'}" style="left:${stop.x / 10}%; top:${stop.y / 6.2}%">${letter(index)}</span>
+      `).join('');
+    }
+
+    function renderModal() {
+      const vehicle = getVehicle(selectedVehicleId);
+      const activeStops = modalStops.filter((stop) => stop.enabled);
+      document.getElementById('mapTitle').textContent = `Mapa de recorrido - ${vehicle.name}`;
+      document.getElementById('summaryStops').textContent = `${activeStops.length}/${modalStops.length}`;
+      document.getElementById('summaryKm').textContent = activeStops.length > 6 ? '38.4 km' : activeStops.length > 1 ? '14.2 km' : '0 km';
+      document.getElementById('summaryTime').textContent = activeStops.length > 6 ? '1h 42m' : activeStops.length > 1 ? '42m' : '0m';
+      document.getElementById('saveOrderBtn').textContent = `Importar recorrido a ${vehicle.name}`;
+      renderStopList();
+      renderMap();
+    }
+
+    function moveModalStop(id, direction) {
+      const index = modalStops.findIndex((stop) => stop.id === id);
+      const target = index + direction;
+      if (index < 0 || target < 0 || target >= modalStops.length) return;
+      const next = [...modalStops];
+      const [item] = next.splice(index, 1);
+      next.splice(target, 0, item);
+      modalStops = next;
+      renderModal();
+      routeStatus.innerHTML = 'Estado: <strong>recorrido recalculado</strong>. Importar para sincronizarlo con el acordeon.';
+    }
+
+    function toggleModalStop(id) {
+      modalStops = modalStops.map((stop) => (
+        stop.id === id ? { ...stop, enabled: !stop.enabled } : stop
+      ));
+      renderModal();
+      const activeCount = modalStops.filter((stop) => stop.enabled).length;
+      routeStatus.innerHTML = `Estado: <strong>${activeCount} puntos prendidos</strong>. La ruta solo conecta los puntos activos.`;
+    }
+
+    function moveVehicleStop(vehicleId, draggedId, targetId) {
+      const vehicle = getVehicle(vehicleId);
+      const oldIndex = vehicle.stops.findIndex((stop) => stop.id === draggedId);
+      const newIndex = vehicle.stops.findIndex((stop) => stop.id === targetId);
+      if (oldIndex < 0 || newIndex < 0 || oldIndex === newIndex) return;
+      const next = [...vehicle.stops];
+      const [item] = next.splice(oldIndex, 1);
+      next.splice(newIndex, 0, item);
+      vehicle.stops = next;
+      renderVehicles();
+      showToast(`Orden manual actualizado en ${vehicle.name}.`);
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3800);
+    }
+
+    document.getElementById('openMapBtn').addEventListener('click', () => {
+      mapModal.classList.add('open');
+      mapModal.setAttribute('aria-hidden', 'false');
+      loadModalVehicle(selectedVehicleId);
+    });
+
+    document.getElementById('closeMapBtn').addEventListener('click', () => {
+      mapModal.classList.remove('open');
+      mapModal.setAttribute('aria-hidden', 'true');
+    });
+
+    vehicleSelect.addEventListener('change', (event) => {
+      loadModalVehicle(Number(event.target.value));
+    });
+
+    document.getElementById('simulateBtn').addEventListener('click', () => {
+      if (selectedVehicleId !== 2) {
+        loadModalVehicle(2);
+      }
+      const base = getVehicle(2).stops;
+      modalStops = carlosOrderR2
+        .map((id) => base.find((stop) => stop.id === id))
+        .filter(Boolean)
+        .map((stop) => ({ ...stop, enabled: true }));
+      routeStatus.innerHTML = 'Estado: <strong>orden de Carlos simulado</strong>. Importar para sincronizar Reparto 2.';
+      renderVehicleSelect();
+      renderModal();
+    });
+
+    document.getElementById('saveOrderBtn').addEventListener('click', () => {
+      const vehicle = getVehicle(selectedVehicleId);
+      const enabledIds = new Set(modalStops.filter((stop) => stop.enabled).map((stop) => stop.id));
+      const orderedEnabled = modalStops.filter((stop) => stop.enabled).map(({ enabled: _enabled, ...stop }) => stop);
+      const disabledInOriginalOrder = vehicle.stops.filter((stop) => !enabledIds.has(stop.id));
+      vehicle.stops = [...orderedEnabled, ...disabledInOriginalOrder];
+      vehicle.open = true;
+      renderVehicles();
+      mapModal.classList.remove('open');
+      mapModal.setAttribute('aria-hidden', 'true');
+      showToast(`Recorrido importado a ${vehicle.name}. Los puntos prendidos quedan primero y en el orden armado.`);
+    });
+
+    stopList.addEventListener('click', (event) => {
+      const toggle = event.target.closest('button[data-toggle-stop]');
+      if (toggle) {
+        toggleModalStop(Number(toggle.dataset.toggleStop));
+        return;
+      }
+
+      const button = event.target.closest('button[data-move]');
+      if (!button) return;
+      moveModalStop(Number(button.dataset.id), button.dataset.move === 'up' ? -1 : 1);
+    });
+
+    stopList.addEventListener('dragstart', (event) => {
+      const card = event.target.closest('.stop-card');
+      if (!card) return;
+      draggedModal = Number(card.dataset.stopId);
+      card.classList.add('dragging');
+      event.dataTransfer.effectAllowed = 'move';
+    });
+
+    stopList.addEventListener('dragend', () => {
+      document.querySelectorAll('.stop-card').forEach((card) => card.classList.remove('dragging'));
+      draggedModal = null;
+    });
+
+    stopList.addEventListener('dragover', (event) => {
+      event.preventDefault();
+      const target = event.target.closest('.stop-card');
+      if (!target || draggedModal === null) return;
+      const targetId = Number(target.dataset.stopId);
+      if (targetId === draggedModal) return;
+      const oldIndex = modalStops.findIndex((stop) => stop.id === draggedModal);
+      const newIndex = modalStops.findIndex((stop) => stop.id === targetId);
+      if (oldIndex < 0 || newIndex < 0) return;
+      const next = [...modalStops];
+      const [item] = next.splice(oldIndex, 1);
+      next.splice(newIndex, 0, item);
+      modalStops = next;
+      routeStatus.innerHTML = 'Estado: <strong>recorrido recalculado</strong>. Importar para sincronizarlo con el acordeon.';
+      renderModal();
+    });
+
+    vehiclesContainer.addEventListener('click', (event) => {
+      if (event.target.closest('button')) return;
+      const header = event.target.closest('[data-toggle-vehicle]');
+      if (!header) return;
+      const vehicle = getVehicle(Number(header.dataset.toggleVehicle));
+      vehicle.open = !vehicle.open;
+      renderVehicles();
+    });
+
+    vehiclesContainer.addEventListener('dragstart', (event) => {
+      const row = event.target.closest('tr[data-stop-id]');
+      if (!row) return;
+      draggedTable = {
+        vehicleId: Number(row.dataset.vehicleId),
+        stopId: Number(row.dataset.stopId)
+      };
+      row.classList.add('dragging');
+      event.dataTransfer.effectAllowed = 'move';
+    });
+
+    vehiclesContainer.addEventListener('dragend', () => {
+      document.querySelectorAll('tr.dragging').forEach((row) => row.classList.remove('dragging'));
+      draggedTable = null;
+    });
+
+    vehiclesContainer.addEventListener('dragover', (event) => {
+      const row = event.target.closest('tr[data-stop-id]');
+      if (!row || !draggedTable) return;
+      event.preventDefault();
+      const targetVehicleId = Number(row.dataset.vehicleId);
+      const targetStopId = Number(row.dataset.stopId);
+      if (targetVehicleId !== draggedTable.vehicleId || targetStopId === draggedTable.stopId) return;
+      moveVehicleStop(draggedTable.vehicleId, draggedTable.stopId, targetStopId);
+    });
+
+    renderVehicles();
+    renderVehicleSelect();
+    loadModalVehicle(2);
+  </script>
+</body>
+</html>
