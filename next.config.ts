@@ -43,6 +43,12 @@ const nextConfig: NextConfig = {
       { source: "/productos/iterashop", destination: "/productos/soluciones/iterashop", permanent: true },
     ];
   },
+  async rewrites() {
+    return [
+      // Propuestas con estructura de carpeta: /presupuestos/<slug> -> index.html dentro de la carpeta
+      { source: "/presupuestos/:slug", destination: "/presupuestos/:slug/index.html" },
+    ];
+  },
 };
 
 export default nextConfig;
