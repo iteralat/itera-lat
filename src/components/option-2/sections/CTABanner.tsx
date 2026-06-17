@@ -13,7 +13,7 @@ export function CTABanner() {
       <div
         className="absolute top-[10%] left-[20%] w-[700px] h-[700px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(255, 60, 0, 0.10) 0%, transparent 60%)",
+          background: "radial-gradient(circle, rgba(255, 94, 20, 0.10) 0%, transparent 60%)",
           filter: "blur(80px)",
         }}
       />

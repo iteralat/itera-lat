@@ -144,7 +144,7 @@ export default function SobreNosotrosPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.12, ease }}
-                  className="group p-6 md:p-8 rounded-lg bg-muted border border-border hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(242,27,16,0.06)]"
+                  className="group p-6 md:p-8 rounded-lg bg-muted border border-border hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(255,94,20,0.06)]"
                 >
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-5">
                     <Icon size={24} className="text-primary" />
@@ -206,7 +206,7 @@ export default function SobreNosotrosPage() {
           </p>
           <Link
             href="/contacto"
-            className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-semibold hover:bg-primary-soft transition-all shadow-[0_0_25px_rgba(242,27,16,0.35)] hover:shadow-[0_0_35px_rgba(242,27,16,0.5)]"
+            className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-semibold hover:bg-primary-soft transition-all shadow-[0_0_25px_rgba(255,94,20,0.35)] hover:shadow-[0_0_35px_rgba(255,94,20,0.5)]"
           >
             Hablemos <ArrowRight size={18} />
           </Link>

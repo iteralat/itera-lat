@@ -33,7 +33,7 @@ export function WhyItera() {
       <div
         className="absolute top-[30%] left-[30%] w-[600px] h-[600px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(255, 60, 0, 0.05) 0%, transparent 60%)",
+          background: "radial-gradient(circle, rgba(255, 94, 20, 0.05) 0%, transparent 60%)",
           filter: "blur(100px)",
         }}
       />
@@ -48,7 +48,7 @@ export function WhyItera() {
         >
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 tracking-tight">
             Por qué{" "}
-            <span style={{ backgroundImage: "linear-gradient(to right, #F21B10, #FF5421)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            <span style={{ backgroundImage: "linear-gradient(to right, var(--primary), var(--primary-soft))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               ÍTERA
             </span>
           </h2>

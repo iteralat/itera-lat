@@ -142,7 +142,7 @@ export function PlatformViewer({ productName, screenshot, screenshots = [], exte
               onClick={() => goTo(i)}
               className={`relative shrink-0 w-24 h-14 rounded-lg overflow-hidden border-2 transition-all ${
                 i === activeIndex
-                  ? "border-primary shadow-[0_0_12px_-4px_rgba(242,27,16,0.4)]"
+                  ? "border-primary shadow-[0_0_12px_-4px_rgba(255,94,20,0.4)]"
                   : "border-border/50 opacity-50 hover:opacity-80"
               }`}
             >

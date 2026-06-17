@@ -1,14 +1,20 @@
 @import "tailwindcss";
 
 :root {
+  /* Superficies — negro neutro (sin slate/navy frío, alineado al brand ÍTERA). */
   --background: #000000;
   --foreground: #FFFFFF;
-  --primary: #F21B10;
-  --primary-soft: #FF5421;
   --muted: #050505;
   --elevated: #0a0a0a;
   --border: rgba(255, 255, 255, 0.08);
 
+  /* Acento — naranja fuego ÍTERA #FF5E14 (NO rojo). SSOT: itera-social/projects/itera/shared.css */
+  --primary: #FF5E14;
+  --primary-soft: #FF8A2B; /* flama clara para gradientes y hover */
+  --primary-rgb: 255, 94, 20; /* canónico para rgba() de glows/sombras */
+  --primary-glow: rgba(255, 94, 20, 0.42);
+  --primary-ring: rgba(255, 94, 20, 0.22);
+  --primary-faint: rgba(255, 94, 20, 0.12);
 }
 
 @theme inline {
@@ -105,7 +111,7 @@ body {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 40px -8px rgba(255, 60, 0, 0.12);
+  box-shadow: 0 4px 40px -8px rgba(255, 94, 20, 0.12);
   transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .glass-card::before {
@@ -133,10 +139,10 @@ body {
     rgba(255, 255, 255, 0.02) 50%,
     rgba(255, 255, 255, 0.05) 100%
   );
-  border-color: rgba(255, 60, 0, 0.12);
+  border-color: rgba(255, 94, 20, 0.12);
   box-shadow:
-    0 8px 50px -10px rgba(255, 60, 0, 0.18),
-    0 0 15px -3px rgba(255, 60, 0, 0.10);
+    0 8px 50px -10px rgba(255, 94, 20, 0.18),
+    0 0 15px -3px rgba(255, 94, 20, 0.10);
   transform: translateY(-4px) scale(1.02);
 }
 
@@ -145,18 +151,18 @@ body {
   transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 .glow-hover:hover {
-  box-shadow: 0 0 30px rgba(255, 60, 0, 0.1);
-  border-color: rgba(255, 60, 0, 0.15);
+  box-shadow: 0 0 30px rgba(255, 94, 20, 0.1);
+  border-color: rgba(255, 94, 20, 0.15);
 }
 
 /* Light line separator */
 .light-line {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 60, 0, 0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 94, 20, 0.4), transparent);
 }
 
 /* Dot grid background */
 .dot-grid {
-  background-image: radial-gradient(rgba(255, 60, 0, 0.08) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255, 94, 20, 0.08) 1px, transparent 1px);
   background-size: 20px 20px;
 }

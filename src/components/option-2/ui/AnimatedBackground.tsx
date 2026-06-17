@@ -103,7 +103,7 @@ export function AnimatedBackground() {
         const tailY = ss.y - Math.sin(ss.angle) * ss.length;
 
         const grad = ctx.createLinearGradient(tailX, tailY, ss.x, ss.y);
-        grad.addColorStop(0, `rgba(255, 60, 0, 0)`);
+        grad.addColorStop(0, `rgba(255, 94, 20, 0)`);
         grad.addColorStop(0.7, `rgba(255, 106, 0, ${alpha * 0.5})`);
         grad.addColorStop(1, `rgba(255, 255, 255, ${alpha})`);
 
@@ -147,7 +147,7 @@ export function AnimatedBackground() {
       <div
         className="absolute -top-[10%] left-[0%] w-[600px] h-[600px] rounded-full"
         style={{
-          background: "radial-gradient(circle, rgba(255, 60, 0, 0.10) 0%, transparent 65%)",
+          background: "radial-gradient(circle, rgba(255, 94, 20, 0.10) 0%, transparent 65%)",
           filter: "blur(100px)",
         }}
       />
@@ -156,7 +156,7 @@ export function AnimatedBackground() {
       <div
         className="absolute bottom-[-10%] left-[30%] w-[800px] h-[400px] rounded-full"
         style={{
-          background: "radial-gradient(ellipse, rgba(255, 60, 0, 0.06) 0%, transparent 65%)",
+          background: "radial-gradient(ellipse, rgba(255, 94, 20, 0.06) 0%, transparent 65%)",
           filter: "blur(120px)",
         }}
       />

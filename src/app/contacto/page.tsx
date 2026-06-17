@@ -13,14 +13,14 @@ export default function ContactoPage() {
       <div
         className="absolute top-0 left-1/4 w-[400px] h-[400px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(255, 60, 0, 0.08) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(255, 94, 20, 0.08) 0%, transparent 70%)",
           filter: "blur(100px)",
         }}
       />
       <div
         className="absolute bottom-0 right-1/4 w-[300px] h-[300px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(255, 60, 0, 0.06) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(255, 94, 20, 0.06) 0%, transparent 70%)",
           filter: "blur(80px)",
         }}
       />

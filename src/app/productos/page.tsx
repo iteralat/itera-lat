@@ -47,7 +47,7 @@ export default function ProductosPage() {
         className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[900px] h-[600px] rounded-full pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse, rgba(255, 60, 0, 0.10) 0%, transparent 65%)",
+            "radial-gradient(ellipse, rgba(255, 94, 20, 0.10) 0%, transparent 65%)",
           filter: "blur(80px)",
         }}
       />
@@ -65,7 +65,7 @@ export default function ProductosPage() {
             <span
               className="italic"
               style={{
-                backgroundImage: "linear-gradient(to right, #F21B10, #FF5421)",
+                backgroundImage: "linear-gradient(to right, var(--primary), var(--primary-soft))",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}

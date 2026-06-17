@@ -29,7 +29,7 @@ export function Hero() {
 
               <h1 className="text-[2.5rem] md:text-5xl lg:text-6xl font-display font-bold tracking-tight leading-[1.08] mb-6 text-white">
                 Software que{" "}
-                <span style={{ backgroundImage: "linear-gradient(to right, #F21B10, #FF5421)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontFamily: "var(--font-poppins)" }}>
+                <span style={{ backgroundImage: "linear-gradient(to right, var(--primary), var(--primary-soft))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontFamily: "var(--font-poppins)" }}>
                   resuelve
                 </span>
                 <br />
@@ -65,7 +65,7 @@ export function Hero() {
             <div
               className="absolute inset-0 -z-10"
               style={{
-                background: "radial-gradient(ellipse at 55% 50%, rgba(255, 60, 0, 0.22) 0%, transparent 65%)",
+                background: "radial-gradient(ellipse at 55% 50%, rgba(255, 94, 20, 0.22) 0%, transparent 65%)",
                 filter: "blur(60px)",
                 transform: "scale(1.2)",
               }}

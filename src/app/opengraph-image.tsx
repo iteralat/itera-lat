@@ -30,7 +30,7 @@ export default function OgImage() {
             width: 400,
             height: 400,
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(255, 60, 0, 0.15) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(255, 94, 20, 0.15) 0%, transparent 70%)",
             filter: "blur(60px)",
           }}
         />
@@ -69,7 +69,7 @@ export default function OgImage() {
             style={{
               marginTop: 16,
               fontSize: 14,
-              color: "rgba(255, 60, 0, 0.8)",
+              color: "rgba(255, 94, 20, 0.8)",
               letterSpacing: "0.1em",
               textTransform: "uppercase" as const,
             }}

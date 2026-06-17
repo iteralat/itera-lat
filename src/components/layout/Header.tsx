@@ -187,7 +187,7 @@ export function Header() {
 
             <Link
               href="/contacto"
-              className="text-sm font-semibold bg-primary text-white px-5 py-2.5 rounded-md hover:bg-primary-soft transition-all hover:scale-105 active:scale-95 inline-block shadow-[0_0_15px_rgba(242,27,16,0.25)]"
+              className="text-sm font-semibold bg-primary text-white px-5 py-2.5 rounded-md hover:bg-primary-soft transition-all hover:scale-105 active:scale-95 inline-block shadow-[0_0_15px_rgba(255,94,20,0.25)]"
             >
               Hablemos
             </Link>
@@ -331,7 +331,7 @@ export function Header() {
             >
               <Link
                 href="/contacto"
-                className="inline-block text-lg font-semibold bg-primary text-white px-8 py-3.5 rounded-xl hover:bg-primary-soft transition-colors shadow-[0_0_25px_rgba(242,27,16,0.3)]"
+                className="inline-block text-lg font-semibold bg-primary text-white px-8 py-3.5 rounded-xl hover:bg-primary-soft transition-colors shadow-[0_0_25px_rgba(255,94,20,0.3)]"
               >
                 Hablemos
               </Link>

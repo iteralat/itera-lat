@@ -139,7 +139,7 @@ export default function ServiciosPage() {
           </p>
           <Link
             href="/contacto"
-            className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-semibold hover:bg-primary-soft transition-all shadow-[0_0_25px_rgba(242,27,16,0.35)] hover:shadow-[0_0_35px_rgba(242,27,16,0.5)]"
+            className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-semibold hover:bg-primary-soft transition-all shadow-[0_0_25px_rgba(255,94,20,0.35)] hover:shadow-[0_0_35px_rgba(255,94,20,0.5)]"
           >
             Hablemos <ArrowRight size={18} />
           </Link>

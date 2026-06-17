@@ -20,14 +20,14 @@ export function Showcase() {
       <div
         className="absolute top-[10%] left-[5%] w-[800px] h-[800px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(255, 60, 0, 0.12) 0%, transparent 60%)",
+          background: "radial-gradient(circle, rgba(255, 94, 20, 0.12) 0%, transparent 60%)",
           filter: "blur(80px)",
         }}
       />
       <div
         className="absolute bottom-[0%] right-[0%] w-[700px] h-[700px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(255, 60, 0, 0.08) 0%, transparent 60%)",
+          background: "radial-gradient(circle, rgba(255, 94, 20, 0.08) 0%, transparent 60%)",
           filter: "blur(100px)",
         }}
       />
@@ -42,7 +42,7 @@ export function Showcase() {
         >
           <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4 tracking-tight">
             Lo que{" "}
-            <span style={{ backgroundImage: "linear-gradient(to right, #F21B10, #FF5421)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            <span style={{ backgroundImage: "linear-gradient(to right, var(--primary), var(--primary-soft))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               construimos
             </span>
           </h2>
@@ -228,8 +228,8 @@ export function Showcase() {
         >
           <Link
             href="/productos"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_-5px_rgba(242,27,16,0.4)]"
-            style={{ backgroundImage: "linear-gradient(to right, #F21B10 70%, #FF5421)" }}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_-5px_rgba(255,94,20,0.4)]"
+            style={{ backgroundImage: "linear-gradient(to right, var(--primary) 70%, var(--primary-soft))" }}
           >
             Ver todos los productos
             <ArrowRight size={16} />

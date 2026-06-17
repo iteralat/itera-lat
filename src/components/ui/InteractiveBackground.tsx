@@ -66,7 +66,7 @@ export function InteractiveBackground() {
       // Draw subtle glowing torch around mouse (only desktop)
       if (!isMobile && mouse.x > 0) {
         const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 400);
-        gradient.addColorStop(0, "rgba(255, 60, 0, 0.12)");
+        gradient.addColorStop(0, "rgba(255, 94, 20, 0.12)");
         gradient.addColorStop(1, "transparent");
         
         ctx.fillStyle = gradient;
@@ -137,7 +137,7 @@ export function InteractiveBackground() {
             if (!isMobile) {
                const distToMouse = Math.sqrt(Math.pow(mouse.x - (node.x + other.x)/2, 2) + Math.pow(mouse.y - (node.y + other.y)/2, 2));
                if (distToMouse < 200) {
-                  ctx.strokeStyle = `rgba(242, 27, 16, ${opacity * 2.5})`;
+                  ctx.strokeStyle = `rgba(255, 94, 20, ${opacity * 2.5})`;
                } else {
                   ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
                }
@@ -196,13 +196,13 @@ export function InteractiveBackground() {
       {/* Ambient glow — multiple light spots matching brand palette */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Primary red glow — top left, illuminates headline */}
-        <div className="absolute -top-[10%] -left-[5%] w-[900px] h-[900px] rounded-full bg-[radial-gradient(circle,rgba(242,27,16,0.18)_0%,transparent_65%)]" />
+        <div className="absolute -top-[10%] -left-[5%] w-[900px] h-[900px] rounded-full bg-[radial-gradient(circle,rgba(255,94,20,0.18)_0%,transparent_65%)]" />
         {/* Warm brand glow — center, behind content */}
         <div className="absolute top-[30%] left-[25%] w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(255,84,33,0.12)_0%,transparent_65%)]" />
         {/* Secondary red glow — right side, behind mockups */}
-        <div className="absolute top-[10%] right-[-5%] w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(242,27,16,0.08)_0%,transparent_65%)]" />
+        <div className="absolute top-[10%] right-[-5%] w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(255,94,20,0.08)_0%,transparent_65%)]" />
         {/* Subtle red glow — bottom center, transition zone */}
-        <div className="absolute bottom-[-10%] left-[20%] w-[1000px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(242,27,16,0.10)_0%,transparent_65%)]" />
+        <div className="absolute bottom-[-10%] left-[20%] w-[1000px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(255,94,20,0.10)_0%,transparent_65%)]" />
       </div>
       <canvas
         ref={canvasRef}

@@ -27,14 +27,14 @@ export function GlowButton({
     primary: [
       "bg-primary text-white",
       "hover:bg-primary-soft",
-      "shadow-[0_0_25px_rgba(242,27,16,0.35),0_0_70px_rgba(242,27,16,0.15)]",
-      "hover:shadow-[0_0_35px_rgba(242,27,16,0.5),0_0_90px_rgba(242,27,16,0.2)]",
+      "shadow-[0_0_25px_rgba(255,94,20,0.35),0_0_70px_rgba(255,94,20,0.15)]",
+      "hover:shadow-[0_0_35px_rgba(255,94,20,0.5),0_0_90px_rgba(255,94,20,0.2)]",
     ].join(" "),
     outline: [
       "bg-elevated border border-border text-white",
       "hover:border-primary/30 hover:bg-muted",
       "shadow-[0_0_15px_rgba(255,255,255,0.03)]",
-      "hover:shadow-[0_0_25px_rgba(242,27,16,0.12)]",
+      "hover:shadow-[0_0_25px_rgba(255,94,20,0.12)]",
     ].join(" "),
   };
 
