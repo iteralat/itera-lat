@@ -177,6 +177,15 @@
   .chip .k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);}
   .chip .v{font-family:var(--font-display);font-weight:800;font-size:26px;color:var(--fg);margin-top:4px;}
   .chip .v.accent{color:var(--accent);}
+  /* dos opciones de precio */
+  .options{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:760px;margin:30px auto 0;text-align:left;}
+  .opt{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;}
+  .opt__name{font-family:var(--font-display);font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:var(--accent);}
+  .opt__price{font-family:var(--font-display);font-weight:800;font-size:38px;color:var(--fg);margin-top:10px;line-height:1;}
+  .opt__price .hi{color:var(--accent);}
+  .opt__time{font-size:13px;color:var(--dim);margin-top:6px;}
+  .opt__desc{font-size:14px;color:var(--muted);margin:14px 0 0;}
+  .opt-shared{font-size:14px;color:var(--muted);margin:22px auto 0;max-width:620px;}
   .cta{display:inline-block;background:var(--accent);color:#0A0A0A;font-family:var(--font-display);font-weight:800;
     font-size:16px;padding:16px 34px;border-radius:12px;}
   .contact{margin-top:24px;color:var(--muted);font-size:15px;}
@@ -191,6 +200,7 @@
     .shot--phone{max-width:230px;}
     .guarantees{grid-template-columns:1fr;}
     .grow{grid-template-columns:1fr;gap:28px;}
+    .options{grid-template-columns:1fr;}
   }
 </style>
 </head>
@@ -219,7 +229,7 @@
     <h2>Un sistema completo, y tuyo</h2>
     <div class="sec-intro big wide">
       <p>Es un sistema de gestión gastronómica: tus clientes arman el pedido desde un menú digital, pagan, y vos seguís cada comanda hasta entregarla. Todo en un mismo lugar, sin planillas ni mensajes sueltos.</p>
-      <p>No alquilás nada ni dependés de una plataforma: el sistema es tuyo. No hay comisiones de intermediarios —solo las de MercadoPago, como en cualquier venta.</p>
+      <p>No alquilás nada ni dependés de una plataforma: el sistema es tuyo. No hay comisiones de intermediarios —y si sumás MercadoPago, solo la suya por venta, como en cualquier cobro.</p>
       <p>Y no es un molde genérico lleno de opciones que nunca vas a usar. Lo armamos alrededor de cómo trabaja tu local, así aprovechás el cien por ciento de lo que tiene.</p>
     </div>
   </div>
@@ -270,13 +280,13 @@
     <div class="feature withphone">
       <div>
         <h3><span class="ic">💳</span> Pago y entrega</h3>
-        <p>Dos formas de pagar, según prefiera el cliente. <strong>Online con MercadoPago</strong>: tarjeta, transferencia, efectivo (Rapipago / Pago Fácil) o saldo, y el pedido se confirma solo. O <strong>pago al recibir</strong>: en efectivo o por transferencia coordinada por WhatsApp, para quien todavía no quiere pagar por adelantado.</p>
-        <p>El cliente elige retiro en el local o delivery, con el costo de envío que vos configurás. Cuando el pago online se aprueba, el pedido entra solo a tu panel: si está pago, está pago, sin que verifiques nada a mano.</p>
+        <p>Cuando el cliente termina, el pedido te llega <strong>formateado por WhatsApp</strong> y queda registrado en tu panel como pendiente, listo para que lo revises y confirmes. Ese cierre por WhatsApp está siempre —es el camino natural para quien paga por transferencia, en efectivo o al retirar.</p>
+        <p>El cobro lo definís vos: podés sumar <strong>MercadoPago</strong> para que el cliente pague online (tarjeta, transferencia, efectivo o saldo) con confirmación automática, o trabajar sin pasarela y coordinar el pago como ya lo hacés. En las dos, el cliente elige retiro o delivery, con el costo de envío que configurás.</p>
         <ul>
-          <li>Pago online: tarjeta, transferencia, efectivo o saldo</li>
-          <li>O pago al recibir: efectivo o transferencia</li>
-          <li>Retiro en el local o delivery</li>
-          <li>Confirmación automática al aprobarse</li>
+          <li>Cierre del pedido por WhatsApp, formateado y listo para leer</li>
+          <li>Cada pedido queda registrado en el panel como pendiente</li>
+          <li>Retiro en el local o delivery, con costo configurable</li>
+          <li>MercadoPago opcional: cobro online con confirmación automática</li>
         </ul>
       </div>
       <img class="frame frame--phone" src="/presupuestos/gastronomico/imagenes/pedidos-checkout.png" alt="Finalizar compra en el celular" loading="lazy" data-shot="screen-pedidos-mobile/checkout" />
@@ -381,7 +391,7 @@
       </tbody>
       <tfoot><tr><td>Total</td><td>USD 10–15/mes</td></tr></tfoot>
     </table>
-    <p style="margin-top:14px;font-size:13px;color:var(--dim);">MercadoPago cobra su comisión sobre cada venta, como en cualquier cobro.</p>
+    <p style="margin-top:14px;font-size:13px;color:var(--dim);">Si usás MercadoPago, cobra su comisión por venta (como en cualquier cobro). Sin pasarela, no hay comisión de plataforma.</p>
   </div>
 </section>
 
@@ -393,7 +403,7 @@
     <div class="steps">
       <div class="step"><h4>Arranque</h4><p>Una charla para entender tu local: qué vendés, cómo tomás los pedidos hoy y qué te complica. Con eso definimos el alcance y arrancamos (con una seña inicial).</p></div>
       <div class="step"><h4>Diseño y prototipo</h4><p>Antes de programar, armamos un prototipo navegable y un sistema de diseño propio del proyecto. Acompañás el proceso a medida que el prototipo se va completando, ajustándolo con nosotros sobre la marcha.</p></div>
-      <div class="step"><h4>Desarrollo</h4><p>Construimos el sistema en 4 a 6 semanas, con avances cada semana para que sigas el progreso de cerca.</p></div>
+      <div class="step"><h4>Desarrollo</h4><p>Construimos el sistema en 4 a 6 semanas —6 a 8 si sumás MercadoPago—, con avances cada semana para que sigas el progreso de cerca.</p></div>
       <div class="step"><h4>Entrega</h4><p>Te damos acceso para probar todo, con documentación y videos de uso para que vos y tu equipo lo manejen sin depender de nadie. Ahí se abona el saldo.</p></div>
       <div class="step"><h4>Lanzamiento</h4><p>Capacitación para usar el panel, lo subimos a producción y empezás a recibir pedidos.</p></div>
       <div class="step"><h4>Soporte</h4><p>Quedamos disponibles. Los bugs del sistema se corrigen siempre, sin límite de tiempo.</p></div>
@@ -433,14 +443,23 @@
 <section class="close">
   <div class="wrap">
     <div class="sec-eyebrow">La propuesta</div>
-    <h2>Listo para arrancar</h2>
-    <p style="max-width:560px;margin:14px auto 0;">Un sistema propio, a tu medida, que arranca útil y crece con tu local.</p>
-    <div class="summary">
-      <div class="chip"><div class="k">Inversión</div><div class="v">USD <span class="hi">1.800</span></div></div>
-      <div class="chip"><div class="k">Tiempo</div><div class="v">4–6 semanas</div></div>
-      <div class="chip"><div class="k">Mensual</div><div class="v">USD 10–15</div></div>
-      <div class="chip"><div class="k">Soporte</div><div class="v">Ilimitado</div></div>
+    <h2>Dos formas de arrancar</h2>
+    <p style="max-width:560px;margin:14px auto 0;">El mismo sistema completo. La diferencia es cómo cobrás.</p>
+    <div class="options">
+      <div class="opt">
+        <div class="opt__name">Pedidos por WhatsApp</div>
+        <div class="opt__price">USD <span class="hi">1.400</span></div>
+        <div class="opt__time">4–6 semanas</div>
+        <p class="opt__desc">El sistema completo con el cierre de pedidos por WhatsApp. Sin pasarela: cobrás como ya lo hacés —transferencia, efectivo o en el local.</p>
+      </div>
+      <div class="opt">
+        <div class="opt__name">Con MercadoPago</div>
+        <div class="opt__price">USD <span class="hi">1.800</span></div>
+        <div class="opt__time">6–8 semanas</div>
+        <p class="opt__desc">Todo lo anterior + cobro online con MercadoPago: el cliente paga en el momento y el pago se confirma solo en tu panel.</p>
+      </div>
     </div>
+    <p class="opt-shared">Las dos incluyen el sistema completo · USD 10–15/mes de mantenimiento · soporte ilimitado.</p>
     <p class="closing">Quedamos a disposición ante cualquier consulta.</p>
     <div class="contact"><b>hola@itera.lat</b></div>
     <div class="contact-sub">pachu.dev</div>
