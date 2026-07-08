@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Propuesta — Nómina semestral en Excel · Júbilo</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --teal: #14867a;
+                --teal-hover: #0f6b61;
+                --teal-soft: #e7f3f1;
+                --ink: #1d2b29;
+                --ink-soft: #55635f;
+                --line: #e2e8e6;
+                --bg: #f4f7f6;
+                --card: #ffffff;
+                --amber-soft: #fbf3e2;
+                --amber-line: #e9d29a;
+                --amber-ink: #8a6512;
+                --radius: 12px;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                background: var(--bg);
+                color: var(--ink);
+                font-family:
+                    "DM Sans",
+                    system-ui,
+                    -apple-system,
+                    "Segoe UI",
+                    Roboto,
+                    sans-serif;
+                font-size: 16px;
+                line-height: 1.62;
+                -webkit-font-smoothing: antialiased;
+            }
+
+            .page {
+                max-width: 820px;
+                margin: 40px auto;
+                background: var(--card);
+                border: 1px solid var(--line);
+                border-radius: var(--radius);
+                box-shadow: 0 8px 30px rgba(20, 60, 55, 0.06);
+                overflow: hidden;
+            }
+
+            .backlink {
+                max-width: 820px;
+                margin: 0 auto 12px;
+                padding: 0 6px;
+                font-size: 14px;
+            }
+            .backlink a {
+                color: var(--ink-soft);
+                text-decoration: none;
+            }
+            .backlink a:hover {
+                color: var(--teal);
+            }
+
+            header {
+                padding: 40px 48px 32px;
+                border-bottom: 1px solid var(--line);
+                background: linear-gradient(
+                    180deg,
+                    var(--teal-soft) 0%,
+                    #ffffff 100%
+                );
+            }
+            .brand {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                font-weight: 700;
+                color: var(--teal);
+                letter-spacing: 0.02em;
+                text-transform: uppercase;
+                font-size: 13px;
+                margin-bottom: 18px;
+            }
+            .brand .dot {
+                width: 26px;
+                height: 26px;
+                border-radius: 50%;
+                background: var(--teal);
+                color: #fff;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 13px;
+            }
+            h1 {
+                font-size: 29px;
+                line-height: 1.2;
+                margin: 0 0 14px;
+                letter-spacing: -0.01em;
+            }
+            .meta {
+                margin: 24px 0 0;
+                display: grid;
+                grid-template-columns: 92px 1fr;
+                gap: 6px 18px;
+                font-size: 15px;
+            }
+            .meta dt {
+                color: var(--ink-soft);
+                font-weight: 500;
+            }
+            .meta dd {
+                margin: 0;
+            }
+
+            main {
+                padding: 8px 48px 44px;
+            }
+            section {
+                padding: 30px 0;
+                border-bottom: 1px solid var(--line);
+            }
+            section:last-child {
+                border-bottom: none;
+            }
+
+            h2 {
+                font-size: 20px;
+                margin: 0 0 16px;
+                display: flex;
+                align-items: baseline;
+                gap: 12px;
+            }
+            h2 .num {
+                color: var(--teal);
+                font-weight: 700;
+                font-variant-numeric: tabular-nums;
+            }
+
+            p {
+                margin: 0 0 14px;
+            }
+            strong {
+                font-weight: 700;
+            }
+            .lead {
+                color: var(--ink-soft);
+            }
+
+            a {
+                color: var(--teal);
+                text-decoration: none;
+                border-bottom: 1px solid rgba(20, 134, 122, 0.35);
+            }
+            a:hover {
+                color: var(--teal-hover);
+                border-bottom-color: var(--teal-hover);
+            }
+
+            ul {
+                margin: 0 0 4px;
+                padding-left: 22px;
+            }
+            li {
+                margin: 0 0 9px;
+            }
+            li::marker {
+                color: var(--teal);
+            }
+
+            code {
+                background: var(--teal-soft);
+                color: var(--teal-hover);
+                padding: 1px 6px;
+                border-radius: 5px;
+                font-size: 13.5px;
+                font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 6px 0 4px;
+                font-size: 14.5px;
+            }
+            thead th {
+                background: var(--teal);
+                color: #fff;
+                text-align: left;
+                padding: 10px 14px;
+                font-weight: 500;
+                font-size: 12.5px;
+                text-transform: uppercase;
+                letter-spacing: 0.03em;
+            }
+            thead th:first-child {
+                border-radius: 8px 0 0 0;
+            }
+            thead th:last-child {
+                border-radius: 0 8px 0 0;
+            }
+            tbody td {
+                padding: 9px 14px;
+                border-bottom: 1px solid var(--line);
+                vertical-align: top;
+            }
+            tbody tr:nth-child(even) {
+                background: #fafcfb;
+            }
+            .col-num {
+                width: 34px;
+                color: var(--ink-soft);
+                font-variant-numeric: tabular-nums;
+            }
+
+            /* Opciones como tarjetas */
+            .options {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 18px;
+                margin-top: 4px;
+            }
+            .opt {
+                position: relative;
+                border: 1px solid var(--line);
+                border-radius: var(--radius);
+                padding: 22px 22px 8px;
+                background: #fafcfb;
+            }
+            .opt h3 {
+                margin: 0 0 4px;
+                font-size: 17px;
+            }
+            .opt .kicker {
+                font-size: 12.5px;
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
+                color: var(--ink-soft);
+                font-weight: 500;
+            }
+            .opt .price {
+                margin: 6px 0 12px;
+                padding-top: 12px;
+                border-top: 1px solid var(--line);
+                font-size: 22px;
+                font-weight: 700;
+                color: var(--teal);
+                font-variant-numeric: tabular-nums;
+            }
+            .opt .price-note {
+                display: block;
+                font-size: 13px;
+                font-weight: 400;
+                color: var(--ink-soft);
+                margin-top: 3px;
+            }
+            .opt .incluye {
+                font-size: 12.5px;
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
+                color: var(--ink-soft);
+                font-weight: 600;
+                margin: 2px 0 8px;
+            }
+            .opt ul {
+                padding-left: 20px;
+            }
+            .opt ul.pros,
+            .opt ul.cons {
+                list-style: none;
+                padding-left: 2px;
+            }
+            .opt ul.pros li,
+            .opt ul.cons li {
+                padding-left: 24px;
+                position: relative;
+            }
+            .opt ul.pros li::before {
+                content: "✓";
+                position: absolute;
+                left: 0;
+                color: var(--teal);
+                font-weight: 700;
+            }
+            .opt ul.cons li::before {
+                content: "✕";
+                position: absolute;
+                left: 0;
+                color: #b0685a;
+                font-weight: 700;
+            }
+            .opt ul.cons {
+                margin-top: 12px;
+            }
+
+            .quote {
+                border-left: 3px solid var(--teal);
+                background: var(--teal-soft);
+                padding: 14px 18px;
+                border-radius: 0 10px 10px 0;
+                margin: 6px 0 0;
+                color: var(--ink);
+            }
+            .quote p:last-child {
+                margin-bottom: 0;
+            }
+
+            .cta {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                background: var(--teal);
+                color: #fff;
+                padding: 10px 18px;
+                border-radius: 9px;
+                font-weight: 500;
+                font-size: 15px;
+                border: none;
+            }
+            .cta:hover {
+                background: var(--teal-hover);
+                color: #fff;
+            }
+
+            footer {
+                padding: 22px 48px 30px;
+                background: #fafcfb;
+                border-top: 1px solid var(--line);
+                color: var(--ink-soft);
+                font-size: 13.5px;
+            }
+
+            @media (max-width: 640px) {
+                .page,
+                .backlink {
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+                .page {
+                    border: none;
+                    border-radius: 0;
+                    margin-top: 0;
+                }
+                header,
+                main,
+                footer {
+                    padding-left: 24px;
+                    padding-right: 24px;
+                }
+                .backlink {
+                    padding: 12px 24px 0;
+                }
+                h1 {
+                    font-size: 24px;
+                }
+                .meta {
+                    grid-template-columns: 1fr;
+                    gap: 2px 0;
+                }
+                .meta dt {
+                    margin-top: 10px;
+                }
+                .options {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            @media print {
+                body {
+                    background: #fff;
+                    font-size: 12pt;
+                }
+                .page {
+                    margin: 0;
+                    border: none;
+                    box-shadow: none;
+                    max-width: none;
+                }
+                .backlink {
+                    display: none;
+                }
+                a {
+                    color: var(--ink);
+                    border-bottom: none;
+                }
+                section,
+                .opt {
+                    break-inside: avoid;
+                }
+                .cta {
+                    border: 1px solid var(--teal);
+                    color: var(--teal);
+                    background: #fff;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="backlink">
+            <a href="reporte-desarrollo.html">← Volver al reporte</a>
+        </nav>
+
+        <div class="page">
+            <header>
+                <div class="brand">
+                    <span class="dot">J</span> Júbilo · Seguimiento clínico
+                </div>
+                <h1>Propuesta — Nómina semestral en Excel</h1>
+                <p class="lead" style="margin: 6px 0 0">
+                    Qué se pide y dos caminos posibles para resolverlo, con sus
+                    pros y contras.
+                </p>
+            </header>
+
+            <main>
+                <section>
+                    <h2><span class="num">1</span> Qué se pide</h2>
+                    <p>
+                        Generar la nómina que se presenta cada 6 meses, en
+                        formato Excel. La planilla modelo tiene
+                        <strong>19 columnas</strong> y una segunda hoja con el
+                        catálogo de opciones para los campos de selección
+                        múltiple.
+                    </p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="col-num">#</th>
+                                <th>Columna</th>
+                                <th>Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="col-num">1</td>
+                                <td>Fecha Envío</td>
+                                <td>fecha administrativa</td>
+                            </tr>
+                            <tr>
+                                <td class="col-num">2</td>
+                                <td>Persona Jurídica</td>
+                                <td>dato legal / institucional</td>
+                            </tr>
+                            <tr>
+                                <td class="col-num">3</td>
+                                <td>CUIT</td>
+                                <td>dato legal / institucional</td>
+                            </tr>
+                            <tr>
+                                <td class="col-num">4</td>
+                                <td>Nombre del médico/a</td>
+                                <td>dato profesional</td>
+                            </tr>
+                            <tr>
+                                <td class="col-num">5</td>
+                                <td>Apellido del médico/a</td>
+                                <td>dato profesional</td>
+                            </tr>
+                            <tr>
+                                <td class="col-num">6</td>
+                                <td>Número de matrícula</td>
+                                <td>dato profesional</td>
+                            </tr>
+                            <tr>
+                                <td class="col-num">7</td>
+                                <td>Tipo matrícula</td>
+                                <td>dato profesional</td>
+                            </tr>
+                            <tr>
+                                <td class="col-num">8</td>
+                                <td>Nro Trámite REPROCANN</td>
+                                <td>dato del trámite</td>
+                            </tr>
+                            <tr>
+                                <td class="col-num">9</td>
+                                <td>Patología</td>
+                                <td>dato clínico</td>
+                            </tr>
+                            <tr>
+                                <td class="col-num">10</td>
+                                <td>Vías de Entrega</td>
+                                <td>selección múltiple (catálogo)</td>
+                            </tr>
+                            <tr>
+                                <td class="col-num">11</td>
+                                <td>Concentración THC</td>
+                                <td>dato clínico</td>
+                            </tr>
+                            <tr>
+                                <td class="col-num">12</td>
+                                <td>Cannabinoides</td>
+                                <td>selección múltiple (catálogo)</td>
+                            </tr>
+                            <tr>
+                                <td class="col-num">13</td>
+                                <td>Quimiotipo</td>
+                                <td>dato clínico</td>
+                            </tr>
+                            <tr>
+                                <td class="col-num">14</td>
+                                <td>Productos Indicados</td>
+                                <td>selección múltiple (catálogo)</td>
+                            </tr>
+                            <tr>
+                                <td class="col-num">15</td>
+                                <td>Beneficios Tratamiento</td>
+                                <td>selección múltiple (catálogo)</td>
+                            </tr>
+                            <tr>
+                                <td class="col-num">16</td>
+                                <td>Evolución</td>
+                                <td>dato clínico</td>
+                            </tr>
+                            <tr>
+                                <td class="col-num">17</td>
+                                <td>Continuidad</td>
+                                <td>dato clínico</td>
+                            </tr>
+                            <tr>
+                                <td class="col-num">18</td>
+                                <td>Duración Tratamiento</td>
+                                <td>dato clínico</td>
+                            </tr>
+                            <tr>
+                                <td class="col-num">19</td>
+                                <td>Observaciones</td>
+                                <td>texto libre</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="margin-top: 16px">
+                        <strong>Punto clave:</strong> el sistema hoy
+                        <strong>no tiene todos estos datos cargados</strong>.
+                        Por eso hay dos formas de resolverlo, con distinto
+                        alcance y costo.
+                    </p>
+                </section>
+
+                <section>
+                    <h2><span class="num">2</span> Dos caminos posibles</h2>
+                    <div class="options">
+                        <div class="opt">
+                            <div class="kicker">Camino A</div>
+                            <h3>Planilla interna exportable</h3>
+                            <p class="lead">
+                                Una sección nueva en el panel de administración
+                                para armar la nómina a mano y exportar el Excel
+                                con el formato que se presenta cada 6 meses.
+                            </p>
+                            <p class="price">$300.000 ARS</p>
+                            <p class="incluye">Qué incluye</p>
+                            <ul>
+                                <li>
+                                    Sección nueva para cargar la nómina, con las
+                                    19 columnas del modelo.
+                                </li>
+                                <li>
+                                    Las listas de opciones (vías de entrega,
+                                    cannabinoides, productos, beneficios,
+                                    patologías) ya cargadas para elegir sin
+                                    tipear.
+                                </li>
+                                <li>
+                                    Listado con filtros por residencia, período,
+                                    médico/a o patología, y edición/borrado de
+                                    filas.
+                                </li>
+                                <li>
+                                    Exportación al
+                                    <strong>Excel con el formato exacto</strong>
+                                    que presentan, incluida la segunda hoja de
+                                    opciones.
+                                </li>
+                                <li>
+                                    Cada residencia ve y gestiona solo su propia
+                                    nómina.
+                                </li>
+                                <li>
+                                    Queda preparado para automatizarse (Camino
+                                    B) más adelante, sin rehacer nada.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="opt">
+                            <div class="kicker">Camino B</div>
+                            <h3>Nómina automática</h3>
+                            <p class="lead">
+                                El sistema arma o precompleta la nómina solo,
+                                tomando los datos que ya tiene, para reducir al
+                                mínimo la carga manual cada semestre.
+                            </p>
+                            <p class="price">
+                                $900.000 ARS
+                                <span class="price-note"
+                                    >Incluye todo lo del Camino A como
+                                    base.</span
+                                >
+                            </p>
+                            <p class="incluye">
+                                Qué incluye (además de todo lo del Camino A)
+                            </p>
+                            <ul>
+                                <li>
+                                    Pantalla
+                                    <strong>"Generar nómina" por período</strong
+                                    >: trae los candidatos, precompleta las
+                                    filas, marca lo que falta y deja revisar y
+                                    ajustar antes de exportar.
+                                </li>
+                                <li>
+                                    Sumamos al sistema la información que hoy no
+                                    tiene para que pueda completar los campos
+                                    solo: datos de la residencia (razón social,
+                                    CUIT), la matrícula del médico/a, el trámite
+                                    REPROCANN y los datos del tratamiento.
+                                </li>
+                                <li>
+                                    Todo integrado con el resto del sistema
+                                    (pacientes, médicos/as y residencias), no
+                                    como una planilla aparte.
+                                </li>
+                                <li>
+                                    Cada nómina presentada queda guardada tal
+                                    cual se envió, como registro histórico que
+                                    no cambia aunque después se modifiquen
+                                    datos.
+                                </li>
+                                <li>
+                                    Mucho menos trabajo manual y menos
+                                    posibilidad de errores en cada presentación.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2><span class="num">3</span> Pros y contras</h2>
+                    <div class="options">
+                        <div class="opt">
+                            <div class="kicker">Camino A</div>
+                            <h3>Planilla interna exportable</h3>
+                            <ul class="pros">
+                                <li>Se entrega rápido.</li>
+                                <li>No cambia nada de lo que ya usan hoy.</li>
+                                <li>
+                                    Resuelve el pedido concreto: tener el Excel
+                                    listo cuando toca presentarlo.
+                                </li>
+                                <li>
+                                    Si más adelante quieren automatizarla, se
+                                    amplía sobre esto sin empezar de cero.
+                                </li>
+                            </ul>
+                            <ul class="cons">
+                                <li>Cada fila se carga a mano.</li>
+                                <li>
+                                    El sistema no arma la nómina solo: la
+                                    persona elige qué pacientes o trámites
+                                    entran en el semestre.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="opt">
+                            <div class="kicker">Camino B</div>
+                            <h3>Nómina automática</h3>
+                            <ul class="pros">
+                                <li>
+                                    El sistema arma o precompleta la nómina
+                                    solo, con los datos que ya tiene.
+                                </li>
+                                <li>
+                                    Mucho menos trabajo manual cada semestre.
+                                </li>
+                                <li>Menos olvidos y menos errores de carga.</li>
+                                <li>
+                                    Información más ordenada y fácil de seguir
+                                    en el tiempo.
+                                </li>
+                            </ul>
+                            <ul class="cons">
+                                <li>
+                                    Se entrega más adelante: es una etapa de
+                                    desarrollo más grande.
+                                </li>
+                                <li>Tiene un costo mayor.</li>
+                                <li>
+                                    Para que el sistema la complete solo,
+                                    primero hay que cargar una vez algunos datos
+                                    que hoy no están (por ejemplo, datos de la
+                                    residencia y la matrícula del médico/a).
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p style="margin-top: 24px">
+                        <a class="cta" href="reporte-desarrollo.html"
+                            >← Volver al reporte de desarrollo</a
+                        >
+                    </p>
+                </section>
+            </main>
+
+            <footer>
+                Valores en pesos argentinos. Los plazos de entrega se coordinan
+                al confirmar el camino elegido. Preparada para Júbilo.
+            </footer>
+        </div>
+    </body>
+</html>

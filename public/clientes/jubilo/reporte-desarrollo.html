@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reporte de desarrollo — Sistema Júbilo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal:        #14867a;
+    --teal-hover:  #0f6b61;
+    --teal-soft:   #e7f3f1;
+    --ink:         #1d2b29;
+    --ink-soft:    #55635f;
+    --line:        #e2e8e6;
+    --bg:          #f4f7f6;
+    --card:        #ffffff;
+    --amber-soft:  #fbf3e2;
+    --amber-line:  #e9d29a;
+    --amber-ink:   #8a6512;
+    --radius:      12px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 820px;
+    margin: 40px auto;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 30px rgba(20, 60, 55, .06);
+    overflow: hidden;
+  }
+
+  /* ── Header ── */
+  header {
+    padding: 40px 48px 32px;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, var(--teal-soft) 0%, #ffffff 100%);
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+    color: var(--teal);
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    font-size: 13px;
+    margin-bottom: 18px;
+  }
+  .brand .dot {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--teal);
+    color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 13px;
+  }
+  h1 {
+    font-size: 30px;
+    line-height: 1.2;
+    margin: 0 0 14px;
+    letter-spacing: -.01em;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--amber-soft);
+    color: var(--amber-ink);
+    border: 1px solid var(--amber-line);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .badge::before {
+    content: "";
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--amber-ink);
+  }
+
+  .meta {
+    margin: 24px 0 0;
+    display: grid;
+    grid-template-columns: 92px 1fr;
+    gap: 6px 18px;
+    font-size: 15px;
+  }
+  .meta dt { color: var(--ink-soft); font-weight: 500; }
+  .meta dd { margin: 0; }
+
+  /* ── Body ── */
+  main { padding: 8px 48px 44px; }
+
+  section { padding: 30px 0; border-bottom: 1px solid var(--line); }
+  section:last-child { border-bottom: none; }
+
+  h2 {
+    font-size: 20px;
+    margin: 0 0 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  h2 .num {
+    color: var(--teal);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  p { margin: 0 0 14px; }
+  strong { font-weight: 700; }
+  .lead { color: var(--ink-soft); }
+
+  a { color: var(--teal); text-decoration: none; border-bottom: 1px solid rgba(20,134,122,.35); }
+  a:hover { color: var(--teal-hover); border-bottom-color: var(--teal-hover); }
+
+  ul, ol { margin: 0 0 4px; padding-left: 22px; }
+  li { margin: 0 0 10px; }
+  li::marker { color: var(--teal); }
+
+  code {
+    background: var(--teal-soft);
+    color: var(--teal-hover);
+    padding: 1px 6px;
+    border-radius: 5px;
+    font-size: 13.5px;
+    font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+
+  /* Glosario */
+  .glossary {
+    background: #fafcfb;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px 26px 8px;
+    margin-top: 6px;
+  }
+  .glossary h2 { font-size: 17px; }
+  .glossary dl { margin: 0; }
+  .glossary dt { font-weight: 700; margin-top: 12px; }
+  .glossary dd { margin: 2px 0 0; color: var(--ink-soft); }
+
+  /* Tabla resumen */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 6px 0 4px;
+    font-size: 15px;
+  }
+  thead th {
+    background: var(--teal);
+    color: #fff;
+    text-align: left;
+    padding: 11px 16px;
+    font-weight: 500;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+  thead th:first-child { border-radius: 8px 0 0 0; }
+  thead th:last-child  { border-radius: 0 8px 0 0; }
+  tbody td { padding: 12px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tbody tr:nth-child(even) { background: #fafcfb; }
+  tbody td:first-child { font-weight: 700; white-space: nowrap; }
+
+  /* Botón propuesta */
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--teal);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 9px;
+    font-weight: 500;
+    font-size: 15px;
+    border: none;
+    margin-top: 4px;
+  }
+  .cta:hover { background: var(--teal-hover); color: #fff; }
+
+  footer {
+    padding: 22px 48px 30px;
+    background: #fafcfb;
+    border-top: 1px solid var(--line);
+    color: var(--ink-soft);
+    font-size: 13.5px;
+  }
+
+  @media (max-width: 640px) {
+    .page { margin: 0; border: none; border-radius: 0; }
+    header, main, footer { padding-left: 24px; padding-right: 24px; }
+    h1 { font-size: 25px; }
+    .meta { grid-template-columns: 1fr; gap: 2px 0; }
+    .meta dt { margin-top: 10px; }
+  }
+
+  @media print {
+    body { background: #fff; font-size: 12pt; }
+    .page { margin: 0; border: none; box-shadow: none; max-width: none; }
+    a { color: var(--ink); border-bottom: none; }
+    section { break-inside: avoid; }
+    .cta { border: 1px solid var(--teal); color: var(--teal); background: #fff; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="brand"><span class="dot">J</span> Júbilo · Seguimiento clínico</div>
+    <h1>Reporte de desarrollo — Sistema Júbilo</h1>
+    <span class="badge">En desarrollo — cierre a mediados de mes</span>
+    <dl class="meta">
+      <dt>Fecha</dt><dd>Abierta — documento en desarrollo.</dd>
+      <dt>Para</dt><dd>Júbilo.</dd>
+      <dt>Alcance</dt><dd>Trabajo realizado en desarrollo y en la demo de muestra. La producción real del cliente no se tocó; su intervención es el paso siguiente (corte a producción). Quedan un par de propuestas por definir al final.</dd>
+    </dl>
+  </header>
+
+  <main>
+
+    <section class="glossary">
+      <h2>Glosario rápido</h2>
+      <p class="lead" style="margin-top:2px">Para leer este reporte sin tecnicismos:</p>
+      <dl>
+        <dt>Error 500</dt>
+        <dd>El sistema se cae y muestra "error interno". La pantalla no abre para nadie.</dd>
+        <dt>Error 403</dt>
+        <dd>El sistema dice "no tenés permiso". Es lo correcto cuando alguien intenta entrar a algo que no le corresponde (no es una falla).</dd>
+        <dt>Script / JavaScript</dt>
+        <dd>El código que hace que la pantalla funcione en el navegador (que los botones respondan, que las cosas se muestren bien).</dd>
+        <dt>CSRF</dt>
+        <dd>Una protección para que una página externa no pueda ejecutar acciones (por ejemplo, un borrado) en nombre del usuario que está logueado.</dd>
+        <dt>Ruta / dirección</dt>
+        <dd>La dirección interna de cada pantalla (lo que aparece en la barra del navegador, por ejemplo <code>/pacientes</code>).</dd>
+      </dl>
+    </section>
+
+    <section>
+      <h2><span class="num">1</span> Resumen</h2>
+      <p>Se aplicó el nuevo diseño a todo el sistema, se corrigieron problemas que ya venían de antes, se agregó el módulo de <strong>Alertas</strong> y se armó un <strong>panel de administración global (para un Super Admin)</strong>. Además se dejó una <strong>demo con tres residencias</strong> y pacientes de ejemplo, para poder mostrar cómo se gestiona el sistema con más de una residencia a la vez —algo que antes no se había probado— y verificar que los datos de cada residencia quedan bien separados. Todo quedó respaldado con pruebas automáticas.</p>
+      <table>
+        <thead>
+          <tr><th>Bloque</th><th>Entregado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Rediseño</td><td>26 pantallas migradas al nuevo diseño + marca unificada (turquesa)</td></tr>
+          <tr><td>Correcciones</td><td>16 problemas heredados corregidos</td></tr>
+          <tr><td>Funcionalidad nueva</td><td>Módulo de Alertas completo</td></tr>
+          <tr><td>Administración</td><td>Panel de Super Admin nuevo + roles y rutas ordenados</td></tr>
+          <tr><td>Demo</td><td>3 residencias de ejemplo, publicada online y probada en simultáneo</td></tr>
+          <tr><td>Garantías</td><td>144 pruebas de aplicación + pruebas por rol, todo en verde</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2><span class="num">2</span> Problemas corregidos</h2>
+      <p class="lead">Al revisar el sistema recibido se detectaron problemas. Se corrigieron los siguientes. Para cada uno: qué fallaba y qué riesgo evitaba corregirlo.</p>
+      <ol>
+        <li><strong>Tableros de "médico" y "enfermero" daban error 500.</strong> No abrían para nadie. Sin corregir, esos roles no tenían pantalla de inicio funcional.</li>
+        <li><strong>La pantalla vieja de gráficos daba error 500</strong> para todos los roles. Sin corregir, quedaba un acceso que siempre rompía; ahora redirige al módulo de gráficos nuevo.</li>
+        <li><strong>El sistema respondía "error de sistema" (500) cuando correspondía "no tenés permiso" (403).</strong> Daba la sensación de sistema roto ante un acceso denegado normal; podía disparar reportes de falla que no eran tales.</li>
+        <li><strong>El login cargaba con un script bloqueado</strong> por un control de seguridad mal configurado. Sin corregir, parte del código de la pantalla de ingreso no cargaba y quedaba con error.</li>
+        <li><strong>El logo de la barra superior no era clickeable.</strong> Detalle de navegación: ahora lleva al inicio.</li>
+        <li><strong>El primer ingreso del administrador caía en una pantalla vacía.</strong> Sin corregir, la primera impresión del sistema era una pantalla sin contenido; ahora entra directo a su pantalla útil.</li>
+        <li><strong>Accesos por dirección directa demasiado abiertos.</strong> Varias pantallas (usuarios, patologías, pacientes, archivos, configuración clínica) se abrían escribiendo la dirección a mano, incluso para roles que no debían verlas. Riesgo: exposición de datos clínicos a quien no correspondía. Se cerró por rol.</li>
+        <li><strong>Aislamiento entre residencias incompleto en seguimiento.</strong> Se podía acceder a un paciente de otra residencia por dirección directa. Riesgo: ver o editar datos de una residencia ajena. Se agregó control por residencia.</li>
+        <li><strong>Borrados y configuración clínica sin protección (CSRF).</strong> Riesgo: una página externa podía disparar un borrado o un cambio en nombre del usuario logueado. Se agregó la protección donde faltaba.</li>
+        <li><strong>Validación superficial de archivos subidos.</strong> Se aceptaban por extensión sin verificar el contenido real, y un archivo podía quedar guardado aunque fallara el registro en base. Riesgo: archivos falsos o huérfanos. Se agregó verificación de contenido y limpieza automática.</li>
+        <li><strong>El calendario mostraba turnos con datos como "sin datos".</strong> Confundía al leer configuraciones importadas. Riesgo: dar por vacío un día que sí tenía carga. Corregido.</li>
+        <li><strong>Las notificaciones mostraban textos técnicos confusos</strong> (por ejemplo "se eliminó '1' del turno"). Riesgo: registro de auditoría ilegible. Ahora se leen con nombres claros.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2><span class="num">3</span> Rediseño aplicado</h2>
+      <ul>
+        <li><strong>26 pantallas</strong> migradas al nuevo diseño, una por una, preservando lo que ya funcionaba (guardar seguimientos, subir archivos, alta de pacientes, permisos, gráficos).</li>
+        <li><strong>Marca unificada y centralizada:</strong> el diseño se armó primero con un color de marca violeta y luego se decidió pasarlo a verde (turquesa). Quedó todo unificado y el sistema quedó bien preparado para ajustar la marca a futuro.</li>
+        <li><strong>Biblioteca de piezas reutilizables</strong> (botones, tarjetas, tablas, formularios, modales, estados vacíos) montada dentro del propio sistema.</li>
+        <li><strong>Accesibilidad</strong> aplicada en todas las pantallas.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span class="num">4</span> Funcionalidad nueva: módulo de Alertas</h2>
+      <p>Desarrollo nuevo de punta a punta: avisos urgentes y accionables para el equipo (por ejemplo "cambiar dosificación a este paciente"), con campana en la barra superior, contador de pendientes, prioridad urgente/normal y flujo de "atender" con comentario de qué se resolvió.</p>
+      <ul>
+        <li>Cada residencia ve <strong>solo sus propias alertas</strong>.</li>
+        <li><strong>Los tres roles del equipo (gerontólogo, médico y administrador de la residencia) pueden crear, ver, atender, reabrir, editar y eliminar</strong> las alertas, para que nada quede trabado cuando falta algún integrante del equipo.</li>
+        <li>Blindado con pruebas por rol (crear, atender, reabrir, editar, eliminar).</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span class="num">5</span> Administración global</h2>
+      <ul>
+        <li><strong>Panel de Super Admin nuevo:</strong> quien administra la plataforma ve el total de residencias, usuarios, pacientes y patologías, separado de la operación diaria de cada residencia.</li>
+        <li><strong>Separación de experiencias:</strong> cada rol entra a su pantalla y su menú; cuando se miran datos de una residencia, la pantalla deja claro cuál es.</li>
+        <li><strong>Roles y rutas ordenados:</strong> un rol viejo y ambiguo se unificó (con respaldo previo y sin poder dejar el sistema sin administrador); las rutas viejas (las direcciones dentro del sistema) siguen funcionando para no romper enlaces guardados.</li>
+        <li><strong>Alta y edición de más de una residencia revisadas y funcionando</strong>, y el sistema quedó probado con tres residencias demo a la vez para ver cómo se separan los datos entre ellas.</li>
+        <li><strong>Borrado seguro de residencias:</strong> se agregó una protección para que, si alguien intenta borrar una residencia, el sistema avise que se van a borrar todos sus datos y pida confirmar de forma explícita (escribiendo el nombre exacto).</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span class="num">6</span> Demo y garantías</h2>
+      <ul>
+        <li><strong>Demo de 3 residencias</strong> (Los Arrayanes, Valle Sereno, Puentes del Limay) con datos ficticios, selector de usuarios en el ingreso, publicada en <a href="https://demo-jubilo.itera.lat" target="_blank" rel="noopener">demo-jubilo.itera.lat</a>.</li>
+        <li><strong>144 pruebas de aplicación</strong> + pruebas de navegación por rol, todo en verde.</li>
+        <li><strong>Producción del cliente intacta.</strong></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span class="num">7</span> Qué queda por delante</h2>
+      <ol>
+        <li><strong>Prueba pantalla por pantalla:</strong> la de nuestro equipo de desarrollo ya está hecha; queda la prueba por parte del cliente, con datos de muestra.</li>
+        <li><strong>Corte a producción</strong> sobre el hosting actual del cliente.</li>
+        <li><strong>Mantenimiento</strong> posterior, según lo acordado.</li>
+        <li><strong>En desarrollo / a definir:</strong> queda pendiente la información que le pedimos a la doctora para ajustar la forma de medir el ánimo, y la propuesta de nómina semestral, que se cotiza por separado.</li>
+      </ol>
+      <p style="margin-top:18px"><a class="cta" href="propuesta-nomina-semetral.html">Ver propuesta de nómina semestral →</a></p>
+    </section>
+
+  </main>
+
+  <footer>
+    Documento en desarrollo — se actualiza hasta el cierre del trabajo. Preparado para Júbilo.
+  </footer>
+
+</div>
+</body>
+</html>
