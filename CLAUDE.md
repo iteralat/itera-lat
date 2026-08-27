@@ -25,6 +25,17 @@ Web informativa y portfolio de la agencia ÍTERA · itera.lat
 
 > Errores conocidos del proyecto. Para indice completo: `.planning/GUARDRAILS.md`
 
+### Copy y voz de marca (OBLIGATORIO en todo texto visible)
+
+Este sitio ES marketing de ÍTERA. **Antes de escribir o tocar cualquier copy** (headlines, cards, CTAs, metadata): leer `~/projects/itera-context/marca/manual-de-marca.md` (§6 voz, §9 slogans, §10 anti-patrones) + `~/projects/itera-context/marca/_chatgpt-project-pack/04-guardrails-voz-drift.md`. Resumen operativo:
+
+- **Voz**: rioplatense, voseo, primera persona plural, directo, técnico pero entendible. Nombrar la **capacidad concreta**, nunca dramatizar el problema ni actuar escenas.
+- **Headlines literales, no metáforas**: el título dice QUÉ hacemos ("Qué hacemos", "Sistemas a medida"), nunca frases ingeniosas tipo "Cuatro puertas, un mismo equipo". Filtro: ¿un dueño de negocio de 50 años entiende al primer vistazo?
+- **FRASES BANEADAS (si salen a producción es un incidente)**: "sin vueltas" · "sin rodeos" · "sin humo" · "lock-in" · "sin comisiones" como diferencial de agencia (solo aplica a Shopear producto) · "transformamos tu negocio" · "al toque" · "X en segundos/minutos" · "10x" / "game-changer" / clichés traducidos · adjetivos vacíos ("innovador", "disruptivo", "de vanguardia") · "vitrina" (no es término argentino).
+- **Jerga técnica en copy comercial**: RAG, CTO fraccional, deploy, multi-tenant → solo si el contexto lo pide; en headlines y cards de la home, traducir a lenguaje de dueño de negocio.
+- **Eyebrows/badges decorativos**: no repetir chips de acento como decoración de cada sección (anti-patrón §10 del manual).
+- **Nada de placeholders abstractos como contenido**: los mocks se muestran con screenshots reales (assets en `public/`) o producidos en el UI-Lab. Un rectángulo con barras NUNCA sale a producción.
+
 ### Checklists de Implementacion
 
 #### Al crear/modificar una page:
@@ -81,7 +92,7 @@ Web informativa y portfolio de la agencia ÍTERA · itera.lat
 
 - CSS vars custom -> registrar en `@theme inline` de globals.css
 - **Paleta base**: `#000000` (background), `#050505` (muted), `#0a0a0a` (elevated). Negro puro.
-- **Sin colores de categoría**: todo acento es `primary` (#F21B10 — rojo). No usar verdes, violetas ni azules. Diferenciar con contenido/layout. Para gradientes brand usar `primary` → `primary-soft` (#FF5421).
+- **Sin colores de categoría**: todo acento es `primary` (#FF5E14 — naranja ÍTERA, el del isotipo). NUNCA rojo #F21B10 (lee bordó sobre negro — corregido en el rediseño 2026-07). No usar verdes, violetas ni azules. Diferenciar con contenido/layout. Para gradientes brand usar `primary` → `primary-soft` (#FF8A3D).
 - **framer-motion + CSS transform**: no mezclar. Si motion controla el elemento, hover scale va en `whileHover`, no en CSS.
 - grid-cols arbitrario -> espacios NO comas: `grid-cols-[1fr_280px]`
 - **`Button size="icon"` -> SIEMPRE `aria-label` descriptivo**
