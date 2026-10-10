@@ -1,5 +1,10 @@
 "use client";
 
+/**
+ * LEGACY (COMPAT FASE 4): solo lo consumen las pages viejas de /productos y
+ * /contacto. El código nuevo usa `Boton` de primitivas. Se borra en Fase 4.
+ */
+
 import Link from "next/link";
 import React from "react";
 

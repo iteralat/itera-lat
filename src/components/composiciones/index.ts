@@ -1,0 +1,13 @@
+export { EncabezadoSeccion, type EncabezadoSeccionProps } from "./EncabezadoSeccion";
+export { MarcoNavegador, type MarcoNavegadorProps } from "./MarcoNavegador";
+export { PortadaHero, type PortadaHeroProps } from "./PortadaHero";
+export { EsferaDigital, type EsferaDigitalProps } from "./EsferaDigital";
+export { SelectorPilares, type SelectorPilaresProps } from "./SelectorPilares";
+export { TrioDispositivos, type TrioDispositivosProps } from "./TrioDispositivos";
+export { PantallaSistema, type PantallaSistemaProps } from "./PantallaSistema";
+export { CintaPantallas, type CintaPantallasProps } from "./CintaPantallas";
+export { TarjetaProducto, type TarjetaProductoProps } from "./TarjetaProducto";
+export { BannerProductos, type BannerProductosProps } from "./BannerProductos";
+export { TarjetaDiferencial, type TarjetaDiferencialProps } from "./TarjetaDiferencial";
+export { TarjetaCaso, type TarjetaCasoProps } from "./TarjetaCaso";
+export { BloqueCTA, type BloqueCTAProps } from "./BloqueCTA";

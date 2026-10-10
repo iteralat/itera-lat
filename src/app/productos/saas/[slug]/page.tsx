@@ -5,7 +5,7 @@ import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import { CaseStudy } from "@/components/shared/CaseStudy";
 import { FadeIn } from "@/components/shared/FadeIn";
 import { PlatformViewer } from "@/components/plataformas/PlatformViewer";
-import { GlowButton } from "@/components/option-2/ui/GlowButton";
+import { GlowButton } from "@/components/shared/GlowButton";
 
 export async function generateStaticParams() {
   return saasProducts.map((p) => ({ slug: p.slug }));

@@ -3,7 +3,7 @@ import { websites } from "@/data/portfolio";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import { CaseStudy } from "@/components/shared/CaseStudy";
 import { PlatformViewer } from "@/components/plataformas/PlatformViewer";
-import { GlowButton } from "@/components/option-2/ui/GlowButton";
+import { GlowButton } from "@/components/shared/GlowButton";
 
 export async function generateStaticParams() {
   return websites

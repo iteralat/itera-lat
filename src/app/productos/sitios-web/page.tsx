@@ -1,6 +1,6 @@
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import { WebCatalog } from "@/components/webs/WebCatalog";
-import { GlowButton } from "@/components/option-2/ui/GlowButton";
+import { GlowButton } from "@/components/shared/GlowButton";
 
 export default function SitiosWebPage() {
   return (

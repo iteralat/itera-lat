@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MessageCircle, Mail, Clock, MapPin } from "lucide-react";
-import { GlowButton } from "@/components/option-2/ui/GlowButton";
+import { GlowButton } from "@/components/shared/GlowButton";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 

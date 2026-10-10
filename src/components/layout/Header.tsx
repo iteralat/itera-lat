@@ -1,92 +1,85 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown, Menu, X } from "lucide-react";
+import { cn } from "@/lib/utils/cn";
+import { Boton } from "@/components/primitivas";
+import { mainNav } from "@/data/site";
+import { pillarSummaries } from "@/data/pilares";
 
-const productCategories = [
-  {
-    name: "Sitios Web",
-    href: "/productos/sitios-web",
-    description: "Presencia digital profesional",
-    colorClass: "text-primary",
-  },
-  {
-    name: "SaaS",
-    href: "/productos/saas",
-    description: "Plataformas listas para usar",
-    colorClass: "text-primary",
-  },
-];
-
-const navLinks = [
-  { name: "Inicio", href: "/" },
-  { name: "Servicios", href: "/servicios" },
-  { name: "Sobre nosotros", href: "/sobre-nosotros" },
-];
+const claseLinkNav =
+  "text-small font-medium transition-colors duracion-fast hover:text-foreground";
 
 export function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isMobileProductsOpen, setIsMobileProductsOpen] = useState(false);
+  const [conScroll, setConScroll] = useState(false);
+  const [menuMovilAbierto, setMenuMovilAbierto] = useState(false);
+  const [dropdownAbierto, setDropdownAbierto] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const alScrollear = () => setConScroll(window.scrollY > 24);
+    alScrollear();
+    window.addEventListener("scroll", alScrollear, { passive: true });
+    return () => window.removeEventListener("scroll", alScrollear);
   }, []);
 
+  // Lock de scroll con el menú mobile abierto
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
+    document.body.style.overflow = menuMovilAbierto ? "hidden" : "";
+    return () => {
       document.body.style.overflow = "";
-    }
-    return () => { document.body.style.overflow = ""; };
-  }, [isMobileMenuOpen]);
+    };
+  }, [menuMovilAbierto]);
 
-  // Close mobile menu on route change (new page is already rendered underneath)
+  // Cerrar todo al navegar (rAF: la page nueva ya está renderizada debajo)
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
-      setIsMobileMenuOpen(false);
-      setIsMobileProductsOpen(false);
+      setMenuMovilAbierto(false);
+      setDropdownAbierto(false);
     });
     return () => cancelAnimationFrame(frame);
   }, [pathname]);
 
-  // Close dropdown on outside click
+  // Cerrar dropdown con click afuera / Escape
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
+    const alClickearAfuera = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setIsDropdownOpen(false);
+        setDropdownAbierto(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    const alTeclear = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setDropdownAbierto(false);
+        setMenuMovilAbierto(false);
+      }
+    };
+    document.addEventListener("mousedown", alClickearAfuera);
+    document.addEventListener("keydown", alTeclear);
+    return () => {
+      document.removeEventListener("mousedown", alClickearAfuera);
+      document.removeEventListener("keydown", alTeclear);
+    };
   }, []);
 
-
-  const isActive = (href: string) =>
+  const esActiva = (href: string) =>
     href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/");
 
-  const isProductsActive = pathname === "/productos" || pathname.startsWith("/productos/");
+  const serviciosActivo = pillarSummaries.some((p) => esActiva(p.href));
 
   return (
     <>
       <header
-        className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${
-          isScrolled ? "bg-background/80 backdrop-blur-md border-border py-4" : "bg-transparent border-white/[0.06] py-6"
-        }`}
+        className={cn(
+          "fixed top-0 z-50 w-full transition-[background-color,box-shadow] duracion-moderate",
+          conScroll ? "bg-chrome/90 shadow-elevation-soft backdrop-blur-md" : "bg-transparent",
+        )}
       >
-        <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="z-50 hover:scale-105 active:scale-95 transition-transform">
+        <div className="mx-auto flex h-20 w-full max-w-wide items-center justify-between px-page-pad">
+          <Link href="/" aria-label="ÍTERA — Inicio" className="shrink-0">
             <Image
               src="/images/logo-itera.png"
               alt="ÍTERA"
@@ -97,248 +90,144 @@ export function Header() {
             />
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
-            <Link
-              href="/"
-              className={`text-sm font-medium transition-colors hover:scale-105 active:scale-95 inline-block ${
-                isActive("/") ? "text-primary" : "text-white/80 hover:text-primary"
-              }`}
-            >
-              Inicio
-            </Link>
-
-            <Link
-              href="/servicios"
-              className={`text-sm font-medium transition-colors hover:scale-105 active:scale-95 inline-block ${
-                isActive("/servicios") ? "text-primary" : "text-white/80 hover:text-primary"
-              }`}
-            >
-              Servicios
-            </Link>
-
-            {/* Productos dropdown */}
+          {/* Nav desktop */}
+          <nav aria-label="Principal" className="hidden items-center gap-8 md:flex">
+            {/* Servicios (dropdown 4 pilares) */}
             <div
               ref={dropdownRef}
               className="relative"
-              onMouseEnter={() => setIsDropdownOpen(true)}
-              onMouseLeave={() => setIsDropdownOpen(false)}
+              onMouseEnter={() => setDropdownAbierto(true)}
+              onMouseLeave={() => setDropdownAbierto(false)}
             >
               <button
-                className={`flex items-center gap-1 text-sm font-medium transition-colors hover:scale-105 active:scale-95 ${
-                  isProductsActive ? "text-primary" : "text-white/80 hover:text-primary"
-                }`}
-                aria-expanded={isDropdownOpen}
+                type="button"
+                onClick={() => setDropdownAbierto(!dropdownAbierto)}
+                aria-expanded={dropdownAbierto}
                 aria-haspopup="true"
+                className={cn(
+                  "flex items-center gap-1",
+                  claseLinkNav,
+                  serviciosActivo ? "text-primary-text" : "text-muted-foreground",
+                )}
               >
-                Productos
+                Servicios
                 <ChevronDown
-                  size={14}
-                  className={`transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""}`}
+                  aria-hidden
+                  className={cn(
+                    "size-3.5 transition-transform duracion-fast",
+                    dropdownAbierto && "rotate-180",
+                  )}
                 />
               </button>
 
-              {/* Dropdown panel — pt-3 keeps hover area continuous */}
+              {/* pt-3 mantiene continua el área de hover */}
               <div
-                className={`absolute top-full left-0 pt-3 w-64 transition-all duration-200 ${
-                  isDropdownOpen
-                    ? "opacity-100 translate-y-0 pointer-events-auto"
-                    : "opacity-0 -translate-y-2 pointer-events-none"
-                }`}
+                className={cn(
+                  "absolute top-full left-0 w-72 pt-3 transition-[opacity,transform] duracion-base",
+                  dropdownAbierto
+                    ? "pointer-events-auto translate-y-0 opacity-100"
+                    : "pointer-events-none -translate-y-1 opacity-0",
+                )}
               >
-                <div className="bg-muted border border-border/50 rounded-xl shadow-lg shadow-black/40 overflow-hidden">
-                  {productCategories.map((cat) => (
+                <div className="overflow-hidden rounded-card bg-surface-2 py-2 shadow-elevation-2">
+                  {pillarSummaries.map((pilar) => (
                     <Link
-                      key={cat.href}
-                      href={cat.href}
-                      onClick={() => setIsDropdownOpen(false)}
-                      className="flex items-start gap-3 px-4 py-3 hover:bg-white/5 transition-colors group"
+                      key={pilar.slug}
+                      href={pilar.href}
+                      className="block px-4 py-2.5 transition-colors duracion-fast hover:bg-surface-3"
                     >
-                      <div className="flex-1 min-w-0">
-                        <span className={`text-sm font-medium ${cat.colorClass} group-hover:opacity-90`}>
-                          {cat.name}
-                        </span>
-                        <p className="text-xs text-white/80 mt-0.5 truncate">{cat.description}</p>
-                      </div>
+                      <span className="block text-small font-medium">{pilar.name}</span>
+                      <span className="mt-0.5 block text-meta text-faint">{pilar.audience}</span>
                     </Link>
                   ))}
-
-                  <div className="border-t border-border/50 px-4 py-2 flex justify-end">
-                    <Link
-                      href="/productos"
-                      onClick={() => setIsDropdownOpen(false)}
-                      className="text-[11px] text-white/55 hover:text-primary transition-colors"
-                    >
-                      Ver todo →
-                    </Link>
-                  </div>
                 </div>
               </div>
             </div>
 
-            <Link
-              href="/sobre-nosotros"
-              className={`text-sm font-medium transition-colors hover:scale-105 active:scale-95 inline-block ${
-                isActive("/sobre-nosotros") ? "text-primary" : "text-white/80 hover:text-primary"
-              }`}
-            >
-              Sobre nosotros
-            </Link>
+            {mainNav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  claseLinkNav,
+                  esActiva(item.href) ? "text-primary-text" : "text-muted-foreground",
+                )}
+              >
+                {item.name}
+              </Link>
+            ))}
 
-            <Link
-              href="/contacto"
-              className="text-sm font-semibold bg-primary text-white px-5 py-2.5 rounded-md hover:bg-primary-soft transition-all hover:scale-105 active:scale-95 inline-block shadow-[0_0_15px_rgba(255,94,20,0.25)]"
-            >
+            <Boton tamano="sm" href="/contacto">
               Hablemos
-            </Link>
+            </Boton>
           </nav>
 
-          {/* Mobile Menu Toggle — placeholder to keep layout, real button is outside header */}
-          <div className="md:hidden w-7" />
+          {/* Toggle mobile */}
+          <button
+            type="button"
+            onClick={() => setMenuMovilAbierto(!menuMovilAbierto)}
+            aria-expanded={menuMovilAbierto}
+            aria-label={menuMovilAbierto ? "Cerrar menú" : "Abrir menú"}
+            className="relative z-50 -mr-2 flex size-11 items-center justify-center rounded-control text-foreground transition-colors duracion-fast hover:bg-surface-2 md:hidden"
+          >
+            {menuMovilAbierto ? <X aria-hidden className="size-6" /> : <Menu aria-hidden className="size-6" />}
+          </button>
         </div>
       </header>
 
-      {/* Mobile toggle — outside header so it stays above the overlay.
-          Height matches the header (80px sin scroll, 64px con scroll) para alinear con el logo. */}
-      <button
-        className="md:hidden fixed top-0 right-0 z-[60] text-white active:scale-90 transition-[height] duration-300 px-6 flex items-center justify-center"
-        style={{ height: isScrolled ? "64px" : "80px" }}
-        onClick={() => {
-          setIsMobileMenuOpen(!isMobileMenuOpen);
-          if (isMobileMenuOpen) setIsMobileProductsOpen(false);
-        }}
-        aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
-      >
-        <AnimatePresence mode="wait">
-          {isMobileMenuOpen ? (
-            <motion.span
-              key="close"
-              initial={{ rotate: -90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: 90, opacity: 0 }}
-              transition={{ duration: 0.15 }}
-            >
-              <X size={28} />
-            </motion.span>
-          ) : (
-            <motion.span
-              key="menu"
-              initial={{ rotate: 90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: -90, opacity: 0 }}
-              transition={{ duration: 0.15 }}
-            >
-              <Menu size={28} />
-            </motion.span>
-          )}
-        </AnimatePresence>
-      </button>
-
-      {/* Mobile Nav — outside header to avoid backdrop-blur breaking fixed positioning */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-background z-[55] md:hidden flex flex-col items-center justify-center gap-8 overflow-y-auto px-6"
-          >
-            {navLinks.map((link, i) => (
-              <motion.div
-                key={link.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.05 + i * 0.05, duration: 0.3 }}
-              >
-                <Link
-                  href={link.href}
-                  className={`text-2xl font-medium transition-colors ${isActive(link.href) ? "text-primary" : "text-white hover:text-primary"}`}
-                >
-                  {link.name}
-                </Link>
-              </motion.div>
-            ))}
-
-            {/* Productos expandible */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.3 }}
-              className="flex flex-col items-center w-full max-w-xs"
-            >
-              <button
-                className={`flex items-center gap-2 text-2xl font-medium transition-colors ${isProductsActive ? "text-primary" : "text-white hover:text-primary"}`}
-                onClick={() => setIsMobileProductsOpen(!isMobileProductsOpen)}
-                aria-expanded={isMobileProductsOpen}
-              >
-                Productos
-                <motion.span
-                  animate={{ rotate: isMobileProductsOpen ? 180 : 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <ChevronDown size={20} />
-                </motion.span>
-              </button>
-
-              <AnimatePresence>
-                {isMobileProductsOpen && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.25 }}
-                    className="overflow-hidden w-full"
-                  >
-                    <ul className="flex flex-col items-center gap-3 mt-5">
-                      {productCategories.map((cat, i) => (
-                        <motion.li
-                          key={cat.href}
-                          initial={{ opacity: 0, y: 8 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: i * 0.05, duration: 0.2 }}
-                        >
-                          <Link
-                            href={cat.href}
-                            className="text-lg text-white/80 hover:text-primary transition-colors"
-                          >
-                            {cat.name}
-                          </Link>
-                        </motion.li>
-                      ))}
-                      <motion.li
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.15, duration: 0.2 }}
-                      >
-                        <Link
-                          href="/productos"
-                          className="text-sm text-white/55 hover:text-primary transition-colors"
-                        >
-                          Ver todo →
-                        </Link>
-                      </motion.li>
-                    </ul>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25, duration: 0.3 }}
-            >
-              <Link
-                href="/contacto"
-                className="inline-block text-lg font-semibold bg-primary text-white px-8 py-3.5 rounded-xl hover:bg-primary-soft transition-colors shadow-[0_0_25px_rgba(255,94,20,0.3)]"
-              >
-                Hablemos
-              </Link>
-            </motion.div>
-          </motion.div>
+      {/* Menú mobile: overlay full-screen, siempre montado (salida animada) */}
+      <div
+        aria-hidden={!menuMovilAbierto}
+        className={cn(
+          "fixed inset-0 z-40 flex flex-col overflow-y-auto bg-background px-page-pad pt-28 pb-10 transition-opacity duracion-moderate md:hidden",
+          menuMovilAbierto ? "opacity-100" : "pointer-events-none opacity-0",
         )}
-      </AnimatePresence>
+      >
+        <nav aria-label="Principal (mobile)" className="grid gap-8">
+          <div className="grid gap-3">
+            <span className="text-eyebrow uppercase text-faint">Servicios</span>
+            {pillarSummaries.map((pilar) => (
+              <Link
+                key={pilar.slug}
+                href={pilar.href}
+                tabIndex={menuMovilAbierto ? undefined : -1}
+                className={cn(
+                  "text-heading font-display transition-colors duracion-fast",
+                  esActiva(pilar.href) ? "text-primary-text" : "text-foreground",
+                )}
+              >
+                {pilar.name}
+              </Link>
+            ))}
+          </div>
+
+          <div className="grid gap-3">
+            <span className="text-eyebrow uppercase text-faint">ÍTERA</span>
+            {mainNav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                tabIndex={menuMovilAbierto ? undefined : -1}
+                className={cn(
+                  "text-heading font-display transition-colors duracion-fast",
+                  esActiva(item.href) ? "text-primary-text" : "text-foreground",
+                )}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+
+          <Boton
+            tamano="lg"
+            href="/contacto"
+            tabIndex={menuMovilAbierto ? undefined : -1}
+            className="justify-self-start"
+          >
+            Hablemos
+          </Boton>
+        </nav>
+      </div>
     </>
   );
 }

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Cloud, RefreshCw, HeadphonesIcon } from "lucide-react";
 import { saasProducts } from "@/data/portfolio";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
-import { GlowButton } from "@/components/option-2/ui/GlowButton";
+import { GlowButton } from "@/components/shared/GlowButton";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 

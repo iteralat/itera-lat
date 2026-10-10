@@ -1,66 +1,405 @@
 @import "tailwindcss";
 
-:root {
-  /* Superficies — negro neutro (sin slate/navy frío, alineado al brand ÍTERA). */
-  --background: #000000;
-  --foreground: #FFFFFF;
-  --muted: #050505;
-  --elevated: #0a0a0a;
-  --border: rgba(255, 255, 255, 0.08);
+/* ============================================================================
+   ÍTERA · itera.lat — Design system tokenizado (Fase 1: Fundación)
 
-  /* Acento — naranja fuego ÍTERA #FF5E14 (NO rojo). SSOT: itera-social/projects/itera/shared.css */
-  --primary: #FF5E14;
-  --primary-soft: #FF8A2B; /* flama clara para gradientes y hover */
-  --primary-rgb: 255, 94, 20; /* canónico para rgba() de glows/sombras */
-  --primary-glow: rgba(255, 94, 20, 0.42);
-  --primary-ring: rgba(255, 94, 20, 0.22);
-  --primary-faint: rgba(255, 94, 20, 0.12);
+   ÚNICA fuente de estilo del sitio. Nada hardcodeado en componentes:
+   todo color, sombra, duración, radio y tamaño sale de acá.
+
+   Doctrina: ~/projects/itera-core/guides/guia-de-diseno-itera.md
+   Motion:   ~/projects/itera-core/guides/guia-de-motion-y-transiciones.md
+   Uso:      DESIGN-SYSTEM.md (raíz del repo)
+   ============================================================================ */
+
+:root {
+  /* --------------------------------------------------------------------------
+     1. COLOR POR ROL SEMÁNTICO — negro puro + rojo, único acento
+     Escalera de superficies: bg → chrome → surface-1 → surface-2 → surface-3.
+     Sólidos (no alpha): lo que se ve no depende de qué hay atrás.
+     -------------------------------------------------------------------------- */
+  --bg: #000000;          /* canvas del sitio */
+  --chrome: #050505;      /* header / nav / footer */
+  --surface-1: #0a0a0a;   /* card en reposo */
+  --surface-2: #111111;   /* raised: hover de card, popover, fields */
+  --surface-3: #181818;   /* raised highlight: item activo, hover secundario */
+  --track: #030303;       /* superficies hundidas (wells, tracks) */
+
+  /* Los 3 roles de texto — no usar grises sueltos de Tailwind */
+  --text-primary: #ffffff;
+  --text-muted: #a3a3a3;
+  --text-faint: #6f6f6f;
+
+  /* Acento ÚNICO de marca: naranja ÍTERA (#FF5E14, la flecha del isotipo).
+     El acento es caro: un elemento sólido por vista. */
+  --primary: #ff5e14;
+  --primary-soft: #ff8a3d;                                        /* extremo claro de gradientes brand + hover de fills */
+  --primary-fg: #ffffff;                                          /* texto/ícono SOBRE fills del acento */
+  --primary-hover: color-mix(in oklab, var(--primary) 86%, white);
+  --primary-text: color-mix(in oklab, var(--primary) 78%, white); /* ink legible p/ texto acento sobre negro */
+  --primary-tint: color-mix(in srgb, var(--primary) 12%, transparent);        /* lavado 12%: hovers, insignias */
+  --primary-tint-strong: color-mix(in srgb, var(--primary) 22%, transparent);
+  --primary-rgb: 255, 94, 20;                                     /* para rgba() de glows y canvas */
+
+  /* Líneas legítimas: border SOLO inputs/controles; divider SOLO interno a cards */
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.18);
+  --divider: rgba(255, 255, 255, 0.06);
+
+  /* --------------------------------------------------------------------------
+     2. ELEVACIÓN — 5 niveles + utilitarias. SIN bordes de contorno.
+     El despegue = escalón de lightness + sombra + inset top highlight (firma
+     del sistema, primera capa de toda superficie raised).
+     -------------------------------------------------------------------------- */
+  --inset-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --shadow-ink: rgba(0, 0, 0, 0.75);
+
+  --elevation-subtle: var(--inset-highlight), 0 1px 2px var(--shadow-ink);
+  --elevation-soft:
+    var(--inset-highlight), 0 1px 2px var(--shadow-ink),
+    0 3px 8px -4px var(--shadow-ink);
+  --elevation-1:
+    var(--inset-highlight), 0 1px 2px var(--shadow-ink),
+    0 8px 24px -12px var(--shadow-ink);
+  --elevation-2:
+    var(--inset-highlight), 0 2px 4px var(--shadow-ink),
+    0 16px 48px -16px var(--shadow-ink);
+  --elevation-3:
+    var(--inset-highlight), 0 4px 8px var(--shadow-ink),
+    0 32px 88px -24px var(--shadow-ink);
+  --button-lift: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 1px 2px rgba(0, 0, 0, 0.55);
+  --track-inset: inset 0 1px 2px rgba(0, 0, 0, 0.7);
+
+  /* Glows de marca — quirúrgicos: UN elemento vivo por vista */
+  --glow-cta: 0 0 24px rgba(var(--primary-rgb), 0.35);
+  --glow-cta-hover: 0 0 34px rgba(var(--primary-rgb), 0.5);
+  --glow-soft:
+    0 0 0 1px rgba(var(--primary-rgb), 0.25),
+    0 0 32px rgba(var(--primary-rgb), 0.14);
+
+  /* --------------------------------------------------------------------------
+     3. MOTION — canon cerrado. ≤300ms, ease-out, sin bounce.
+     Reduced-motion self-zeroing al final de este archivo.
+     -------------------------------------------------------------------------- */
+  --duration-fast: 120ms;     /* micro-feedback: hover color, tints */
+  --duration-base: 180ms;     /* DEFAULT: fades, cambios de estado */
+  --duration-moderate: 220ms; /* layout: collapse/reveal, salidas */
+  --duration-slow: 300ms;     /* TECHO — nada por encima */
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1); /* solo dos-vías */
+  --transition-fast: var(--duration-fast) var(--ease-out);
+  --transition-base: var(--duration-base) var(--ease-out);
+  --transition-moderate: var(--duration-moderate) var(--ease-out);
+
+  /* --------------------------------------------------------------------------
+     4. FOCO Y CONTROLES — ergonomía fija (sin clamp en alturas de click)
+     -------------------------------------------------------------------------- */
+  --focus-ring: var(--primary);
+  --control-sm: 2.25rem;
+  --control-md: 2.75rem;
+  --control-lg: 3.25rem;
+}
+
+/* Purga de la paleta cruda de Tailwind: se borra TODO color default del
+   compilador. Solo compilan los roles del sistema (re-registrados abajo)
+   y el bloque COMPAT FASE 4. `text-emerald-500` & cía. ya no generan CSS. */
+@theme {
+  --color-*: initial;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* ---- Color: roles canónicos ---- */
+  --color-background: var(--bg);
+  --color-chrome: var(--chrome);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-track: var(--track);
+  --color-foreground: var(--text-primary);
+  --color-muted-foreground: var(--text-muted);
+  --color-faint: var(--text-faint);
   --color-primary: var(--primary);
   --color-primary-soft: var(--primary-soft);
-  --color-muted: var(--muted);
-  --color-elevated: var(--elevated);
+  --color-primary-fg: var(--primary-fg);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-text: var(--primary-text);
+  --color-primary-tint: var(--primary-tint);
+  --color-primary-tint-strong: var(--primary-tint-strong);
   --color-border: var(--border);
-  /* Inter para body, UI y párrafos — optimizada para pantalla */
+  --color-border-strong: var(--border-strong);
+  --color-divider: var(--divider);
+
+  /* ---- COMPAT FASE 4 — BORRAR cuando /productos, /casos, /sobre-nosotros
+          y /contacto se reescriban sobre el sistema nuevo. Aliases + únicas
+          shades crudas que las pages viejas todavía consumen (valores default
+          de Tailwind v4). El código NUEVO no usa nada de este bloque. ---- */
+  --color-muted: var(--chrome);
+  --color-elevated: var(--surface-1);
+  --color-white: #fff;
+  --color-black: #000;
+  --color-zinc-800: oklch(27.4% 0.006 286.033);
+  --color-zinc-900: oklch(21% 0.006 285.885);
+  --color-green-400: oklch(79.2% 0.209 151.711);
+  --color-green-500: oklch(72.3% 0.219 149.579);
+  --color-red-500: oklch(63.7% 0.237 25.331);
+  --color-yellow-500: oklch(79.5% 0.184 86.047);
+  --color-orange-400: oklch(75% 0.183 55.934);
+  --color-orange-500: oklch(70.5% 0.213 47.604);
+  --color-orange-600: oklch(64.6% 0.222 41.116);
+  --color-orange-700: oklch(55.3% 0.195 38.402);
+  --color-amber-400: oklch(82.8% 0.189 84.429);
+  --color-amber-500: oklch(76.9% 0.188 70.08);
+
+  /* ---- Sombras: elevación consumible como shadow-* ---- */
+  --shadow-elevation-subtle: var(--elevation-subtle);
+  --shadow-elevation-soft: var(--elevation-soft);
+  --shadow-elevation-1: var(--elevation-1);
+  --shadow-elevation-2: var(--elevation-2);
+  --shadow-elevation-3: var(--elevation-3);
+  --shadow-button-lift: var(--button-lift);
+  --shadow-track-inset: var(--track-inset);
+  --shadow-glow-cta: var(--glow-cta);
+  --shadow-glow-cta-hover: var(--glow-cta-hover);
+  --shadow-glow-soft: var(--glow-soft);
+
+  /* ---- Tipografía fluida (clamp laptop → 4K). Escala corta y cerrada. ---- */
   --font-sans: var(--font-inter);
-  /* Poppins para headings y brand moments — carga display */
   --font-display: var(--font-poppins);
+
+  --text-display: clamp(2.75rem, 1.85rem + 4.2vw, 5.75rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.03em;
+  --text-display--font-weight: 700;
+  --text-title: clamp(2rem, 1.55rem + 2.1vw, 3.5rem);
+  --text-title--line-height: 1.08;
+  --text-title--letter-spacing: -0.02em;
+  --text-title--font-weight: 700;
+  --text-heading: clamp(1.375rem, 1.2rem + 0.8vw, 1.9375rem);
+  --text-heading--line-height: 1.2;
+  --text-heading--letter-spacing: -0.01em;
+  --text-heading--font-weight: 600;
+  --text-lead: clamp(1.0625rem, 1rem + 0.35vw, 1.3125rem);
+  --text-lead--line-height: 1.5;
+  --text-body: clamp(0.9375rem, 0.91rem + 0.15vw, 1.0625rem);
+  --text-body--line-height: 1.6;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.5;
+  --text-meta: 0.8125rem;
+  --text-meta--line-height: 1.4;
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.14em;
+  --text-eyebrow--font-weight: 600;
+
+  /* ---- Espaciado de layout (fluido) + alturas de control (fijas) ---- */
+  --spacing-section: clamp(4.5rem, 3.2rem + 6vw, 9rem);
+  --spacing-section-sm: clamp(3rem, 2.2rem + 3.5vw, 5.5rem);
+  --spacing-block: clamp(2.25rem, 1.8rem + 2vw, 4rem);
+  --spacing-page-pad: clamp(1.25rem, 0.9rem + 1.8vw, 2.5rem);
+  --spacing-control-sm: var(--control-sm);
+  --spacing-control-md: var(--control-md);
+  --spacing-control-lg: var(--control-lg);
+
+  /* ---- Anchos de contenido ---- */
+  --container-page: 72rem;
+  --container-wide: 85rem;
+  --container-prose: 42rem;
+
+  /* ---- Radios propios (escala corta) ---- */
+  --radius-control: 0.5rem;   /* botones, inputs, chips cuadrados */
+  --radius-card: 0.875rem;    /* superficies */
+
+  /* ---- Motion: defaults del sistema ----
+     ease-out / ease-in-out de Tailwind ya coinciden con el canon
+     (cubic-bezier(0,0,0.2,1) / cubic-bezier(0.4,0,0.2,1)) — no se redefinen. */
+  --default-transition-duration: var(--duration-base);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* ---- Keyframes canónicos (tríada aparece / despliega / repliega) ---- */
+  --animate-aparece: aparece var(--duration-base) var(--ease-out) both;
+  --animate-despliega: despliega var(--duration-moderate) var(--ease-out) both;
+  --animate-repliega: repliega var(--duration-moderate) var(--ease-out) forwards;
+
+  @keyframes aparece {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+  }
+  @keyframes despliega {
+    from {
+      grid-template-rows: 0fr;
+      opacity: 0;
+    }
+    to {
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
+  }
+  @keyframes repliega {
+    from {
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
+    to {
+      grid-template-rows: 0fr;
+      opacity: 0;
+    }
+  }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ============================================================================
+   BASE
+   ============================================================================ */
+
+@layer base {
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font-sans), sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--primary);
+    color: var(--text-primary);
+  }
+
+  /* Foco visible token-driven: outline (no box-shadow), color primary, halo */
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  /* Scrollbar tokenizado */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--surface-2);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--surface-3);
+  }
 }
 
-::selection {
-  background: var(--primary);
-  color: #FFFFFF;
+/* ============================================================================
+   UTILIDADES PROPIAS
+   ============================================================================ */
+
+@utility duracion-fast {
+  transition-duration: var(--duration-fast);
+}
+@utility duracion-base {
+  transition-duration: var(--duration-base);
+}
+@utility duracion-moderate {
+  transition-duration: var(--duration-moderate);
+}
+@utility duracion-slow {
+  transition-duration: var(--duration-slow);
 }
 
-/* Custom Scrollbar for the 3D gallery and overall feel */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--background);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--muted);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--border);
+/* Hairline interno de cards (línea, no caja). NUNCA border-t/<hr>. */
+@utility linea-divisoria {
+  height: 1px;
+  background: var(--divider);
 }
 
-/* Hero animations (replaces framer-motion for critical path) */
+/* Texto con gradiente brand (primary → primary-soft). Único gradiente permitido. */
+@utility texto-gradiente-brand {
+  background-image: linear-gradient(100deg, var(--primary), var(--primary-soft));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Resplandor ambiental de marca para fondos de hero/CTA: radial del tint,
+   nunca compite con el glow-cta del botón. Aplicar a un contenedor relative. */
+@utility fondo-brillo-brand {
+  background-image: radial-gradient(
+    ellipse 80% 55% at 50% -10%,
+    var(--primary-tint),
+    transparent 70%
+  );
+}
+
+/* Atmósfera del globo del hero (EsferaDigital): halo central de marca +
+   viñeta inferior que funde el globo con el contenido que sigue. */
+@utility halo-globo {
+  background-image:
+    radial-gradient(
+      ellipse 52% 46% at 50% 60%,
+      var(--primary-tint) 0%,
+      color-mix(in srgb, var(--primary) 5%, transparent) 55%,
+      transparent 75%
+    ),
+    linear-gradient(to bottom, transparent 62%, var(--bg) 96%);
+}
+
+/* Cinta marquesina (CintaPantallas): pista duplicada que corre de punta a
+   punta. Se pausa en hover; reduced-motion la apaga vía motion-reduce. */
+@keyframes desplaza-cinta {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Fade en los bordes de la cinta full-bleed. */
+@utility mascara-cinta {
+  mask-image: linear-gradient(to right, transparent, black 7%, black 93%, transparent);
+}
+
+@layer utilities {
+  /* Reveal on scroll con CSS scroll-driven animations.
+     Fallback: sin soporte o reduced-motion → contenido visible, sin animar. */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .revela-al-scroll {
+        animation: revela-al-scroll linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 55%;
+      }
+    }
+  }
+}
+
+@keyframes revela-al-scroll {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================================================================
+   REDUCED MOTION — self-zeroing a nivel sistema: todo consumidor de los
+   tokens de duración queda instantáneo sin tocar componentes.
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-moderate: 0ms;
+    --duration-slow: 0ms;
+  }
+}
+
+/* ============================================================================
+   COMPAT FASE 4 — restos que las pages viejas (/productos, /contacto,
+   /sobre-nosotros, /servicios, webs/, plataformas/) todavía consumen.
+   Se borra completo cuando esas pages se reescriban. NO usar en código nuevo.
+   ============================================================================ */
+
 @keyframes fade-in-up {
   from {
     opacity: 0;
@@ -72,97 +411,11 @@ body {
   }
 }
 
-@keyframes slide-in-right {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 .animate-fade-in-up {
   animation: fade-in-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.animate-slide-in-right {
-  animation: slide-in-right 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
-}
-
-/* Hide scrollbar for slider components */
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-/* Glass card base */
-.glass-card {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.05) 0%,
-    rgba(255, 255, 255, 0.015) 50%,
-    rgba(255, 255, 255, 0.03) 100%
-  );
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 40px -8px rgba(255, 94, 20, 0.12);
-  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.glass-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.08) 0%,
-    transparent 40%,
-    transparent 60%,
-    rgba(255, 255, 255, 0.04) 100%
-  );
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  -webkit-mask-composite: xor;
-  pointer-events: none;
-}
-.glass-card:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.07) 0%,
-    rgba(255, 255, 255, 0.02) 50%,
-    rgba(255, 255, 255, 0.05) 100%
-  );
-  border-color: rgba(255, 94, 20, 0.12);
-  box-shadow:
-    0 8px 50px -10px rgba(255, 94, 20, 0.18),
-    0 0 15px -3px rgba(255, 94, 20, 0.10);
-  transform: translateY(-4px) scale(1.02);
-}
-
-/* Glow hover effect for cards */
-.glow-hover {
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
-}
-.glow-hover:hover {
-  box-shadow: 0 0 30px rgba(255, 94, 20, 0.1);
-  border-color: rgba(255, 94, 20, 0.15);
-}
-
-/* Light line separator */
-.light-line {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 94, 20, 0.4), transparent);
-}
-
-/* Dot grid background */
 .dot-grid {
-  background-image: radial-gradient(rgba(255, 94, 20, 0.08) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(var(--primary-rgb), 0.08) 1px, transparent 1px);
   background-size: 20px 20px;
 }

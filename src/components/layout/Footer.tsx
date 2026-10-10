@@ -1,16 +1,22 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { Mail, MessageCircle } from "lucide-react";
+import { mainNav, siteConfig } from "@/data/site";
+import { pillarSummaries } from "@/data/pilares";
+
+const claseLinkFooter =
+  "text-small text-muted-foreground transition-colors duracion-fast hover:text-foreground";
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
+  const anio = new Date().getFullYear();
 
   return (
-    <footer className="bg-background border-t border-border pt-24 pb-12">
-      <div className="container mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-12 lg:gap-16 mb-24">
-          <div className="md:col-span-2">
-            <Link href="/" className="inline-block mb-6">
+    <footer className="bg-chrome">
+      <div className="mx-auto w-full max-w-wide px-page-pad pt-16 pb-10">
+        <div className="grid gap-12 md:grid-cols-[1.6fr_1fr_1fr]">
+          {/* Marca + contacto */}
+          <div>
+            <Link href="/" aria-label="ÍTERA — Inicio" className="inline-block">
               <Image
                 src="/images/logo-itera.png"
                 alt="ÍTERA"
@@ -19,74 +25,64 @@ export function Footer() {
                 className="h-8 w-auto"
               />
             </Link>
-            <p className="text-white/80 max-w-sm text-lg leading-relaxed mb-8">
-              Soluciones digitales que evolucionan con vos.
+            <p className="mt-5 max-w-sm text-body text-muted-foreground">
+              Construimos el software de tu negocio: webs, sistemas a medida e IA aplicada.
             </p>
-            <div className="flex flex-col gap-3">
-              <a
-                href="mailto:hola@itera.lat"
-                className="text-white hover:text-primary transition-colors font-medium inline-flex items-center gap-2"
-              >
-                <Mail size={16} />
-                hola@itera.lat
+            <div className="mt-6 grid justify-items-start gap-3">
+              <a href={`mailto:${siteConfig.email}`} className={`${claseLinkFooter} inline-flex items-center gap-2`}>
+                <Mail aria-hidden className="size-4" />
+                {siteConfig.email}
               </a>
               <a
-                href="https://wa.me/5492984394286"
+                href={siteConfig.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-primary transition-colors font-medium inline-flex items-center gap-2"
+                className={`${claseLinkFooter} inline-flex items-center gap-2`}
               >
-                <MessageCircle size={16} />
+                <MessageCircle aria-hidden className="size-4" />
                 WhatsApp
               </a>
             </div>
           </div>
 
-          <div>
-            <h4 className="font-semibold text-lg mb-6">Productos</h4>
-            <ul className="space-y-4">
-              <li>
-                <Link href="/productos/sitios-web" className="text-white/80 hover:text-white transition-colors">Sitios Web</Link>
-              </li>
-              <li>
-                <Link href="/productos/saas" className="text-white/80 hover:text-white transition-colors">SaaS</Link>
-              </li>
+          {/* Servicios */}
+          <nav aria-label="Servicios">
+            <h2 className="text-small font-semibold">Servicios</h2>
+            <ul className="mt-5 grid gap-3">
+              {pillarSummaries.map((pilar) => (
+                <li key={pilar.slug}>
+                  <Link href={pilar.href} className={claseLinkFooter}>
+                    {pilar.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
-          </div>
+          </nav>
 
-          <div>
-            <h4 className="font-semibold text-lg mb-6">Agencia</h4>
-            <ul className="space-y-4">
+          {/* Empresa */}
+          <nav aria-label="Empresa">
+            <h2 className="text-small font-semibold">ÍTERA</h2>
+            <ul className="mt-5 grid gap-3">
+              {mainNav.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className={claseLinkFooter}>
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
               <li>
-                <Link href="/servicios" className="text-white/80 hover:text-white transition-colors">Servicios</Link>
-              </li>
-              <li>
-                <Link href="/sobre-nosotros" className="text-white/80 hover:text-white transition-colors">Sobre Nosotros</Link>
-              </li>
-              <li>
-                <Link href="/contacto" className="text-white/80 hover:text-white transition-colors">Contacto</Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold text-lg mb-6">Recursos</h4>
-            <ul className="space-y-4">
-              <li>
-                <Link href="#showcase" className="text-white/80 hover:text-white transition-colors">Portfolio</Link>
-              </li>
-              <li>
-                <Link href="#contacto" className="text-white/80 hover:text-white transition-colors">Hablemos</Link>
+                <Link href="/contacto" className={claseLinkFooter}>
+                  Contacto
+                </Link>
               </li>
             </ul>
-          </div>
+          </nav>
         </div>
 
-        <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between text-white/80 text-sm">
-          <p>&copy; {currentYear} ÍTERA. Todos los derechos reservados.</p>
-          <div className="flex gap-6 mt-4 md:mt-0">
-            <span>Patagonia, Argentina</span>
-          </div>
+        <div className="linea-divisoria mt-14" />
+        <div className="flex flex-col items-start justify-between gap-3 pt-6 text-meta text-faint md:flex-row md:items-center">
+          <p>© {anio} ÍTERA. Todos los derechos reservados.</p>
+          <p>{siteConfig.location}</p>
         </div>
       </div>
     </footer>

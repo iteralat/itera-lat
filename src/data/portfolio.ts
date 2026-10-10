@@ -210,7 +210,7 @@ export const saasProducts: ProductItem[] = [
     slug: "itera-estudio",
     category: "saas",
     productName: "Itera Estudio",
-    tagline: "Fotos de producto profesionales con IA, listas en segundos",
+    tagline: "Fotos de producto profesionales generadas con IA",
     coverLine: "Subí una foto con el celular, obtené imágenes de catálogo profesional.",
     description: "Generá fotos de producto con fondo de estudio, banners para redes y assets visuales. Generación por lotes, imágenes de referencia y galería organizada. Todo en pesos argentinos.",
     features: [
